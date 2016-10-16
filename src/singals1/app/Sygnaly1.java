@@ -3,7 +3,10 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package sygnaly1;
+package singals1.app;
+
+import com.sun.java.swing.plaf.windows.resources.windows;
+import singals1.gui.MainWindow;
 
 /**
  *
@@ -16,6 +19,13 @@ public class Sygnaly1 {
      */
     public static void main(String[] args) {
         // TODO code application logic here
+        MainWindow window = new MainWindow();
+
+        java.awt.EventQueue.invokeLater(new Runnable() {
+            public void run() {
+                window.setVisible(true);
+            }
+        });
     }
-    
+
 }
