@@ -5,8 +5,12 @@
  */
 package singals1.gui;
 
+import java.awt.BorderLayout;
 import java.awt.Dimension;
 import java.awt.Font;
+import javax.swing.JScrollPane;
+import javax.swing.JTextArea;
+import org.apache.commons.math3.complex.Complex;
 import org.jfree.chart.ChartFactory;
 import org.jfree.chart.ChartPanel;
 import org.jfree.chart.JFreeChart;
@@ -19,24 +23,47 @@ import org.jfree.data.category.DefaultCategoryDataset;
  */
 public class ChartDialog extends javax.swing.JDialog {
 
-    public ChartDialog(java.awt.Frame parent, boolean modal, String chartTitle, String xLabel, String yLabel, double[] values, int interval) {
-        super(parent, modal);
+    private int chartDimensionX = 1200;
+    private int chartDimensionY = 400;
 
-        JFreeChart lineChart = ChartFactory.createLineChart(
-                chartTitle,
-                xLabel,
-                yLabel,
-                createDataset(values, interval),
-                PlotOrientation.VERTICAL,
-                true, true, false);
-        lineChart.getCategoryPlot().getDomainAxis().setTickLabelFont(new Font("Dialog", Font.PLAIN, 8));
-        //lineChart.getCategoryPlot().getRangeAxis().setTickLabelFont(new Font("Dialog", Font.PLAIN, 8));
-        ChartPanel chartPanel = new ChartPanel(lineChart);
-        chartPanel.setPreferredSize(new Dimension(1200, 600));
-        setContentPane(chartPanel);
+    public ChartDialog(java.awt.Frame parent, boolean modal, Complex[] values, int interval) {
+        super(parent, modal);
         initComponents();
+
+        ChartPanel realChart = getChart(values, interval, true);
+        ChartPanel imgChart = getChart(values, interval, false);
+
+
+        jPanelReal.setLayout(new java.awt.BorderLayout());
+        jPanelReal.add(realChart, BorderLayout.CENTER);
+        jPanelReal.setVisible(true);
+        jPanelReal.validate();
+
+        jPanelImg.setLayout(new java.awt.BorderLayout());
+        jPanelImg.add(imgChart, BorderLayout.CENTER);
+        jPanelImg.setVisible(true);
+        jPanelImg.validate();
+
     }
 
+    private ChartPanel getChart(Complex[] values, int interval, boolean isReal) {
+        String title = "wartości rzeczywiste";
+        if (!isReal){
+            title = "wartości urojone";
+        }
+        JFreeChart chart = ChartFactory.createLineChart(
+                title,
+                "czas",
+                "wartośc funkcji",
+                createDataset(values, interval, isReal),
+                PlotOrientation.VERTICAL,
+                true, true, false);
+        chart.getCategoryPlot().getDomainAxis().setTickLabelFont(new Font("Dialog", Font.PLAIN, 8));
+        ChartPanel chartPanel = new ChartPanel(chart);
+        chartPanel.setPreferredSize(new Dimension(chartDimensionX, chartDimensionY));
+        return chartPanel;
+    }
+    
     /**
      * This method is called from within the constructor to initialize the form.
      * WARNING: Do NOT modify this code. The content of this method is always
@@ -46,30 +73,75 @@ public class ChartDialog extends javax.swing.JDialog {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
+        jPanelImg = new javax.swing.JPanel();
+        jPanelReal = new javax.swing.JPanel();
+
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
+
+        jPanelImg.setPreferredSize(new Dimension(chartDimensionX, chartDimensionY));
+
+        javax.swing.GroupLayout jPanelImgLayout = new javax.swing.GroupLayout(jPanelImg);
+        jPanelImg.setLayout(jPanelImgLayout);
+        jPanelImgLayout.setHorizontalGroup(
+            jPanelImgLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGap(0, 1148, Short.MAX_VALUE)
+        );
+        jPanelImgLayout.setVerticalGroup(
+            jPanelImgLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGap(0, 323, Short.MAX_VALUE)
+        );
+
+        jPanelReal.setPreferredSize(new Dimension(chartDimensionX, chartDimensionY));
+
+        javax.swing.GroupLayout jPanelRealLayout = new javax.swing.GroupLayout(jPanelReal);
+        jPanelReal.setLayout(jPanelRealLayout);
+        jPanelRealLayout.setHorizontalGroup(
+            jPanelRealLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGap(0, 1148, Short.MAX_VALUE)
+        );
+        jPanelRealLayout.setVerticalGroup(
+            jPanelRealLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGap(0, 323, Short.MAX_VALUE)
+        );
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 1210, Short.MAX_VALUE)
+            .addGroup(layout.createSequentialGroup()
+                .addGap(22, 22, 22)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(jPanelReal, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jPanelImg, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addContainerGap(40, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 610, Short.MAX_VALUE)
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                .addContainerGap(55, Short.MAX_VALUE)
+                .addComponent(jPanelReal, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addComponent(jPanelImg, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap())
         );
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JPanel jPanelImg;
+    private javax.swing.JPanel jPanelReal;
     // End of variables declaration//GEN-END:variables
-    
-    private DefaultCategoryDataset createDataset(double[] values, int interval){
+
+    private DefaultCategoryDataset createDataset(Complex[] values, int interval, boolean isReal) {
         DefaultCategoryDataset dataset = new DefaultCategoryDataset();
         int i = 1;
-        for(double v : values){
-            dataset.addValue(v, "", new Integer(i * interval));
+        for (Complex v : values) {
+            if (isReal) {
+                dataset.addValue(v.getReal(), "", new Integer(i * interval));
+            } else {
+                dataset.addValue(v.getImaginary(), "", new Integer(i * interval));
+            }
             i++;
         }
         return dataset;

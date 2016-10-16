@@ -5,6 +5,8 @@
  */
 package signal1.generator.abstracts;
 
+import org.apache.commons.math3.complex.Complex;
+
 
 /**
  *
@@ -22,5 +24,18 @@ public abstract class Signal {
         this.numberOfSamples = samples.length;
     }
     
-    abstract public double[] generateSignal();
+    abstract public Complex[] generateSignal();
+
+    public double getAmplitude() {
+        return amplitude;
+    }
+
+    public double getTimeSpan() {
+        return timeSpan;
+    }
+
+    public int getNumberOfSamples() {
+        return numberOfSamples;
+    }
+    
 }

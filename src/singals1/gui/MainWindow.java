@@ -5,6 +5,7 @@
  */
 package singals1.gui;
 
+import org.apache.commons.math3.complex.Complex;
 import signal1.generator.SineModSingal;
 import signal1.generator.SinesHalfWafeSingal;
 import signal1.generator.SineSignal;
@@ -33,36 +34,17 @@ public class MainWindow extends javax.swing.JFrame {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
-        jPanelChart = new javax.swing.JPanel();
-
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
-
-        javax.swing.GroupLayout jPanelChartLayout = new javax.swing.GroupLayout(jPanelChart);
-        jPanelChart.setLayout(jPanelChartLayout);
-        jPanelChartLayout.setHorizontalGroup(
-            jPanelChartLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 749, Short.MAX_VALUE)
-        );
-        jPanelChartLayout.setVerticalGroup(
-            jPanelChartLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 581, Short.MAX_VALUE)
-        );
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(layout.createSequentialGroup()
-                .addGap(57, 57, 57)
-                .addComponent(jPanelChart, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(278, Short.MAX_VALUE))
+            .addGap(0, 1084, Short.MAX_VALUE)
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                .addContainerGap(110, Short.MAX_VALUE)
-                .addComponent(jPanelChart, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(70, 70, 70))
+            .addGap(0, 761, Short.MAX_VALUE)
         );
 
         pack();
@@ -75,13 +57,12 @@ public class MainWindow extends javax.swing.JFrame {
             input[i] = i;
         }
         Signal signal = new SineModSingal(input, 1, 5, 20);
-        double[]data = signal.generateSignal();
-        ChartDialog dialog = new ChartDialog(this, false, "title", "time", "value", data, 1);
+        Complex[]data = signal.generateSignal();
+        ChartDialog dialog = new ChartDialog(this, false, data, 1);
         dialog.setVisible(true);
         
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JPanel jPanelChart;
     // End of variables declaration//GEN-END:variables
 }

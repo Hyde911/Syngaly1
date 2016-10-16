@@ -5,6 +5,7 @@
  */
 package signal1.generator;
 
+import org.apache.commons.math3.complex.Complex;
 import signal1.generator.abstracts.PeriodicSignal;
 
 /**
@@ -18,12 +19,12 @@ public class SinesHalfWafeSingal extends PeriodicSignal {
     }
 
     @Override
-    public double[] generateSignal() {
-        double[] result = new double[numberOfSamples];
+    public Complex[] generateSignal() {
+        Complex[] result = new Complex[numberOfSamples];
         for (int i = 0; i < numberOfSamples; i++) {
             double radians = Math.toRadians(((2 * Math.PI) / period) * i);
             double res = 0.5 * amplitude * (Math.sin(radians) + Math.abs(Math.sin(radians)));
-            result[i] = res;
+            result[i] = new Complex(res, 0);
         }
         return result;
     }

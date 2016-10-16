@@ -6,6 +6,7 @@
 package signal1.generator;
 
 import java.util.Random;
+import org.apache.commons.math3.complex.Complex;
 import signal1.generator.abstracts.Signal;
 
 /**
@@ -19,11 +20,11 @@ public class GaussianNoise extends Signal{
     }
 
     @Override
-    public double[] generateSignal() {
+    public Complex[] generateSignal() {
         Random rand = new Random();
-        double[] result =  new double[numberOfSamples];
+        Complex[] result =  new Complex[numberOfSamples];
         for (int i = 0; i < numberOfSamples; i++){
-            result[i] = rand.nextGaussian();
+            result[i] = new Complex(rand.nextGaussian(), 0);
         }
         return result;
     }

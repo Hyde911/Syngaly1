@@ -5,9 +5,9 @@
  */
 package signal1.generator;
 
+import org.apache.commons.math3.complex.Complex;
 import signal1.generator.abstracts.PeriodicSignal;
 import signal1.generator.abstracts.Signal;
-
 /**
  *
  * @author marr
@@ -19,11 +19,11 @@ public class SineSignal extends PeriodicSignal{
     }
 
     @Override
-    public double[] generateSignal() {
-        double [] result = new double[numberOfSamples];
+    public Complex[] generateSignal() {
+        Complex[] result = new Complex[numberOfSamples];
         for (int i = 0; i < numberOfSamples; i++){
             double temp = ((2 * Math.PI)/period) * (i);
-            result[i] = amplitude * Math.sin( Math.toRadians(temp) );
+            result[i] = new Complex(amplitude * Math.sin( Math.toRadians(temp)), 0);
         }
         return result;
     }

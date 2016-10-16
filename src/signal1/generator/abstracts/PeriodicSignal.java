@@ -18,7 +18,9 @@ public abstract class PeriodicSignal extends Signal{
         super(samples, amplitude, timeSpan);
         this.period = period;
     }
-    
 
+    public double getPeriod() {
+        return period;
+    }
     
 }
