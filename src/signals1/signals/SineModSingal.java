@@ -22,8 +22,8 @@ public class SineModSingal extends SineLikeSignals {
     protected Complex[] generateSignal() {
         this.result = new Complex[numberOfSamples];
         for (int i = 0; i < numberOfSamples; i++) {
-            double temp = ((2 * Math.PI) / period) * (i);
-            this.result[i] = new Complex(Math.abs(amplitude * Math.sin(Math.toRadians(temp))), 0);
+            double temp = ((2 * Math.PI) / samplesPerPeriod) * (i);
+            this.result[i] = new Complex(Math.abs(amplitude * Math.sin(temp)), 0);
         }
         return result;
     }

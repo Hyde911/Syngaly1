@@ -11,16 +11,17 @@ import signals1.stats.SignalStats;
  *
  * @author marr
  */
-public abstract class SineLikeSignals extends Signals{
+public abstract class SquareSignals extends Signals {
+
     protected double period;
     protected int numberOfWholePeriods;
     protected int samplesPerPeriod;
 
-    public SineLikeSignals(double startTime, int numberOfSamples, double amplitude, int duration, double period) {
+    public SquareSignals(double startTime, int numberOfSamples, double amplitude, int duration, double period) {
         super(startTime, numberOfSamples, amplitude, duration);
         this.period = period;
-        numberOfWholePeriods = (int)(duration / period);
-        samplesPerPeriod = (int)((numberOfSamples) / (numberOfWholePeriods));
+        numberOfWholePeriods = (int) (duration / period);
+        samplesPerPeriod = (int) ((numberOfSamples) / (numberOfWholePeriods));
     }
 
     public double getPeriod() {

@@ -17,6 +17,7 @@ public abstract class NoiseSignals extends Signals{
         super(startTime, numberOfSamples, amplitude, duration);
     }
     
+    @Override
     protected SignalStats calculateStats(){
         return null;
     }

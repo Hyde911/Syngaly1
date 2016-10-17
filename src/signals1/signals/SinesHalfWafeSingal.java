@@ -22,8 +22,8 @@ public class SinesHalfWafeSingal extends SineLikeSignals {
     protected Complex[] generateSignal() {
         this.result = new Complex[numberOfSamples];
         for (int i = 0; i < numberOfSamples; i++) {
-            double radians = Math.toRadians(((2 * Math.PI) / period) * i);
-            double res = 0.5 * amplitude * (Math.sin(radians) + Math.abs(Math.sin(radians)));
+            double tmp = ((2 * Math.PI) / samplesPerPeriod) * i;
+            double res = 0.5 * amplitude * (Math.sin(tmp) + Math.abs(Math.sin(tmp)));
             this.result[i] = new Complex(res, 0);
         }
         return result;
