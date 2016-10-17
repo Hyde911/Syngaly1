@@ -19,13 +19,12 @@ public class SineSignal extends SineLikeSignals {
     }
 
     @Override
-    protected Complex[] generateSignal() {
+    protected void generateSignal() {
         this.result = new Complex[numberOfSamples];
         for (int i = 0; i < numberOfSamples; i++) {
             double temp = ((2 * Math.PI) / samplesPerPeriod) * (i);
             this.result[i] = new Complex(amplitude * Math.sin(temp), 0);
         }
-        return this.result;
     }
 
 }

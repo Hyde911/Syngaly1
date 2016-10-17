@@ -6,7 +6,6 @@
 package signals1.stats;
 
 import org.apache.commons.math3.complex.Complex;
-import signals1.signals.abstracts.Signals;
 
 /**
  *
@@ -14,57 +13,51 @@ import signals1.signals.abstracts.Signals;
  */
 public class StatsCalculator {
 
-    private Complex[] result;
-    private int numberOfSamples;
-
-    public SignalStats getStats(Signals signal) {
-        this.result = signal.getSignal();
-        this.numberOfSamples = signal.getNumberOfSamples();
-        
+    public static SignalStats getStats(Complex[] input) {
         return new SignalStats(
-                calcMeanValue(),
-                calcAbsoluteMeanValue(),
-                calcAveragePower(),
-                caclVariance(),
-                caclEffectivePower()
+                calcMeanValue(input),
+                calcAbsoluteMeanValue(input),
+                calcAveragePower(input),
+                caclVariance(input),
+                caclEffectivePower(input)
         );
     }
 
-    private double calcMeanValue() {
+    public static double calcMeanValue(Complex[] input) {
         double mean = 0;
-        for (int i = 0; i < numberOfSamples; i++) {
-            mean += result[i].getReal();
+        for (int i = 0; i < input.length; i++) {
+            mean += input[i].getReal();
         }
-        return mean / (numberOfSamples + 1);
+        return mean / (input.length + 1);
     }
 
-    private double calcAbsoluteMeanValue() {
+    public static double calcAbsoluteMeanValue(Complex[] input) {
         double absMean = 0;
-        for (int i = 0; i < numberOfSamples; i++) {
-            absMean += Math.abs(result[i].getReal());
+        for (int i = 0; i < input.length; i++) {
+            absMean += Math.abs(input[i].getReal());
         }
-        return absMean / (numberOfSamples + 1);
+        return absMean / (input.length + 1);
     }
 
-    private double calcAveragePower() {
+    public static double calcAveragePower(Complex[] input) {
         double power = 0;
-        for (int i = 0; i < numberOfSamples; i++) {
-            power += result[i].getReal() * result[i].getReal();
+        for (int i = 0; i < input.length; i++) {
+            power += input[i].getReal() * input[i].getReal();
         }
-        return power / (numberOfSamples + 1);
+        return power / (input.length + 1);
     }
 
-    private double caclVariance() {
-        double mean = calcMeanValue();
+    public static double caclVariance(Complex[] input) {
+        double mean = calcMeanValue(input);
         double variance = 0;
-        for (int i = 0; i < numberOfSamples; i++) {
-            variance += (result[i].getReal() - mean) * (result[i].getReal() - mean) ;
+        for (int i = 0; i < input.length; i++) {
+            variance += (input[i].getReal() - mean) * (input[i].getReal() - mean);
         }
-        mean = variance / (numberOfSamples + 1);
+        mean = variance / (input.length + 1);
         return mean;
     }
 
-    private double caclEffectivePower() {
-        return Math.sqrt(calcAveragePower());
+    public static double caclEffectivePower(Complex[] input) {
+        return Math.sqrt(calcAveragePower(input));
     }
 }

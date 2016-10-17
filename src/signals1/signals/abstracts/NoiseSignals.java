@@ -6,6 +6,7 @@
 package signals1.signals.abstracts;
 
 import signals1.stats.SignalStats;
+import signals1.stats.StatsCalculator;
 
 /**
  *
@@ -18,7 +19,7 @@ public abstract class NoiseSignals extends Signals{
     }
     
     @Override
-    protected SignalStats calculateStats(){
-        return null;
+    protected void calculateStats(){
+        this.stats = StatsCalculator.getStats(result);
     }
 }

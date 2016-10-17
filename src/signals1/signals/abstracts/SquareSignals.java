@@ -5,7 +5,10 @@
  */
 package signals1.signals.abstracts;
 
+import java.util.Arrays;
+import org.apache.commons.math3.complex.Complex;
 import signals1.stats.SignalStats;
+import signals1.stats.StatsCalculator;
 
 /**
  *
@@ -29,9 +32,11 @@ public abstract class SquareSignals extends Signals {
     public double getPeriod() {
         return period;
     }
-    
+
     @Override
-        protected SignalStats calculateStats(){
-        return null;
+    protected void calculateStats() {
+        int wholePeriodSamples = samplesPerPeriod * numberOfWholePeriods;
+        Complex[] samplesForStats = Arrays.copyOf(result, wholePeriodSamples);
+        this.stats = StatsCalculator.getStats(samplesForStats);
     }
 }

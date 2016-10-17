@@ -31,18 +31,16 @@ public abstract class Signals {
 
     public Complex[] getSignal(){
         if (result == null){
-            return generateSignal();
+            generateSignal();
         }
-        else{
             return result;
-        }
     }
     
     public SignalStats getStats(){
         if (this.stats == null){
-            return calculateStats();
+            calculateStats();
         }
-        else return this.stats;
+        return this.stats;
     }
     
     public double getAmplitude() {
@@ -57,7 +55,7 @@ public abstract class Signals {
         return numberOfSamples;
     }
     
-    abstract protected Complex[] generateSignal();
+    abstract protected void generateSignal();
     
-    abstract protected SignalStats calculateStats();
+    abstract protected void calculateStats();
 }

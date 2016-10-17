@@ -20,14 +20,13 @@ public class UniformNoise extends NoiseSignals {
     }
 
     @Override
-    protected Complex[] generateSignal() {
+    protected void generateSignal() {
         this.result = new Complex[numberOfSamples];
         Random rand = new Random();
         this.result = new Complex[numberOfSamples];
         for (int i = 0; i < numberOfSamples; i++) {
             this.result[i] = new Complex(rand.nextDouble() * amplitude, 0);
         }
-        return result;
     }
 
 }

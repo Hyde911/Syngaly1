@@ -19,7 +19,7 @@ public class SquareSignal extends SquareSignals{
     }
 
     @Override
-    protected Complex[] generateSignal() {
+    protected void generateSignal() {
         this.result = new Complex[numberOfSamples];
         int period = 0;
         int sampleOfPeriod = 0;
@@ -36,7 +36,6 @@ public class SquareSignal extends SquareSignals{
             }
             sampleOfPeriod++;
         }
-        return this.result;
     }
     
 }

@@ -6,9 +6,7 @@
 package signals1.tools;
 
 import org.apache.commons.math3.complex.Complex;
-import signals1.signals.abstracts.NoiseSignals;
 import signals1.signals.abstracts.Signals;
-import signals1.signals.abstracts.SineLikeSignals;
 import signals1.stats.SignalStats;
 import signals1.stats.StatsCalculator;
 
@@ -18,7 +16,6 @@ import signals1.stats.StatsCalculator;
  */
 public class SignalContainer {
 
-    private StatsCalculator statCalc = new StatsCalculator();
     private Signals signal;
     
     public SignalContainer(Signals signal){
