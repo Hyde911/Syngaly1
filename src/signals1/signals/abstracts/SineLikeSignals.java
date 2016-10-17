@@ -5,6 +5,8 @@
  */
 package signals1.signals.abstracts;
 
+import signals1.stats.SignalStats;
+
 /**
  *
  * @author marr
@@ -21,4 +23,7 @@ public abstract class SineLikeSignals extends Signals{
         return period;
     }
     
+        protected SignalStats calculateStats(){
+        return null;
+    }
 }

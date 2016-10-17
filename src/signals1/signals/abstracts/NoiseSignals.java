@@ -5,6 +5,8 @@
  */
 package signals1.signals.abstracts;
 
+import signals1.stats.SignalStats;
+
 /**
  *
  * @author marr
@@ -15,5 +17,7 @@ public abstract class NoiseSignals extends Signals{
         super(startTime, numberOfSamples, amplitude, duration);
     }
     
-    
+    protected SignalStats calculateStats(){
+        return null;
+    }
 }

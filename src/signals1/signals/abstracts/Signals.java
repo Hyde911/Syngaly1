@@ -6,6 +6,7 @@
 package signals1.signals.abstracts;
 
 import org.apache.commons.math3.complex.Complex;
+import signals1.stats.SignalStats;
 
 
 /**
@@ -19,6 +20,7 @@ public abstract class Signals {
     protected int numberOfSamples;
     protected Complex[]result;
     protected double startTime;
+    protected SignalStats stats;
     
     public Signals(double startTime, int numberOfSamples, double amplitude, int duration){
         this.startTime = startTime; 
@@ -36,6 +38,13 @@ public abstract class Signals {
         }
     }
     
+    public SignalStats getStats(){
+        if (this.stats == null){
+            return calculateStats();
+        }
+        else return this.stats;
+    }
+    
     public double getAmplitude() {
         return amplitude;
     }
@@ -49,4 +58,6 @@ public abstract class Signals {
     }
     
     abstract protected Complex[] generateSignal();
+    
+    abstract protected SignalStats calculateStats();
 }
