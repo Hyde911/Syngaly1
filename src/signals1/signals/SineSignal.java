@@ -7,11 +7,12 @@ package signals1.signals;
 
 import org.apache.commons.math3.complex.Complex;
 import signals1.signals.abstracts.SineLikeSignals;
+
 /**
  *
  * @author marr
  */
-public class SineSignal extends SineLikeSignals{
+public class SineSignal extends SineLikeSignals {
 
     public SineSignal(double startTime, int numberOfSamples, double amplitude, int duration, double period) {
         super(startTime, numberOfSamples, amplitude, duration, period);
@@ -20,11 +21,11 @@ public class SineSignal extends SineLikeSignals{
     @Override
     protected Complex[] generateSignal() {
         this.result = new Complex[numberOfSamples];
-        for (int i = 0; i < numberOfSamples; i++){
-            double temp = ((2 * Math.PI)/samplesPerPeriod) * (i);
+        for (int i = 0; i < numberOfSamples; i++) {
+            double temp = ((2 * Math.PI) / samplesPerPeriod) * (i);
             this.result[i] = new Complex(amplitude * Math.sin(temp), 0);
         }
-        return result;
+        return this.result;
     }
-    
+
 }

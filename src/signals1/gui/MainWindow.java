@@ -12,6 +12,7 @@ import javax.swing.UIManager;
 import javax.swing.UnsupportedLookAndFeelException;
 import signals1.gui.inputForms.NoiseInputPanel;
 import signals1.gui.inputForms.SineInputPanel;
+import signals1.gui.inputForms.SquareInputPanel;
 import signals1.tools.SignalContainer;
 import signals1.stats.SignalStats;
 
@@ -24,9 +25,9 @@ public class MainWindow extends javax.swing.JFrame {
     private Dimension inputFormDimension = new Dimension(400, 320);
     private SineInputPanel sineInputPanel;
     private NoiseInputPanel noiseInputPanel;
+    private SquareInputPanel squareInputPanel;
     private SignalContainer signalContainer;
     private DecimalFormat df = new DecimalFormat("0.####");
-    
 
     /**
      * Creates new form NewJFrame
@@ -261,40 +262,52 @@ public class MainWindow extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void jButtonGenerateSignalActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonGenerateSignalActionPerformed
-        switch (jTabbedPane1.getSelectedIndex()){
-            case 1 : signalContainer = new SignalContainer(sineInputPanel.getSingal());
-            break;
-            default: signalContainer = new SignalContainer(noiseInputPanel.getSingal());
+        switch (jTabbedPane1.getSelectedIndex()) {
+            case 1:
+                signalContainer = new SignalContainer(sineInputPanel.getSingal());
+                break;
+            case 2:
+                signalContainer = new SignalContainer(squareInputPanel.getSingal());
+                break;
+            default:
+                signalContainer = new SignalContainer(noiseInputPanel.getSingal());
         }
         ChartDialog dialog = new ChartDialog(this, false, signalContainer.getSignalOutput(), 1);
         dialog.setVisible(true);
         showStats();
-        
+
     }//GEN-LAST:event_jButtonGenerateSignalActionPerformed
 
-    private void initInputForms(){
+    private void initInputForms() {
         sineInputPanel = new SineInputPanel(inputFormDimension);
         noiseInputPanel = new NoiseInputPanel(inputFormDimension);
-        
+        squareInputPanel = new SquareInputPanel(inputFormDimension);
+
         jPanelSineSignals.setLayout(new java.awt.BorderLayout());
         jPanelSineSignals.add(sineInputPanel, BorderLayout.CENTER);
         jPanelNoiseSignals.setLayout(new java.awt.BorderLayout());
         jPanelNoiseSignals.add(noiseInputPanel, BorderLayout.CENTER);
-        
+        jPanelSquareSignals.setLayout(new java.awt.BorderLayout());
+        jPanelSquareSignals.add(squareInputPanel, BorderLayout.CENTER);
+
         jPanelSineSignals.validate();
         jPanelNoiseSignals.validate();
+        jPanelSquareSignals.validate();
 
     }
-    
-    private void showStats(){
+
+    private void showStats() {
         SignalStats stats = signalContainer.getStats();
-        jTextMeanValue.setText(df.format(stats.getMeanValue()));
-        jTextAbsMeanValue1.setText(df.format(stats.getAbsoluteMeanValue()));
-        jTextEffPower.setText(df.format(stats.getEffectivePower()));
-        jTextVariance.setText(df.format(stats.getVariance()));
-        jTextMeanPower.setText(df.format(stats.getAveragePower()));
-        
+        if (stats != null) {
+            jTextMeanValue.setText(df.format(stats.getMeanValue()));
+            jTextAbsMeanValue1.setText(df.format(stats.getAbsoluteMeanValue()));
+            jTextEffPower.setText(df.format(stats.getEffectivePower()));
+            jTextVariance.setText(df.format(stats.getVariance()));
+            jTextMeanPower.setText(df.format(stats.getAveragePower()));
+        }
+
     }
+
     private static void initLookAndFeel() {
         String lookAndFeel = null;
         lookAndFeel = UIManager.getSystemLookAndFeelClassName();

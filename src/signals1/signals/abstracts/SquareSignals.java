@@ -16,10 +16,12 @@ public abstract class SquareSignals extends Signals {
     protected double period;
     protected int numberOfWholePeriods;
     protected int samplesPerPeriod;
+    protected int fillFactor;
 
-    public SquareSignals(double startTime, int numberOfSamples, double amplitude, int duration, double period) {
+    public SquareSignals(double startTime, int numberOfSamples, double amplitude, int duration, double period, int fillFactor) {
         super(startTime, numberOfSamples, amplitude, duration);
         this.period = period;
+        this.fillFactor = fillFactor;
         numberOfWholePeriods = (int) (duration / period);
         samplesPerPeriod = (int) ((numberOfSamples) / (numberOfWholePeriods));
     }

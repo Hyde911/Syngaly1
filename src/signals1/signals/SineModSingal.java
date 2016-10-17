@@ -25,7 +25,7 @@ public class SineModSingal extends SineLikeSignals {
             double temp = ((2 * Math.PI) / samplesPerPeriod) * (i);
             this.result[i] = new Complex(Math.abs(amplitude * Math.sin(temp)), 0);
         }
-        return result;
+        return this.result;
     }
 
 }

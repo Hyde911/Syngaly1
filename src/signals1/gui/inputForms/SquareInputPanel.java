@@ -7,52 +7,57 @@ package signals1.gui.inputForms;
 
 import java.awt.Dimension;
 import javax.swing.JOptionPane;
-import signals1.signals.SineModSingal;
-import signals1.signals.SineSignal;
-import signals1.signals.SinesHalfWafeSingal;
-import signals1.signals.abstracts.SineLikeSignals;
-
+import signals1.signals.SquareSignal;
+import signals1.signals.SymetricSquareSignal;
+import signals1.signals.TriangleSignal;
+import signals1.signals.abstracts.SquareSignals;
 
 /**
  *
  * @author marr
  */
-public class SineInputPanel extends javax.swing.JPanel {
+public class SquareInputPanel extends javax.swing.JPanel {
 
     private Dimension dimension;
 
     /**
      * Creates new form NewJPanel
      */
-    public SineInputPanel(Dimension dimension) {
+    public SquareInputPanel(Dimension dimension) {
         this.dimension = dimension;
         initComponents();
     }
 
-    public SineLikeSignals getSingal() {
+    public SquareSignals getSingal() {
         double amplitude = 0;
         double period = 0;
         int frequency = 0;
         int duration = 0;
         double startTime = 0;
+        int fillFactor = 0;
         try {
             amplitude = Double.parseDouble(jTextAmplitude.getText());
             period = Double.parseDouble(jTextPeriod.getText());
             frequency = Integer.parseInt(jTextFreq.getText());
             duration = Integer.parseInt(jTextDuration.getText());
             startTime = Double.parseDouble(jTextStartTime.getText());
+            fillFactor = Integer.parseInt(jTextFillFactor.getText());
+            if (fillFactor < 1 || fillFactor > 100) {
+                throw new NumberFormatException();
+            }
         } catch (NumberFormatException ex) {
             JOptionPane.showMessageDialog(this, "Niepoprawna wartość", "Błąd", JOptionPane.ERROR_MESSAGE);
             return null;
         }
         int numberOfSamples = duration * frequency;
         switch (jComboBox1.getSelectedIndex()) {
-            case 0:
-                return new SineSignal(startTime, numberOfSamples, amplitude, duration, period);
             case 1:
-                return new SinesHalfWafeSingal(startTime, numberOfSamples, amplitude, duration, period);
+                return new SymetricSquareSignal(startTime, numberOfSamples, amplitude, duration, period, fillFactor);
+            case 2:
+                return new TriangleSignal(startTime, numberOfSamples, amplitude, duration, period, fillFactor);
+
             default:
-                return new SineModSingal(startTime, numberOfSamples, amplitude, duration, period);
+                return new SquareSignal(startTime, numberOfSamples, amplitude, duration, period, fillFactor);
         }
     }
 
@@ -76,11 +81,13 @@ public class SineInputPanel extends javax.swing.JPanel {
         jTextFreq = new javax.swing.JTextField();
         jLabel5 = new javax.swing.JLabel();
         jTextStartTime = new javax.swing.JTextField();
+        jLabel6 = new javax.swing.JLabel();
+        jTextFillFactor = new javax.swing.JTextField();
 
         setPreferredSize(dimension);
 
         jComboBox1.setFont(new java.awt.Font("Verdana", 0, 12)); // NOI18N
-        jComboBox1.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Sygnał sinusoidalny", "Sygnał sinusoidalny wyprostowany jednopołówkowo", "Sygnał sinusoidalny wyprostowany dwupołówkowo" }));
+        jComboBox1.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Sygnał prostokątny", "Sygnał prostokątny symetryczny", "Sygnała trójąkny" }));
 
         jLabel1.setFont(new java.awt.Font("Verdana", 1, 12)); // NOI18N
         jLabel1.setText("Amplituda");
@@ -142,6 +149,18 @@ public class SineInputPanel extends javax.swing.JPanel {
             }
         });
 
+        jLabel6.setFont(new java.awt.Font("Verdana", 1, 12)); // NOI18N
+        jLabel6.setText("Stopień wypełnienia [%]");
+
+        jTextFillFactor.setFont(new java.awt.Font("Tahoma", 0, 12)); // NOI18N
+        jTextFillFactor.setHorizontalAlignment(javax.swing.JTextField.CENTER);
+        jTextFillFactor.setText("50");
+        jTextFillFactor.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jTextFillFactorActionPerformed(evt);
+            }
+        });
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(this);
         this.setLayout(layout);
         layout.setHorizontalGroup(
@@ -149,25 +168,31 @@ public class SineInputPanel extends javax.swing.JPanel {
             .addGroup(layout.createSequentialGroup()
                 .addContainerGap()
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(jComboBox1, 0, 493, Short.MAX_VALUE)
+                    .addComponent(jComboBox1, 0, 502, Short.MAX_VALUE)
                     .addGroup(layout.createSequentialGroup()
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addGroup(layout.createSequentialGroup()
                                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                                     .addComponent(jLabel2, javax.swing.GroupLayout.PREFERRED_SIZE, 92, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                    .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 92, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                    .addComponent(jLabel3, javax.swing.GroupLayout.PREFERRED_SIZE, 130, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                    .addComponent(jLabel4, javax.swing.GroupLayout.PREFERRED_SIZE, 178, javax.swing.GroupLayout.PREFERRED_SIZE))
-                                .addGap(18, 18, 18)
+                                    .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 92, javax.swing.GroupLayout.PREFERRED_SIZE))
+                                .addGap(104, 104, 104)
                                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                    .addComponent(jTextFreq, javax.swing.GroupLayout.PREFERRED_SIZE, 56, javax.swing.GroupLayout.PREFERRED_SIZE)
                                     .addComponent(jTextPeriod, javax.swing.GroupLayout.PREFERRED_SIZE, 56, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                    .addComponent(jTextAmplitude, javax.swing.GroupLayout.PREFERRED_SIZE, 56, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                    .addComponent(jTextDuration, javax.swing.GroupLayout.PREFERRED_SIZE, 56, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                                    .addComponent(jTextAmplitude, javax.swing.GroupLayout.PREFERRED_SIZE, 56, javax.swing.GroupLayout.PREFERRED_SIZE)))
                             .addGroup(layout.createSequentialGroup()
                                 .addComponent(jLabel5, javax.swing.GroupLayout.PREFERRED_SIZE, 178, javax.swing.GroupLayout.PREFERRED_SIZE)
                                 .addGap(18, 18, 18)
-                                .addComponent(jTextStartTime, javax.swing.GroupLayout.PREFERRED_SIZE, 56, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                                .addComponent(jTextStartTime, javax.swing.GroupLayout.PREFERRED_SIZE, 56, javax.swing.GroupLayout.PREFERRED_SIZE))
+                            .addGroup(layout.createSequentialGroup()
+                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                                    .addComponent(jLabel3, javax.swing.GroupLayout.PREFERRED_SIZE, 130, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                    .addComponent(jLabel4, javax.swing.GroupLayout.DEFAULT_SIZE, 178, Short.MAX_VALUE)
+                                    .addComponent(jLabel6, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                                .addGap(18, 18, 18)
+                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                    .addComponent(jTextFillFactor, javax.swing.GroupLayout.PREFERRED_SIZE, 56, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                    .addComponent(jTextFreq, javax.swing.GroupLayout.PREFERRED_SIZE, 56, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                    .addComponent(jTextDuration, javax.swing.GroupLayout.PREFERRED_SIZE, 56, javax.swing.GroupLayout.PREFERRED_SIZE))))
                         .addGap(0, 0, Short.MAX_VALUE)))
                 .addContainerGap())
         );
@@ -184,6 +209,10 @@ public class SineInputPanel extends javax.swing.JPanel {
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel2, javax.swing.GroupLayout.PREFERRED_SIZE, 32, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(jTextPeriod, javax.swing.GroupLayout.DEFAULT_SIZE, 32, Short.MAX_VALUE))
+                .addGap(9, 9, 9)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jLabel6, javax.swing.GroupLayout.PREFERRED_SIZE, 32, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jTextFillFactor, javax.swing.GroupLayout.DEFAULT_SIZE, 32, Short.MAX_VALUE))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel3, javax.swing.GroupLayout.PREFERRED_SIZE, 32, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -196,7 +225,7 @@ public class SineInputPanel extends javax.swing.JPanel {
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel5, javax.swing.GroupLayout.PREFERRED_SIZE, 32, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(jTextStartTime, javax.swing.GroupLayout.DEFAULT_SIZE, 32, Short.MAX_VALUE))
-                .addContainerGap(158, Short.MAX_VALUE))
+                .addGap(102, 102, 102))
         );
     }// </editor-fold>//GEN-END:initComponents
 
@@ -220,6 +249,10 @@ public class SineInputPanel extends javax.swing.JPanel {
         // TODO add your handling code here:
     }//GEN-LAST:event_jTextStartTimeActionPerformed
 
+    private void jTextFillFactorActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jTextFillFactorActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_jTextFillFactorActionPerformed
+
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JComboBox<String> jComboBox1;
@@ -228,8 +261,10 @@ public class SineInputPanel extends javax.swing.JPanel {
     private javax.swing.JLabel jLabel3;
     private javax.swing.JLabel jLabel4;
     private javax.swing.JLabel jLabel5;
+    private javax.swing.JLabel jLabel6;
     private javax.swing.JTextField jTextAmplitude;
     private javax.swing.JTextField jTextDuration;
+    private javax.swing.JTextField jTextFillFactor;
     private javax.swing.JTextField jTextFreq;
     private javax.swing.JTextField jTextPeriod;
     private javax.swing.JTextField jTextStartTime;

@@ -26,7 +26,7 @@ public class SinesHalfWafeSingal extends SineLikeSignals {
             double res = 0.5 * amplitude * (Math.sin(tmp) + Math.abs(Math.sin(tmp)));
             this.result[i] = new Complex(res, 0);
         }
-        return result;
+        return this.result;
     }
 
 }
