@@ -22,4 +22,5 @@ public abstract class NoiseSignals extends Signals{
     protected void calculateStats(){
         this.stats = StatsCalculator.getStats(result);
     }
+    
 }

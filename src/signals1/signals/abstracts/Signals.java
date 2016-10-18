@@ -5,6 +5,7 @@
  */
 package signals1.signals.abstracts;
 
+import java.io.Serializable;
 import org.apache.commons.math3.complex.Complex;
 import signals1.stats.SignalStats;
 
@@ -13,7 +14,7 @@ import signals1.stats.SignalStats;
  *
  * @author marr
  */
-public abstract class Signals {
+public abstract class Signals implements Serializable {
     
     protected double amplitude;
     protected int duration;

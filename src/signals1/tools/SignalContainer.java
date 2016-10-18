@@ -5,6 +5,8 @@
  */
 package signals1.tools;
 
+import java.util.ArrayList;
+import java.util.List;
 import org.apache.commons.math3.complex.Complex;
 import signals1.signals.abstracts.Signals;
 import signals1.stats.SignalStats;
@@ -16,18 +18,20 @@ import signals1.stats.StatsCalculator;
  */
 public class SignalContainer {
 
-    private Signals signal;
+    private Signals current;
+    private List<Signals> signalConainer = new ArrayList<Signals>();
     
     public SignalContainer(Signals signal){
-        this.signal = signal;
+        this.current = signal;
+        signalConainer.add(signal);
     }
     
     public SignalStats getStats(){
-        return signal.getStats();
+        return current.getStats();
     }
     
     public Complex[] getSignalOutput(){
-        return signal.getSignal();
+        return current.getSignal();
     }
     
 
