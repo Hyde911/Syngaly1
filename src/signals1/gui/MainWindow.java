@@ -28,11 +28,13 @@ public class MainWindow extends javax.swing.JFrame {
     private SquareInputPanel squareInputPanel;
     private SignalContainer signalContainer;
     private DecimalFormat df = new DecimalFormat("0.####");
+    private static MainWindow INSTANCE;
 
     /**
      * Creates new form NewJFrame
      */
     public MainWindow() {
+        
         initLookAndFeel();
         initComponents();
         initInputForms();
