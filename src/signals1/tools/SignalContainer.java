@@ -34,5 +34,4 @@ public class SignalContainer {
         return current.getSignal();
     }
     
-
 }

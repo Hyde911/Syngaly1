@@ -13,6 +13,8 @@ import org.apache.commons.math3.complex.Complex;
  */
 public class StatsCalculator {
 
+    
+    
     public static SignalStats getStats(Complex[] input) {
         return new SignalStats(
                 calcMeanValue(input),
@@ -60,4 +62,5 @@ public class StatsCalculator {
     public static double caclEffectivePower(Complex[] input) {
         return Math.sqrt(calcAveragePower(input));
     }
+
 }

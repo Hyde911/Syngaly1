@@ -7,6 +7,7 @@ package signals1.signals.abstracts;
 
 import java.io.Serializable;
 import org.apache.commons.math3.complex.Complex;
+import signals1.stats.HistogramCalculator;
 import signals1.stats.SignalStats;
 
 
@@ -22,6 +23,8 @@ public abstract class Signals implements Serializable {
     protected Complex[]result;
     protected double startTime;
     protected SignalStats stats;
+    protected int[]realHistogram;
+    protected int[]imgHistogram;
     
     public Signals(double startTime, int numberOfSamples, double amplitude, int duration){
         this.startTime = startTime; 
@@ -59,4 +62,5 @@ public abstract class Signals implements Serializable {
     abstract protected void generateSignal();
     
     abstract protected void calculateStats();
+    
 }
