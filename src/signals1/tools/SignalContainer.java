@@ -14,13 +14,25 @@ import signals1.stats.SignalStats;
 
 public class SignalContainer extends HashMap{
     
+    private static SignalContainer INSTANCE;
+
+    public static SignalContainer getInstance() {
+        if(INSTANCE == null){
+            INSTANCE = new SignalContainer();
+        }
+        return INSTANCE;
+    }
+    
     public SignalStats getStats(int id){
-        return ((Signals)get(id)).getStats();
+        return get(id).getStats();
     }
     
     public Complex[] getSignalOutput(int id){
-        return ((Signals)get(id)).getSignal();
+        return get(id).getSignal();
     }
     
+    public Signals get(int key) {
+        return (Signals)get(key);
+    }
 
 }

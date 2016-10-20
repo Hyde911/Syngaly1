@@ -139,6 +139,8 @@ public class OutputWindow extends javax.swing.JFrame {
         jTabbedPane1.addTab("Histogramy", jPanelHist1);
 
         jButton1.setText("Zapisz Sygnał");
+        jButton1.setToolTipText("");
+        jButton1.setActionCommand("saveSignal");
         jButton1.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jButton1ActionPerformed(evt);

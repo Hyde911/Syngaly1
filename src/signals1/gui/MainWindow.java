@@ -27,9 +27,8 @@ public class MainWindow extends javax.swing.JFrame {
     private SineInputPanel sineInputPanel;
     private NoiseInputPanel noiseInputPanel;
     private SquareInputPanel squareInputPanel;
-    private SignalContainer signalContainer = new SignalContainer();
+    private SignalContainer signalContainer = SignalContainer.getInstance();
     private DecimalFormat df = new DecimalFormat("0.####");
-    private static MainWindow INSTANCE;
 
     /**
      * Creates new form NewJFrame

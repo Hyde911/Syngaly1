@@ -5,6 +5,7 @@
  */
 package signals1.tools;
 
+import java.io.File;
 import java.io.FileInputStream;
 import java.io.FileOutputStream;
 import java.io.IOException;
@@ -18,8 +19,8 @@ import signals1.signals.abstracts.Signals;
  */
 public class SignalSerializationHelper {
 
-    public static void SaveSignal(Signals signal, String fileName) throws IOException {
-        FileOutputStream fos = new FileOutputStream(fileName);
+    public static void saveSignal(Signals signal, File fileName) throws IOException {
+        FileOutputStream fos = new FileOutputStream(fileName.getName());
         ObjectOutputStream oos = new ObjectOutputStream(fos);
         oos.writeObject(signal);
         fos.close();
