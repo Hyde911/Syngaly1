@@ -5,33 +5,22 @@
  */
 package signals1.tools;
 
-import java.util.ArrayList;
-import java.util.List;
+
+import java.util.HashMap;
 import org.apache.commons.math3.complex.Complex;
 import signals1.signals.abstracts.Signals;
 import signals1.stats.SignalStats;
-import signals1.stats.StatsCalculator;
 
-/**
- *
- * @author marr
- */
-public class SignalContainer {
 
-    private Signals current;
-    private List<Signals> signalConainer = new ArrayList<Signals>();
+public class SignalContainer extends HashMap{
     
-    public SignalContainer(Signals signal){
-        this.current = signal;
-        signalConainer.add(signal);
+    public SignalStats getStats(int id){
+        return ((Signals)get(id)).getStats();
     }
     
-    public SignalStats getStats(){
-        return current.getStats();
+    public Complex[] getSignalOutput(int id){
+        return ((Signals)get(id)).getSignal();
     }
     
-    public Complex[] getSignalOutput(){
-        return current.getSignal();
-    }
-    
+
 }

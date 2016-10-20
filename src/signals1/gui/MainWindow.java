@@ -13,9 +13,9 @@ import javax.swing.UnsupportedLookAndFeelException;
 import signals1.gui.inputForms.NoiseInputPanel;
 import signals1.gui.inputForms.SineInputPanel;
 import signals1.gui.inputForms.SquareInputPanel;
+import signals1.signals.abstracts.Signals;
 import signals1.stats.HistogramCalculator;
 import signals1.tools.SignalContainer;
-import signals1.stats.SignalStats;
 
 /**
  *
@@ -27,7 +27,7 @@ public class MainWindow extends javax.swing.JFrame {
     private SineInputPanel sineInputPanel;
     private NoiseInputPanel noiseInputPanel;
     private SquareInputPanel squareInputPanel;
-    private SignalContainer signalContainer;
+    private SignalContainer signalContainer = new SignalContainer();
     private DecimalFormat df = new DecimalFormat("0.####");
     private static MainWindow INSTANCE;
 
@@ -56,17 +56,6 @@ public class MainWindow extends javax.swing.JFrame {
         jPanelSquareSignals = new javax.swing.JPanel();
         jPanelDiscreteSignals = new javax.swing.JPanel();
         jButtonGenerateSignal = new javax.swing.JButton();
-        jLabel1 = new javax.swing.JLabel();
-        jLabel2 = new javax.swing.JLabel();
-        jLabel3 = new javax.swing.JLabel();
-        jLabel4 = new javax.swing.JLabel();
-        jLabel5 = new javax.swing.JLabel();
-        jTextMeanValue = new javax.swing.JTextField();
-        jTextMeanPower = new javax.swing.JTextField();
-        jTextVariance = new javax.swing.JTextField();
-        jTextEffPower = new javax.swing.JTextField();
-        jLabel6 = new javax.swing.JLabel();
-        jTextAbsMeanValue1 = new javax.swing.JTextField();
         jSliderHistNo = new javax.swing.JSlider();
         jLabel7 = new javax.swing.JLabel();
 
@@ -144,45 +133,6 @@ public class MainWindow extends javax.swing.JFrame {
             }
         });
 
-        jLabel1.setFont(new java.awt.Font("Yu Gothic UI Semilight", 1, 12)); // NOI18N
-        jLabel1.setText("wartość średnia");
-
-        jLabel2.setFont(new java.awt.Font("Yu Mincho", 1, 14)); // NOI18N
-        jLabel2.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
-        jLabel2.setText("Parametry sygnału");
-
-        jLabel3.setFont(new java.awt.Font("Yu Gothic UI Semilight", 1, 12)); // NOI18N
-        jLabel3.setText("moc średnia");
-
-        jLabel4.setFont(new java.awt.Font("Yu Gothic UI Semilight", 1, 12)); // NOI18N
-        jLabel4.setText("wariancja");
-
-        jLabel5.setFont(new java.awt.Font("Yu Gothic UI Semilight", 1, 12)); // NOI18N
-        jLabel5.setText("moc skuteczna");
-
-        jTextMeanValue.setFont(new java.awt.Font("Courier New", 0, 18)); // NOI18N
-        jTextMeanValue.setHorizontalAlignment(javax.swing.JTextField.CENTER);
-        jTextMeanValue.setText("0");
-
-        jTextMeanPower.setFont(new java.awt.Font("Courier New", 0, 18)); // NOI18N
-        jTextMeanPower.setHorizontalAlignment(javax.swing.JTextField.CENTER);
-        jTextMeanPower.setText("0");
-
-        jTextVariance.setFont(new java.awt.Font("Courier New", 0, 18)); // NOI18N
-        jTextVariance.setHorizontalAlignment(javax.swing.JTextField.CENTER);
-        jTextVariance.setText("0");
-
-        jTextEffPower.setFont(new java.awt.Font("Courier New", 0, 18)); // NOI18N
-        jTextEffPower.setHorizontalAlignment(javax.swing.JTextField.CENTER);
-        jTextEffPower.setText("0");
-
-        jLabel6.setFont(new java.awt.Font("Yu Gothic UI Semilight", 1, 12)); // NOI18N
-        jLabel6.setText("bezwzględna wartość średnia");
-
-        jTextAbsMeanValue1.setFont(new java.awt.Font("Courier New", 0, 18)); // NOI18N
-        jTextAbsMeanValue1.setHorizontalAlignment(javax.swing.JTextField.CENTER);
-        jTextAbsMeanValue1.setText("0");
-
         jSliderHistNo.setMajorTickSpacing(5);
         jSliderHistNo.setMaximum(20);
         jSliderHistNo.setMinimum(5);
@@ -201,37 +151,7 @@ public class MainWindow extends javax.swing.JFrame {
                     .addGroup(layout.createSequentialGroup()
                         .addContainerGap()
                         .addComponent(jTabbedPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 430, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                            .addGroup(layout.createSequentialGroup()
-                                .addGap(174, 174, 174)
-                                .addComponent(jLabel2, javax.swing.GroupLayout.PREFERRED_SIZE, 154, javax.swing.GroupLayout.PREFERRED_SIZE))
-                            .addGroup(layout.createSequentialGroup()
-                                .addGap(18, 18, 18)
-                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                    .addGroup(layout.createSequentialGroup()
-                                        .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 145, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                                        .addComponent(jTextMeanValue, javax.swing.GroupLayout.PREFERRED_SIZE, 104, javax.swing.GroupLayout.PREFERRED_SIZE))
-                                    .addGroup(layout.createSequentialGroup()
-                                        .addComponent(jLabel3, javax.swing.GroupLayout.PREFERRED_SIZE, 145, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                                        .addComponent(jTextMeanPower, javax.swing.GroupLayout.PREFERRED_SIZE, 104, javax.swing.GroupLayout.PREFERRED_SIZE))
-                                    .addGroup(layout.createSequentialGroup()
-                                        .addComponent(jLabel6, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                                        .addComponent(jTextAbsMeanValue1, javax.swing.GroupLayout.PREFERRED_SIZE, 104, javax.swing.GroupLayout.PREFERRED_SIZE))
-                                    .addGroup(layout.createSequentialGroup()
-                                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                            .addGroup(layout.createSequentialGroup()
-                                                .addComponent(jLabel5, javax.swing.GroupLayout.PREFERRED_SIZE, 145, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                                .addGap(61, 61, 61)
-                                                .addComponent(jTextEffPower, javax.swing.GroupLayout.PREFERRED_SIZE, 104, javax.swing.GroupLayout.PREFERRED_SIZE))
-                                            .addGroup(layout.createSequentialGroup()
-                                                .addComponent(jLabel4, javax.swing.GroupLayout.PREFERRED_SIZE, 145, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                                .addGap(61, 61, 61)
-                                                .addComponent(jTextVariance, javax.swing.GroupLayout.PREFERRED_SIZE, 104, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                                        .addGap(0, 0, Short.MAX_VALUE)))))
-                        .addGap(0, 70, Short.MAX_VALUE))
+                        .addGap(0, 0, Short.MAX_VALUE))
                     .addGroup(layout.createSequentialGroup()
                         .addGap(93, 93, 93)
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -248,30 +168,6 @@ public class MainWindow extends javax.swing.JFrame {
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
-                .addGap(25, 25, 25)
-                .addComponent(jLabel2, javax.swing.GroupLayout.PREFERRED_SIZE, 37, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(8, 8, 8)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 38, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jTextMeanValue))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jLabel6, javax.swing.GroupLayout.PREFERRED_SIZE, 38, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jTextAbsMeanValue1))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jLabel3, javax.swing.GroupLayout.PREFERRED_SIZE, 38, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jTextMeanPower))
-                .addGap(4, 4, 4)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jLabel4, javax.swing.GroupLayout.PREFERRED_SIZE, 38, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jTextVariance))
-                .addGap(5, 5, 5)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jLabel5, javax.swing.GroupLayout.PREFERRED_SIZE, 38, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jTextEffPower))
-                .addContainerGap(304, Short.MAX_VALUE))
-            .addGroup(layout.createSequentialGroup()
                 .addGap(37, 37, 37)
                 .addComponent(jTabbedPane1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
@@ -287,22 +183,24 @@ public class MainWindow extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void jButtonGenerateSignalActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonGenerateSignalActionPerformed
+        Signals signal;
         switch (jTabbedPane1.getSelectedIndex()) {
             case 1:
-                signalContainer = new SignalContainer(sineInputPanel.getSingal());
+                signal = sineInputPanel.getSingal();
                 break;
             case 2:
-                signalContainer = new SignalContainer(squareInputPanel.getSingal());
+                signal = squareInputPanel.getSingal();
                 break;
             default:
-                signalContainer = new SignalContainer(noiseInputPanel.getSingal());
+                signal = noiseInputPanel.getSingal();
         }
+        signalContainer.put(signal.getID(), signal);
         int intervals = jSliderHistNo.getValue();
-        HistogramCalculator histCalc = new HistogramCalculator(signalContainer.getSignalOutput());
+        HistogramCalculator histCalc = new HistogramCalculator(signal.getSignal());
         
-        AmplitudePanel ampPanel = new AmplitudePanel(signalContainer.getSignalOutput(), 1);
+        AmplitudePanel ampPanel = new AmplitudePanel(signal.getSignal(), 1);
         HistogramPanel hisPanel = new HistogramPanel(histCalc.getRealHistogram(intervals, true), intervals, histCalc.getRealHistogram(intervals, false), intervals);
-        OutputWindow w = new OutputWindow(signalContainer.getStats(), ampPanel, hisPanel);
+        OutputWindow w = new OutputWindow(signal, ampPanel, hisPanel);
         w.setVisible(true);
 
     }//GEN-LAST:event_jButtonGenerateSignalActionPerformed
@@ -325,17 +223,6 @@ public class MainWindow extends javax.swing.JFrame {
 
     }
 
-    private void showStats() {
-        SignalStats stats = signalContainer.getStats();
-        if (stats != null) {
-            jTextMeanValue.setText(df.format(stats.getMeanValue()));
-            jTextAbsMeanValue1.setText(df.format(stats.getAbsoluteMeanValue()));
-            jTextEffPower.setText(df.format(stats.getEffectivePower()));
-            jTextVariance.setText(df.format(stats.getVariance()));
-            jTextMeanPower.setText(df.format(stats.getAveragePower()));
-        }
-    }
-
     private static void initLookAndFeel() {
         String lookAndFeel = null;
         lookAndFeel = UIManager.getSystemLookAndFeelClassName();
@@ -349,12 +236,6 @@ public class MainWindow extends javax.swing.JFrame {
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton jButtonGenerateSignal;
-    private javax.swing.JLabel jLabel1;
-    private javax.swing.JLabel jLabel2;
-    private javax.swing.JLabel jLabel3;
-    private javax.swing.JLabel jLabel4;
-    private javax.swing.JLabel jLabel5;
-    private javax.swing.JLabel jLabel6;
     private javax.swing.JLabel jLabel7;
     private javax.swing.JPanel jPanelDiscreteSignals;
     private javax.swing.JPanel jPanelNoiseSignals;
@@ -362,11 +243,6 @@ public class MainWindow extends javax.swing.JFrame {
     private javax.swing.JPanel jPanelSquareSignals;
     private javax.swing.JSlider jSliderHistNo;
     private javax.swing.JTabbedPane jTabbedPane1;
-    private javax.swing.JTextField jTextAbsMeanValue1;
-    private javax.swing.JTextField jTextEffPower;
-    private javax.swing.JTextField jTextMeanPower;
-    private javax.swing.JTextField jTextMeanValue;
-    private javax.swing.JTextField jTextVariance;
     // End of variables declaration//GEN-END:variables
 
 }

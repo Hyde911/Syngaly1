@@ -9,6 +9,7 @@ import java.io.File;
 import java.lang.reflect.Method;
 import java.util.logging.Level;
 import java.util.logging.Logger;
+import signals1.signals.abstracts.Signals;
 
 /**
  *
@@ -18,7 +19,7 @@ public class GUIHelper {
 
     private static final Class helperClass = GUIHelper.class;
 
-    public static void actionLocator(String action, File file) {
+    public static void actionLocator(String action, File file, int id) {
         try {
             Method actionMethod = helperClass.getMethod(action, File.class);
             actionMethod.invoke(null, file);
@@ -28,11 +29,11 @@ public class GUIHelper {
         }
     }
 
-    public static void saveCurrentToFile(final File file) {
+    public static void saveCurrentToFile(final File file, final int id) {
         //DSAMainWindow.getInstance().setInputFile(file);
     }
 
-    public static void readCurrentFromFile(final File file) {
+    public static void readCurrentFromFile(final File file, final int id) {
        // DSAMainWindow.getInstance().saveDS(file);
     }
 

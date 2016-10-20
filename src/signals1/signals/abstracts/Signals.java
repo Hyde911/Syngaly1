@@ -6,6 +6,7 @@
 package signals1.signals.abstracts;
 
 import java.io.Serializable;
+import java.util.concurrent.atomic.AtomicInteger;
 import org.apache.commons.math3.complex.Complex;
 import signals1.stats.HistogramCalculator;
 import signals1.stats.SignalStats;
@@ -17,6 +18,8 @@ import signals1.stats.SignalStats;
  */
 public abstract class Signals implements Serializable {
     
+    private final int id;
+    static AtomicInteger nextId = new AtomicInteger();
     protected double amplitude;
     protected int duration;
     protected int numberOfSamples;
@@ -26,7 +29,16 @@ public abstract class Signals implements Serializable {
     protected int[]realHistogram;
     protected int[]imgHistogram;
     
+    private Signals(){
+        id = nextId.incrementAndGet();
+    }
+    
+    public int getID(){
+        return id;
+    }
+    
     public Signals(double startTime, int numberOfSamples, double amplitude, int duration){
+        this();
         this.startTime = startTime; 
         this.amplitude = amplitude;
         this.duration = duration;

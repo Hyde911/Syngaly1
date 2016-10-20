@@ -11,12 +11,14 @@ package signals1.gui;
  */
 public class FileChooserDialog extends javax.swing.JDialog {
 
+    int signalId;
     private String action;
     /**
      * Creates new form FileChooserDialog
      */
-    public FileChooserDialog(java.awt.Frame parent, boolean modal) {
+    public FileChooserDialog(java.awt.Frame parent, boolean modal, int id) {
         super(parent, modal);
+        signalId = id;
         initComponents();
         this.action = "";
     }
@@ -64,7 +66,7 @@ public class FileChooserDialog extends javax.swing.JDialog {
 
     private void jFileChooser1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jFileChooser1ActionPerformed
         setVisible(false);
-        GUIHelper.actionLocator(action, jFileChooser1.getSelectedFile());
+        GUIHelper.actionLocator(action, jFileChooser1.getSelectedFile(), signalId);
     }//GEN-LAST:event_jFileChooser1ActionPerformed
 
 //    /**
