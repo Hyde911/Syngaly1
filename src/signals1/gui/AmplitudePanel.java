@@ -13,6 +13,7 @@ import org.jfree.chart.ChartPanel;
 import org.jfree.chart.JFreeChart;
 import org.jfree.data.xy.XYSeries;
 import org.jfree.data.xy.XYSeriesCollection;
+import signals1.signals.DescreetSignal;
 
 /**
  *
@@ -27,11 +28,11 @@ public class AmplitudePanel extends javax.swing.JPanel {
     /**
      * Creates new form AmplitudePanel
      */
-    public AmplitudePanel(Complex[] values) {
+    public AmplitudePanel(DescreetSignal signal) {
         initComponents();
         
-        ChartPanel realChart = getChart(values, true);
-        ChartPanel imgChart = getChart(values, false);
+        ChartPanel realChart = getChart(signal.getValues(), true, signal.getStartTime());
+        ChartPanel imgChart = getChart(signal.getValues(), false, signal.getStartTime());
 
         jPanelReal.setLayout(new java.awt.BorderLayout());
         jPanelReal.add(realChart, BorderLayout.CENTER);
@@ -106,7 +107,7 @@ public class AmplitudePanel extends javax.swing.JPanel {
         );
     }// </editor-fold>//GEN-END:initComponents
 
-    private ChartPanel getChart(Complex[] values, boolean isReal) {
+    private ChartPanel getChart(Complex[] values, boolean isReal, double offset) {
        String title = "składowa rzeczywista";
         if (!isReal) {
             title = "składowa urojona";
@@ -115,22 +116,25 @@ public class AmplitudePanel extends javax.swing.JPanel {
                 title,
                 "czas",
                 "wartośc funkcji",
-                createDataset(values, isReal));
-        //chart.getCategoryPlot().getDomainAxis().setTickLabelsVisible(false);
+                createDataset(values, isReal, offset, title));
         ChartPanel chartPanel = new ChartPanel(chart);
         chartPanel.setPreferredSize(new Dimension(chartDimensionX, chartDimensionY));
         return chartPanel;
     }
 
-    private XYSeriesCollection createDataset(Complex[] values, boolean isReal) {
-        XYSeries series = new XYSeries("");
+    private XYSeriesCollection createDataset(Complex[] values, boolean isReal, double offset, String title) {
+        XYSeries series = new XYSeries(title);
         int i =0;
+        double x;
+        double y;
         for (Complex v : values) {
             if (isReal) {
-                series.add(i, v.getReal());
+                y = v.getReal();
             } else {
-                series.add(i, v.getImaginary());
+                y = v.getImaginary();
             }
+            x = i+offset;
+            series.add(x,y);
             i++;
         }
         return new XYSeriesCollection(series);

@@ -14,6 +14,7 @@ import signals1.gui.inputForms.NoiseInputPanel;
 import signals1.gui.inputForms.SineInputPanel;
 import signals1.gui.inputForms.SquareInputPanel;
 import signals1.signals.abstracts.Signals;
+import signals1.signals.DescreetSignal;
 import signals1.stats.HistogramCalculator;
 import signals1.tools.SignalContainer;
 
@@ -197,7 +198,7 @@ public class MainWindow extends javax.swing.JFrame {
         int intervals = jSliderHistNo.getValue();
         HistogramCalculator histCalc = new HistogramCalculator(signal.getSignal());
         
-        AmplitudePanel ampPanel = new AmplitudePanel(signal.getSignal());
+        AmplitudePanel ampPanel = new AmplitudePanel(new DescreetSignal(signal.getSignal(), 0, signal.getStartTime()) );
         HistogramPanel hisPanel = new HistogramPanel(histCalc.getRealHistogram(intervals, true), intervals, histCalc.getRealHistogram(intervals, false), intervals);
         OutputWindow w = new OutputWindow(signal, ampPanel, hisPanel);
         w.setVisible(true);
