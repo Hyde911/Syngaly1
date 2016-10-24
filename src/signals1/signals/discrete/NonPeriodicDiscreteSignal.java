@@ -70,9 +70,9 @@ public class NonPeriodicDiscreteSignal implements DescreetSignal {
 
     private void getSamples(Signals signal) {
         values = new Complex[(int) (samplingRate * signal.getDuration())];
-        double factor = values.length / signal.getNumberOfSamples();
-        for (int i = 0; i < signal.getNumberOfSamples(); i++) {
-            values[i] = signal.getSignal()[(int) round(i * factor)];
+        double factor =signal.getNumberOfSamples() / (1.0 * values.length);
+        for (int i = 0; i < values.length; i++){
+            values[i] = signal.getSignal()[(int)(i * factor)];
         }
     }
 }
