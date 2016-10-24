@@ -14,23 +14,13 @@ import signals1.stats.StatsCalculator;
  *
  * @author marr
  */
-public abstract class SquareSignals extends Signals {
+public abstract class SquareSignals extends PeriodicSignals {
 
-    protected double period;
-    protected int numberOfWholePeriods;
-    protected int samplesPerPeriod;
     protected int fillFactor;
 
     public SquareSignals(double startTime, double amplitude, int duration, double period, int fillFactor) {
-        super(startTime, amplitude, duration);
-        this.period = period;
+        super(startTime, amplitude, duration, period);
         this.fillFactor = fillFactor;
-        numberOfWholePeriods = (int) (duration / period);
-        samplesPerPeriod = (int) ((numberOfSamples) / (1.0 * duration / period));
+        generateSignal();
     }
-
-    public double getPeriod() {
-        return period;
-    }
-
 }

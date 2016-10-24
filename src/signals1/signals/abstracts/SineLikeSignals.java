@@ -14,21 +14,11 @@ import signals1.stats.StatsCalculator;
  *
  * @author marr
  */
-public abstract class SineLikeSignals extends Signals {
-
-    protected double period;
-    protected int numberOfWholePeriods;
-    protected int samplesPerPeriod;
+public abstract class SineLikeSignals extends PeriodicSignals {
 
     public SineLikeSignals(double startTime, double amplitude, int duration, double period) {
-        super(startTime, amplitude, duration);
-        this.period = period;
-        numberOfWholePeriods = (int) (duration / period);
-        samplesPerPeriod = (int) ((numberOfSamples) / (1.0 * duration / period));
-    }
-
-    public double getPeriod() {
-        return period;
+        super(startTime, amplitude, duration, period);
+        generateSignal();
     }
 
 //    @Override

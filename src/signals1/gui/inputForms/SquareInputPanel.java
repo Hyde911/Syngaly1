@@ -31,14 +31,12 @@ public class SquareInputPanel extends javax.swing.JPanel {
     public SquareSignals getSingal() {
         double amplitude = 0;
         double period = 0;
-        int frequency = 0;
         int duration = 0;
         double startTime = 0;
         int fillFactor = 0;
         try {
             amplitude = Double.parseDouble(jTextAmplitude.getText());
             period = Double.parseDouble(jTextPeriod.getText());
-            frequency = Integer.parseInt(jTextFreq.getText());
             duration = Integer.parseInt(jTextDuration.getText());
             startTime = Double.parseDouble(jTextStartTime.getText());
             fillFactor = Integer.parseInt(jTextFillFactor.getText());
@@ -49,15 +47,14 @@ public class SquareInputPanel extends javax.swing.JPanel {
             JOptionPane.showMessageDialog(this, "Niepoprawna wartość", "Błąd", JOptionPane.ERROR_MESSAGE);
             return null;
         }
-        int numberOfSamples = duration * frequency;
         switch (jComboBox1.getSelectedIndex()) {
             case 1:
-                return new SymetricSquareSignal(startTime, numberOfSamples, amplitude, duration, period, fillFactor);
+                return new SymetricSquareSignal(startTime, amplitude, duration, period, fillFactor);
             case 2:
-                return new TriangleSignal(startTime, numberOfSamples, amplitude, duration, period, fillFactor);
+                return new TriangleSignal(startTime, amplitude, duration, period, fillFactor);
 
             default:
-                return new SquareSignal(startTime, numberOfSamples, amplitude, duration, period, fillFactor);
+                return new SquareSignal(startTime, amplitude, duration, period, fillFactor);
         }
     }
 
@@ -77,8 +74,6 @@ public class SquareInputPanel extends javax.swing.JPanel {
         jTextPeriod = new javax.swing.JTextField();
         jLabel3 = new javax.swing.JLabel();
         jTextDuration = new javax.swing.JTextField();
-        jLabel4 = new javax.swing.JLabel();
-        jTextFreq = new javax.swing.JTextField();
         jLabel5 = new javax.swing.JLabel();
         jTextStartTime = new javax.swing.JTextField();
         jLabel6 = new javax.swing.JLabel();
@@ -125,18 +120,6 @@ public class SquareInputPanel extends javax.swing.JPanel {
             }
         });
 
-        jLabel4.setFont(new java.awt.Font("Verdana", 1, 12)); // NOI18N
-        jLabel4.setText("Częst. próbkowania[Hz]");
-
-        jTextFreq.setFont(new java.awt.Font("Tahoma", 0, 12)); // NOI18N
-        jTextFreq.setHorizontalAlignment(javax.swing.JTextField.CENTER);
-        jTextFreq.setText("200");
-        jTextFreq.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jTextFreqActionPerformed(evt);
-            }
-        });
-
         jLabel5.setFont(new java.awt.Font("Verdana", 1, 12)); // NOI18N
         jLabel5.setText("Czas początkowy");
 
@@ -180,20 +163,18 @@ public class SquareInputPanel extends javax.swing.JPanel {
                                     .addComponent(jTextPeriod, javax.swing.GroupLayout.PREFERRED_SIZE, 56, javax.swing.GroupLayout.PREFERRED_SIZE)
                                     .addComponent(jTextAmplitude, javax.swing.GroupLayout.PREFERRED_SIZE, 56, javax.swing.GroupLayout.PREFERRED_SIZE)))
                             .addGroup(layout.createSequentialGroup()
-                                .addComponent(jLabel5, javax.swing.GroupLayout.PREFERRED_SIZE, 178, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addGap(18, 18, 18)
-                                .addComponent(jTextStartTime, javax.swing.GroupLayout.PREFERRED_SIZE, 56, javax.swing.GroupLayout.PREFERRED_SIZE))
-                            .addGroup(layout.createSequentialGroup()
-                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                                     .addComponent(jLabel3, javax.swing.GroupLayout.PREFERRED_SIZE, 130, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                    .addComponent(jLabel4, javax.swing.GroupLayout.DEFAULT_SIZE, 178, Short.MAX_VALUE)
-                                    .addComponent(jLabel6, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                                    .addComponent(jLabel6, javax.swing.GroupLayout.PREFERRED_SIZE, 178, javax.swing.GroupLayout.PREFERRED_SIZE))
                                 .addGap(18, 18, 18)
                                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                                     .addComponent(jTextFillFactor, javax.swing.GroupLayout.PREFERRED_SIZE, 56, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                    .addComponent(jTextFreq, javax.swing.GroupLayout.PREFERRED_SIZE, 56, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                    .addComponent(jTextDuration, javax.swing.GroupLayout.PREFERRED_SIZE, 56, javax.swing.GroupLayout.PREFERRED_SIZE))))
-                        .addGap(0, 334, Short.MAX_VALUE)))
+                                    .addComponent(jTextDuration, javax.swing.GroupLayout.PREFERRED_SIZE, 56, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                            .addGroup(layout.createSequentialGroup()
+                                .addComponent(jLabel5, javax.swing.GroupLayout.PREFERRED_SIZE, 178, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                                .addComponent(jTextStartTime, javax.swing.GroupLayout.PREFERRED_SIZE, 56, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                        .addGap(0, 306, Short.MAX_VALUE)))
                 .addContainerGap())
         );
         layout.setVerticalGroup(
@@ -219,13 +200,9 @@ public class SquareInputPanel extends javax.swing.JPanel {
                     .addComponent(jTextDuration, javax.swing.GroupLayout.DEFAULT_SIZE, 32, Short.MAX_VALUE))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jLabel4, javax.swing.GroupLayout.PREFERRED_SIZE, 32, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jTextFreq, javax.swing.GroupLayout.DEFAULT_SIZE, 32, Short.MAX_VALUE))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel5, javax.swing.GroupLayout.PREFERRED_SIZE, 32, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(jTextStartTime, javax.swing.GroupLayout.DEFAULT_SIZE, 32, Short.MAX_VALUE))
-                .addGap(102, 102, 102))
+                .addGap(107, 107, 107))
         );
     }// </editor-fold>//GEN-END:initComponents
 
@@ -241,10 +218,6 @@ public class SquareInputPanel extends javax.swing.JPanel {
         // TODO add your handling code here:
     }//GEN-LAST:event_jTextDurationActionPerformed
 
-    private void jTextFreqActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jTextFreqActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_jTextFreqActionPerformed
-
     private void jTextStartTimeActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jTextStartTimeActionPerformed
         // TODO add your handling code here:
     }//GEN-LAST:event_jTextStartTimeActionPerformed
@@ -259,13 +232,11 @@ public class SquareInputPanel extends javax.swing.JPanel {
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
-    private javax.swing.JLabel jLabel4;
     private javax.swing.JLabel jLabel5;
     private javax.swing.JLabel jLabel6;
     private javax.swing.JTextField jTextAmplitude;
     private javax.swing.JTextField jTextDuration;
     private javax.swing.JTextField jTextFillFactor;
-    private javax.swing.JTextField jTextFreq;
     private javax.swing.JTextField jTextPeriod;
     private javax.swing.JTextField jTextStartTime;
     // End of variables declaration//GEN-END:variables

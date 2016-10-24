@@ -13,8 +13,12 @@ import javax.swing.UnsupportedLookAndFeelException;
 import signals1.gui.inputForms.NoiseInputPanel;
 import signals1.gui.inputForms.SineInputPanel;
 import signals1.gui.inputForms.SquareInputPanel;
+import signals1.signals.abstracts.NoiseSignals;
+import signals1.signals.abstracts.PeriodicSignals;
 import signals1.signals.abstracts.Signals;
-import signals1.signals.DescreetSignal;
+import signals1.signals.discrete.DescreetSignal;
+import signals1.signals.discrete.NonPeriodicDiscreteSignal;
+import signals1.signals.discrete.PeriodicDiscreteSignal;
 import signals1.stats.HistogramCalculator;
 import signals1.tools.SignalContainer;
 
@@ -183,24 +187,28 @@ public class MainWindow extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void jButtonGenerateSignalActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonGenerateSignalActionPerformed
+        DescreetSignal disSignal;
         Signals signal;
         switch (jTabbedPane1.getSelectedIndex()) {
             case 1:
                 signal = sineInputPanel.getSingal();
+                disSignal = new PeriodicDiscreteSignal((PeriodicSignals)signal, 128);
                 break;
             case 2:
                 signal = squareInputPanel.getSingal();
+                disSignal = new PeriodicDiscreteSignal((PeriodicSignals)signal, 128);
                 break;
             default:
                 signal = noiseInputPanel.getSingal();
+                disSignal = new NonPeriodicDiscreteSignal((NoiseSignals)signal, 128);
         }
         signalContainer.put(signal.getID(), signal);
         int intervals = jSliderHistNo.getValue();
-        HistogramCalculator histCalc = new HistogramCalculator(signal.getSignal());
+       
         
-        AmplitudePanel ampPanel = new AmplitudePanel(new DescreetSignal(signal.getSignal(), 0, signal.getStartTime()) );
-        HistogramPanel hisPanel = new HistogramPanel(histCalc.getRealHistogram(intervals, true), intervals, histCalc.getRealHistogram(intervals, false), intervals);
-        OutputWindow w = new OutputWindow(signal, ampPanel, hisPanel);
+        AmplitudePanel ampPanel = new AmplitudePanel(disSignal);
+//        HistogramPanel hisPanel = new HistogramPanel(disSignal.getHistogram(intervals).getRealHistogram(), intervals, disSignal.getHistogram(intervals).getImgHistogram(), intervals);
+        OutputWindow w = new OutputWindow(signal, ampPanel);
         w.setVisible(true);
 
     }//GEN-LAST:event_jButtonGenerateSignalActionPerformed

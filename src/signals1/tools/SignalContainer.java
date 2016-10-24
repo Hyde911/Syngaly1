@@ -9,7 +9,6 @@ package signals1.tools;
 import java.util.HashMap;
 import org.apache.commons.math3.complex.Complex;
 import signals1.signals.abstracts.Signals;
-import signals1.stats.SignalStats;
 
 
 public class SignalContainer extends HashMap{
@@ -21,10 +20,6 @@ public class SignalContainer extends HashMap{
             INSTANCE = new SignalContainer();
         }
         return INSTANCE;
-    }
-    
-    public SignalStats getStats(int id){
-        return get(id).getStats();
     }
     
     public Complex[] getSignalOutput(int id){

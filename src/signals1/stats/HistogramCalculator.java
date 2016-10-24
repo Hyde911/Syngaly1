@@ -36,13 +36,16 @@ public class HistogramCalculator {
         calculateRange();
     }
 
-    public double[] getRealHistogram(int numberOfIntervals, boolean getReal) {
+    public Histogram getHistogram(int numberOfIntervals) {
         DisData = new double[DisData.length];
         numberOfClasses = numberOfIntervals;
         intervals = new double[numberOfIntervals];
-        prepareIntervals(getReal);
-        return DisData;
-
+        prepareIntervals(true);
+        double[] realHis = DisData;
+        DisData = new double[DisData.length];
+        prepareIntervals(false);
+        double[] imgHis = DisData;
+        return new Histogram(realHis, imgHis);
     }
 
     private void calculateRange() {
@@ -91,7 +94,7 @@ public class HistogramCalculator {
         } else {
             for (int i = 0; i < values.length; i++) {
                 for (int j = 0; j < numberOfClasses; j++) {
-                    if (values[i].getImaginary()>= intervals[j] - (classWidth / 2.0)
+                    if (values[i].getImaginary() >= intervals[j] - (classWidth / 2.0)
                             && (values[i].getImaginary() <= intervals[j] + (classWidth / 2.0))) {
                         DisData[i] = intervals[j];
                         break;

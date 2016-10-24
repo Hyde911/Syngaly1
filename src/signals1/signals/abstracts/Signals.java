@@ -8,7 +8,6 @@ package signals1.signals.abstracts;
 import java.io.Serializable;
 import java.util.concurrent.atomic.AtomicInteger;
 import org.apache.commons.math3.complex.Complex;
-import signals1.stats.SignalStats;
 
 
 /**
@@ -18,7 +17,7 @@ import signals1.stats.SignalStats;
 public abstract class Signals implements Serializable {
     
     private final int id;
-    private int samplesPerSecond = 1_000_000;
+    private int samplesPerSecond = 1_048_576;
     static AtomicInteger nextId = new AtomicInteger();
     protected double amplitude;
     protected int duration;
@@ -42,17 +41,18 @@ public abstract class Signals implements Serializable {
         this.duration = duration;
         this.numberOfSamples = this.duration * samplesPerSecond;
         result = new Complex[numberOfSamples];
+
     }
 
-    public Complex[] getSignal(int samplingRate){
-            return null;
+    public Complex[] getSignal(){
+            return result;
     }
     
     public double getAmplitude() {
         return amplitude;
     }
 
-    public double getTimeSpan() {
+    public double getDuration() {
         return duration;
     }
     
@@ -63,9 +63,12 @@ public abstract class Signals implements Serializable {
     public int getNumberOfSamples() {
         return numberOfSamples;
     }
+
+    public int getSamplesPerSecond() {
+        return samplesPerSecond;
+    }
     
     abstract protected void generateSignal();
     
-    abstract protected void calculateStats();
     
 }

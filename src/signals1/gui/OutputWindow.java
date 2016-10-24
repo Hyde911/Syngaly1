@@ -23,7 +23,7 @@ public class OutputWindow extends javax.swing.JFrame {
     /**
      * Creates new form OutputWindow
      */
-    public OutputWindow(Signals signal, JPanel aplitudeCharts, HistogramPanel hisPanel) {
+    public OutputWindow(Signals signal, JPanel aplitudeCharts/*, HistogramPanel hisPanel*/) {
         initComponents();
         fileChooserDialog = new FileChooserDialog(this, true, signal.getID());
         fileChooserDialog.addWindowListener(new java.awt.event.WindowAdapter() {
@@ -33,14 +33,14 @@ public class OutputWindow extends javax.swing.JFrame {
                     }
                 });
         
-        showStats(signal.getStats());
+//        showStats(signal.getStats());
 
         jPanelAmp1.setLayout(new java.awt.BorderLayout());
         jPanelAmp1.add(aplitudeCharts, BorderLayout.CENTER);
         jPanelAmp1.revalidate();
         jPanelHist1.setLayout(new java.awt.BorderLayout());
-        jPanelHist1.add(hisPanel, BorderLayout.CENTER);
-        jPanelHist1.revalidate();
+//        jPanelHist1.add(hisPanel, BorderLayout.CENTER);
+//        jPanelHist1.revalidate();
     }
 
     /**

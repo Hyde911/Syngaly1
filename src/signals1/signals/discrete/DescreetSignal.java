@@ -3,36 +3,30 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package signals1.signals;
+package signals1.signals.discrete;
 
+import static java.lang.Math.round;
 import org.apache.commons.math3.complex.Complex;
+import signals1.signals.abstracts.Signals;
+import signals1.stats.Histogram;
+import signals1.stats.SignalStats;
 
 /**
  *
  * @author glabg
  */
-public class DescreetSignal {
+public interface DescreetSignal {
+
+    Complex[] getValues();
+
+    int getSamplingRate();
+
+    double getStartTime();
+
+    SignalStats getStats();
+
+    int getDuration();
     
-    private Complex[] values;
-    private int samplingRate;
-    private double startTime;
+    Histogram getHistogram(int numberOfIntervals);
 
-    public DescreetSignal(Complex[] values, int samplingRate, double startTime) {
-        this.values = values;
-        this.samplingRate = samplingRate;
-        this.startTime = startTime;
-    }
-
-    public Complex[] getValues() {
-        return values;
-    }
-
-    public int getSamplingRate() {
-        return samplingRate;
-    }
-
-    public double getStartTime() {
-        return startTime;
-    }
-   
 }

@@ -13,14 +13,11 @@ import signals1.stats.StatsCalculator;
  *
  * @author marr
  */
-public abstract class NoiseSignals extends Signals implements Serializable{
+public abstract class NoiseSignals extends Signals implements Serializable {
 
     public NoiseSignals(double startTime, double amplitude, int duration) {
         super(startTime, amplitude, duration);
+        generateSignal();
     }
-   
-//    @Override
-//    protected void calculateStats(){
-//        this.stats = StatsCalculator.getStats(result);
-//    }
+
 }
