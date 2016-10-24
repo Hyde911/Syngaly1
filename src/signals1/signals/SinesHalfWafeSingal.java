@@ -14,8 +14,8 @@ import signals1.signals.abstracts.SineLikeSignals;
  */
 public class SinesHalfWafeSingal extends SineLikeSignals {
 
-    public SinesHalfWafeSingal(double startTime, int numberOfSamples, double amplitude, int duration, double period) {
-        super(startTime, numberOfSamples, amplitude, duration, period);
+    public SinesHalfWafeSingal(double startTime, double amplitude, int duration, double period) {
+        super(startTime, amplitude, duration, period);
     }
 
     @Override

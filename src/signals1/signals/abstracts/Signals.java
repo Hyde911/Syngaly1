@@ -18,16 +18,15 @@ import signals1.stats.SignalStats;
 public abstract class Signals implements Serializable {
     
     private final int id;
+    private int samplesPerSecond = 1_000_000;
     static AtomicInteger nextId = new AtomicInteger();
     protected double amplitude;
     protected int duration;
     protected int numberOfSamples;
     protected Complex[]result;
     protected double startTime;
-    protected SignalStats stats;
-    protected int[]realHistogram;
-    protected int[]imgHistogram;
     
+
     private Signals(){
         id = nextId.incrementAndGet();
     }
@@ -36,26 +35,17 @@ public abstract class Signals implements Serializable {
         return id;
     }
     
-    public Signals(double startTime, int numberOfSamples, double amplitude, int duration){
+    public Signals(double startTime, double amplitude, int duration){
         this();
         this.startTime = startTime; 
         this.amplitude = amplitude;
         this.duration = duration;
-        this.numberOfSamples = numberOfSamples;
+        this.numberOfSamples = this.duration * samplesPerSecond;
+        result = new Complex[numberOfSamples];
     }
 
-    public Complex[] getSignal(){
-        if (result == null){
-            generateSignal();
-        }
-            return result;
-    }
-    
-    public SignalStats getStats(){
-        if (this.stats == null){
-            calculateStats();
-        }
-        return this.stats;
+    public Complex[] getSignal(int samplingRate){
+            return null;
     }
     
     public double getAmplitude() {

@@ -13,9 +13,9 @@ import signals1.signals.abstracts.SquareSignals;
  * @author marr
  */
 public class SymetricSquareSignal extends SquareSignals{
-    
-    public SymetricSquareSignal(double startTime, int numberOfSamples, double amplitude, int duration, double period, int fillFactor) {
-        super(startTime, numberOfSamples, amplitude, duration, period, fillFactor);
+
+    public SymetricSquareSignal(double startTime, double amplitude, int duration, double period, int fillFactor) {
+        super(startTime, amplitude, duration, period, fillFactor);
     }
 
     @Override

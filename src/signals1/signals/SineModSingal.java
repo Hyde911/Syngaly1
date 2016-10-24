@@ -14,9 +14,10 @@ import signals1.signals.abstracts.SineLikeSignals;
  */
 public class SineModSingal extends SineLikeSignals {
 
-    public SineModSingal(double startTime, int numberOfSamples, double amplitude, int duration, double period) {
-        super(startTime, numberOfSamples, amplitude, duration, period);
+    public SineModSingal(double startTime, double amplitude, int duration, double period) {
+        super(startTime, amplitude, duration, period);
     }
+
 
     @Override
     protected void generateSignal() {

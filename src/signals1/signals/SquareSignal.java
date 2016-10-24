@@ -14,8 +14,8 @@ import signals1.signals.abstracts.SquareSignals;
  */
 public class SquareSignal extends SquareSignals{
 
-    public SquareSignal(double startTime, int numberOfSamples, double amplitude, int duration, double period, int fillFactor) {
-        super(startTime, numberOfSamples, amplitude, duration, period, fillFactor);
+    public SquareSignal(double startTime, double amplitude, int duration, double period, int fillFactor) {
+        super(startTime, amplitude, duration, period, fillFactor);
     }
 
     @Override

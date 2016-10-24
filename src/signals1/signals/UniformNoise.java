@@ -15,8 +15,8 @@ import signals1.signals.abstracts.NoiseSignals;
  */
 public class UniformNoise extends NoiseSignals {
 
-    public UniformNoise(double startTime, int numberOfSamples, double amplitude, int duration) {
-        super(startTime, numberOfSamples, amplitude, duration);
+    public UniformNoise(double startTime, double amplitude, int duration) {
+        super(startTime, amplitude, duration);
     }
 
     @Override

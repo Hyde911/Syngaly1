@@ -13,10 +13,11 @@ import signals1.signals.abstracts.SquareSignals;
  * @author marr
  */
 public class TriangleSignal extends SquareSignals{
-    
-    public TriangleSignal(double startTime, int numberOfSamples, double amplitude, int duration, double period, int fillFactor) {
-        super(startTime, numberOfSamples, amplitude, duration, period, fillFactor);
+
+    public TriangleSignal(double startTime, double amplitude, int duration, double period, int fillFactor) {
+        super(startTime, amplitude, duration, period, fillFactor);
     }
+
 
     @Override
     protected void generateSignal() {

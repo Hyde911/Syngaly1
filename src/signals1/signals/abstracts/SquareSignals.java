@@ -21,22 +21,16 @@ public abstract class SquareSignals extends Signals {
     protected int samplesPerPeriod;
     protected int fillFactor;
 
-    public SquareSignals(double startTime, int numberOfSamples, double amplitude, int duration, double period, int fillFactor) {
-        super(startTime, numberOfSamples, amplitude, duration);
+    public SquareSignals(double startTime, double amplitude, int duration, double period, int fillFactor) {
+        super(startTime, amplitude, duration);
         this.period = period;
         this.fillFactor = fillFactor;
         numberOfWholePeriods = (int) (duration / period);
-        samplesPerPeriod = (int) ((numberOfSamples) / (numberOfWholePeriods));
+        samplesPerPeriod = (int) ((numberOfSamples) / (1.0 * duration / period));
     }
 
     public double getPeriod() {
         return period;
     }
 
-    @Override
-    protected void calculateStats() {
-        int wholePeriodSamples = samplesPerPeriod * numberOfWholePeriods;
-        Complex[] samplesForStats = Arrays.copyOf(result, wholePeriodSamples);
-        this.stats = StatsCalculator.getStats(samplesForStats);
-    }
 }

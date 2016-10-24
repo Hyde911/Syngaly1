@@ -15,8 +15,8 @@ import signals1.signals.abstracts.NoiseSignals;
  */
 public class GaussianNoise extends NoiseSignals {
 
-    public GaussianNoise(double startTime, int numberOfSamples, double amplitude, int duration) {
-        super(startTime, numberOfSamples, amplitude, duration);
+    public GaussianNoise(double startTime, double amplitude, int duration) {
+        super(startTime, amplitude, duration);
     }
 
     @Override
