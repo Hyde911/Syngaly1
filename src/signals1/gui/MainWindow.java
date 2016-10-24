@@ -197,7 +197,7 @@ public class MainWindow extends javax.swing.JFrame {
         int intervals = jSliderHistNo.getValue();
         HistogramCalculator histCalc = new HistogramCalculator(signal.getSignal());
         
-        AmplitudePanel ampPanel = new AmplitudePanel(signal.getSignal(), 1);
+        AmplitudePanel ampPanel = new AmplitudePanel(signal.getSignal());
         HistogramPanel hisPanel = new HistogramPanel(histCalc.getRealHistogram(intervals, true), intervals, histCalc.getRealHistogram(intervals, false), intervals);
         OutputWindow w = new OutputWindow(signal, ampPanel, hisPanel);
         w.setVisible(true);

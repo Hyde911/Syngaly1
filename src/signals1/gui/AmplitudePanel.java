@@ -7,13 +7,12 @@ package signals1.gui;
 
 import java.awt.BorderLayout;
 import java.awt.Dimension;
-import java.awt.Font;
 import org.apache.commons.math3.complex.Complex;
 import org.jfree.chart.ChartFactory;
 import org.jfree.chart.ChartPanel;
 import org.jfree.chart.JFreeChart;
-import org.jfree.chart.plot.PlotOrientation;
-import org.jfree.data.category.DefaultCategoryDataset;
+import org.jfree.data.xy.XYSeries;
+import org.jfree.data.xy.XYSeriesCollection;
 
 /**
  *
@@ -21,16 +20,18 @@ import org.jfree.data.category.DefaultCategoryDataset;
  */
 public class AmplitudePanel extends javax.swing.JPanel {
 
+    private static final int INTERVAL = 10;
     private int chartDimensionX = 1150;
     private int chartDimensionY = 350;
 
     /**
      * Creates new form AmplitudePanel
      */
-    public AmplitudePanel(Complex[] values, int interval) {
+    public AmplitudePanel(Complex[] values) {
         initComponents();
-        ChartPanel realChart = getChart(values, interval, true);
-        ChartPanel imgChart = getChart(values, interval, false);
+        
+        ChartPanel realChart = getChart(values, true);
+        ChartPanel imgChart = getChart(values, false);
 
         jPanelReal.setLayout(new java.awt.BorderLayout());
         jPanelReal.add(realChart, BorderLayout.CENTER);
@@ -105,37 +106,36 @@ public class AmplitudePanel extends javax.swing.JPanel {
         );
     }// </editor-fold>//GEN-END:initComponents
 
-    private ChartPanel getChart(Complex[] values, int interval, boolean isReal) {
-        String title = "składowa rzeczywista";
+    private ChartPanel getChart(Complex[] values, boolean isReal) {
+       String title = "składowa rzeczywista";
         if (!isReal) {
             title = "składowa urojona";
         }
-        JFreeChart chart = ChartFactory.createLineChart(
+        JFreeChart chart = ChartFactory.createXYLineChart(
                 title,
                 "czas",
                 "wartośc funkcji",
-                createDataset(values, interval, isReal),
-                PlotOrientation.VERTICAL,
-                true, true, false);
-        chart.getCategoryPlot().getDomainAxis().setTickLabelFont(new Font("Dialog", Font.PLAIN, 8));
+                createDataset(values, isReal));
+        //chart.getCategoryPlot().getDomainAxis().setTickLabelsVisible(false);
         ChartPanel chartPanel = new ChartPanel(chart);
         chartPanel.setPreferredSize(new Dimension(chartDimensionX, chartDimensionY));
         return chartPanel;
     }
 
-    private DefaultCategoryDataset createDataset(Complex[] values, int interval, boolean isReal) {
-        DefaultCategoryDataset dataset = new DefaultCategoryDataset();
-        int i = 1;
+    private XYSeriesCollection createDataset(Complex[] values, boolean isReal) {
+        XYSeries series = new XYSeries("");
+        int i =0;
         for (Complex v : values) {
             if (isReal) {
-                dataset.addValue(v.getReal(), "", new Integer(i * interval));
+                series.add(i, v.getReal());
             } else {
-                dataset.addValue(v.getImaginary(), "", new Integer(i * interval));
+                series.add(i, v.getImaginary());
             }
             i++;
         }
-        return dataset;
+        return new XYSeriesCollection(series);
     }
+    
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JPanel jPanelImg;
