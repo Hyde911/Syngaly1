@@ -8,7 +8,6 @@ package signals1.signals.abstracts;
 import java.io.Serializable;
 import java.util.concurrent.atomic.AtomicInteger;
 import org.apache.commons.math3.complex.Complex;
-import signals1.stats.HistogramCalculator;
 import signals1.stats.SignalStats;
 
 
