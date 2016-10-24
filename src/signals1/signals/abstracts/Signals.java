@@ -65,6 +65,10 @@ public abstract class Signals implements Serializable {
     public double getTimeSpan() {
         return duration;
     }
+    
+   public double getStartTime(){
+       return startTime;
+   }
 
     public int getNumberOfSamples() {
         return numberOfSamples;
