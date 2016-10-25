@@ -25,13 +25,13 @@ public class OutputWindow extends javax.swing.JFrame {
      */
     public OutputWindow(Signals signal, JPanel aplitudeCharts/*, HistogramPanel hisPanel*/) {
         initComponents();
-        fileChooserDialog = new FileChooserDialog(this, true, signal.getID());
-        fileChooserDialog.addWindowListener(new java.awt.event.WindowAdapter() {
-                    @Override
-                    public void windowClosing(java.awt.event.WindowEvent e) {
-                        fileChooserDialog.setVisible(false);            
-                    }
-                });
+//        fileChooserDialog = new FileChooserDialog(this, true, signal.getID());
+//        fileChooserDialog.addWindowListener(new java.awt.event.WindowAdapter() {
+//                    @Override
+//                    public void windowClosing(java.awt.event.WindowEvent e) {
+//                        fileChooserDialog.setVisible(false);            
+//                    }
+//                });
         
 //        showStats(signal.getStats());
 

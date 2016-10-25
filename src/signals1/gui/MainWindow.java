@@ -10,6 +10,7 @@ import java.awt.Dimension;
 import java.text.DecimalFormat;
 import javax.swing.UIManager;
 import javax.swing.UnsupportedLookAndFeelException;
+import signals1.gui.inputForms.DiscreetSignalsPanel;
 import signals1.gui.inputForms.NoiseInputPanel;
 import signals1.gui.inputForms.SineInputPanel;
 import signals1.gui.inputForms.SquareInputPanel;
@@ -19,7 +20,6 @@ import signals1.signals.abstracts.Signals;
 import signals1.signals.discrete.DescreetSignal;
 import signals1.signals.discrete.NonPeriodicDiscreteSignal;
 import signals1.signals.discrete.PeriodicDiscreteSignal;
-import signals1.stats.HistogramCalculator;
 import signals1.tools.SignalContainer;
 
 /**
@@ -32,6 +32,7 @@ public class MainWindow extends javax.swing.JFrame {
     private SineInputPanel sineInputPanel;
     private NoiseInputPanel noiseInputPanel;
     private SquareInputPanel squareInputPanel;
+    private DiscreetSignalsPanel discreetPanel;
     private SignalContainer signalContainer = SignalContainer.getInstance();
     private DecimalFormat df = new DecimalFormat("0.####");
 
@@ -54,7 +55,7 @@ public class MainWindow extends javax.swing.JFrame {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
-        jTabbedPane1 = new javax.swing.JTabbedPane();
+        tabs = new javax.swing.JTabbedPane();
         jPanelNoiseSignals = new javax.swing.JPanel();
         jPanelSineSignals = new javax.swing.JPanel();
         jPanelSquareSignals = new javax.swing.JPanel();
@@ -66,8 +67,8 @@ public class MainWindow extends javax.swing.JFrame {
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setResizable(false);
 
-        jTabbedPane1.setFont(new java.awt.Font("Arial", 0, 12)); // NOI18N
-        jTabbedPane1.setPreferredSize(new java.awt.Dimension(420, 320));
+        tabs.setFont(new java.awt.Font("Arial", 0, 12)); // NOI18N
+        tabs.setPreferredSize(new java.awt.Dimension(420, 320));
 
         jPanelNoiseSignals.setPreferredSize(inputFormDimension);
 
@@ -82,7 +83,7 @@ public class MainWindow extends javax.swing.JFrame {
             .addGap(0, 291, Short.MAX_VALUE)
         );
 
-        jTabbedPane1.addTab("Szumy", jPanelNoiseSignals);
+        tabs.addTab("Szumy", jPanelNoiseSignals);
 
         jPanelSineSignals.setPreferredSize(inputFormDimension);
 
@@ -97,7 +98,7 @@ public class MainWindow extends javax.swing.JFrame {
             .addGap(0, 291, Short.MAX_VALUE)
         );
 
-        jTabbedPane1.addTab("Sygnały sinusoidalne", jPanelSineSignals);
+        tabs.addTab("Sygnały sinusoidalne", jPanelSineSignals);
 
         jPanelSquareSignals.setPreferredSize(inputFormDimension);
 
@@ -112,7 +113,7 @@ public class MainWindow extends javax.swing.JFrame {
             .addGap(0, 291, Short.MAX_VALUE)
         );
 
-        jTabbedPane1.addTab("Sygnały prostokątne", jPanelSquareSignals);
+        tabs.addTab("Sygnały prostokątne", jPanelSquareSignals);
 
         jPanelDiscreteSignals.setPreferredSize(inputFormDimension);
 
@@ -127,7 +128,7 @@ public class MainWindow extends javax.swing.JFrame {
             .addGap(0, 291, Short.MAX_VALUE)
         );
 
-        jTabbedPane1.addTab("Sygnały dyskretne", jPanelDiscreteSignals);
+        tabs.addTab("Sygnały dyskretne", jPanelDiscreteSignals);
 
         jButtonGenerateSignal.setFont(new java.awt.Font("Lucida Sans", 1, 14)); // NOI18N
         jButtonGenerateSignal.setText("Generuj Sygnał");
@@ -154,7 +155,7 @@ public class MainWindow extends javax.swing.JFrame {
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(layout.createSequentialGroup()
                         .addContainerGap()
-                        .addComponent(jTabbedPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 430, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addComponent(tabs, javax.swing.GroupLayout.PREFERRED_SIZE, 430, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addGap(0, 0, Short.MAX_VALUE))
                     .addGroup(layout.createSequentialGroup()
                         .addGap(93, 93, 93)
@@ -173,7 +174,7 @@ public class MainWindow extends javax.swing.JFrame {
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
                 .addGap(37, 37, 37)
-                .addComponent(jTabbedPane1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addComponent(tabs, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(jLabel7, javax.swing.GroupLayout.PREFERRED_SIZE, 38, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(17, 17, 17)
@@ -188,8 +189,8 @@ public class MainWindow extends javax.swing.JFrame {
 
     private void jButtonGenerateSignalActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonGenerateSignalActionPerformed
         DescreetSignal disSignal;
-        Signals signal;
-        switch (jTabbedPane1.getSelectedIndex()) {
+        Signals signal = null;
+        switch (tabs.getSelectedIndex()) {
             case 1:
                 signal = sineInputPanel.getSingal();
                 disSignal = new PeriodicDiscreteSignal((PeriodicSignals)signal, 128);
@@ -198,11 +199,16 @@ public class MainWindow extends javax.swing.JFrame {
                 signal = squareInputPanel.getSingal();
                 disSignal = new PeriodicDiscreteSignal((PeriodicSignals)signal, 128);
                 break;
+            case 3:
+                disSignal =  discreetPanel.getSingal();
+                break;
             default:
                 signal = noiseInputPanel.getSingal();
                 disSignal = new NonPeriodicDiscreteSignal((NoiseSignals)signal, 128);
         }
-        signalContainer.put(signal.getID(), signal);
+        if(signal!=null){
+            signalContainer.put(signal.getID(), signal);
+        }
         int intervals = jSliderHistNo.getValue();
        
         
@@ -217,6 +223,7 @@ public class MainWindow extends javax.swing.JFrame {
         sineInputPanel = new SineInputPanel(inputFormDimension);
         noiseInputPanel = new NoiseInputPanel(inputFormDimension);
         squareInputPanel = new SquareInputPanel(inputFormDimension);
+        discreetPanel = new DiscreetSignalsPanel(inputFormDimension);
 
         jPanelSineSignals.setLayout(new java.awt.BorderLayout());
         jPanelSineSignals.add(sineInputPanel, BorderLayout.CENTER);
@@ -224,11 +231,13 @@ public class MainWindow extends javax.swing.JFrame {
         jPanelNoiseSignals.add(noiseInputPanel, BorderLayout.CENTER);
         jPanelSquareSignals.setLayout(new java.awt.BorderLayout());
         jPanelSquareSignals.add(squareInputPanel, BorderLayout.CENTER);
+        jPanelDiscreteSignals.setLayout(new java.awt.BorderLayout());
+        jPanelDiscreteSignals.add(discreetPanel, BorderLayout.CENTER);
 
         jPanelSineSignals.validate();
         jPanelNoiseSignals.validate();
         jPanelSquareSignals.validate();
-
+        jPanelDiscreteSignals.validate();
     }
 
     private static void initLookAndFeel() {
@@ -250,7 +259,7 @@ public class MainWindow extends javax.swing.JFrame {
     private javax.swing.JPanel jPanelSineSignals;
     private javax.swing.JPanel jPanelSquareSignals;
     private javax.swing.JSlider jSliderHistNo;
-    private javax.swing.JTabbedPane jTabbedPane1;
+    private javax.swing.JTabbedPane tabs;
     // End of variables declaration//GEN-END:variables
 
 }
