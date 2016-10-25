@@ -7,11 +7,15 @@ package signals1.tools;
 
 import java.io.File;
 import java.io.FileInputStream;
+import java.io.FileNotFoundException;
 import java.io.FileOutputStream;
 import java.io.IOException;
 import java.io.ObjectInputStream;
 import java.io.ObjectOutputStream;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import signals1.signals.abstracts.Signals;
+import signals1.signals.discrete.DescreetSignal;
 
 /**
  *
@@ -19,18 +23,28 @@ import signals1.signals.abstracts.Signals;
  */
 public class SignalSerializationHelper {
 
-    public static void saveSignal(Signals signal, File fileName) throws IOException {
-        FileOutputStream fos = new FileOutputStream(fileName.getName());
-        ObjectOutputStream oos = new ObjectOutputStream(fos);
-        oos.writeObject(signal);
-        fos.close();
+    public static void saveSignal(Signals signal, File writeFile) {
+        try (FileOutputStream fos = new FileOutputStream(writeFile)) {
+            ObjectOutputStream oos = new ObjectOutputStream(fos);
+            oos.writeObject(signal);
+            oos.close();
+            fos.close();
+        } catch (FileNotFoundException ex) {
+            Logger.getLogger(SignalSerializationHelper.class.getName()).log(Level.SEVERE, null, ex);
+        } catch (IOException ex) {
+            Logger.getLogger(SignalSerializationHelper.class.getName()).log(Level.SEVERE, null, ex);
+        }
     }
 
-    public static Signals ReadSignal(Signals signal, String fileName) throws IOException, ClassNotFoundException {
-        FileInputStream fis = new FileInputStream(fileName);
-        ObjectInputStream ois = new ObjectInputStream(fis);
-        Signals result = (Signals) ois.readObject();
-        ois.close();
+    public static DescreetSignal ReadSignal(File readFile) throws IOException, ClassNotFoundException {
+        DescreetSignal result = null;
+        try (FileInputStream fis = new FileInputStream(readFile)){
+            ObjectInputStream ois = new ObjectInputStream(fis);
+            result = (DescreetSignal) ois.readObject();
+            ois.close();
+            fis.close();
+        }
+        
         return result;
     }
 }
