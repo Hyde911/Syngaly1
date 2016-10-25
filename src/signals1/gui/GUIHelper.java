@@ -33,11 +33,7 @@ public class GUIHelper {
     }
 
     public static void saveSignal(final File file, final int id) {
-        try {
-            SignalSerializationHelper.saveSignal(SignalContainer.getInstance().get(id), file);
-        } catch (IOException ex) {
-            Logger.getLogger(GUIHelper.class.getName()).log(Level.SEVERE, null, ex);
-        }
+        SignalSerializationHelper.saveSignal(SignalContainer.getInstance().get(id), file);
     }
 
     public static void readCurrentFromFile(final File file, final int id) {
