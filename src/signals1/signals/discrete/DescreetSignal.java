@@ -5,10 +5,7 @@
  */
 package signals1.signals.discrete;
 
-import java.io.Serializable;
-import static java.lang.Math.round;
 import org.apache.commons.math3.complex.Complex;
-import signals1.signals.abstracts.Signals;
 import signals1.stats.Histogram;
 import signals1.stats.SignalStats;
 
@@ -16,18 +13,18 @@ import signals1.stats.SignalStats;
  *
  * @author glabg
  */
-public abstract class DescreetSignal implements Serializable{
+public interface DescreetSignal{
 
-    abstract Complex[] getValues();
+    Complex[] getValues();
 
-    abstract int getSamplingRate();
+    int getSamplingRate();
 
-    abstract double getStartTime();
+    double getStartTime();
 
-    abstract SignalStats getStats();
+    SignalStats getStats();
 
-    abstract int getDuration();
+    int getDuration();
     
-    abstract Histogram getHistogram(int numberOfIntervals);
+    Histogram getHistogram(int numberOfIntervals);
 
 }

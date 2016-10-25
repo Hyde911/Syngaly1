@@ -5,6 +5,7 @@
  */
 package signals1.signals.discrete;
 
+import java.io.Serializable;
 import static java.lang.Math.round;
 import org.apache.commons.math3.complex.Complex;
 import signals1.signals.abstracts.NoiseSignals;
@@ -18,7 +19,7 @@ import signals1.stats.StatsCalculator;
  *
  * @author marr
  */
-public class NonPeriodicDiscreteSignal extends DescreetSignal {
+public class NonPeriodicDiscreteSignal implements DescreetSignal, Serializable {
 
     protected Complex[] values;
     private int samplingRate;
