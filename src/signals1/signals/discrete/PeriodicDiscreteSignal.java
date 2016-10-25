@@ -21,7 +21,7 @@ import signals1.stats.StatsCalculator;
  *
  * @author marr
  */
-public class PeriodicDiscreteSignal implements DescreetSignal {
+public class PeriodicDiscreteSignal extends DescreetSignal {
 
     protected Complex[] values;
     private int samplingRate;

@@ -18,7 +18,7 @@ import signals1.stats.StatsCalculator;
  *
  * @author marr
  */
-public class NonPeriodicDiscreteSignal implements DescreetSignal {
+public class NonPeriodicDiscreteSignal extends DescreetSignal {
 
     protected Complex[] values;
     private int samplingRate;
