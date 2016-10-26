@@ -16,21 +16,22 @@ import signals1.stats.SignalStats;
  *
  * @author glabg
  */
-public class Impulse implements DescreetSignal, Serializable, ImpulseInterface {
+public class Impulse implements Serializable, DescreetSignal, ImpulseInterface {
 
     private static final int ZERO = 0;
     private static final int A = 1;
     protected Complex[] values;
-    private int samplingRate;
-    private int samples;
+    private final int samplingRate;
+    private final int samples;
+    private final int duration;
     private double startTime;
-    
-    private int ns;
+    private final int ns;
     protected SignalStats stats;
     
     public Impulse(int samplingRate,  int duration, int ns){
         this.ns = ns;
         this.samplingRate = samplingRate;
+        this.duration = duration;
         this.samples = samplingRate*duration;
         this.values = new Complex[samples];
         Arrays.fill(values, new Complex(ZERO));

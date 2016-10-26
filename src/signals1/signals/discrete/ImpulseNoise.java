@@ -6,8 +6,9 @@
 package signals1.signals.discrete;
 
 import java.io.Serializable;
+import java.util.Arrays;
+import java.util.Random;
 import org.apache.commons.math3.complex.Complex;
-import signals1.signals.discrete.DescreetSignal;
 import signals1.stats.Histogram;
 import signals1.stats.SignalStats;
 
@@ -15,23 +16,54 @@ import signals1.stats.SignalStats;
  *
  * @author glabg
  */
-public class ImpulseNoise implements DescreetSignal, Serializable{
+public class ImpulseNoise implements ImpulseInterface, DescreetSignal, Serializable{
 
+    private static final int ZERO = 0;
+    private final double a;
+    protected Complex[] values;
+    private final int samplingRate;
+    private final int samples;
+    private final int duration;
+    private final double startTime;
+    private final int ns;
+    protected SignalStats stats;
+
+    public ImpulseNoise(double a, int samplingRate, int duration, double startTime, int ns, double p) {
+        this.a = a;
+        this.samplingRate = samplingRate;
+        this.duration = duration;
+        this.startTime = startTime;
+        this.ns = ns;
+        this.samples = duration*samplingRate;
+        this.values = new Complex[samples];
+        if(p==0){
+            Arrays.fill(values, new Complex[ZERO]);
+        }else{
+            Random r = new Random();
+            for(int i=0; i<samples; i++){
+               if(r.nextInt(101)<=p*100){
+                   values[i] = new Complex(a);
+               }else{
+                   values[i] = new Complex(ZERO);
+               }
+            }
+        }
     
+    }
     
     @Override
     public Complex[] getValues() {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+        return values;
     }
 
     @Override
     public int getSamplingRate() {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+        return samplingRate;
     }
 
     @Override
     public double getStartTime() {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+        return startTime;
     }
 
     @Override
@@ -41,7 +73,7 @@ public class ImpulseNoise implements DescreetSignal, Serializable{
 
     @Override
     public int getDuration() {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+        return samples;
     }
 
     @Override
