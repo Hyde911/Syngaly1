@@ -16,7 +16,7 @@ import signals1.stats.SignalStats;
  *
  * @author glabg
  */
-public class Impulse implements DescreetSignal, Serializable {
+public class Impulse implements DescreetSignal, Serializable, ImpulseInterface {
 
     private static final int ZERO = 0;
     private static final int A = 1;
@@ -34,7 +34,7 @@ public class Impulse implements DescreetSignal, Serializable {
         this.samples = samplingRate*duration;
         this.values = new Complex[samples];
         Arrays.fill(values, new Complex(ZERO));
-        values[ns+1] = new Complex(A);
+        values[ns-1] = new Complex(A);
     }
     
     @Override
@@ -49,7 +49,7 @@ public class Impulse implements DescreetSignal, Serializable {
 
     @Override
     public double getStartTime() {
-        return 0-(samples - ns);
+        return (1-ns);
     }
 
     @Override

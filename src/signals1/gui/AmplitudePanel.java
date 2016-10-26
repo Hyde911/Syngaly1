@@ -14,13 +14,17 @@ import org.jfree.chart.JFreeChart;
 import org.jfree.data.xy.XYSeries;
 import org.jfree.data.xy.XYSeriesCollection;
 import signals1.signals.discrete.DescreetSignal;
+import signals1.signals.discrete.ImpulseInterface;
 
 /**
  *
  * @author marr
  */
 public class AmplitudePanel extends javax.swing.JPanel {
-
+    private static final String SKŁADOWA_UROJONA = "składowa urojona";
+    private static final String SKŁADOWA_RZECZYWISTA = "składowa rzeczywista";
+    private static final String AMPLITUDA = "amplituda";
+    private static final String CZAS = "czas";
     private static final int INTERVAL = 10;
     private int chartDimensionX = 1150;
     private int chartDimensionY = 350;
@@ -30,10 +34,17 @@ public class AmplitudePanel extends javax.swing.JPanel {
      */
     public AmplitudePanel(DescreetSignal signal) {
         initComponents();
+        ChartPanel realChart;
+        ChartPanel imgChart;
         
-        ChartPanel realChart = getChart(signal.getValues(), true, signal.getStartTime());
-        ChartPanel imgChart = getChart(signal.getValues(), false, signal.getStartTime());
-
+        if(signal instanceof ImpulseInterface){       
+            realChart = getScatterPlot(signal.getValues(), true, signal.getStartTime());
+            imgChart = getScatterPlot(signal.getValues(), false, signal.getStartTime());
+        }else{
+            realChart = getChart(signal.getValues(), true, signal.getStartTime());
+            imgChart = getChart(signal.getValues(), false, signal.getStartTime());
+        }
+        
         jPanelReal.setLayout(new java.awt.BorderLayout());
         jPanelReal.add(realChart, BorderLayout.CENTER);
         jPanelReal.setVisible(true);
@@ -107,15 +118,37 @@ public class AmplitudePanel extends javax.swing.JPanel {
         );
     }// </editor-fold>//GEN-END:initComponents
 
-    private ChartPanel getChart(Complex[] values, boolean isReal, double offset) {
-       String title = "składowa rzeczywista";
+    private ChartPanel getScatterPlot(Complex[] values, boolean isReal, double startTime){
+        String title = SKŁADOWA_RZECZYWISTA;
         if (!isReal) {
-            title = "składowa urojona";
+            title = SKŁADOWA_UROJONA;
         }
-        JFreeChart chart = ChartFactory.createXYLineChart(
-                title,
-                "czas",
-                "wartośc funkcji",
+        XYSeries series = new XYSeries(title);
+        int i = (int) startTime;
+        double x;
+        double y;
+        for (Complex v : values) {
+            if (isReal) {
+                y = v.getReal();
+            } else {
+                y = v.getImaginary();
+            }
+            x = i;
+            series.add(x,y);
+            i++;
+        }
+        JFreeChart chart = ChartFactory.createScatterPlot(title, CZAS, AMPLITUDA, new XYSeriesCollection(series));
+        ChartPanel chartPanel = new ChartPanel(chart);
+        chartPanel.setPreferredSize(new Dimension(chartDimensionX, chartDimensionY));
+        return chartPanel;
+    }
+    
+    private ChartPanel getChart(Complex[] values, boolean isReal, double offset) {
+       String title = SKŁADOWA_RZECZYWISTA;
+        if (!isReal) {
+            title = SKŁADOWA_UROJONA;
+        }
+        JFreeChart chart = ChartFactory.createXYLineChart(title, CZAS, AMPLITUDA,
                 createDataset(values, isReal, offset, title));
         ChartPanel chartPanel = new ChartPanel(chart);
         chartPanel.setPreferredSize(new Dimension(chartDimensionX, chartDimensionY));
