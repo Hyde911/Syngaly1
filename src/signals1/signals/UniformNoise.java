@@ -15,8 +15,9 @@ import signals1.signals.abstracts.NoiseSignals;
  */
 public class UniformNoise extends NoiseSignals {
 
-    public UniformNoise(double startTime, double amplitude, int duration) {
+    public UniformNoise(double startTime, double amplitude, double duration) {
         super(startTime, amplitude, duration);
+        this.fullName = "szum jednorodny";
     }
 
     @Override

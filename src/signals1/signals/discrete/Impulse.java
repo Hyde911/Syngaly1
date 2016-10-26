@@ -8,7 +8,6 @@ package signals1.signals.discrete;
 import java.io.Serializable;
 import java.util.Arrays;
 import org.apache.commons.math3.complex.Complex;
-import signals1.signals.discrete.DescreetSignal;
 import signals1.stats.Histogram;
 import signals1.stats.SignalStats;
 
@@ -16,7 +15,7 @@ import signals1.stats.SignalStats;
  *
  * @author glabg
  */
-public class Impulse implements Serializable, DescreetSignal, ImpulseInterface {
+public class Impulse implements Serializable, DiscreteSignal {
 
     private static final int ZERO = 0;
     private static final int A = 1;
@@ -27,17 +26,18 @@ public class Impulse implements Serializable, DescreetSignal, ImpulseInterface {
     private double startTime;
     private final int ns;
     protected SignalStats stats;
-    
-    public Impulse(int samplingRate,  int duration, int ns){
+    private String fullName = "impuls jednostkowy";
+
+    public Impulse(int samplingRate, int duration, int ns) {
         this.ns = ns;
         this.samplingRate = samplingRate;
         this.duration = duration;
-        this.samples = samplingRate*duration;
+        this.samples = samplingRate * duration;
         this.values = new Complex[samples];
         Arrays.fill(values, new Complex(ZERO));
-        values[ns-1] = new Complex(A);
+        values[ns - 1] = new Complex(A);
     }
-    
+
     @Override
     public Complex[] getValues() {
         return values;
@@ -50,7 +50,7 @@ public class Impulse implements Serializable, DescreetSignal, ImpulseInterface {
 
     @Override
     public double getStartTime() {
-        return (1-ns);
+        return (1 - ns);
     }
 
     @Override
@@ -67,5 +67,14 @@ public class Impulse implements Serializable, DescreetSignal, ImpulseInterface {
     public Histogram getHistogram(int numberOfIntervals) {
         throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
-    
+
+    @Override
+    public String getFullName() {
+        return fullName;
+    }
+
+    @Override
+    public double getAmplitude() {
+        return A;
+    }
 }

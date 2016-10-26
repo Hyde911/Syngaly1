@@ -15,8 +15,9 @@ import signals1.signals.abstracts.NoiseSignals;
  */
 public class GaussianNoise extends NoiseSignals {
 
-    public GaussianNoise(double startTime, double amplitude, int duration) {
+    public GaussianNoise(double startTime, double amplitude, double duration) {
         super(startTime, amplitude, duration);
+        this.fullName = "szum gaussowski";
     }
 
     @Override

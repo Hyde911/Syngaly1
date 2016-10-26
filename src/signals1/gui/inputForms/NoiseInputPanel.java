@@ -30,11 +30,11 @@ public class NoiseInputPanel extends javax.swing.JPanel {
 
     public NoiseSignals getSingal() {
         double amplitude = 0;
-        int duration = 0;
+        double duration = 0;
         double startTime = 0;
         try {
             amplitude = Double.parseDouble(jTextAmplitude.getText());
-            duration = Integer.parseInt(jTextDuration.getText());
+            duration = Double.parseDouble(jTextDuration.getText());
             startTime = Double.parseDouble(jTextStartTime.getText());
         } catch (NumberFormatException ex) {
             JOptionPane.showMessageDialog(this, "Niepoprawna wartość", "Błąd", JOptionPane.ERROR_MESSAGE);
@@ -128,7 +128,7 @@ public class NoiseInputPanel extends javax.swing.JPanel {
                                 .addComponent(jLabel5, javax.swing.GroupLayout.PREFERRED_SIZE, 178, javax.swing.GroupLayout.PREFERRED_SIZE)
                                 .addGap(18, 18, 18)
                                 .addComponent(jTextStartTime, javax.swing.GroupLayout.PREFERRED_SIZE, 56, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                        .addGap(0, 192, Short.MAX_VALUE)))
+                        .addGap(0, 121, Short.MAX_VALUE)))
                 .addContainerGap())
         );
         layout.setVerticalGroup(
@@ -148,7 +148,7 @@ public class NoiseInputPanel extends javax.swing.JPanel {
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel5, javax.swing.GroupLayout.PREFERRED_SIZE, 32, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(jTextStartTime, javax.swing.GroupLayout.DEFAULT_SIZE, 32, Short.MAX_VALUE))
-                .addContainerGap(174, Short.MAX_VALUE))
+                .addContainerGap(211, Short.MAX_VALUE))
         );
     }// </editor-fold>//GEN-END:initComponents
 

@@ -31,13 +31,13 @@ public class SquareInputPanel extends javax.swing.JPanel {
     public SquareSignals getSingal() {
         double amplitude = 0;
         double period = 0;
-        int duration = 0;
+        double duration = 0;
         double startTime = 0;
         int fillFactor = 0;
         try {
             amplitude = Double.parseDouble(jTextAmplitude.getText());
             period = Double.parseDouble(jTextPeriod.getText());
-            duration = Integer.parseInt(jTextDuration.getText());
+            duration = Double.parseDouble(jTextDuration.getText());
             startTime = Double.parseDouble(jTextStartTime.getText());
             fillFactor = Integer.parseInt(jTextFillFactor.getText());
             if (fillFactor < 1 || fillFactor > 100) {
@@ -52,7 +52,6 @@ public class SquareInputPanel extends javax.swing.JPanel {
                 return new SymetricSquareSignal(startTime, amplitude, duration, period, fillFactor);
             case 2:
                 return new TriangleSignal(startTime, amplitude, duration, period, fillFactor);
-
             default:
                 return new SquareSignal(startTime, amplitude, duration, period, fillFactor);
         }
@@ -172,9 +171,9 @@ public class SquareInputPanel extends javax.swing.JPanel {
                                     .addComponent(jTextDuration, javax.swing.GroupLayout.PREFERRED_SIZE, 56, javax.swing.GroupLayout.PREFERRED_SIZE)))
                             .addGroup(layout.createSequentialGroup()
                                 .addComponent(jLabel5, javax.swing.GroupLayout.PREFERRED_SIZE, 178, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                                .addGap(18, 18, 18)
                                 .addComponent(jTextStartTime, javax.swing.GroupLayout.PREFERRED_SIZE, 56, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                        .addGap(0, 306, Short.MAX_VALUE)))
+                        .addGap(0, 105, Short.MAX_VALUE)))
                 .addContainerGap())
         );
         layout.setVerticalGroup(

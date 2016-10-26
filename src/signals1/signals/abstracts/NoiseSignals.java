@@ -6,8 +6,6 @@
 package signals1.signals.abstracts;
 
 import java.io.Serializable;
-import signals1.stats.SignalStats;
-import signals1.stats.StatsCalculator;
 
 /**
  *
@@ -15,7 +13,7 @@ import signals1.stats.StatsCalculator;
  */
 public abstract class NoiseSignals extends Signals implements Serializable {
 
-    public NoiseSignals(double startTime, double amplitude, int duration) {
+    public NoiseSignals(double startTime, double amplitude, double duration) {
         super(startTime, amplitude, duration);
         generateSignal();
     }

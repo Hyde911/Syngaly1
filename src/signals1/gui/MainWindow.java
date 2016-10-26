@@ -14,12 +14,15 @@ import signals1.gui.inputForms.DiscreetSignalsPanel;
 import signals1.gui.inputForms.NoiseInputPanel;
 import signals1.gui.inputForms.SineInputPanel;
 import signals1.gui.inputForms.SquareInputPanel;
+import signals1.gui.tables.DiscreteSignalTableModel;
+import signals1.gui.tables.VirtualSignalsTableModel;
 import signals1.signals.abstracts.NoiseSignals;
 import signals1.signals.abstracts.PeriodicSignals;
 import signals1.signals.abstracts.Signals;
-import signals1.signals.discrete.DescreetSignal;
+import signals1.signals.discrete.DiscreteSignal;
 import signals1.signals.discrete.NonPeriodicDiscreteSignal;
 import signals1.signals.discrete.PeriodicDiscreteSignal;
+import signals1.tools.DiscretetSignalsContainer;
 import signals1.tools.SignalContainer;
 
 /**
@@ -34,16 +37,21 @@ public class MainWindow extends javax.swing.JFrame {
     private SquareInputPanel squareInputPanel;
     private DiscreetSignalsPanel discreetPanel;
     private SignalContainer signalContainer = SignalContainer.getInstance();
+    private DiscretetSignalsContainer disSignalContainer = DiscretetSignalsContainer.getInstance();
     private DecimalFormat df = new DecimalFormat("0.####");
+    private VirtualSignalsTableModel virtulTableModel = new VirtualSignalsTableModel();
+    private DiscreteSignalTableModel discreteTableModel = new DiscreteSignalTableModel();
 
     /**
      * Creates new form NewJFrame
      */
     public MainWindow() {
-        
+
         initLookAndFeel();
         initComponents();
         initInputForms();
+        setUpVirtualTable();
+        setUpDiscreteTable();
     }
 
     /**
@@ -55,7 +63,7 @@ public class MainWindow extends javax.swing.JFrame {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
-        tabs = new javax.swing.JTabbedPane();
+        jPaneTabs = new javax.swing.JTabbedPane();
         jPanelNoiseSignals = new javax.swing.JPanel();
         jPanelSineSignals = new javax.swing.JPanel();
         jPanelSquareSignals = new javax.swing.JPanel();
@@ -63,12 +71,24 @@ public class MainWindow extends javax.swing.JFrame {
         jButtonGenerateSignal = new javax.swing.JButton();
         jSliderHistNo = new javax.swing.JSlider();
         jLabel7 = new javax.swing.JLabel();
+        jScrollPane1 = new javax.swing.JScrollPane();
+        jTableVirtual = new javax.swing.JTable();
+        jLabel1 = new javax.swing.JLabel();
+        jSeparator1 = new javax.swing.JSeparator();
+        jLabel5 = new javax.swing.JLabel();
+        jTextSamplingRate = new javax.swing.JTextField();
+        jButtonSampling = new javax.swing.JButton();
+        jScrollPane2 = new javax.swing.JScrollPane();
+        jTableDiscrete = new javax.swing.JTable();
+        jButtonShowSignal = new javax.swing.JButton();
+        jSeparator2 = new javax.swing.JSeparator();
+        jLabel2 = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setResizable(false);
 
-        tabs.setFont(new java.awt.Font("Arial", 0, 12)); // NOI18N
-        tabs.setPreferredSize(new java.awt.Dimension(420, 320));
+        jPaneTabs.setFont(new java.awt.Font("Arial", 0, 12)); // NOI18N
+        jPaneTabs.setPreferredSize(new java.awt.Dimension(420, 320));
 
         jPanelNoiseSignals.setPreferredSize(inputFormDimension);
 
@@ -83,7 +103,7 @@ public class MainWindow extends javax.swing.JFrame {
             .addGap(0, 291, Short.MAX_VALUE)
         );
 
-        tabs.addTab("Szumy", jPanelNoiseSignals);
+        jPaneTabs.addTab("Szumy", jPanelNoiseSignals);
 
         jPanelSineSignals.setPreferredSize(inputFormDimension);
 
@@ -98,7 +118,7 @@ public class MainWindow extends javax.swing.JFrame {
             .addGap(0, 291, Short.MAX_VALUE)
         );
 
-        tabs.addTab("Sygnały sinusoidalne", jPanelSineSignals);
+        jPaneTabs.addTab("Sygnały sinusoidalne", jPanelSineSignals);
 
         jPanelSquareSignals.setPreferredSize(inputFormDimension);
 
@@ -113,7 +133,7 @@ public class MainWindow extends javax.swing.JFrame {
             .addGap(0, 291, Short.MAX_VALUE)
         );
 
-        tabs.addTab("Sygnały prostokątne", jPanelSquareSignals);
+        jPaneTabs.addTab("Sygnały prostokątne", jPanelSquareSignals);
 
         jPanelDiscreteSignals.setPreferredSize(inputFormDimension);
 
@@ -128,10 +148,10 @@ public class MainWindow extends javax.swing.JFrame {
             .addGap(0, 291, Short.MAX_VALUE)
         );
 
-        tabs.addTab("Sygnały dyskretne", jPanelDiscreteSignals);
+        jPaneTabs.addTab("Sygnały dyskretne", jPanelDiscreteSignals);
 
         jButtonGenerateSignal.setFont(new java.awt.Font("Lucida Sans", 1, 14)); // NOI18N
-        jButtonGenerateSignal.setText("Generuj Sygnał");
+        jButtonGenerateSignal.setText("Generuj Sygnał Pseudociągły");
         jButtonGenerateSignal.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jButtonGenerateSignalActionPerformed(evt);
@@ -145,79 +165,200 @@ public class MainWindow extends javax.swing.JFrame {
         jSliderHistNo.setPaintLabels(true);
 
         jLabel7.setFont(new java.awt.Font("Yu Gothic UI Semilight", 1, 12)); // NOI18N
+        jLabel7.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         jLabel7.setText("liczba przedziałów histogramu");
+
+        jTableVirtual.setFont(new java.awt.Font("Tahoma", 1, 13)); // NOI18N
+        jTableVirtual.setModel(virtulTableModel);
+        jTableVirtual.setDragEnabled(true);
+        jTableVirtual.setRowHeight(18);
+        jTableVirtual.setSelectionMode(javax.swing.ListSelectionModel.SINGLE_SELECTION);
+        jScrollPane1.setViewportView(jTableVirtual);
+
+        jLabel1.setFont(new java.awt.Font("Verdana", 1, 16)); // NOI18N
+        jLabel1.setText("Wygenerowane sygnały pseudociągłe");
+
+        jLabel5.setFont(new java.awt.Font("Verdana", 1, 12)); // NOI18N
+        jLabel5.setText("Częstotliwośc próbkowania");
+
+        jTextSamplingRate.setFont(new java.awt.Font("Tahoma", 0, 12)); // NOI18N
+        jTextSamplingRate.setHorizontalAlignment(javax.swing.JTextField.CENTER);
+        jTextSamplingRate.setText("8192");
+        jTextSamplingRate.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jTextSamplingRateActionPerformed(evt);
+            }
+        });
+
+        jButtonSampling.setFont(new java.awt.Font("Lucida Sans", 1, 14)); // NOI18N
+        jButtonSampling.setText("Próbkuj sygnał");
+        jButtonSampling.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButtonSamplingActionPerformed(evt);
+            }
+        });
+
+        jTableDiscrete.setFont(new java.awt.Font("Tahoma", 1, 13)); // NOI18N
+        jTableDiscrete.setModel(discreteTableModel);
+        jTableDiscrete.setRowHeight(18);
+        jTableDiscrete.setSelectionMode(javax.swing.ListSelectionModel.SINGLE_SELECTION);
+        jScrollPane2.setViewportView(jTableDiscrete);
+
+        jButtonShowSignal.setFont(new java.awt.Font("Lucida Sans", 1, 14)); // NOI18N
+        jButtonShowSignal.setText("Wyświetl sygnał");
+        jButtonShowSignal.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButtonShowSignalActionPerformed(evt);
+            }
+        });
+
+        jLabel2.setFont(new java.awt.Font("Verdana", 1, 20)); // NOI18N
+        jLabel2.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        jLabel2.setText("Próbkowanie Sygnałów");
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addComponent(jSeparator1)
+            .addComponent(jSeparator2)
             .addGroup(layout.createSequentialGroup()
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(layout.createSequentialGroup()
                         .addContainerGap()
-                        .addComponent(tabs, javax.swing.GroupLayout.PREFERRED_SIZE, 430, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(0, 0, Short.MAX_VALUE))
-                    .addGroup(layout.createSequentialGroup()
-                        .addGap(93, 93, 93)
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addGroup(layout.createSequentialGroup()
-                                .addGap(31, 31, 31)
-                                .addComponent(jLabel7, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-                            .addComponent(jSliderHistNo, javax.swing.GroupLayout.PREFERRED_SIZE, 251, javax.swing.GroupLayout.PREFERRED_SIZE))))
-                .addContainerGap())
-            .addGroup(layout.createSequentialGroup()
-                .addGap(124, 124, 124)
-                .addComponent(jButtonGenerateSignal, javax.swing.GroupLayout.PREFERRED_SIZE, 191, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                                .addComponent(jPaneTabs, javax.swing.GroupLayout.PREFERRED_SIZE, 430, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                    .addGroup(layout.createSequentialGroup()
+                                        .addGap(18, 18, 18)
+                                        .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 695, javax.swing.GroupLayout.PREFERRED_SIZE))
+                                    .addGroup(layout.createSequentialGroup()
+                                        .addGap(177, 177, 177)
+                                        .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 348, javax.swing.GroupLayout.PREFERRED_SIZE))))
+                            .addComponent(jButtonGenerateSignal, javax.swing.GroupLayout.PREFERRED_SIZE, 430, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                    .addGroup(layout.createSequentialGroup()
+                        .addGap(2, 2, 2)
+                        .addComponent(jButtonShowSignal, javax.swing.GroupLayout.PREFERRED_SIZE, 286, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                            .addComponent(jSliderHistNo, javax.swing.GroupLayout.DEFAULT_SIZE, 266, Short.MAX_VALUE)
+                            .addComponent(jLabel7, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
+                    .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
+                        .addGroup(javax.swing.GroupLayout.Alignment.LEADING, layout.createSequentialGroup()
+                            .addComponent(jLabel5, javax.swing.GroupLayout.PREFERRED_SIZE, 206, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                            .addComponent(jTextSamplingRate, javax.swing.GroupLayout.PREFERRED_SIZE, 76, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addGap(22, 22, 22)
+                            .addComponent(jButtonSampling, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                        .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 607, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addGroup(layout.createSequentialGroup()
+                        .addGap(118, 118, 118)
+                        .addComponent(jLabel2, javax.swing.GroupLayout.PREFERRED_SIZE, 348, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                .addContainerGap(46, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
-                .addGap(37, 37, 37)
-                .addComponent(tabs, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(layout.createSequentialGroup()
+                        .addGap(12, 12, 12)
+                        .addComponent(jLabel1)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                        .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 256, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addGroup(layout.createSequentialGroup()
+                        .addContainerGap()
+                        .addComponent(jPaneTabs, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(jLabel7, javax.swing.GroupLayout.PREFERRED_SIZE, 38, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(17, 17, 17)
-                .addComponent(jSliderHistNo, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(18, 18, 18)
                 .addComponent(jButtonGenerateSignal, javax.swing.GroupLayout.PREFERRED_SIZE, 49, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addGap(11, 11, 11)
+                .addComponent(jSeparator1, javax.swing.GroupLayout.PREFERRED_SIZE, 10, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(5, 5, 5)
+                .addComponent(jSeparator2, javax.swing.GroupLayout.PREFERRED_SIZE, 10, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addComponent(jLabel2)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 22, Short.MAX_VALUE)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jButtonSampling, javax.swing.GroupLayout.PREFERRED_SIZE, 49, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jLabel5, javax.swing.GroupLayout.PREFERRED_SIZE, 32, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jTextSamplingRate))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 163, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(layout.createSequentialGroup()
+                        .addGap(21, 21, 21)
+                        .addComponent(jSliderHistNo, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(jLabel7, javax.swing.GroupLayout.PREFERRED_SIZE, 38, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addGroup(layout.createSequentialGroup()
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(jButtonShowSignal, javax.swing.GroupLayout.PREFERRED_SIZE, 70, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                .addContainerGap())
         );
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
     private void jButtonGenerateSignalActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonGenerateSignalActionPerformed
-        DescreetSignal disSignal;
+//        Discrete disSignal;
         Signals signal = null;
-        switch (tabs.getSelectedIndex()) {
+        switch (jPaneTabs.getSelectedIndex()) {
             case 1:
                 signal = sineInputPanel.getSingal();
-                disSignal = new PeriodicDiscreteSignal((PeriodicSignals)signal, 128);
                 break;
             case 2:
                 signal = squareInputPanel.getSingal();
-                disSignal = new PeriodicDiscreteSignal((PeriodicSignals)signal, 128);
                 break;
             case 3:
-                disSignal =  discreetPanel.getSingal();
+                disSignalContainer.add(discreetPanel.getSingal());
+                discreteTableModel.fireTableDataChanged();
                 break;
             default:
                 signal = noiseInputPanel.getSingal();
-                disSignal = new NonPeriodicDiscreteSignal((NoiseSignals)signal, 128);
+//                disSignal = new NonPeriodicDiscreteSignal((NoiseSignals) signal, 128);
         }
-        if(signal!=null){
-            signalContainer.put(signal.getID(), signal);
+        if (signal != null) {
+            signalContainer.add(signal);
+            virtulTableModel.fireTableDataChanged();
         }
-        int intervals = jSliderHistNo.getValue();
-       
-        
-        AmplitudePanel ampPanel = new AmplitudePanel(disSignal);
-//        HistogramPanel hisPanel = new HistogramPanel(disSignal.getHistogram(intervals).getRealHistogram(), intervals, disSignal.getHistogram(intervals).getImgHistogram(), intervals);
-        OutputWindow w = new OutputWindow(signal, ampPanel);
-        w.setVisible(true);
-
     }//GEN-LAST:event_jButtonGenerateSignalActionPerformed
+
+    private void jButtonSamplingActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonSamplingActionPerformed
+        int selectedVirtualSignal = jTableVirtual.getSelectedRow();
+        if (selectedVirtualSignal < 0) {
+            return;
+        }
+        int sampling = Integer.parseInt(jTextSamplingRate.getText());
+        Signals virtualSignal = signalContainer.get(selectedVirtualSignal);
+        if (virtualSignal == null) {
+            return;
+        }
+        if (virtualSignal instanceof PeriodicSignals) {
+            disSignalContainer.add(new PeriodicDiscreteSignal((PeriodicSignals) virtualSignal, sampling));
+        } else if (virtualSignal instanceof NoiseSignals) {
+            disSignalContainer.add(new NonPeriodicDiscreteSignal((NoiseSignals) virtualSignal, sampling));
+        }
+        discreteTableModel.fireTableDataChanged();
+    }//GEN-LAST:event_jButtonSamplingActionPerformed
+
+    private void jButtonShowSignalActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonShowSignalActionPerformed
+        int selectedDiscreteSignal = jTableDiscrete.getSelectedRow();
+        if (selectedDiscreteSignal < 0) {
+            return;
+        }
+        DiscreteSignal signal = disSignalContainer.get(selectedDiscreteSignal);
+        if (signal == null){
+            return;
+        }
+        AmplitudePanel amPanel = new AmplitudePanel(signal);
+//        HistogramPanel hisPanel = new HistogramPanel(signal.getHistogram(jSliderHistNo.getValue()));
+        OutputWindow outputWindow = new OutputWindow(amPanel);
+        outputWindow.setVisible(true);
+    }//GEN-LAST:event_jButtonShowSignalActionPerformed
+
+    private void jTextSamplingRateActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jTextSamplingRateActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_jTextSamplingRateActionPerformed
 
     private void initInputForms() {
         sineInputPanel = new SineInputPanel(inputFormDimension);
@@ -240,6 +381,23 @@ public class MainWindow extends javax.swing.JFrame {
         jPanelDiscreteSignals.validate();
     }
 
+    private void setUpVirtualTable() {
+        jTableVirtual.getColumnModel().getColumn(0).setPreferredWidth(175);
+        jTableVirtual.getColumnModel().getColumn(1).setPreferredWidth(115);
+        jTableVirtual.getColumnModel().getColumn(2).setPreferredWidth(90);
+        jTableVirtual.getColumnModel().getColumn(3).setPreferredWidth(60);
+        jTableVirtual.getColumnModel().getColumn(4).setPreferredWidth(60);
+        jTableVirtual.getColumnModel().getColumn(5).setPreferredWidth(95);
+    }
+
+    private void setUpDiscreteTable() {
+        jTableDiscrete.getColumnModel().getColumn(0).setPreferredWidth(175);
+        jTableDiscrete.getColumnModel().getColumn(1).setPreferredWidth(115);
+        jTableDiscrete.getColumnModel().getColumn(2).setPreferredWidth(90);
+        jTableDiscrete.getColumnModel().getColumn(3).setPreferredWidth(60);
+        jTableDiscrete.getColumnModel().getColumn(4).setPreferredWidth(60);
+    }
+
     private static void initLookAndFeel() {
         String lookAndFeel = null;
         lookAndFeel = UIManager.getSystemLookAndFeelClassName();
@@ -253,13 +411,25 @@ public class MainWindow extends javax.swing.JFrame {
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton jButtonGenerateSignal;
+    private javax.swing.JButton jButtonSampling;
+    private javax.swing.JButton jButtonShowSignal;
+    private javax.swing.JLabel jLabel1;
+    private javax.swing.JLabel jLabel2;
+    private javax.swing.JLabel jLabel5;
     private javax.swing.JLabel jLabel7;
+    private javax.swing.JTabbedPane jPaneTabs;
     private javax.swing.JPanel jPanelDiscreteSignals;
     private javax.swing.JPanel jPanelNoiseSignals;
     private javax.swing.JPanel jPanelSineSignals;
     private javax.swing.JPanel jPanelSquareSignals;
+    private javax.swing.JScrollPane jScrollPane1;
+    private javax.swing.JScrollPane jScrollPane2;
+    private javax.swing.JSeparator jSeparator1;
+    private javax.swing.JSeparator jSeparator2;
     private javax.swing.JSlider jSliderHistNo;
-    private javax.swing.JTabbedPane tabs;
+    private javax.swing.JTable jTableDiscrete;
+    private javax.swing.JTable jTableVirtual;
+    private javax.swing.JTextField jTextSamplingRate;
     // End of variables declaration//GEN-END:variables
 
 }

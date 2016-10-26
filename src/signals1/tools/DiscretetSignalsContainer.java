@@ -6,22 +6,24 @@
 package signals1.tools;
 
 import java.util.ArrayList;
+import signals1.signals.discrete.DiscreteSignal;
 
 /**
  *
  * @author glabg
  */
-public class DescreetSignalsContainer extends ArrayList{
+public class DiscretetSignalsContainer extends ArrayList<DiscreteSignal>{
     
-    private static DescreetSignalsContainer INSTANCE;
+    private static DiscretetSignalsContainer INSTANCE;
 
-    private DescreetSignalsContainer(){}
+    private DiscretetSignalsContainer(){}
     
-    public static DescreetSignalsContainer getInstance() {
+    public static DiscretetSignalsContainer getInstance() {
         if(INSTANCE == null){
-            INSTANCE = new DescreetSignalsContainer();
+            INSTANCE = new DiscretetSignalsContainer();
         }
         return INSTANCE;
     }
     
 }
+

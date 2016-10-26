@@ -14,8 +14,9 @@ import signals1.signals.abstracts.SquareSignals;
  */
 public class SymetricSquareSignal extends SquareSignals{
 
-    public SymetricSquareSignal(double startTime, double amplitude, int duration, double period, int fillFactor) {
+    public SymetricSquareSignal(double startTime, double amplitude, double duration, double period, int fillFactor) {
         super(startTime, amplitude, duration, period, fillFactor);
+        this.fullName = "prostokątny symetryczny";
     }
 
     @Override

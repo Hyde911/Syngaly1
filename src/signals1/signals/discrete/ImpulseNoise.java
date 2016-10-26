@@ -16,10 +16,10 @@ import signals1.stats.SignalStats;
  *
  * @author glabg
  */
-public class ImpulseNoise implements ImpulseInterface, DescreetSignal, Serializable{
+public class ImpulseNoise implements ImpulseInterface, DiscreteSignal, Serializable {
 
     private static final int ZERO = 0;
-    private final double a;
+    private final double amplitude;
     protected Complex[] values;
     private final int samplingRate;
     private final int samples;
@@ -27,30 +27,31 @@ public class ImpulseNoise implements ImpulseInterface, DescreetSignal, Serializa
     private final double startTime;
     private final int ns;
     protected SignalStats stats;
+    private String fullName = "szum impulsowy";
 
-    public ImpulseNoise(double a, int samplingRate, int duration, double startTime, int ns, double p) {
-        this.a = a;
+    public ImpulseNoise(double amplitude, int samplingRate, int duration, double startTime, int ns, double p) {
+        this.amplitude = amplitude;
         this.samplingRate = samplingRate;
         this.duration = duration;
         this.startTime = startTime;
         this.ns = ns;
-        this.samples = duration*samplingRate;
+        this.samples = duration * samplingRate;
         this.values = new Complex[samples];
-        if(p==0){
+        if (p == 0) {
             Arrays.fill(values, new Complex[ZERO]);
-        }else{
+        } else {
             Random r = new Random();
-            for(int i=0; i<samples; i++){
-               if(r.nextInt(101)<=p*100){
-                   values[i] = new Complex(a);
-               }else{
-                   values[i] = new Complex(ZERO);
-               }
+            for (int i = 0; i < samples; i++) {
+                if (r.nextInt(101) <= p * 100) {
+                    values[i] = new Complex(amplitude);
+                } else {
+                    values[i] = new Complex(ZERO);
+                }
             }
         }
-    
+
     }
-    
+
     @Override
     public Complex[] getValues() {
         return values;
@@ -80,5 +81,14 @@ public class ImpulseNoise implements ImpulseInterface, DescreetSignal, Serializa
     public Histogram getHistogram(int numberOfIntervals) {
         throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
-    
+
+    @Override
+    public String getFullName() {
+        return fullName;
+    }
+
+    @Override
+    public double getAmplitude() {
+        return amplitude;
+    }
 }

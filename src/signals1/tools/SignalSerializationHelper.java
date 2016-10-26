@@ -15,7 +15,7 @@ import java.io.ObjectOutputStream;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import signals1.signals.abstracts.Signals;
-import signals1.signals.discrete.DescreetSignal;
+import signals1.signals.discrete.DiscreteSignal;
 
 /**
  *
@@ -36,11 +36,11 @@ public class SignalSerializationHelper {
         }
     }
 
-    public static DescreetSignal ReadSignal(File readFile) throws IOException, ClassNotFoundException {
-        DescreetSignal result = null;
+    public static DiscreteSignal ReadSignal(File readFile) throws IOException, ClassNotFoundException {
+        DiscreteSignal result = null;
         try (FileInputStream fis = new FileInputStream(readFile)){
             ObjectInputStream ois = new ObjectInputStream(fis);
-            result = (DescreetSignal) ois.readObject();
+            result = (DiscreteSignal) ois.readObject();
             ois.close();
             fis.close();
         }

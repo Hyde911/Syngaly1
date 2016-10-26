@@ -15,7 +15,7 @@ public abstract class PeriodicSignals extends Signals {
     protected int numberOfWholePeriods;
     protected int samplesPerPeriod;
 
-    public PeriodicSignals(double startTime, double amplitude, int duration, double period) {
+    public PeriodicSignals(double startTime, double amplitude, double duration, double period) {
         super(startTime, amplitude, duration);
         this.period = period;
         numberOfWholePeriods = (int) (duration / period);

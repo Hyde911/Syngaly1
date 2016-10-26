@@ -23,7 +23,7 @@ public class OutputWindow extends javax.swing.JFrame {
     /**
      * Creates new form OutputWindow
      */
-    public OutputWindow(Signals signal, JPanel aplitudeCharts/*, HistogramPanel hisPanel*/) {
+    public OutputWindow(/*Signals signal, */JPanel aplitudeCharts/*, HistogramPanel hisPanel*/) {
         initComponents();
 //        fileChooserDialog = new FileChooserDialog(this, true, signal.getID());
 //        fileChooserDialog.addWindowListener(new java.awt.event.WindowAdapter() {

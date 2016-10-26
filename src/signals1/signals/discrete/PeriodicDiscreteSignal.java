@@ -6,13 +6,10 @@
 package signals1.signals.discrete;
 
 import java.io.Serializable;
-import static java.lang.Math.round;
 import java.util.Arrays;
 import org.apache.commons.math3.complex.Complex;
 import signals1.signals.abstracts.PeriodicSignals;
 import signals1.signals.abstracts.Signals;
-import signals1.signals.abstracts.SineLikeSignals;
-import signals1.signals.abstracts.SquareSignals;
 import signals1.stats.Histogram;
 import signals1.stats.HistogramCalculator;
 import signals1.stats.SignalStats;
@@ -22,7 +19,7 @@ import signals1.stats.StatsCalculator;
  *
  * @author marr
  */
-public class PeriodicDiscreteSignal implements DescreetSignal, Serializable {
+public class PeriodicDiscreteSignal implements DiscreteSignal, Serializable {
 
     protected Complex[] values;
     private int samplingRate;
@@ -31,10 +28,21 @@ public class PeriodicDiscreteSignal implements DescreetSignal, Serializable {
     private double period;
     private int numberOfWholePeriods;
     private int samplesPerPeriod;
+    private String fullName = "";
+    private double amplitude;
+    private double duration;
+    private int numberOfSamples;
 
     public PeriodicDiscreteSignal(PeriodicSignals periodicSignal, int samplingRate) {
         this.samplingRate = samplingRate;
         this.startTime = periodicSignal.getStartTime();
+        this.fullName = periodicSignal.getFullName();
+        this.amplitude = periodicSignal.getAmplitude();
+        this.duration = periodicSignal.getDuration();
+        this.period = periodicSignal.getPeriod();
+        numberOfSamples = (int) (samplingRate * periodicSignal.getDuration());
+        numberOfWholePeriods = (int) (duration / period);
+        samplesPerPeriod = (int) ((numberOfSamples) / (1.0 * duration / period));
         getSamples(periodicSignal);
         calculateStats();
         this.period = periodicSignal.getPeriod();
@@ -65,12 +73,27 @@ public class PeriodicDiscreteSignal implements DescreetSignal, Serializable {
         return stats;
     }
 
-    public void calculateStats() {
+    @Override
+    public String getFullName() {
+        return fullName;
+    }
+
+    public double getPeriod() {
+        return period;
+    }
+
+    @Override
+    public double getAmplitude() {
+        return amplitude;
+    }
+
+    private void calculateStats() {
         int wholePeriodSamples = samplesPerPeriod * numberOfWholePeriods;
         Complex[] samplesForStats = Arrays.copyOf(values, wholePeriodSamples);
         this.stats = StatsCalculator.getStats(samplesForStats);
     }
 
+    @Override
     public Histogram getHistogram(int numberOfIntervals) {
         int wholePeriodSamples = samplesPerPeriod * numberOfWholePeriods;
         Complex[] samplesForStats = Arrays.copyOf(values, wholePeriodSamples);
@@ -79,10 +102,10 @@ public class PeriodicDiscreteSignal implements DescreetSignal, Serializable {
     }
 
     private void getSamples(Signals signal) {
-        values = new Complex[(int) (samplingRate * signal.getDuration())];
-        double factor =signal.getNumberOfSamples() / (1.0 * values.length);
-        for (int i = 0; i < values.length; i++){
-            values[i] = signal.getSignal()[(int)(i * factor)];
+        values = new Complex[numberOfSamples];
+        double factor = signal.getNumberOfSamples() / (1.0 * values.length);
+        for (int i = 0; i < values.length; i++) {
+            values[i] = signal.getSignal()[(int) (i * factor)];
         }
     }
 }

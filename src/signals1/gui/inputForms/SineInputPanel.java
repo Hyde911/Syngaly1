@@ -32,12 +32,12 @@ public class SineInputPanel extends javax.swing.JPanel {
     public SineLikeSignals getSingal() {
         double amplitude = 0;
         double period = 0;
-        int duration = 0;
+        double duration = 0;
         double startTime = 0;
         try {
             amplitude = Double.parseDouble(jTextAmplitude.getText());
             period = Double.parseDouble(jTextPeriod.getText());
-            duration = Integer.parseInt(jTextDuration.getText());
+            duration = Double.parseDouble(jTextDuration.getText());
             startTime = Double.parseDouble(jTextStartTime.getText());
         } catch (NumberFormatException ex) {
             JOptionPane.showMessageDialog(this, "Niepoprawna wartość", "Błąd", JOptionPane.ERROR_MESSAGE);
@@ -133,7 +133,7 @@ public class SineInputPanel extends javax.swing.JPanel {
             .addGroup(layout.createSequentialGroup()
                 .addContainerGap()
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(jComboBox1, 0, 453, Short.MAX_VALUE)
+                    .addComponent(jComboBox1, 0, 471, Short.MAX_VALUE)
                     .addGroup(layout.createSequentialGroup()
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addGroup(layout.createSequentialGroup()
@@ -174,7 +174,7 @@ public class SineInputPanel extends javax.swing.JPanel {
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel5, javax.swing.GroupLayout.PREFERRED_SIZE, 32, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(jTextStartTime, javax.swing.GroupLayout.DEFAULT_SIZE, 32, Short.MAX_VALUE))
-                .addContainerGap(140, Short.MAX_VALUE))
+                .addContainerGap(158, Short.MAX_VALUE))
         );
     }// </editor-fold>//GEN-END:initComponents
 

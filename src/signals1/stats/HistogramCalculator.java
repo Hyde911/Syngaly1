@@ -5,13 +5,7 @@
  */
 package signals1.stats;
 
-import java.util.ArrayList;
-import java.util.Arrays;
-import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
 import org.apache.commons.math3.complex.Complex;
-import signals1.signals.abstracts.Signals;
 
 /**
  *

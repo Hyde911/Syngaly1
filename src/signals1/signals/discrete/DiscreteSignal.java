@@ -13,7 +13,7 @@ import signals1.stats.SignalStats;
  *
  * @author glabg
  */
-public interface DescreetSignal{
+public interface DiscreteSignal{
 
     Complex[] getValues();
 
@@ -24,6 +24,10 @@ public interface DescreetSignal{
     SignalStats getStats();
 
     int getDuration();
+    
+    double getAmplitude();
+    
+    String getFullName();
     
     Histogram getHistogram(int numberOfIntervals);
 

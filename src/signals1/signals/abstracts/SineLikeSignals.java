@@ -5,18 +5,13 @@
  */
 package signals1.signals.abstracts;
 
-import java.util.Arrays;
-import org.apache.commons.math3.complex.Complex;
-import signals1.stats.SignalStats;
-import signals1.stats.StatsCalculator;
-
 /**
  *
  * @author marr
  */
 public abstract class SineLikeSignals extends PeriodicSignals {
 
-    public SineLikeSignals(double startTime, double amplitude, int duration, double period) {
+    public SineLikeSignals(double startTime, double amplitude, double duration, double period) {
         super(startTime, amplitude, duration, period);
         generateSignal();
     }

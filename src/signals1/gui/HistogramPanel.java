@@ -13,6 +13,7 @@ import org.jfree.chart.JFreeChart;
 import org.jfree.chart.plot.PlotOrientation;
 import org.jfree.data.statistics.HistogramDataset;
 import org.jfree.data.statistics.HistogramType;
+import signals1.stats.Histogram;
 
 /**
  *
@@ -23,9 +24,9 @@ public class HistogramPanel extends javax.swing.JPanel {
     /**
      * Creates new form HistogramPane
      */
-    public HistogramPanel(double[] realData, int realIntervals, double[] imgData, int imgIntervals) {
+    public HistogramPanel(Histogram histogram) {
         initComponents();
-        JFreeChart realHistogram = buildHistogram("składowa rzeczywista", "", "", realData, realIntervals, HistogramType.FREQUENCY);
+        JFreeChart realHistogram = buildHistogram("składowa rzeczywista", "", "", histogram.getRealHistogram(), histogram.getRealHistogram().length, HistogramType.FREQUENCY);
         ChartPanel realChartPanel = new ChartPanel(realHistogram);
         realChartPanel.setPreferredSize(new Dimension(570, 680));
         jPanelHisReal.setLayout(new java.awt.BorderLayout());
@@ -33,7 +34,7 @@ public class HistogramPanel extends javax.swing.JPanel {
         jPanelHisReal.setVisible(true);
         jPanelHisReal.validate();
         
-        JFreeChart imgHistogram = buildHistogram("składowa rzeczywista", "", "", imgData, imgIntervals, HistogramType.FREQUENCY);
+        JFreeChart imgHistogram = buildHistogram("składowa rzeczywista", "", "", histogram.getImgHistogram(), histogram.getImgHistogram().length, HistogramType.FREQUENCY);
         ChartPanel imgChartPanel = new ChartPanel(imgHistogram);
         imgChartPanel.setPreferredSize(new Dimension(570, 680));        
         jPanelHisImg.setLayout(new java.awt.BorderLayout());

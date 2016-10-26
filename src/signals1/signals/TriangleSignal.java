@@ -14,8 +14,9 @@ import signals1.signals.abstracts.SquareSignals;
  */
 public class TriangleSignal extends SquareSignals{
 
-    public TriangleSignal(double startTime, double amplitude, int duration, double period, int fillFactor) {
+    public TriangleSignal(double startTime, double amplitude, double duration, double period, int fillFactor) {
         super(startTime, amplitude, duration, period, fillFactor);
+        this.fullName = "trójkątny";
     }
 
 

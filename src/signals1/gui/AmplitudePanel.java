@@ -15,8 +15,8 @@ import org.jfree.chart.plot.XYPlot;
 import org.jfree.chart.renderer.xy.XYLineAndShapeRenderer;
 import org.jfree.data.xy.XYSeries;
 import org.jfree.data.xy.XYSeriesCollection;
-import signals1.signals.discrete.DescreetSignal;
 import signals1.signals.discrete.ImpulseInterface;
+import signals1.signals.discrete.DiscreteSignal;
 
 /**
  *
@@ -34,7 +34,7 @@ public class AmplitudePanel extends javax.swing.JPanel {
     /**
      * Creates new form AmplitudePanel
      */
-    public AmplitudePanel(DescreetSignal signal) {
+    public AmplitudePanel(DiscreteSignal signal) {
         initComponents();
         ChartPanel realChart;
         ChartPanel imgChart;
