@@ -8,6 +8,8 @@ package signals1.gui;
 import java.awt.BorderLayout;
 import java.awt.Dimension;
 import java.text.DecimalFormat;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import javax.swing.UIManager;
 import javax.swing.UnsupportedLookAndFeelException;
 import signals1.gui.inputForms.DiscreetSignalsPanel;
@@ -16,6 +18,7 @@ import signals1.gui.inputForms.SineInputPanel;
 import signals1.gui.inputForms.SquareInputPanel;
 import signals1.gui.tables.DiscreteSignalTableModel;
 import signals1.gui.tables.VirtualSignalsTableModel;
+import signals1.operations.ArithmeticOperations;
 import signals1.signals.abstracts.NoiseSignals;
 import signals1.signals.abstracts.PeriodicSignals;
 import signals1.signals.abstracts.Signals;
@@ -38,7 +41,6 @@ public class MainWindow extends javax.swing.JFrame {
     private DiscreetSignalsPanel discreetPanel;
     private SignalContainer signalContainer = SignalContainer.getInstance();
     private DiscretetSignalsContainer disSignalContainer = DiscretetSignalsContainer.getInstance();
-    private DecimalFormat df = new DecimalFormat("0.####");
     private VirtualSignalsTableModel virtulTableModel = new VirtualSignalsTableModel();
     private DiscreteSignalTableModel discreteTableModel = new DiscreteSignalTableModel();
 
@@ -188,7 +190,7 @@ public class MainWindow extends javax.swing.JFrame {
 
         jTextSamplingRate.setFont(new java.awt.Font("Tahoma", 0, 12)); // NOI18N
         jTextSamplingRate.setHorizontalAlignment(javax.swing.JTextField.CENTER);
-        jTextSamplingRate.setText("8192");
+        jTextSamplingRate.setText("300");
         jTextSamplingRate.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jTextSamplingRateActionPerformed(evt);
@@ -276,11 +278,11 @@ public class MainWindow extends javax.swing.JFrame {
                                 .addComponent(jPaneTabs, javax.swing.GroupLayout.PREFERRED_SIZE, 430, javax.swing.GroupLayout.PREFERRED_SIZE)
                                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                                     .addGroup(layout.createSequentialGroup()
-                                        .addGap(18, 18, 18)
-                                        .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 695, javax.swing.GroupLayout.PREFERRED_SIZE))
-                                    .addGroup(layout.createSequentialGroup()
                                         .addGap(177, 177, 177)
-                                        .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 348, javax.swing.GroupLayout.PREFERRED_SIZE))))
+                                        .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 348, javax.swing.GroupLayout.PREFERRED_SIZE))
+                                    .addGroup(layout.createSequentialGroup()
+                                        .addGap(18, 18, 18)
+                                        .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 695, javax.swing.GroupLayout.PREFERRED_SIZE))))
                             .addComponent(jButtonGenerateSignal, javax.swing.GroupLayout.PREFERRED_SIZE, 430, javax.swing.GroupLayout.PREFERRED_SIZE)))
                     .addGroup(layout.createSequentialGroup()
                         .addGap(2, 2, 2)
@@ -431,7 +433,18 @@ public class MainWindow extends javax.swing.JFrame {
     }//GEN-LAST:event_jTextSamplingRateActionPerformed
 
     private void jButtonAddSignalsActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonAddSignalsActionPerformed
-        // TODO add your handling code here:
+        ArithmeticOperations add;
+        DiscreteSignal[] signals = getSignalsForCalculation();
+        if (signals != null){
+            try {
+                add = new ArithmeticOperations(signals[0], signals[1]);
+                disSignalContainer.add(add.add());
+                discreteTableModel.fireTableDataChanged();
+            } catch (ArithmeticOperations.NotSameSamplinRateExpcetion ex) {
+                
+            }
+        }
+        
     }//GEN-LAST:event_jButtonAddSignalsActionPerformed
 
     private void jButtonSubtractSignalsActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonSubtractSignalsActionPerformed
@@ -505,6 +518,16 @@ public class MainWindow extends javax.swing.JFrame {
         return (int)jTableVirtual.getModel().getValueAt(row, 0);
     }
     
+    private DiscreteSignal[] getSignalsForCalculation(){
+        if (jTableDiscrete.getSelectedRowCount() != 2){
+            return null;
+        }
+        DiscreteSignal[] signals = new DiscreteSignal[2];
+        signals[0] = disSignalContainer.getById(getIdFromDiscreteTable(jTableDiscrete.getSelectedRows()[0]));
+        signals[1] = disSignalContainer.getById(getIdFromDiscreteTable(jTableDiscrete.getSelectedRows()[1]));
+        return signals;
+    }
+
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton jButtonAddSignals;
     private javax.swing.JButton jButtonDvideSignals;

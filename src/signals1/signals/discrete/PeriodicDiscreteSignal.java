@@ -48,11 +48,6 @@ public class PeriodicDiscreteSignal extends DiscreteSignal implements Serializab
     }
 
     @Override
-    public Complex[] getValues() {
-        return values;
-    }
-
-    @Override
     public int getSamplingRate() {
         return samplingRate;
     }

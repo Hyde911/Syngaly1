@@ -16,7 +16,7 @@ import org.apache.commons.math3.complex.Complex;
 public abstract class Signals implements Serializable {
 
     private final int id;
-    private int samplesPerSecond = 1_048_576;
+    private int samplesPerSecond = 1_048_5;//76;
     static AtomicInteger nextId = new AtomicInteger();
     protected double amplitude;
     protected double duration;

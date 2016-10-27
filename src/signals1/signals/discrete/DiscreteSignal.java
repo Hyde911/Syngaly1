@@ -30,7 +30,9 @@ public abstract class DiscreteSignal {
         id = nextId.incrementAndGet();
     }
 
-    public abstract Complex[] getValues();
+    public Complex[] getValues(){
+        return values;
+    }
 
     public abstract Histogram getHistogram(int numberOfIntervals);
 
@@ -41,7 +43,7 @@ public abstract class DiscreteSignal {
     public int getId() {
         return id;
     }
-
+    
     public double getStartTime() {
         return startTime;
     }

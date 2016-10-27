@@ -27,7 +27,6 @@ public class ImpulseNoise extends DiscreteSignal implements ImpulseInterface, Se
     private final double startTime;
     private final int ns;
     protected SignalStats stats;
-    private String fullName = "szum impulsowy";
 
     public ImpulseNoise(double amplitude, int samplingRate, int duration, double startTime, int ns, double p) {
         super ();
@@ -38,6 +37,7 @@ public class ImpulseNoise extends DiscreteSignal implements ImpulseInterface, Se
         this.ns = ns;
         this.samples = duration * samplingRate;
         this.values = new Complex[samples];
+        this.fullName = "szum impulsowy";
         if (p == 0) {
             Arrays.fill(values, new Complex[ZERO]);
         } else {
@@ -50,13 +50,8 @@ public class ImpulseNoise extends DiscreteSignal implements ImpulseInterface, Se
                 }
             }
         }
-
     }
 
-    @Override
-    public Complex[] getValues() {
-        return values;
-    }
 
     @Override
     public int getSamplingRate() {

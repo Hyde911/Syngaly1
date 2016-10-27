@@ -22,7 +22,6 @@ public class Impulse extends DiscreteSignal implements Serializable, ImpulseInte
     protected Complex[] values;
     private final int samples;
     private final int ns;
-    private String fullName = "impuls jednostkowy";
 
     public Impulse(int samplingRate, int duration, int ns) {
         super ();
@@ -31,13 +30,9 @@ public class Impulse extends DiscreteSignal implements Serializable, ImpulseInte
         this.duration = duration;
         this.samples = samplingRate * duration;
         this.values = new Complex[samples];
+        this.fullName = "impuls jednostkowy";
         Arrays.fill(values, new Complex(ZERO));
         values[ns - 1] = new Complex(A);
-    }
-
-    @Override
-    public Complex[] getValues() {
-        return values;
     }
 
     @Override
