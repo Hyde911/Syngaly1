@@ -352,8 +352,8 @@ public class MainWindow extends javax.swing.JFrame {
         }
         System.out.println("TEST: " + signal.getClass());
         AmplitudePanel amPanel = new AmplitudePanel(signal);
-//        HistogramPanel hisPanel = new HistogramPanel(signal.getHistogram(jSliderHistNo.getValue()));
-        OutputWindow outputWindow = new OutputWindow(amPanel);
+        HistogramPanel hisPanel = new HistogramPanel(signal.getHistogram(jSliderHistNo.getValue()), jSliderHistNo.getValue());
+        OutputWindow outputWindow = new OutputWindow(amPanel, hisPanel);
         outputWindow.setVisible(true);
     }//GEN-LAST:event_jButtonShowSignalActionPerformed
 
