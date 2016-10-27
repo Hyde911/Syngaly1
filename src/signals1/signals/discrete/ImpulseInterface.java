@@ -23,7 +23,7 @@ public interface ImpulseInterface {
 
     SignalStats getStats();
 
-    int getDuration();
+    double getDuration();
     
     Histogram getHistogram(int numberOfIntervals);
 }

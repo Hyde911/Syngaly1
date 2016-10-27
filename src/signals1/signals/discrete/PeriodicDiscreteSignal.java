@@ -19,21 +19,15 @@ import signals1.stats.StatsCalculator;
  *
  * @author marr
  */
-public class PeriodicDiscreteSignal implements DiscreteSignal, Serializable {
+public class PeriodicDiscreteSignal extends DiscreteSignal implements Serializable {
 
-    protected Complex[] values;
-    private int samplingRate;
-    private double startTime;
-    protected SignalStats stats;
     private double period;
     private int numberOfWholePeriods;
     private int samplesPerPeriod;
-    private String fullName = "";
-    private double amplitude;
-    private double duration;
     private int numberOfSamples;
 
     public PeriodicDiscreteSignal(PeriodicSignals periodicSignal, int samplingRate) {
+        super ();
         this.samplingRate = samplingRate;
         this.startTime = periodicSignal.getStartTime();
         this.fullName = periodicSignal.getFullName();
@@ -49,7 +43,7 @@ public class PeriodicDiscreteSignal implements DiscreteSignal, Serializable {
     }
 
     @Override
-    public int getDuration() {
+    public double getDuration() {
         return (int) values.length / samplingRate;
     }
 

@@ -5,15 +5,9 @@
  */
 package signals1.gui.tables;
 
-import java.util.ArrayList;
-import java.util.HashMap;
-import java.util.List;
 import javax.swing.event.TableModelEvent;
 import javax.swing.event.TableModelListener;
-import javax.swing.table.AbstractTableModel;
 import javax.swing.table.DefaultTableModel;
-import signals1.signals.GaussianNoise;
-import signals1.signals.abstracts.NoiseSignals;
 import signals1.signals.abstracts.PeriodicSignals;
 import signals1.signals.abstracts.Signals;
 import signals1.signals.abstracts.SquareSignals;
@@ -25,7 +19,7 @@ import signals1.tools.SignalContainer;
  */
 public class VirtualSignalsTableModel extends DefaultTableModel {
 
-    private String[] columnsNames = {"typ sygnału", "czas początkowy [s]", "czas trwania [s]", "amplituda", "okres [s]", "wypełnienie [%]"};
+    private String[] columnsNames = {"id", "typ sygnału", "czas początkowy [s]", "czas trwania [s]", "amplituda", "okres [s]", "wypełnienie [%]"};
     private SignalContainer container = SignalContainer.getInstance();
     private int rowsNumber = 0;
 
@@ -58,16 +52,18 @@ public class VirtualSignalsTableModel extends DefaultTableModel {
         Signals signal = container.get(rowIndex);
         switch (columnIndex) {
             case 0:
-                return signal.getFullName();
+                return signal.getId();
             case 1:
-                return signal.getStartTime();
+                return signal.getFullName();
             case 2:
-                return signal.getDuration();
+                return signal.getStartTime();
             case 3:
-                return signal.getAmplitude();
+                return signal.getDuration();
             case 4:
-                return getPeriod(signal);
+                return signal.getAmplitude();
             case 5:
+                return getPeriod(signal);
+            case 6:
                 return getFill(signal);
         }
         return null;

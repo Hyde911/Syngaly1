@@ -18,20 +18,15 @@ import signals1.stats.StatsCalculator;
  *
  * @author marr
  */
-public class NonPeriodicDiscreteSignal implements DiscreteSignal, Serializable {
-
-    protected Complex[] values;
-    private int samplingRate;
-    private double startTime;
-    protected SignalStats stats;
-    private String fullName = "";
-    private double amplitude;
+public class NonPeriodicDiscreteSignal extends DiscreteSignal implements Serializable {
 
     public NonPeriodicDiscreteSignal(NoiseSignals noiseSignal, int samplingRate) {
+        super ();
         this.samplingRate = samplingRate;
         this.startTime = noiseSignal.getStartTime();
         this.fullName = noiseSignal.getFullName();
         this.amplitude = noiseSignal.getAmplitude();
+        this.duration = noiseSignal.getDuration();
         getSamples(noiseSignal);
         calculateStats();
     }
@@ -47,7 +42,7 @@ public class NonPeriodicDiscreteSignal implements DiscreteSignal, Serializable {
     }
     
     @Override
-    public int getDuration() {
+    public double getDuration() {
         return (int) values.length / samplingRate;
     }
 

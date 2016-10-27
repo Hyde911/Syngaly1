@@ -29,7 +29,7 @@ public abstract class Signals implements Serializable {
         id = nextId.incrementAndGet();
     }
 
-    public int getID() {
+    public int getId() {
         return id;
     }
 

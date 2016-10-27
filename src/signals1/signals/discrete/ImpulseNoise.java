@@ -16,7 +16,7 @@ import signals1.stats.SignalStats;
  *
  * @author glabg
  */
-public class ImpulseNoise implements ImpulseInterface, DiscreteSignal, Serializable {
+public class ImpulseNoise extends DiscreteSignal implements ImpulseInterface, Serializable {
 
     private static final int ZERO = 0;
     private final double amplitude;
@@ -30,6 +30,7 @@ public class ImpulseNoise implements ImpulseInterface, DiscreteSignal, Serializa
     private String fullName = "szum impulsowy";
 
     public ImpulseNoise(double amplitude, int samplingRate, int duration, double startTime, int ns, double p) {
+        super ();
         this.amplitude = amplitude;
         this.samplingRate = samplingRate;
         this.duration = duration;
@@ -73,8 +74,8 @@ public class ImpulseNoise implements ImpulseInterface, DiscreteSignal, Serializa
     }
 
     @Override
-    public int getDuration() {
-        return samples;
+    public double getDuration() {
+        return (int) values.length / samplingRate;
     }
 
     @Override

@@ -5,6 +5,7 @@
  */
 package signals1.signals.discrete;
 
+import java.util.concurrent.atomic.AtomicInteger;
 import org.apache.commons.math3.complex.Complex;
 import signals1.stats.Histogram;
 import signals1.stats.SignalStats;
@@ -13,22 +14,51 @@ import signals1.stats.SignalStats;
  *
  * @author glabg
  */
-public interface DiscreteSignal{
+public abstract class DiscreteSignal {
 
-    Complex[] getValues();
+    private final int id;
+    protected String fullName = "";
+    static AtomicInteger nextId = new AtomicInteger();
+    protected double startTime;
+    protected double duration;
+    protected double amplitude;
+    protected int samplingRate;
+    protected SignalStats stats;
+    protected Complex[] values;
 
-    int getSamplingRate();
+    protected DiscreteSignal() {
+        id = nextId.incrementAndGet();
+    }
 
-    double getStartTime();
+    public abstract Complex[] getValues();
 
-    SignalStats getStats();
+    public abstract Histogram getHistogram(int numberOfIntervals);
 
-    int getDuration();
-    
-    double getAmplitude();
-    
-    String getFullName();
-    
-    Histogram getHistogram(int numberOfIntervals);
+    public String getFullName() {
+        return fullName;
+    }
 
+    public int getId() {
+        return id;
+    }
+
+    public double getStartTime() {
+        return startTime;
+    }
+
+    public double getDuration() {
+        return duration;
+    }
+
+    public double getAmplitude() {
+        return amplitude;
+    }
+
+    public int getSamplingRate() {
+        return samplingRate;
+    }
+
+    public SignalStats getStats() {
+        return stats;
+    }
 }

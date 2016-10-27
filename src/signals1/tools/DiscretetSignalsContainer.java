@@ -25,5 +25,11 @@ public class DiscretetSignalsContainer extends ArrayList<DiscreteSignal>{
         return INSTANCE;
     }
     
+    public DiscreteSignal getById(int id){
+        if (id < 1){
+            return null;
+        }
+        return get(id - 1);
+    }
 }
 

@@ -15,20 +15,17 @@ import signals1.stats.SignalStats;
  *
  * @author glabg
  */
-public class Impulse implements Serializable, DiscreteSignal, ImpulseInterface {
+public class Impulse extends DiscreteSignal implements Serializable, ImpulseInterface {
 
     private static final int ZERO = 0;
     private static final int A = 1;
     protected Complex[] values;
-    private final int samplingRate;
     private final int samples;
-    private final int duration;
-    private double startTime;
     private final int ns;
-    protected SignalStats stats;
     private String fullName = "impuls jednostkowy";
 
     public Impulse(int samplingRate, int duration, int ns) {
+        super ();
         this.ns = ns;
         this.samplingRate = samplingRate;
         this.duration = duration;
@@ -59,8 +56,8 @@ public class Impulse implements Serializable, DiscreteSignal, ImpulseInterface {
     }
 
     @Override
-    public int getDuration() {
-        return samples;
+    public double getDuration() {
+        return (int) values.length / samplingRate;
     }
 
     @Override

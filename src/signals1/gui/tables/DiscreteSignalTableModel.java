@@ -18,7 +18,7 @@ import signals1.tools.DiscretetSignalsContainer;
  */
 public class DiscreteSignalTableModel extends DefaultTableModel {
 
-    private String[] columnsNames = {"typ sygnału", "czas początkowy [s]", "czas trwania [s]", "amplituda", "okres [s]"};
+    private String[] columnsNames = {"id", "typ sygnału", "czas początkowy [s]", "czas trwania [s]", "amplituda", "okres [s]"};
     private DiscretetSignalsContainer container = DiscretetSignalsContainer.getInstance();
     private int rowsNumber = 0;
 
@@ -51,14 +51,16 @@ public class DiscreteSignalTableModel extends DefaultTableModel {
         DiscreteSignal signal = container.get(rowIndex);
         switch (columnIndex) {
             case 0:
-                return signal.getFullName();
+                return signal.getId();
             case 1:
-                return signal.getStartTime();
+                return signal.getFullName();
             case 2:
-                return signal.getDuration();
+                return signal.getStartTime();
             case 3:
-                return signal.getAmplitude();
+                return signal.getDuration();
             case 4:
+                return signal.getAmplitude();
+            case 5:
                 return getPeriod(signal);
         }
         return null;

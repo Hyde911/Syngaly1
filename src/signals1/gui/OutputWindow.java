@@ -9,6 +9,7 @@ import java.awt.BorderLayout;
 import java.text.DecimalFormat;
 import javax.swing.JPanel;
 import signals1.signals.abstracts.Signals;
+import signals1.signals.discrete.DiscreteSignal;
 import signals1.stats.SignalStats;
 
 /**
@@ -23,7 +24,7 @@ public class OutputWindow extends javax.swing.JFrame {
     /**
      * Creates new form OutputWindow
      */
-    public OutputWindow(/*Signals signal, */JPanel aplitudeCharts, HistogramPanel hisPanel) {
+    public OutputWindow(DiscreteSignal signal, JPanel aplitudeCharts, HistogramPanel hisPanel) {
         initComponents();
 //        fileChooserDialog = new FileChooserDialog(this, true, signal.getID());
 //        fileChooserDialog.addWindowListener(new java.awt.event.WindowAdapter() {
@@ -33,7 +34,7 @@ public class OutputWindow extends javax.swing.JFrame {
 //                    }
 //                });
         
-//        showStats(signal.getStats());
+        showStats(signal.getStats());
 
         jPanelAmp1.setLayout(new java.awt.BorderLayout());
         jPanelAmp1.add(aplitudeCharts, BorderLayout.CENTER);

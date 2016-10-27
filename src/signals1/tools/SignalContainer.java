@@ -5,18 +5,24 @@
  */
 package signals1.tools;
 
-
 import java.util.ArrayList;
 import signals1.signals.abstracts.Signals;
 
+public class SignalContainer extends ArrayList<Signals> {
 
-public class SignalContainer extends ArrayList<Signals>{
-    
     private static SignalContainer INSTANCE;
+
     public static SignalContainer getInstance() {
-        if(INSTANCE == null){
+        if (INSTANCE == null) {
             INSTANCE = new SignalContainer();
         }
         return INSTANCE;
+    }
+
+    public Signals getById(int id) {
+        if (id < 1) {
+            return null;
+        }
+        return get(id - 1);
     }
 }
