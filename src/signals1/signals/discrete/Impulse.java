@@ -15,7 +15,7 @@ import signals1.stats.SignalStats;
  *
  * @author glabg
  */
-public class Impulse implements Serializable, DiscreteSignal {
+public class Impulse implements Serializable, DiscreteSignal, ImpulseInterface {
 
     private static final int ZERO = 0;
     private static final int A = 1;

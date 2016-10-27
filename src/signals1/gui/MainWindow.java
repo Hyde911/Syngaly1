@@ -350,6 +350,7 @@ public class MainWindow extends javax.swing.JFrame {
         if (signal == null){
             return;
         }
+        System.out.println("TEST: " + signal.getClass());
         AmplitudePanel amPanel = new AmplitudePanel(signal);
 //        HistogramPanel hisPanel = new HistogramPanel(signal.getHistogram(jSliderHistNo.getValue()));
         OutputWindow outputWindow = new OutputWindow(amPanel);
