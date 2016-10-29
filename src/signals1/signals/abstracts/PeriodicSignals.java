@@ -5,6 +5,8 @@
  */
 package signals1.signals.abstracts;
 
+import org.apache.commons.math3.complex.Complex;
+
 /**
  *
  * @author marr
@@ -14,6 +16,7 @@ public abstract class PeriodicSignals extends Signals {
     protected double period;
     protected int numberOfWholePeriods;
     protected int samplesPerPeriod;
+    protected Complex phaseShift;
 
     public PeriodicSignals(double startTime, double amplitude, double duration, double period) {
         super(startTime, amplitude, duration);

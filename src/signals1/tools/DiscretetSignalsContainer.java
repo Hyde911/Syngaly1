@@ -6,6 +6,7 @@
 package signals1.tools;
 
 import java.util.ArrayList;
+import signals1.signals.abstracts.Signals;
 import signals1.signals.discrete.DiscreteSignal;
 
 /**
@@ -25,11 +26,16 @@ public class DiscretetSignalsContainer extends ArrayList<DiscreteSignal>{
         return INSTANCE;
     }
     
-    public DiscreteSignal getById(int id){
-        if (id < 1){
+    public DiscreteSignal getById(int id) {
+        if (id < 1) {
             return null;
         }
-        return get(id - 1);
+        for (DiscreteSignal s : this){
+            if (s.getId() == id){
+                return s;
+            }
+        }
+        return null;
     }
 }
 

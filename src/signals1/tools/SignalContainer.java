@@ -23,6 +23,11 @@ public class SignalContainer extends ArrayList<Signals> {
         if (id < 1) {
             return null;
         }
-        return get(id - 1);
+        for (Signals s : this){
+            if (s.getId() == id){
+                return s;
+            }
+        }
+        return null;
     }
 }

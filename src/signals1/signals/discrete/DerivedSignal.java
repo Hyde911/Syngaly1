@@ -24,6 +24,7 @@ public class DerivedSignal extends DiscreteSignal implements Serializable {
         this.startTime = startTime;
         this.amplitude = amplitude;
         this.values = values;
+        this.duration = values.length / samplingRate;
         calculateStats();
     }
 

@@ -7,14 +7,21 @@ package signals1.operations;
 
 import java.util.Arrays;
 import org.apache.commons.math3.complex.Complex;
+import signals1.operations.arithmetic.Addition;
 import signals1.signals.discrete.DerivedSignal;
 import signals1.signals.discrete.DiscreteSignal;
+import signals1.operations.arithmetic.ArithmeticOperator;
+import signals1.operations.arithmetic.Division;
+import signals1.operations.arithmetic.Multiplication;
+import signals1.operations.arithmetic.Subtraction;
+import signals1.tools.exceptions.DivideByZeroValueExcpetion;
+import signals1.tools.exceptions.NotSameSamplinRateExpcetion;
 
 /**
  *
  * @author marr
  */
-public class ArithmeticOperations {
+class AmplitudeOperations {
 
     private double amplitude;
     private Complex[] values;
@@ -28,7 +35,7 @@ public class ArithmeticOperations {
     private double endTime1;
     private double endTime2;
 
-    public ArithmeticOperations(DiscreteSignal signal1, DiscreteSignal signal2) throws NotSameSamplinRateExpcetion {
+    public AmplitudeOperations(DiscreteSignal signal1, DiscreteSignal signal2) throws NotSameSamplinRateExpcetion {
         if (signal1.getSamplingRate() != signal2.getSamplingRate()) {
             throw new NotSameSamplinRateExpcetion();
         }
@@ -39,22 +46,64 @@ public class ArithmeticOperations {
     }
 
     public DerivedSignal add() {
-        int beginSingle = (int) Math.abs(startTime1 - startTime2) * samplingRate;
+        doCalculation(new Addition());
+        return new DerivedSignal(values, samplingRate, startTime, amplitude);
+    }
+
+    public DerivedSignal sub() {
+        doCalculation(new Subtraction());
+        return new DerivedSignal(values, samplingRate, startTime, amplitude);
+    }
+
+    public DerivedSignal mul() {
+        doCalculation(new Multiplication());
+        return new DerivedSignal(values, samplingRate, startTime, amplitude);
+    }
+
+    public DerivedSignal div() throws DivideByZeroValueExcpetion {
+        doCalculation(new Division());
+        for (Complex c : values){
+            if(Double.isNaN(c.getReal())){
+                throw new DivideByZeroValueExcpetion();
+            }
+        }
+        return new DerivedSignal(values, samplingRate, startTime, amplitude);
+    }
+
+    private void doCalculation(ArithmeticOperator op) {
+        int beginSingle = (int) (Math.abs(startTime1 - startTime2) * samplingRate);
         int n = 0;
+        amplitude = 0;
         try {
-            for (int i = 0; i < numberOfSamples; i++) {
-                if (startTime1 < startTime2) {
-                    values[i] = signal1.getValues()[i + beginSingle].add(signal2.getValues()[n++]);
-                } else if (startTime1 > startTime2) {
-                    values[i] = signal2.getValues()[i + beginSingle].add(signal1.getValues()[n++]);
-                } else {
-                    values[i] = signal2.getValues()[i].add(signal1.getValues()[i]);
+            if (startTime1 < startTime2) {
+                for (int i = 0; i < numberOfSamples; i++) {
+                    values[i + beginSingle] = singleOperation(op, signal1.getValues()[i + beginSingle], (signal2.getValues()[n++]));
+                    if (Math.abs(values[i + beginSingle].getReal()) > amplitude) {
+                        amplitude = Math.abs(values[i + beginSingle].getReal());
+                    }
+                }
+            } else if (startTime1 > startTime2) {
+                for (int i = 0; i < numberOfSamples; i++) {
+                    values[i + beginSingle] = singleOperation(op, (signal1.getValues()[n++]), signal2.getValues()[i + beginSingle]);
+                    if (Math.abs(values[i + beginSingle].getReal()) > amplitude) {
+                        amplitude = Math.abs(values[i + beginSingle].getReal());
+                    }
+                }
+            } else {
+                for (int i = 0; i < numberOfSamples; i++) {
+                    values[i] = singleOperation(op, signal1.getValues()[i], (signal2.getValues()[i]));
+                    if (Math.abs(values[i].getReal()) > amplitude) {
+                        amplitude = Math.abs(values[i].getReal());
+                    }
                 }
             }
         } catch (ArrayIndexOutOfBoundsException ex) {
 
         }
-        return new DerivedSignal(values, samplingRate, startTime, 0);
+    }
+
+    private Complex singleOperation(ArithmeticOperator op, Complex c1, Complex c2) {
+        return op.getResult(c1, c2);
     }
 
     private void setStartTime() {
@@ -72,7 +121,7 @@ public class ArithmeticOperations {
         this.startTime1 = signal1.getStartTime();
         this.startTime2 = signal2.getStartTime();
         this.endTime1 = startTime1 + (signal1.getValues().length / signal1.getSamplingRate());
-        this.endTime2 = startTime1 + (signal2.getValues().length / signal2.getSamplingRate());
+        this.endTime2 = startTime2 + (signal2.getValues().length / signal2.getSamplingRate());
         if (endTime1 >= endTime2) {
             numberOfSamples = (int) (endTime1 - this.startTime) * this.samplingRate;
         } else {
@@ -80,9 +129,7 @@ public class ArithmeticOperations {
         }
         this.values = new Complex[numberOfSamples];
         Arrays.fill(values, Complex.ZERO);
-    }
-
-    public class NotSameSamplinRateExpcetion extends Exception {
 
     }
+
 }
