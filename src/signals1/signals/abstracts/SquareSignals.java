@@ -16,7 +16,6 @@ public abstract class SquareSignals extends PeriodicSignals {
     public SquareSignals(double startTime, double amplitude, double duration, double period, int fillFactor) {
         super(startTime, amplitude, duration, period);
         this.fillFactor = fillFactor;
-        generateSignal();
     }
 
     public int getFillFactor() {

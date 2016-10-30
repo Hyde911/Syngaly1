@@ -5,15 +5,19 @@
  */
 package signals1.gui;
 
+import java.awt.BasicStroke;
 import java.awt.BorderLayout;
+import java.awt.Color;
 import java.awt.Dimension;
-import java.util.Arrays;
+import java.awt.Shape;
+import java.awt.Stroke;
+import java.awt.geom.Ellipse2D;
 import org.apache.commons.math3.complex.Complex;
 import org.jfree.chart.ChartFactory;
 import org.jfree.chart.ChartPanel;
 import org.jfree.chart.JFreeChart;
 import org.jfree.chart.plot.XYPlot;
-import org.jfree.chart.renderer.xy.XYLineAndShapeRenderer;
+import org.jfree.chart.renderer.xy.XYItemRenderer;
 import org.jfree.data.xy.XYSeries;
 import org.jfree.data.xy.XYSeriesCollection;
 import signals1.signals.discrete.ImpulseInterface;
@@ -24,13 +28,14 @@ import signals1.signals.discrete.DiscreteSignal;
  * @author marr
  */
 public class AmplitudePanel extends javax.swing.JPanel {
+
     private static final String SKŁADOWA_UROJONA = "składowa urojona";
     private static final String SKŁADOWA_RZECZYWISTA = "składowa rzeczywista";
     private static final String AMPLITUDA = "amplituda";
     private static final String CZAS = "czas";
     private static final int INTERVAL = 10;
-    private int chartDimensionX = 1150;
-    private int chartDimensionY = 350;
+    private final int chartDimensionX = 1150;
+    private final int chartDimensionY = 350;
 
     /**
      * Creates new form AmplitudePanel
@@ -39,15 +44,15 @@ public class AmplitudePanel extends javax.swing.JPanel {
         initComponents();
         ChartPanel realChart;
         ChartPanel imgChart;
-        
-        if(signal instanceof ImpulseInterface){       
+
+        if (signal instanceof ImpulseInterface) {
             realChart = getScatterPlot(signal.getValues(), true, signal.getStartTime());
             imgChart = getScatterPlot(signal.getValues(), false, signal.getStartTime());
-        }else{
+        } else {
             realChart = getChart(signal.getValues(), true, signal.getStartTime());
             imgChart = getChart(signal.getValues(), false, signal.getStartTime());
         }
-        
+
         jPanelReal.setLayout(new java.awt.BorderLayout());
         jPanelReal.add(realChart, BorderLayout.CENTER);
         jPanelReal.setVisible(true);
@@ -121,7 +126,7 @@ public class AmplitudePanel extends javax.swing.JPanel {
         );
     }// </editor-fold>//GEN-END:initComponents
 
-    private ChartPanel getScatterPlot(Complex[] values, boolean isReal, double startTime){
+    private ChartPanel getScatterPlot(Complex[] values, boolean isReal, double startTime) {
         String title = SKŁADOWA_RZECZYWISTA;
         if (!isReal) {
             title = SKŁADOWA_UROJONA;
@@ -137,7 +142,7 @@ public class AmplitudePanel extends javax.swing.JPanel {
                 y = v.getImaginary();
             }
             x = i;
-            series.add(x,y);
+            series.add(x, y);
             i++;
         }
         JFreeChart chart = ChartFactory.createScatterPlot(title, CZAS, AMPLITUDA, new XYSeriesCollection(series));
@@ -145,14 +150,16 @@ public class AmplitudePanel extends javax.swing.JPanel {
         chartPanel.setPreferredSize(new Dimension(chartDimensionX, chartDimensionY));
         return chartPanel;
     }
-    
+
     private ChartPanel getChart(Complex[] values, boolean isReal, double offset) {
-       String title = SKŁADOWA_RZECZYWISTA;
+
+        String title = SKŁADOWA_RZECZYWISTA;
         if (!isReal) {
             title = SKŁADOWA_UROJONA;
         }
         JFreeChart chart = ChartFactory.createXYLineChart(title, CZAS, AMPLITUDA,
                 createDataset(values, isReal, offset, title));
+        chart.getXYPlot().getRenderer().setSeriesStroke(0, new BasicStroke(0.8f));
         ChartPanel chartPanel = new ChartPanel(chart);
         chartPanel.setPreferredSize(new Dimension(chartDimensionX, chartDimensionY));
         return chartPanel;
@@ -160,7 +167,7 @@ public class AmplitudePanel extends javax.swing.JPanel {
 
     private XYSeriesCollection createDataset(Complex[] values, boolean isReal, double offset, String title) {
         XYSeries series = new XYSeries(title);
-        int i =0;
+        int i = 0;
         double x;
         double y;
         for (Complex v : values) {
@@ -169,13 +176,13 @@ public class AmplitudePanel extends javax.swing.JPanel {
             } else {
                 y = v.getImaginary();
             }
-            x = i+offset;
-            series.add(x,y);
+            x = i + offset;
+            series.add(x, y);
             i++;
         }
         return new XYSeriesCollection(series);
     }
-    
+
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JPanel jPanelImg;

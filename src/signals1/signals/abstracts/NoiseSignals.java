@@ -15,7 +15,6 @@ public abstract class NoiseSignals extends Signals implements Serializable {
 
     public NoiseSignals(double startTime, double amplitude, double duration) {
         super(startTime, amplitude, duration);
-        generateSignal();
     }
 
 }

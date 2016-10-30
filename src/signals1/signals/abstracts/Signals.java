@@ -16,7 +16,7 @@ import org.apache.commons.math3.complex.Complex;
 public abstract class Signals implements Serializable {
 
     private final int id;
-    private int samplesPerSecond = 1_048_5;//76;
+    protected final int samplesPerSecond = 1_048_5;//76;
     static AtomicInteger nextId = new AtomicInteger();
     protected double amplitude;
     protected double duration;
@@ -39,11 +39,12 @@ public abstract class Signals implements Serializable {
         this.amplitude = amplitude;
         this.duration = duration;
         this.numberOfSamples = (int) this.duration * samplesPerSecond;
-        result = new Complex[numberOfSamples];
-
     }
 
     public Complex[] getSignal() {
+        if (result == null){
+            generateSignal();
+        }
         return result;
     }
 
