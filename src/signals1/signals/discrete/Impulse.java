@@ -9,7 +9,9 @@ import java.io.Serializable;
 import java.util.Arrays;
 import org.apache.commons.math3.complex.Complex;
 import signals1.stats.Histogram;
+import signals1.stats.HistogramCalculator;
 import signals1.stats.SignalStats;
+import signals1.stats.StatsCalculator;
 
 /**
  *
@@ -31,13 +33,19 @@ public class Impulse extends DiscreteSignal implements Serializable, ImpulseInte
         this.samples = samplingRate * duration;
         this.values = new Complex[samples];
         this.fullName = "impuls jednostkowy";
-        Arrays.fill(values, new Complex(ZERO));
-        values[ns - 1] = new Complex(A);
+        Arrays.fill(values, new Complex(ZERO, ZERO));
+        values[ns - 1] = new Complex(A, ZERO);
+        calculateStats();
     }
 
     @Override
     public int getSamplingRate() {
         return samplingRate;
+    }
+    
+    @Override
+    public Complex[] getValues(){
+        return values;
     }
 
     @Override
@@ -47,7 +55,7 @@ public class Impulse extends DiscreteSignal implements Serializable, ImpulseInte
 
     @Override
     public SignalStats getStats() {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+        return stats;
     }
 
     @Override
@@ -57,7 +65,8 @@ public class Impulse extends DiscreteSignal implements Serializable, ImpulseInte
 
     @Override
     public Histogram getHistogram(int numberOfIntervals) {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+        HistogramCalculator hisCalc = new HistogramCalculator(values);
+        return hisCalc.getHistogram(numberOfIntervals);
     }
 
     @Override
@@ -68,5 +77,9 @@ public class Impulse extends DiscreteSignal implements Serializable, ImpulseInte
     @Override
     public double getAmplitude() {
         return A;
+    }
+    
+    private void calculateStats() {
+        this.stats = StatsCalculator.getStats(values);
     }
 }

@@ -7,6 +7,7 @@ package signals1.gui;
 
 import java.awt.BorderLayout;
 import java.awt.Dimension;
+import java.util.Arrays;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.swing.JOptionPane;
@@ -23,6 +24,7 @@ import signals1.signals.abstracts.NoiseSignals;
 import signals1.signals.abstracts.PeriodicSignals;
 import signals1.signals.abstracts.Signals;
 import signals1.signals.discrete.DiscreteSignal;
+import signals1.signals.discrete.ImpulseInterface;
 import signals1.signals.discrete.NonPeriodicDiscreteSignal;
 import signals1.signals.discrete.PeriodicDiscreteSignal;
 import signals1.tools.DiscretetSignalsContainer;
@@ -411,7 +413,8 @@ public class MainWindow extends javax.swing.JFrame {
                 signal = squareInputPanel.getSingal();
                 break;
             case 3:
-                disSignalContainer.add(discreetPanel.getSingal());
+                DiscreteSignal sig = discreetPanel.getSingal();
+                disSignalContainer.add(sig);
                 discreteTableModel.fireTableDataChanged();
                 break;
             default:
@@ -451,6 +454,7 @@ public class MainWindow extends javax.swing.JFrame {
         if (signal == null) {
             return;
         }
+        
         AmplitudePanel amPanel = new AmplitudePanel(signal);
         HistogramPanel hisPanel = new HistogramPanel(signal.getHistogram(jSliderHistNo.getValue()), jSliderHistNo.getValue());
         OutputWindow outputWindow = new OutputWindow(signal, amPanel, hisPanel);

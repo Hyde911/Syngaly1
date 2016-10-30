@@ -6,6 +6,7 @@
 package signals1.gui.inputForms;
 
 import java.awt.Dimension;
+import java.util.Arrays;
 import signals1.signals.discrete.Impulse;
 import signals1.signals.discrete.ImpulseNoise;
 import signals1.signals.discrete.DiscreteSignal;
@@ -30,12 +31,15 @@ public class DiscreetSignalsPanel extends javax.swing.JPanel {
         double p = Double.parseDouble(probability.getText());
         double a = Double.parseDouble(aValue.getText());
         double s = Double.parseDouble(startTime.getText());
+        DiscreteSignal result;
         switch (jComboBox1.getSelectedIndex()) {
             case 1:
-                return new ImpulseNoise(a, f, d, s, ns, p);
+                result = new ImpulseNoise(a, f, d, s, ns, p);
+                break;
             default:
-                return new Impulse(f,d,ns);
+                result = new Impulse(f,d,ns);
         }
+        return result;
     }
 
     /**

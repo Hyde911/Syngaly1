@@ -10,7 +10,9 @@ import java.util.Arrays;
 import java.util.Random;
 import org.apache.commons.math3.complex.Complex;
 import signals1.stats.Histogram;
+import signals1.stats.HistogramCalculator;
 import signals1.stats.SignalStats;
+import signals1.stats.StatsCalculator;
 
 /**
  *
@@ -44,14 +46,19 @@ public class ImpulseNoise extends DiscreteSignal implements ImpulseInterface, Se
             Random r = new Random();
             for (int i = 0; i < samples; i++) {
                 if (r.nextInt(101) <= p * 100) {
-                    values[i] = new Complex(amplitude);
+                    values[i] = new Complex(amplitude, ZERO);
                 } else {
-                    values[i] = new Complex(ZERO);
+                    values[i] = new Complex(ZERO, ZERO);
                 }
             }
         }
+        calculateStats();
     }
 
+    @Override
+    public Complex[] getValues(){
+        return values;
+    }
 
     @Override
     public int getSamplingRate() {
@@ -65,7 +72,7 @@ public class ImpulseNoise extends DiscreteSignal implements ImpulseInterface, Se
 
     @Override
     public SignalStats getStats() {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+        return stats;
     }
 
     @Override
@@ -75,7 +82,8 @@ public class ImpulseNoise extends DiscreteSignal implements ImpulseInterface, Se
 
     @Override
     public Histogram getHistogram(int numberOfIntervals) {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+        HistogramCalculator hisCalc = new HistogramCalculator(values);
+        return hisCalc.getHistogram(numberOfIntervals);
     }
 
     @Override
@@ -86,5 +94,9 @@ public class ImpulseNoise extends DiscreteSignal implements ImpulseInterface, Se
     @Override
     public double getAmplitude() {
         return amplitude;
+    }
+    
+    private void calculateStats() {
+        this.stats = StatsCalculator.getStats(values);
     }
 }
