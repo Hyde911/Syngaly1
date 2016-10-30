@@ -7,17 +7,13 @@ package signals1.gui;
 
 import java.awt.BasicStroke;
 import java.awt.BorderLayout;
-import java.awt.Color;
 import java.awt.Dimension;
-import java.awt.Shape;
-import java.awt.Stroke;
-import java.awt.geom.Ellipse2D;
 import org.apache.commons.math3.complex.Complex;
 import org.jfree.chart.ChartFactory;
 import org.jfree.chart.ChartPanel;
 import org.jfree.chart.JFreeChart;
-import org.jfree.chart.plot.XYPlot;
-import org.jfree.chart.renderer.xy.XYItemRenderer;
+import org.jfree.chart.axis.NumberAxis;
+import org.jfree.chart.axis.NumberTickUnit;
 import org.jfree.data.xy.XYSeries;
 import org.jfree.data.xy.XYSeriesCollection;
 import signals1.signals.discrete.ImpulseInterface;
@@ -46,11 +42,11 @@ public class AmplitudePanel extends javax.swing.JPanel {
         ChartPanel imgChart;
 
         if (signal instanceof ImpulseInterface) {
-            realChart = getScatterPlot(signal.getValues(), true, signal.getStartTime());
-            imgChart = getScatterPlot(signal.getValues(), false, signal.getStartTime());
+            realChart = getScatterPlot(signal.getValues(), true, signal.getStartTime(), signal.getSamplingRate());
+            imgChart = getScatterPlot(signal.getValues(), false, signal.getStartTime(), signal.getSamplingRate());
         } else {
-            realChart = getChart(signal.getValues(), true, signal.getStartTime());
-            imgChart = getChart(signal.getValues(), false, signal.getStartTime());
+            realChart = getChart(signal.getValues(), true, signal.getStartTime(), signal.getSamplingRate());
+            imgChart = getChart(signal.getValues(), false, signal.getStartTime(), signal.getSamplingRate());
         }
 
         jPanelReal.setLayout(new java.awt.BorderLayout());
@@ -126,7 +122,7 @@ public class AmplitudePanel extends javax.swing.JPanel {
         );
     }// </editor-fold>//GEN-END:initComponents
 
-    private ChartPanel getScatterPlot(Complex[] values, boolean isReal, double startTime) {
+    private ChartPanel getScatterPlot(Complex[] values, boolean isReal, double startTime, int samplingRate) {
         String title = SKŁADOWA_RZECZYWISTA;
         if (!isReal) {
             title = SKŁADOWA_UROJONA;
@@ -141,8 +137,8 @@ public class AmplitudePanel extends javax.swing.JPanel {
             } else {
                 y = v.getImaginary();
             }
-            x = i;
-            series.add(x, y);
+            x = i + (startTime * samplingRate);
+            series.add(x / samplingRate, y);
             i++;
         }
         JFreeChart chart = ChartFactory.createScatterPlot(title, CZAS, AMPLITUDA, new XYSeriesCollection(series));
@@ -151,21 +147,23 @@ public class AmplitudePanel extends javax.swing.JPanel {
         return chartPanel;
     }
 
-    private ChartPanel getChart(Complex[] values, boolean isReal, double offset) {
+    private ChartPanel getChart(Complex[] values, boolean isReal, double startTime, int samplingRate) {
 
         String title = SKŁADOWA_RZECZYWISTA;
         if (!isReal) {
             title = SKŁADOWA_UROJONA;
         }
         JFreeChart chart = ChartFactory.createXYLineChart(title, CZAS, AMPLITUDA,
-                createDataset(values, isReal, offset, title));
+                createDataset(values, isReal, startTime, title, samplingRate));
+        NumberAxis xAxis = new NumberAxis();
+        xAxis.setTickUnit(new NumberTickUnit(1));
         chart.getXYPlot().getRenderer().setSeriesStroke(0, new BasicStroke(0.8f));
         ChartPanel chartPanel = new ChartPanel(chart);
         chartPanel.setPreferredSize(new Dimension(chartDimensionX, chartDimensionY));
         return chartPanel;
     }
 
-    private XYSeriesCollection createDataset(Complex[] values, boolean isReal, double offset, String title) {
+    private XYSeriesCollection createDataset(Complex[] values, boolean isReal, double startTime, String title, int samplingRate) {
         XYSeries series = new XYSeries(title);
         int i = 0;
         double x;
@@ -176,8 +174,8 @@ public class AmplitudePanel extends javax.swing.JPanel {
             } else {
                 y = v.getImaginary();
             }
-            x = i + offset;
-            series.add(x, y);
+            x = i + (startTime * samplingRate) ;
+            series.add(x / samplingRate, y);
             i++;
         }
         return new XYSeriesCollection(series);
