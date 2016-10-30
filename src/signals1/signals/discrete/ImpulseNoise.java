@@ -21,14 +21,8 @@ import signals1.stats.StatsCalculator;
 public class ImpulseNoise extends DiscreteSignal implements ImpulseInterface, Serializable {
 
     private static final int ZERO = 0;
-    private final double amplitude;
-    protected Complex[] values;
-    private final int samplingRate;
     private final int samples;
-    private final int duration;
-    private final double startTime;
     private final int ns;
-    protected SignalStats stats;
 
     public ImpulseNoise(double amplitude, int samplingRate, int duration, double startTime, int ns, double p) {
         super ();

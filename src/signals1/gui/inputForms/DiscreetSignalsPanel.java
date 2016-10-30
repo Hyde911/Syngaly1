@@ -6,7 +6,7 @@
 package signals1.gui.inputForms;
 
 import java.awt.Dimension;
-import java.util.Arrays;
+import javax.swing.JOptionPane;
 import signals1.signals.discrete.Impulse;
 import signals1.signals.discrete.ImpulseNoise;
 import signals1.signals.discrete.DiscreteSignal;
@@ -18,28 +18,32 @@ import signals1.signals.discrete.DiscreteSignal;
 public class DiscreetSignalsPanel extends javax.swing.JPanel {
 
     private Dimension dimension;
-    
+
     public DiscreetSignalsPanel(Dimension dimension) {
         this.dimension = dimension;
         initComponents();
-        
+
     }
+
     public DiscreteSignal getSingal() {
-        int f = Integer.parseInt(frequency.getText());
-        int d = Integer.parseInt(duration.getText());
-        int ns = Integer.parseInt(sampleNumber.getText());
-        double p = Double.parseDouble(probability.getText());
-        double a = Double.parseDouble(aValue.getText());
-        double s = Double.parseDouble(startTime.getText());
-        DiscreteSignal result;
-        switch (jComboBox1.getSelectedIndex()) {
-            case 1:
-                result = new ImpulseNoise(a, f, d, s, ns, p);
-                break;
-            default:
-                result = new Impulse(f,d,ns);
+        try {
+            int f = Integer.parseInt(frequency.getText());
+            int d = Integer.parseInt(duration.getText());
+            int ns = Integer.parseInt(sampleNumber.getText());
+            double p = Double.parseDouble(probability.getText());
+            double a = Double.parseDouble(aValue.getText());
+            double s = Double.parseDouble(startTime.getText());
+            switch (jComboBox1.getSelectedIndex()) {
+                case 1:
+                    return new ImpulseNoise(a, f, d, s, ns, p);
+                default:
+                    return new Impulse(f, d, ns);
+            }
+        } catch (NumberFormatException ex) {
+            JOptionPane.showMessageDialog(this, "Niepoprawna wartość", "Błąd", JOptionPane.ERROR_MESSAGE);
+            return null;
+
         }
-        return result;
     }
 
     /**
@@ -309,6 +313,5 @@ public class DiscreetSignalsPanel extends javax.swing.JPanel {
     private javax.swing.JTextField sampleNumber;
     private javax.swing.JTextField startTime;
     // End of variables declaration//GEN-END:variables
-
 
 }
