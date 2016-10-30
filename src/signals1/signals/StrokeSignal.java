@@ -5,7 +5,6 @@
  */
 package signals1.signals;
 
-import java.util.Random;
 import org.apache.commons.math3.complex.Complex;
 import signals1.signals.abstracts.NoiseSignals;
 

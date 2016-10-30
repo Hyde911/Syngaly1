@@ -24,7 +24,7 @@ public class OutputWindow extends javax.swing.JFrame {
     /**
      * Creates new form OutputWindow
      */
-    public OutputWindow(DiscreteSignal signal, JPanel aplitudeCharts, HistogramPanel hisPanel) {
+    public OutputWindow(DiscreteSignal signal, AmplitudePanel aplitudeCharts, HistogramPanel hisPanel, AmplitudePanel modAndPhaseChart, HistogramPanel hisModAndPhase) {
         initComponents();
 //        fileChooserDialog = new FileChooserDialog(this, true, signal.getID());
 //        fileChooserDialog.addWindowListener(new java.awt.event.WindowAdapter() {
@@ -33,7 +33,7 @@ public class OutputWindow extends javax.swing.JFrame {
 //                        fileChooserDialog.setVisible(false);            
 //                    }
 //                });
-        
+
         showStats(signal.getStats());
 
         jPanelAmp1.setLayout(new java.awt.BorderLayout());
@@ -42,6 +42,13 @@ public class OutputWindow extends javax.swing.JFrame {
         jPanelHist1.setLayout(new java.awt.BorderLayout());
         jPanelHist1.add(hisPanel, BorderLayout.CENTER);
         jPanelHist1.revalidate();
+
+        jPanelAmp2.setLayout(new java.awt.BorderLayout());
+        jPanelAmp2.add(modAndPhaseChart, BorderLayout.CENTER);
+        jPanelAmp2.revalidate();
+        jPanelHist2.setLayout(new java.awt.BorderLayout());
+        jPanelHist2.add(hisModAndPhase, BorderLayout.CENTER);
+        jPanelHist2.revalidate();
     }
 
     /**
@@ -64,9 +71,11 @@ public class OutputWindow extends javax.swing.JFrame {
         jTextAbsMeanValue1 = new javax.swing.JTextField();
         jLabel1 = new javax.swing.JLabel();
         jLabel2 = new javax.swing.JLabel();
-        jTabbedPane1 = new javax.swing.JTabbedPane();
+        jTabbedPane = new javax.swing.JTabbedPane();
         jPanelAmp1 = new javax.swing.JPanel();
         jPanelHist1 = new javax.swing.JPanel();
+        jPanelAmp2 = new javax.swing.JPanel();
+        jPanelHist2 = new javax.swing.JPanel();
         jButton1 = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
@@ -111,7 +120,7 @@ public class OutputWindow extends javax.swing.JFrame {
         jLabel2.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         jLabel2.setText("Parametry sygnału");
 
-        jTabbedPane1.setFont(new java.awt.Font("Tahoma", 0, 12)); // NOI18N
+        jTabbedPane.setFont(new java.awt.Font("Tahoma", 0, 12)); // NOI18N
 
         javax.swing.GroupLayout jPanelAmp1Layout = new javax.swing.GroupLayout(jPanelAmp1);
         jPanelAmp1.setLayout(jPanelAmp1Layout);
@@ -124,7 +133,7 @@ public class OutputWindow extends javax.swing.JFrame {
             .addGap(0, 781, Short.MAX_VALUE)
         );
 
-        jTabbedPane1.addTab("Wykres amplitud", jPanelAmp1);
+        jTabbedPane.addTab("Wykres amplitud", jPanelAmp1);
 
         javax.swing.GroupLayout jPanelHist1Layout = new javax.swing.GroupLayout(jPanelHist1);
         jPanelHist1.setLayout(jPanelHist1Layout);
@@ -137,7 +146,33 @@ public class OutputWindow extends javax.swing.JFrame {
             .addGap(0, 781, Short.MAX_VALUE)
         );
 
-        jTabbedPane1.addTab("Histogramy", jPanelHist1);
+        jTabbedPane.addTab("Histogramy", jPanelHist1);
+
+        javax.swing.GroupLayout jPanelAmp2Layout = new javax.swing.GroupLayout(jPanelAmp2);
+        jPanelAmp2.setLayout(jPanelAmp2Layout);
+        jPanelAmp2Layout.setHorizontalGroup(
+            jPanelAmp2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGap(0, 1174, Short.MAX_VALUE)
+        );
+        jPanelAmp2Layout.setVerticalGroup(
+            jPanelAmp2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGap(0, 781, Short.MAX_VALUE)
+        );
+
+        jTabbedPane.addTab("Wykres modułu i fazy", jPanelAmp2);
+
+        javax.swing.GroupLayout jPanelHist2Layout = new javax.swing.GroupLayout(jPanelHist2);
+        jPanelHist2.setLayout(jPanelHist2Layout);
+        jPanelHist2Layout.setHorizontalGroup(
+            jPanelHist2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGap(0, 1174, Short.MAX_VALUE)
+        );
+        jPanelHist2Layout.setVerticalGroup(
+            jPanelHist2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGap(0, 781, Short.MAX_VALUE)
+        );
+
+        jTabbedPane.addTab("Histogram modułu i fazy", jPanelHist2);
 
         jButton1.setText("Zapisz Sygnał");
         jButton1.setToolTipText("");
@@ -183,7 +218,7 @@ public class OutputWindow extends javax.swing.JFrame {
                                 .addComponent(jTextVariance, javax.swing.GroupLayout.PREFERRED_SIZE, 104, javax.swing.GroupLayout.PREFERRED_SIZE)))
                         .addGap(0, 0, Short.MAX_VALUE)))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(jTabbedPane1)
+                .addComponent(jTabbedPane)
                 .addContainerGap())
         );
         layout.setVerticalGroup(
@@ -216,7 +251,7 @@ public class OutputWindow extends javax.swing.JFrame {
                 .addGap(505, 505, 505))
             .addGroup(layout.createSequentialGroup()
                 .addContainerGap()
-                .addComponent(jTabbedPane1)
+                .addComponent(jTabbedPane)
                 .addContainerGap())
         );
 
@@ -225,7 +260,7 @@ public class OutputWindow extends javax.swing.JFrame {
 
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
         fileChooserDialog.setAction(evt.getActionCommand());
-        fileChooserDialog.setVisible(true); 
+        fileChooserDialog.setVisible(true);
     }//GEN-LAST:event_jButton1ActionPerformed
 
     /**
@@ -249,8 +284,10 @@ public class OutputWindow extends javax.swing.JFrame {
     private javax.swing.JLabel jLabel5;
     private javax.swing.JLabel jLabel6;
     private javax.swing.JPanel jPanelAmp1;
+    private javax.swing.JPanel jPanelAmp2;
     private javax.swing.JPanel jPanelHist1;
-    private javax.swing.JTabbedPane jTabbedPane1;
+    private javax.swing.JPanel jPanelHist2;
+    private javax.swing.JTabbedPane jTabbedPane;
     private javax.swing.JTextField jTextAbsMeanValue1;
     private javax.swing.JTextField jTextEffPower;
     private javax.swing.JTextField jTextMeanPower;

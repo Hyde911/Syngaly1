@@ -7,9 +7,6 @@ package signals1.gui;
 
 import java.awt.BorderLayout;
 import java.awt.Dimension;
-import java.util.Arrays;
-import java.util.logging.Level;
-import java.util.logging.Logger;
 import javax.swing.JOptionPane;
 import javax.swing.UIManager;
 import javax.swing.UnsupportedLookAndFeelException;
@@ -24,7 +21,6 @@ import signals1.signals.abstracts.NoiseSignals;
 import signals1.signals.abstracts.PeriodicSignals;
 import signals1.signals.abstracts.Signals;
 import signals1.signals.discrete.DiscreteSignal;
-import signals1.signals.discrete.ImpulseInterface;
 import signals1.signals.discrete.NonPeriodicDiscreteSignal;
 import signals1.signals.discrete.PeriodicDiscreteSignal;
 import signals1.tools.DiscretetSignalsContainer;
@@ -455,9 +451,11 @@ public class MainWindow extends javax.swing.JFrame {
             return;
         }
         
-        AmplitudePanel amPanel = new AmplitudePanel(signal);
+        AmplitudePanel amPanel = new AmplitudePanel(signal, false);
+        AmplitudePanel modAndShiftPanel = new AmplitudePanel(signal, true);
         HistogramPanel hisPanel = new HistogramPanel(signal.getHistogram(jSliderHistNo.getValue()), jSliderHistNo.getValue());
-        OutputWindow outputWindow = new OutputWindow(signal, amPanel, hisPanel);
+        HistogramPanel hisModAndShiftPanel = new HistogramPanel(signal.getHistogramModAndShift(jSliderHistNo.getValue()), jSliderHistNo.getValue());
+        OutputWindow outputWindow = new OutputWindow(signal, amPanel, hisPanel, modAndShiftPanel, hisModAndShiftPanel);
         outputWindow.setVisible(true);
     }//GEN-LAST:event_jButtonShowSignalActionPerformed
 

@@ -33,9 +33,31 @@ public abstract class DiscreteSignal {
     public Complex[] getValues(){
         return values;
     }
+    
+    public Complex[] getValuesModAndShift(){
+        Complex[] result = new Complex[this.values.length];
+        for (int i = 0; i  < result.length; i++){
+            result[i] = new Complex (Math.sqrt(values[i].getImaginary() * values[i].getImaginary() + values[i].getReal() * values[i].getReal()),
+                                    Math.atan(values[i].getImaginary() / values[i].getReal()));
+        }
+        return result;
+    }
 
     public abstract Histogram getHistogram(int numberOfIntervals);
 
+    public Histogram getHistogramModAndShift(int numberOfIntervals){
+        Histogram hist = getHistogram(numberOfIntervals);
+        double []real = hist.getRealHistogram();
+        double []img = hist.getImgHistogram();
+        double []mod = new double[values.length];
+        double []phase = new double[values.length];
+        for (int i = 0; i < values.length; i++){
+            mod[i] = Math.sqrt(real[i] * real[i] + img[i] * img[i]);
+            phase[i] = Math.atan(img[i] / real[i]);
+        }
+        return new Histogram(mod, phase);
+    }
+    
     public String getFullName() {
         return fullName;
     }

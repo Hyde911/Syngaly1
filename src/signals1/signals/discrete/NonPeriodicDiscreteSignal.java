@@ -46,7 +46,6 @@ public class NonPeriodicDiscreteSignal extends DiscreteSignal implements Seriali
         return (int) values.length / samplingRate;
     }
 
-
     @Override
     public int getSamplingRate() {
         return samplingRate;

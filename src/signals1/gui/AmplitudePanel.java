@@ -36,12 +36,20 @@ public class AmplitudePanel extends javax.swing.JPanel {
     /**
      * Creates new form AmplitudePanel
      */
-    public AmplitudePanel(DiscreteSignal signal) {
+    public AmplitudePanel(DiscreteSignal signal, boolean isModAndPhase) {
         initComponents();
         ChartPanel realChart;
         ChartPanel imgChart;
 
-        if (signal instanceof ImpulseInterface) {
+        if (isModAndPhase) {
+            if (signal instanceof ImpulseInterface) {
+                realChart = getScatterPlot(signal.getValuesModAndShift(), true, signal.getStartTime(), signal.getSamplingRate());
+                imgChart = getScatterPlot(signal.getValuesModAndShift(), false, signal.getStartTime(), signal.getSamplingRate());
+            } else {
+                realChart = getChart(signal.getValuesModAndShift(), true, signal.getStartTime(), signal.getSamplingRate());
+                imgChart = getChart(signal.getValuesModAndShift(), false, signal.getStartTime(), signal.getSamplingRate());
+            }
+        } else if (signal instanceof ImpulseInterface) {
             realChart = getScatterPlot(signal.getValues(), true, signal.getStartTime(), signal.getSamplingRate());
             imgChart = getScatterPlot(signal.getValues(), false, signal.getStartTime(), signal.getSamplingRate());
         } else {
@@ -127,21 +135,8 @@ public class AmplitudePanel extends javax.swing.JPanel {
         if (!isReal) {
             title = SKŁADOWA_UROJONA;
         }
-        XYSeries series = new XYSeries(title);
-        int i = (int) startTime;
-        double x;
-        double y;
-        for (Complex v : values) {
-            if (isReal) {
-                y = v.getReal();
-            } else {
-                y = v.getImaginary();
-            }
-            x = i + (startTime * samplingRate);
-            series.add(x / samplingRate, y);
-            i++;
-        }
-        JFreeChart chart = ChartFactory.createScatterPlot(title, CZAS, AMPLITUDA, new XYSeriesCollection(series));
+
+        JFreeChart chart = ChartFactory.createScatterPlot(title, CZAS, AMPLITUDA, createDataset(values, isReal, startTime, title, samplingRate));
         ChartPanel chartPanel = new ChartPanel(chart);
         chartPanel.setPreferredSize(new Dimension(chartDimensionX, chartDimensionY));
         return chartPanel;
@@ -163,7 +158,7 @@ public class AmplitudePanel extends javax.swing.JPanel {
         return chartPanel;
     }
 
-    private XYSeriesCollection createDataset(Complex[] values, boolean isReal, double startTime, String title, int samplingRate) {
+    protected XYSeriesCollection createDataset(Complex[] values, boolean isReal, double startTime, String title, int samplingRate) {
         XYSeries series = new XYSeries(title);
         int i = 0;
         double x;
@@ -174,7 +169,7 @@ public class AmplitudePanel extends javax.swing.JPanel {
             } else {
                 y = v.getImaginary();
             }
-            x = i + (startTime * samplingRate) ;
+            x = i + (startTime * samplingRate);
             series.add(x / samplingRate, y);
             i++;
         }
