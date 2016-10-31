@@ -17,7 +17,7 @@ import signals1.stats.SignalStats;
  */
 public abstract class DiscreteSignal implements Serializable{
 
-    private transient final int id;
+    private transient int id;
     protected String fullName = "";
     static AtomicInteger nextId = new AtomicInteger();
     protected double startTime;
@@ -64,6 +64,9 @@ public abstract class DiscreteSignal implements Serializable{
     }
 
     public int getId() {
+        if (id == 0){
+            id = nextId.incrementAndGet();
+        }
         return id;
     }
     

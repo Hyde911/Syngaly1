@@ -59,14 +59,14 @@ public class MainWindow extends javax.swing.JFrame {
         setUpDiscreteTable();
         fileDialog = new FileChooserDialog(this, true);
         fileDialog.addWindowListener(new java.awt.event.WindowAdapter() {
-                    @Override
-                    public void windowClosing(java.awt.event.WindowEvent e) {
-                        fileDialog.setVisible(false);            
-                    }
-                });
+            @Override
+            public void windowClosing(java.awt.event.WindowEvent e) {
+                fileDialog.setVisible(false);
+            }
+        });
         instance = this;
     }
-    
+
     public static MainWindow getInstance() {
         return instance;
     }
@@ -494,7 +494,7 @@ public class MainWindow extends javax.swing.JFrame {
         if (signal == null) {
             return;
         }
-        
+
         AmplitudePanel amPanel = new AmplitudePanel(signal, false);
         AmplitudePanel modAndShiftPanel = new AmplitudePanel(signal, true);
         HistogramPanel hisPanel = new HistogramPanel(signal.getHistogram(jSliderHistNo.getValue()), jSliderHistNo.getValue());
@@ -573,15 +573,19 @@ public class MainWindow extends javax.swing.JFrame {
     }//GEN-LAST:event_jButtonClearDiscreteTable1ActionPerformed
 
     private void saveSignalActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_saveSignalActionPerformed
+        int selectedDiscreteSignal = jTableDiscrete.getSelectedRow();
+        if (selectedDiscreteSignal < 0) {
+            return;
+        }
         fileDialog.setDialogType(JFileChooser.SAVE_DIALOG);
         DiscreteSignal selected = getSelectedSignal();
-        if(selected == null){
-             JOptionPane.showMessageDialog(this, "Wybierz sygnał do zapisu", "Błąd", JOptionPane.ERROR_MESSAGE);
-        }else{
+        if (selected == null) {
+            JOptionPane.showMessageDialog(this, "Wybierz sygnał do zapisu", "Błąd", JOptionPane.ERROR_MESSAGE);
+        } else {
             fileDialog.setSignal(selected);
             fileDialog.setAction(evt.getActionCommand());
             fileDialog.setVisible(true);
-        }           
+        }
     }//GEN-LAST:event_saveSignalActionPerformed
 
     private void loadSignalActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_loadSignalActionPerformed
@@ -650,11 +654,11 @@ public class MainWindow extends javax.swing.JFrame {
         return (int) jTableVirtual.getModel().getValueAt(row, 0);
     }
 
-    private DiscreteSignal getSelectedSignal(){
+    private DiscreteSignal getSelectedSignal() {
         DiscreteSignal signal = disSignalContainer.getById(getIdFromDiscreteTable(jTableDiscrete.getSelectedRows()[0]));
         return signal;
     }
-    
+
     private DiscreteSignal[] getSignalsForCalculation() {
         if (jTableDiscrete.getSelectedRowCount() != 2) {
             return null;
@@ -705,7 +709,7 @@ public class MainWindow extends javax.swing.JFrame {
     // End of variables declaration//GEN-END:variables
 
     public void addDiscreteSignal(DiscreteSignal loadSignal) {
-        if(loadSignal != null){
+        if (loadSignal != null) {
             disSignalContainer.add(loadSignal);
             discreteTableModel.fireTableDataChanged();
         }
