@@ -128,8 +128,31 @@ class AmplitudeOperations {
             numberOfSamples = (int) (endTime2 - this.startTime) * this.samplingRate;
         }
         this.values = new Complex[numberOfSamples];
-        Arrays.fill(values, Complex.ZERO);
+        fillValues();
+    }
 
+    private void fillValues() {
+        //Arrays.fill(values, Complex.ZERO);
+        int k = (int) Math.abs(startTime1 - startTime2) * samplingRate;
+        if(startTime1 < startTime2){
+            for(int i=0; i<=k; i++){
+                values[i] = signal1.getValues()[i];
+            }
+        }else if(startTime2 < startTime1){
+            for(int i=0; i<=k; i++){
+                values[i] = signal2.getValues()[i];
+            }
+        }
+        k = values.length -((int) Math.abs(endTime1 - endTime2) * samplingRate) -1;
+        if(endTime1 < endTime2){
+            for(int i=k; i<values.length; i++){
+                values[i] = signal2.getValues()[i];
+            }
+        }else if(endTime2 < endTime1){
+            for(int i=k; i<values.length; i++){
+                values[i] = signal1.getValues()[i];
+            }
+        }
     }
 
 }
