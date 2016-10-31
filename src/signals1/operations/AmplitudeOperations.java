@@ -132,25 +132,33 @@ class AmplitudeOperations {
     }
 
     private void fillValues() {
-        //Arrays.fill(values, Complex.ZERO);
+        Arrays.fill(values, Complex.ZERO);
         int k = (int) Math.abs(startTime1 - startTime2) * samplingRate;
         if(startTime1 < startTime2){
-            for(int i=0; i<=k; i++){
-                values[i] = signal1.getValues()[i];
+            for(int i=0; i<k; i++){
+                if(signal1.getValues().length > i && values.length > i){
+                    values[i] = signal1.getValues()[i];
+                }
             }
         }else if(startTime2 < startTime1){
-            for(int i=0; i<=k; i++){
-                values[i] = signal2.getValues()[i];
+            for(int i=0; i<k; i++){
+                if(signal2.getValues().length > i && values.length > i){
+                    values[i] = signal2.getValues()[i];
+                }
             }
         }
-        k = values.length -((int) Math.abs(endTime1 - endTime2) * samplingRate) -1;
+        k = ((int) Math.abs(endTime1 - endTime2) * samplingRate);
         if(endTime1 < endTime2){
-            for(int i=k; i<values.length; i++){
-                values[i] = signal2.getValues()[i];
+            for(int i = values.length -k; i < values.length; i++){
+                if(i-k >=0 && i>=0){
+                    values[i] = signal2.getValues()[i-k];
+                }
             }
         }else if(endTime2 < endTime1){
-            for(int i=k; i<values.length; i++){
-                values[i] = signal1.getValues()[i];
+            for(int i = values.length -k; i < values.length; i++){
+                if(i-k >=0 && i>=0){
+                    values[i] = signal1.getValues()[i-k];
+                }
             }
         }
     }
