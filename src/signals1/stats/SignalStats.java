@@ -5,11 +5,13 @@
  */
 package signals1.stats;
 
+import java.io.Serializable;
+
 /**
  *
  * @author marr
  */
-public class SignalStats {
+public class SignalStats implements Serializable{
     
     private double meanValue;
     private double absoluteMeanValue;

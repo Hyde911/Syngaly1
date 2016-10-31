@@ -5,7 +5,6 @@
  */
 package signals1.signals.abstracts;
 
-import java.io.Serializable;
 import java.util.concurrent.atomic.AtomicInteger;
 import org.apache.commons.math3.complex.Complex;
 
@@ -13,7 +12,7 @@ import org.apache.commons.math3.complex.Complex;
  *
  * @author marr
  */
-public abstract class Signals implements Serializable {
+public abstract class Signals {
 
     private final int id;
     protected final int samplesPerSecond = 1_048_5;//76;

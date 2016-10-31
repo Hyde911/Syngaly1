@@ -7,6 +7,7 @@ package signals1.gui;
 
 import java.awt.BorderLayout;
 import java.awt.Dimension;
+import javax.swing.JFileChooser;
 import javax.swing.JOptionPane;
 import javax.swing.UIManager;
 import javax.swing.UnsupportedLookAndFeelException;
@@ -43,6 +44,8 @@ public class MainWindow extends javax.swing.JFrame {
     private DiscretetSignalsContainer disSignalContainer = DiscretetSignalsContainer.getInstance();
     private VirtualSignalsTableModel virtulTableModel = new VirtualSignalsTableModel();
     private DiscreteSignalTableModel discreteTableModel = new DiscreteSignalTableModel();
+    private FileChooserDialog fileDialog;
+    private static MainWindow instance = null;
 
     /**
      * Creates new form NewJFrame
@@ -54,6 +57,18 @@ public class MainWindow extends javax.swing.JFrame {
         initInputForms();
         setUpVirtualTable();
         setUpDiscreteTable();
+        fileDialog = new FileChooserDialog(this, true);
+        fileDialog.addWindowListener(new java.awt.event.WindowAdapter() {
+                    @Override
+                    public void windowClosing(java.awt.event.WindowEvent e) {
+                        fileDialog.setVisible(false);            
+                    }
+                });
+        instance = this;
+    }
+    
+    public static MainWindow getInstance() {
+        return instance;
     }
 
     /**
@@ -93,6 +108,8 @@ public class MainWindow extends javax.swing.JFrame {
         jButtonClearVirtualTable = new javax.swing.JButton();
         jButtonClearDiscreteTable1 = new javax.swing.JButton();
         jCheckBoxOperationOrder = new javax.swing.JCheckBox();
+        saveSignal = new javax.swing.JButton();
+        loadSignal = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setResizable(false);
@@ -278,6 +295,24 @@ public class MainWindow extends javax.swing.JFrame {
         jCheckBoxOperationOrder.setFont(new java.awt.Font("Tahoma", 1, 11)); // NOI18N
         jCheckBoxOperationOrder.setText("Odwróć kolejność");
 
+        saveSignal.setFont(new java.awt.Font("Dialog", 0, 18)); // NOI18N
+        saveSignal.setText("Zapisz");
+        saveSignal.setActionCommand("saveSignal");
+        saveSignal.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                saveSignalActionPerformed(evt);
+            }
+        });
+
+        loadSignal.setFont(new java.awt.Font("Dialog", 0, 18)); // NOI18N
+        loadSignal.setText("Odczytaj");
+        loadSignal.setActionCommand("loadSignal");
+        loadSignal.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                loadSignalActionPerformed(evt);
+            }
+        });
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
@@ -285,7 +320,7 @@ public class MainWindow extends javax.swing.JFrame {
             .addComponent(jSeparator1)
             .addComponent(jSeparator2)
             .addGroup(layout.createSequentialGroup()
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                     .addGroup(layout.createSequentialGroup()
                         .addContainerGap()
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -324,11 +359,16 @@ public class MainWindow extends javax.swing.JFrame {
                         .addGap(70, 70, 70)
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addComponent(jCheckBoxOperationOrder)
-                            .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                                .addComponent(jButtonAddSignals, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addComponent(jButtonSubtractSignals, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addComponent(jButtonMultiplySignals, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addComponent(jButtonDvideSignals, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))))
+                            .addGroup(layout.createSequentialGroup()
+                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                                    .addComponent(jButtonAddSignals, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                    .addComponent(jButtonSubtractSignals, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                    .addComponent(jButtonMultiplySignals, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                    .addComponent(jButtonDvideSignals, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                                .addGap(18, 18, 18)
+                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                                    .addComponent(saveSignal, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                    .addComponent(loadSignal, javax.swing.GroupLayout.DEFAULT_SIZE, 163, Short.MAX_VALUE))))))
                 .addContainerGap(46, Short.MAX_VALUE))
             .addGroup(layout.createSequentialGroup()
                 .addGap(118, 118, 118)
@@ -383,9 +423,13 @@ public class MainWindow extends javax.swing.JFrame {
                                 .addComponent(jButtonClearDiscreteTable1))))
                     .addGroup(layout.createSequentialGroup()
                         .addGap(18, 18, 18)
-                        .addComponent(jButtonAddSignals, javax.swing.GroupLayout.PREFERRED_SIZE, 49, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                            .addComponent(saveSignal, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                            .addComponent(jButtonAddSignals, javax.swing.GroupLayout.PREFERRED_SIZE, 49, javax.swing.GroupLayout.PREFERRED_SIZE))
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                        .addComponent(jButtonSubtractSignals, javax.swing.GroupLayout.PREFERRED_SIZE, 49, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                            .addComponent(loadSignal, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                            .addComponent(jButtonSubtractSignals, javax.swing.GroupLayout.PREFERRED_SIZE, 49, javax.swing.GroupLayout.PREFERRED_SIZE))
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                         .addComponent(jButtonMultiplySignals, javax.swing.GroupLayout.PREFERRED_SIZE, 49, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
@@ -528,6 +572,25 @@ public class MainWindow extends javax.swing.JFrame {
         discreteTableModel.fireTableDataChanged();
     }//GEN-LAST:event_jButtonClearDiscreteTable1ActionPerformed
 
+    private void saveSignalActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_saveSignalActionPerformed
+        fileDialog.setDialogType(JFileChooser.SAVE_DIALOG);
+        DiscreteSignal selected = getSelectedSignal();
+        if(selected == null){
+             JOptionPane.showMessageDialog(this, "Wybierz sygnał do zapisu", "Błąd", JOptionPane.ERROR_MESSAGE);
+        }else{
+            fileDialog.setSignal(selected);
+            fileDialog.setAction(evt.getActionCommand());
+            fileDialog.setVisible(true);
+        }           
+    }//GEN-LAST:event_saveSignalActionPerformed
+
+    private void loadSignalActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_loadSignalActionPerformed
+        fileDialog.setDialogType(JFileChooser.OPEN_DIALOG);
+        fileDialog.setSignal(null);
+        fileDialog.setAction(evt.getActionCommand());
+        fileDialog.setVisible(true);
+    }//GEN-LAST:event_loadSignalActionPerformed
+
     private void initInputForms() {
         sineInputPanel = new SineInputPanel(inputFormDimension);
         noiseInputPanel = new NoiseInputPanel(inputFormDimension);
@@ -587,6 +650,11 @@ public class MainWindow extends javax.swing.JFrame {
         return (int) jTableVirtual.getModel().getValueAt(row, 0);
     }
 
+    private DiscreteSignal getSelectedSignal(){
+        DiscreteSignal signal = disSignalContainer.getById(getIdFromDiscreteTable(jTableDiscrete.getSelectedRows()[0]));
+        return signal;
+    }
+    
     private DiscreteSignal[] getSignalsForCalculation() {
         if (jTableDiscrete.getSelectedRowCount() != 2) {
             return null;
@@ -632,6 +700,15 @@ public class MainWindow extends javax.swing.JFrame {
     private javax.swing.JTable jTableDiscrete;
     private javax.swing.JTable jTableVirtual;
     private javax.swing.JTextField jTextSamplingRate;
+    private javax.swing.JButton loadSignal;
+    private javax.swing.JButton saveSignal;
     // End of variables declaration//GEN-END:variables
+
+    public void addDiscreteSignal(DiscreteSignal loadSignal) {
+        if(loadSignal != null){
+            disSignalContainer.add(loadSignal);
+            discreteTableModel.fireTableDataChanged();
+        }
+    }
 
 }

@@ -5,20 +5,21 @@
  */
 package signals1.gui;
 
+import signals1.signals.discrete.DiscreteSignal;
+
 /**
  *
  * @author glabg
  */
 public class FileChooserDialog extends javax.swing.JDialog {
 
-    int signalId;
     private String action;
+    private DiscreteSignal signal;
     /**
      * Creates new form FileChooserDialog
      */
-    public FileChooserDialog(java.awt.Frame parent, boolean modal, int id) {
+    public FileChooserDialog(java.awt.Frame parent, boolean modal) {
         super(parent, modal);
-        signalId = id;
         initComponents();
         this.action = "";
     }
@@ -44,6 +45,7 @@ public class FileChooserDialog extends javax.swing.JDialog {
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
 
+        jFileChooser1.setDialogType(javax.swing.JFileChooser.SAVE_DIALOG);
         jFileChooser1.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jFileChooser1ActionPerformed(evt);
@@ -66,7 +68,12 @@ public class FileChooserDialog extends javax.swing.JDialog {
 
     private void jFileChooser1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jFileChooser1ActionPerformed
         setVisible(false);
-        GUIHelper.actionLocator(action, jFileChooser1.getSelectedFile(), signalId);
+        if(signal == null){
+            GUIHelper.actionLocator(action, jFileChooser1.getSelectedFile());
+        }else{
+            GUIHelper.actionLocator(action, jFileChooser1.getSelectedFile(), signal);
+        }
+        setSignal(null);
     }//GEN-LAST:event_jFileChooser1ActionPerformed
 
 //    /**
@@ -114,4 +121,12 @@ public class FileChooserDialog extends javax.swing.JDialog {
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JFileChooser jFileChooser1;
     // End of variables declaration//GEN-END:variables
+
+    public void setDialogType(int type) {
+        jFileChooser1.setDialogType(type);
+    }
+
+    public void setSignal(DiscreteSignal signal) {
+        this.signal = signal;
+    }
 }

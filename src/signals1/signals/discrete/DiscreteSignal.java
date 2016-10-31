@@ -5,6 +5,7 @@
  */
 package signals1.signals.discrete;
 
+import java.io.Serializable;
 import java.util.concurrent.atomic.AtomicInteger;
 import org.apache.commons.math3.complex.Complex;
 import signals1.stats.Histogram;
@@ -14,9 +15,9 @@ import signals1.stats.SignalStats;
  *
  * @author glabg
  */
-public abstract class DiscreteSignal {
+public abstract class DiscreteSignal implements Serializable{
 
-    private final int id;
+    private transient final int id;
     protected String fullName = "";
     static AtomicInteger nextId = new AtomicInteger();
     protected double startTime;

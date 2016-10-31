@@ -11,7 +11,7 @@ import java.io.Serializable;
  *
  * @author marr
  */
-public abstract class NoiseSignals extends Signals implements Serializable {
+public abstract class NoiseSignals extends Signals{
 
     public NoiseSignals(double startTime, double amplitude, double duration) {
         super(startTime, amplitude, duration);

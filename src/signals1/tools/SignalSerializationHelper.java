@@ -23,7 +23,7 @@ import signals1.signals.discrete.DiscreteSignal;
  */
 public class SignalSerializationHelper {
 
-    public static void saveSignal(Signals signal, File writeFile) {
+    public static void saveSignal(DiscreteSignal signal, File writeFile) {
         try (FileOutputStream fos = new FileOutputStream(writeFile)) {
             ObjectOutputStream oos = new ObjectOutputStream(fos);
             oos.writeObject(signal);
@@ -36,15 +36,20 @@ public class SignalSerializationHelper {
         }
     }
 
-    public static DiscreteSignal ReadSignal(File readFile) throws IOException, ClassNotFoundException {
+    public static DiscreteSignal loadSignal(File readFile) {
         DiscreteSignal result = null;
         try (FileInputStream fis = new FileInputStream(readFile)){
             ObjectInputStream ois = new ObjectInputStream(fis);
             result = (DiscreteSignal) ois.readObject();
             ois.close();
             fis.close();
+        } catch (FileNotFoundException ex) {
+            Logger.getLogger(SignalSerializationHelper.class.getName()).log(Level.SEVERE, null, ex);
+        } catch (IOException ex) {
+            Logger.getLogger(SignalSerializationHelper.class.getName()).log(Level.SEVERE, null, ex);
+        } catch (ClassNotFoundException ex) {
+            Logger.getLogger(SignalSerializationHelper.class.getName()).log(Level.SEVERE, null, ex);
         }
-        
         return result;
     }
 }
