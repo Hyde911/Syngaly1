@@ -50,9 +50,9 @@ public abstract class DiscreteSignal implements Serializable{
         Histogram hist = getHistogram(numberOfIntervals);
         double []real = hist.getRealHistogram();
         double []img = hist.getImgHistogram();
-        double []mod = new double[values.length];
-        double []phase = new double[values.length];
-        for (int i = 0; i < values.length; i++){
+        double []mod = new double[real.length];
+        double []phase = new double[real.length];
+        for (int i = 0; i < real.length; i++){
             mod[i] = Math.sqrt(real[i] * real[i] + img[i] * img[i]);
             phase[i] = Math.atan(img[i] / real[i]);
         }

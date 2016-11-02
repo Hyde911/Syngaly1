@@ -152,7 +152,7 @@ public class AmplitudePanel extends javax.swing.JPanel {
                 createDataset(values, isReal, startTime, title, samplingRate));
         NumberAxis xAxis = new NumberAxis();
         xAxis.setTickUnit(new NumberTickUnit(1));
-        chart.getXYPlot().getRenderer().setSeriesStroke(0, new BasicStroke(0.8f));
+        chart.getXYPlot().getRenderer().setSeriesStroke(0, new BasicStroke(0.6f));
         ChartPanel chartPanel = new ChartPanel(chart);
         chartPanel.setPreferredSize(new Dimension(chartDimensionX, chartDimensionY));
         return chartPanel;
