@@ -11,11 +11,10 @@ import org.apache.commons.math3.complex.Complex;
  *
  * @author marr
  */
-public class Subtraction implements ArithmeticOperator{
+public class Subtraction implements ArithmeticOperator {
 
     @Override
     public Complex getResult(Complex c1, Complex c2) {
         return c1.subtract(c2);
     }
-    
 }

@@ -12,7 +12,6 @@ import signals1.signals.SineSignal;
 import signals1.signals.SinesHalfWafeSingal;
 import signals1.signals.abstracts.SineLikeSignals;
 
-
 /**
  *
  * @author marr
@@ -193,7 +192,6 @@ public class SineInputPanel extends javax.swing.JPanel {
     private void jTextStartTimeActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jTextStartTimeActionPerformed
         // TODO add your handling code here:
     }//GEN-LAST:event_jTextStartTimeActionPerformed
-
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JComboBox<String> jComboBox1;

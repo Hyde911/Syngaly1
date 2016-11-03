@@ -15,7 +15,7 @@ import signals1.stats.SignalStats;
  *
  * @author glabg
  */
-public abstract class DiscreteSignal implements Serializable{
+public abstract class DiscreteSignal implements Serializable {
 
     private transient int id;
     protected String fullName = "";
@@ -31,45 +31,45 @@ public abstract class DiscreteSignal implements Serializable{
         id = nextId.incrementAndGet();
     }
 
-    public Complex[] getValues(){
+    public Complex[] getValues() {
         return values;
     }
-    
-    public Complex[] getValuesModAndShift(){
+
+    public Complex[] getValuesModAndShift() {
         Complex[] result = new Complex[this.values.length];
-        for (int i = 0; i  < result.length; i++){
-            result[i] = new Complex (Math.sqrt(values[i].getImaginary() * values[i].getImaginary() + values[i].getReal() * values[i].getReal()),
-                                    Math.atan(values[i].getImaginary() / values[i].getReal()));
+        for (int i = 0; i < result.length; i++) {
+            result[i] = new Complex(Math.sqrt(values[i].getImaginary() * values[i].getImaginary() + values[i].getReal() * values[i].getReal()),
+                    Math.atan(values[i].getImaginary() / values[i].getReal()));
         }
         return result;
     }
 
     public abstract Histogram getHistogram(int numberOfIntervals);
 
-    public Histogram getHistogramModAndShift(int numberOfIntervals){
+    public Histogram getHistogramModAndShift(int numberOfIntervals) {
         Histogram hist = getHistogram(numberOfIntervals);
-        double []real = hist.getRealHistogram();
-        double []img = hist.getImgHistogram();
-        double []mod = new double[real.length];
-        double []phase = new double[real.length];
-        for (int i = 0; i < real.length; i++){
+        double[] real = hist.getRealHistogram();
+        double[] img = hist.getImgHistogram();
+        double[] mod = new double[real.length];
+        double[] phase = new double[real.length];
+        for (int i = 0; i < real.length; i++) {
             mod[i] = Math.sqrt(real[i] * real[i] + img[i] * img[i]);
             phase[i] = Math.atan(img[i] / real[i]);
         }
         return new Histogram(mod, phase);
     }
-    
+
     public String getFullName() {
         return fullName;
     }
 
     public int getId() {
-        if (id == 0){
+        if (id == 0) {
             id = nextId.incrementAndGet();
         }
         return id;
     }
-    
+
     public double getStartTime() {
         return startTime;
     }

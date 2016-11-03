@@ -14,7 +14,6 @@ import java.io.ObjectInputStream;
 import java.io.ObjectOutputStream;
 import java.util.logging.Level;
 import java.util.logging.Logger;
-import signals1.signals.abstracts.Signals;
 import signals1.signals.discrete.DiscreteSignal;
 
 /**

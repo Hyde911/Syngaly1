@@ -19,7 +19,6 @@ public class SineModSingal extends SineLikeSignals {
         this.fullName = "sin modulo";
     }
 
-
     @Override
     protected void generateSignal() {
         this.result = new Complex[numberOfSamples];
@@ -28,5 +27,4 @@ public class SineModSingal extends SineLikeSignals {
             this.result[i] = new Complex(Math.abs(amplitude * Math.sin(temp)), 0);
         }
     }
-
 }

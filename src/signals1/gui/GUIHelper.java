@@ -18,14 +18,14 @@ import signals1.tools.SignalSerializationHelper;
  */
 public class GUIHelper {
 
-    private static final Class HELPERCLASS = GUIHelper.class; 
+    private static final Class HELPERCLASS = GUIHelper.class;
 
     public static void actionLocator(String action, File file, DiscreteSignal signal) {
         try {
             Method actionMethod = HELPERCLASS.getMethod(action, File.class, DiscreteSignal.class);
             actionMethod.invoke(null, file, signal);
         } catch (Exception ex) {
-            Logger.getLogger(GUIHelper.class.getName()).log(Level.SEVERE, null, ex);
+            
             //DSAMainWindow.showError(ex, "Błąd Pliku", "Błąd Pliku");
         }
     }
@@ -35,11 +35,10 @@ public class GUIHelper {
             Method actionMethod = HELPERCLASS.getMethod(action, File.class);
             actionMethod.invoke(null, file);
         } catch (Exception ex) {
-            Logger.getLogger(GUIHelper.class.getName()).log(Level.SEVERE, null, ex);
             //DSAMainWindow.showError(ex, "Błąd Pliku", "Błąd Pliku");
         }
     }
-    
+
     public static void saveSignal(final File file, final DiscreteSignal signal) {
         SignalSerializationHelper.saveSignal(signal, file);
     }
@@ -47,5 +46,4 @@ public class GUIHelper {
     public static void loadSignal(final File file) {
         MainWindow.getInstance().addDiscreteSignal(SignalSerializationHelper.loadSignal(file));
     }
-
 }

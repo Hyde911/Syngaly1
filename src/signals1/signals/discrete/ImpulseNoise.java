@@ -25,7 +25,7 @@ public class ImpulseNoise extends DiscreteSignal implements ImpulseInterface, Se
     private final int ns;
 
     public ImpulseNoise(double amplitude, int samplingRate, int duration, double startTime, int ns, double p) {
-        super ();
+        super();
         this.amplitude = amplitude;
         this.samplingRate = samplingRate;
         this.duration = duration;
@@ -50,7 +50,7 @@ public class ImpulseNoise extends DiscreteSignal implements ImpulseInterface, Se
     }
 
     @Override
-    public Complex[] getValues(){
+    public Complex[] getValues() {
         return values;
     }
 
@@ -89,7 +89,7 @@ public class ImpulseNoise extends DiscreteSignal implements ImpulseInterface, Se
     public double getAmplitude() {
         return amplitude;
     }
-    
+
     private void calculateStats() {
         this.stats = StatsCalculator.getStats(values);
     }

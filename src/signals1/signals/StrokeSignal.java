@@ -6,22 +6,22 @@
 package signals1.signals;
 
 import org.apache.commons.math3.complex.Complex;
-import signals1.signals.abstracts.NoiseSignals;
+import signals1.signals.abstracts.NonPeriodicSignals;
 
 /**
  *
  * @author marr
  */
-public class StrokeSignal extends NoiseSignals {
+public class StrokeSignal extends NonPeriodicSignals {
 
     private double strokeTime;
 
     public StrokeSignal(double startTime, double amplitude, double duration, double strokeTime) {
         super(startTime, amplitude, duration);
         this.strokeTime = strokeTime;
-        if (strokeTime > duration - startTime){
+        if (strokeTime > duration - startTime) {
             this.strokeTime = duration;
-        }else if(strokeTime < startTime){
+        } else if (strokeTime < startTime) {
             this.strokeTime = startTime;
         }
         this.fullName = "skok jednostkowy";
@@ -31,12 +31,11 @@ public class StrokeSignal extends NoiseSignals {
     protected void generateSignal() {
         this.result = new Complex[numberOfSamples];
         for (int i = 0; i < numberOfSamples; i++) {
-            if (i < (strokeTime - startTime) * this.samplesPerSecond){
+            if (i < (strokeTime - startTime) * this.samplesPerSecond) {
                 result[i] = Complex.ZERO;
-            }else{
+            } else {
                 result[i] = new Complex(amplitude);
             }
         }
     }
-
 }

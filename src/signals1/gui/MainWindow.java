@@ -18,7 +18,7 @@ import signals1.gui.inputForms.SquareInputPanel;
 import signals1.gui.tables.DiscreteSignalTableModel;
 import signals1.gui.tables.VirtualSignalsTableModel;
 import signals1.operations.AmplitudeCalculator;
-import signals1.signals.abstracts.NoiseSignals;
+import signals1.signals.abstracts.NonPeriodicSignals;
 import signals1.signals.abstracts.PeriodicSignals;
 import signals1.signals.abstracts.Signals;
 import signals1.signals.discrete.DiscreteSignal;
@@ -478,8 +478,8 @@ public class MainWindow extends javax.swing.JFrame {
         }
         if (virtualSignal instanceof PeriodicSignals) {
             disSignalContainer.add(new PeriodicDiscreteSignal((PeriodicSignals) virtualSignal, sampling));
-        } else if (virtualSignal instanceof NoiseSignals) {
-            disSignalContainer.add(new NonPeriodicDiscreteSignal((NoiseSignals) virtualSignal, sampling));
+        } else if (virtualSignal instanceof NonPeriodicSignals) {
+            disSignalContainer.add(new NonPeriodicDiscreteSignal((NonPeriodicSignals) virtualSignal, sampling));
         }
         discreteTableModel.fireTableDataChanged();
     }//GEN-LAST:event_jButtonSamplingActionPerformed
@@ -714,5 +714,4 @@ public class MainWindow extends javax.swing.JFrame {
             discreteTableModel.fireTableDataChanged();
         }
     }
-
 }

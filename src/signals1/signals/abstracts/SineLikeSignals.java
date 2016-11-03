@@ -14,11 +14,4 @@ public abstract class SineLikeSignals extends PeriodicSignals {
     public SineLikeSignals(double startTime, double amplitude, double duration, double period) {
         super(startTime, amplitude, duration, period);
     }
-
-//    @Override
-//    protected void calculateStats() {
-//        int wholePeriodSamples = samplesPerPeriod * numberOfWholePeriods;
-//        Complex[] samplesForStats = Arrays.copyOf(result, wholePeriodSamples);
-//        this.stats = StatsCalculator.getStats(samplesForStats);
-//    }
 }

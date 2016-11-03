@@ -26,5 +26,4 @@ public class Histogram {
     public double[] getImgHistogram() {
         return imgHistogram;
     }
-
 }

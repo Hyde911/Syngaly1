@@ -21,5 +21,4 @@ public abstract class SquareSignals extends PeriodicSignals {
     public int getFillFactor() {
         return fillFactor;
     }
-    
 }

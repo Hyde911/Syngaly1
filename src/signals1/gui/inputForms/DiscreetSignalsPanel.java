@@ -42,7 +42,6 @@ public class DiscreetSignalsPanel extends javax.swing.JPanel {
         } catch (NumberFormatException ex) {
             JOptionPane.showMessageDialog(this, "Niepoprawna wartość", "Błąd", JOptionPane.ERROR_MESSAGE);
             return null;
-
         }
     }
 
@@ -313,5 +312,4 @@ public class DiscreetSignalsPanel extends javax.swing.JPanel {
     private javax.swing.JTextField sampleNumber;
     private javax.swing.JTextField startTime;
     // End of variables declaration//GEN-END:variables
-
 }

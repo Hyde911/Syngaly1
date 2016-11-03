@@ -14,7 +14,7 @@ import signals1.stats.SignalStats;
  * @author glabg
  */
 public interface ImpulseInterface {
-    
+
     Complex[] getValues();
 
     int getSamplingRate();
@@ -24,6 +24,6 @@ public interface ImpulseInterface {
     SignalStats getStats();
 
     double getDuration();
-    
+
     Histogram getHistogram(int numberOfIntervals);
 }

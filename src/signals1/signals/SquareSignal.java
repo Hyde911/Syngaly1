@@ -38,5 +38,4 @@ public class SquareSignal extends SquareSignals{
             sampleOfPeriod++;
         }
     }
-    
 }

@@ -27,9 +27,10 @@ public class AmplitudePanel extends javax.swing.JPanel {
 
     private static final String SKŁADOWA_UROJONA = "składowa urojona";
     private static final String SKŁADOWA_RZECZYWISTA = "składowa rzeczywista";
+    private static final String MODUL_LICZBY = "moduł z liczby zespolonej";
+    private static final String FAZA_LICZBY = "faza liczby zespolonej";
     private static final String AMPLITUDA = "amplituda";
     private static final String CZAS = "czas";
-    private static final int INTERVAL = 10;
     private final int chartDimensionX = 1150;
     private final int chartDimensionY = 350;
 
@@ -43,18 +44,18 @@ public class AmplitudePanel extends javax.swing.JPanel {
 
         if (isModAndPhase) {
             if (signal instanceof ImpulseInterface) {
-                realChart = getScatterPlot(signal.getValuesModAndShift(), true, signal.getStartTime(), signal.getSamplingRate());
-                imgChart = getScatterPlot(signal.getValuesModAndShift(), false, signal.getStartTime(), signal.getSamplingRate());
+                realChart = getScatterPlot(signal.getValuesModAndShift(), true, signal.getStartTime(), signal.getSamplingRate(), isModAndPhase);
+                imgChart = getScatterPlot(signal.getValuesModAndShift(), false, signal.getStartTime(), signal.getSamplingRate(), isModAndPhase);
             } else {
-                realChart = getChart(signal.getValuesModAndShift(), true, signal.getStartTime(), signal.getSamplingRate());
-                imgChart = getChart(signal.getValuesModAndShift(), false, signal.getStartTime(), signal.getSamplingRate());
+                realChart = getChart(signal.getValuesModAndShift(), true, signal.getStartTime(), signal.getSamplingRate(), isModAndPhase);
+                imgChart = getChart(signal.getValuesModAndShift(), false, signal.getStartTime(), signal.getSamplingRate(), isModAndPhase);
             }
         } else if (signal instanceof ImpulseInterface) {
-            realChart = getScatterPlot(signal.getValues(), true, signal.getStartTime(), signal.getSamplingRate());
-            imgChart = getScatterPlot(signal.getValues(), false, signal.getStartTime(), signal.getSamplingRate());
+            realChart = getScatterPlot(signal.getValues(), true, signal.getStartTime(), signal.getSamplingRate(), isModAndPhase);
+            imgChart = getScatterPlot(signal.getValues(), false, signal.getStartTime(), signal.getSamplingRate(), isModAndPhase);
         } else {
-            realChart = getChart(signal.getValues(), true, signal.getStartTime(), signal.getSamplingRate());
-            imgChart = getChart(signal.getValues(), false, signal.getStartTime(), signal.getSamplingRate());
+            realChart = getChart(signal.getValues(), true, signal.getStartTime(), signal.getSamplingRate(), isModAndPhase);
+            imgChart = getChart(signal.getValues(), false, signal.getStartTime(), signal.getSamplingRate(), isModAndPhase);
         }
 
         jPanelReal.setLayout(new java.awt.BorderLayout());
@@ -130,10 +131,16 @@ public class AmplitudePanel extends javax.swing.JPanel {
         );
     }// </editor-fold>//GEN-END:initComponents
 
-    private ChartPanel getScatterPlot(Complex[] values, boolean isReal, double startTime, int samplingRate) {
+    private ChartPanel getScatterPlot(Complex[] values, boolean isReal, double startTime, int samplingRate, boolean isModAndPhase) {
         String title = SKŁADOWA_RZECZYWISTA;
         if (!isReal) {
             title = SKŁADOWA_UROJONA;
+        }
+        if (isModAndPhase) {
+            title = MODUL_LICZBY;
+            if (!isReal) {
+                title = FAZA_LICZBY;
+            }
         }
 
         JFreeChart chart = ChartFactory.createScatterPlot(title, CZAS, AMPLITUDA, createDataset(values, isReal, startTime, title, samplingRate));
@@ -142,12 +149,18 @@ public class AmplitudePanel extends javax.swing.JPanel {
         return chartPanel;
     }
 
-    private ChartPanel getChart(Complex[] values, boolean isReal, double startTime, int samplingRate) {
-
+    private ChartPanel getChart(Complex[] values, boolean isReal, double startTime, int samplingRate, boolean isModAndPhase) {
         String title = SKŁADOWA_RZECZYWISTA;
         if (!isReal) {
             title = SKŁADOWA_UROJONA;
         }
+        if (isModAndPhase) {
+            title = MODUL_LICZBY;
+            if (!isReal) {
+                title = FAZA_LICZBY;
+            }
+        }
+
         JFreeChart chart = ChartFactory.createXYLineChart(title, CZAS, AMPLITUDA,
                 createDataset(values, isReal, startTime, title, samplingRate));
         NumberAxis xAxis = new NumberAxis();
@@ -175,7 +188,6 @@ public class AmplitudePanel extends javax.swing.JPanel {
         }
         return new XYSeriesCollection(series);
     }
-
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JPanel jPanelImg;

@@ -6,13 +6,12 @@
 package signals1.operations.arithmetic;
 
 import org.apache.commons.math3.complex.Complex;
-import signals1.signals.discrete.DerivedSignal;
 
 /**
  *
  * @author marr
  */
 public interface ArithmeticOperator {
-    
-    Complex getResult(Complex c1, Complex c2) ;
+
+    Complex getResult(Complex c1, Complex c2);
 }

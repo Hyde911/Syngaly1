@@ -5,16 +5,13 @@
  */
 package signals1.signals.abstracts;
 
-import java.io.Serializable;
-
 /**
  *
  * @author marr
  */
-public abstract class NoiseSignals extends Signals{
+public abstract class NonPeriodicSignals extends Signals {
 
-    public NoiseSignals(double startTime, double amplitude, double duration) {
+    public NonPeriodicSignals(double startTime, double amplitude, double duration) {
         super(startTime, amplitude, duration);
     }
-
 }

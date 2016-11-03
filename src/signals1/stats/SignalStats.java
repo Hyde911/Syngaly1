@@ -46,7 +46,4 @@ public class SignalStats implements Serializable{
     public double getEffectivePower() {
         return effectivePower;
     }
-    
-    
-    
 }

@@ -10,7 +10,7 @@ import javax.swing.JOptionPane;
 import signals1.signals.GaussianNoise;
 import signals1.signals.StrokeSignal;
 import signals1.signals.UniformNoise;
-import signals1.signals.abstracts.NoiseSignals;
+import signals1.signals.abstracts.NonPeriodicSignals;
 
 
 /**
@@ -29,7 +29,7 @@ public class NoiseInputPanel extends javax.swing.JPanel {
         initComponents();
     }
 
-    public NoiseSignals getSingal() {
+    public NonPeriodicSignals getSingal() {
         double amplitude = 0;
         double duration = 0;
         double startTime = 0;

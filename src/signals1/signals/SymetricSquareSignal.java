@@ -12,7 +12,7 @@ import signals1.signals.abstracts.SquareSignals;
  *
  * @author marr
  */
-public class SymetricSquareSignal extends SquareSignals{
+public class SymetricSquareSignal extends SquareSignals {
 
     public SymetricSquareSignal(double startTime, double amplitude, double duration, double period, int fillFactor) {
         super(startTime, amplitude, duration, period, fillFactor);
@@ -24,19 +24,17 @@ public class SymetricSquareSignal extends SquareSignals{
         this.result = new Complex[numberOfSamples];
         int period = 0;
         int sampleOfPeriod = 0;
-        for (int i = 0; i< numberOfSamples; i++){
-            if (i % samplesPerPeriod == 0 && i != 0){
+        for (int i = 0; i < numberOfSamples; i++) {
+            if (i % samplesPerPeriod == 0 && i != 0) {
                 period++;
                 sampleOfPeriod = 0;
             }
-            if (sampleOfPeriod < samplesPerPeriod * fillFactor*0.01){
-                this.result[i] = new Complex(amplitude , 0);
-            }
-            else{
+            if (sampleOfPeriod < samplesPerPeriod * fillFactor * 0.01) {
+                this.result[i] = new Complex(amplitude, 0);
+            } else {
                 this.result[i] = new Complex(-amplitude, 0);
             }
             sampleOfPeriod++;
         }
     }
-    
 }

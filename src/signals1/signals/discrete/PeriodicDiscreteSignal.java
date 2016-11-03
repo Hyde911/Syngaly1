@@ -27,7 +27,7 @@ public class PeriodicDiscreteSignal extends DiscreteSignal implements Serializab
     private int numberOfSamples;
 
     public PeriodicDiscreteSignal(PeriodicSignals periodicSignal, int samplingRate) {
-        super ();
+        super();
         this.samplingRate = samplingRate;
         this.startTime = periodicSignal.getStartTime();
         this.fullName = periodicSignal.getFullName();

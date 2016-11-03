@@ -17,20 +17,12 @@ import signals1.stats.SignalStats;
 public class OutputWindow extends javax.swing.JFrame {
 
     private DecimalFormat df = new DecimalFormat("0.####");
-    private FileChooserDialog fileChooserDialog;
 
     /**
      * Creates new form OutputWindow
      */
     public OutputWindow(DiscreteSignal signal, AmplitudePanel aplitudeCharts, HistogramPanel hisPanel, AmplitudePanel modAndPhaseChart, HistogramPanel hisModAndPhase) {
         initComponents();
-//        fileChooserDialog = new FileChooserDialog(this, true, signal.getID());
-//        fileChooserDialog.addWindowListener(new java.awt.event.WindowAdapter() {
-//                    @Override
-//                    public void windowClosing(java.awt.event.WindowEvent e) {
-//                        fileChooserDialog.setVisible(false);            
-//                    }
-//                });
 
         showStats(signal.getStats());
 

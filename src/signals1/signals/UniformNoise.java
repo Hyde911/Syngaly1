@@ -7,13 +7,13 @@ package signals1.signals;
 
 import java.util.Random;
 import org.apache.commons.math3.complex.Complex;
-import signals1.signals.abstracts.NoiseSignals;
+import signals1.signals.abstracts.NonPeriodicSignals;
 
 /**
  *
  * @author marr
  */
-public class UniformNoise extends NoiseSignals {
+public class UniformNoise extends NonPeriodicSignals {
 
     public UniformNoise(double startTime, double amplitude, double duration) {
         super(startTime, amplitude, duration);
@@ -29,5 +29,4 @@ public class UniformNoise extends NoiseSignals {
             this.result[i] = new Complex(rand.nextDouble() * amplitude, 0);
         }
     }
-
 }

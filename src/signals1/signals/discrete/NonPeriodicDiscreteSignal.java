@@ -7,7 +7,7 @@ package signals1.signals.discrete;
 
 import java.io.Serializable;
 import org.apache.commons.math3.complex.Complex;
-import signals1.signals.abstracts.NoiseSignals;
+import signals1.signals.abstracts.NonPeriodicSignals;
 import signals1.signals.abstracts.Signals;
 import signals1.stats.Histogram;
 import signals1.stats.HistogramCalculator;
@@ -20,8 +20,8 @@ import signals1.stats.StatsCalculator;
  */
 public class NonPeriodicDiscreteSignal extends DiscreteSignal implements Serializable {
 
-    public NonPeriodicDiscreteSignal(NoiseSignals noiseSignal, int samplingRate) {
-        super ();
+    public NonPeriodicDiscreteSignal(NonPeriodicSignals noiseSignal, int samplingRate) {
+        super();
         this.samplingRate = samplingRate;
         this.startTime = noiseSignal.getStartTime();
         this.fullName = noiseSignal.getFullName();
@@ -40,7 +40,7 @@ public class NonPeriodicDiscreteSignal extends DiscreteSignal implements Seriali
         HistogramCalculator hisCalc = new HistogramCalculator(values);
         return hisCalc.getHistogram(numberOfIntervals);
     }
-    
+
     @Override
     public double getDuration() {
         return (int) values.length / samplingRate;
@@ -63,9 +63,9 @@ public class NonPeriodicDiscreteSignal extends DiscreteSignal implements Seriali
 
     private void getSamples(Signals signal) {
         values = new Complex[(int) (samplingRate * signal.getDuration())];
-        double factor =signal.getNumberOfSamples() / (1.0 * values.length);
-        for (int i = 0; i < values.length; i++){
-            values[i] = signal.getSignal()[(int)(i * factor)];
+        double factor = signal.getNumberOfSamples() / (1.0 * values.length);
+        for (int i = 0; i < values.length; i++) {
+            values[i] = signal.getSignal()[(int) (i * factor)];
         }
     }
 

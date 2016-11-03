@@ -33,15 +33,14 @@ public class HistogramPanel extends javax.swing.JPanel {
         jPanelHisReal.add(realChartPanel, BorderLayout.CENTER);
         jPanelHisReal.setVisible(true);
         jPanelHisReal.validate();
-        
+
         JFreeChart imgHistogram = buildHistogram("składowa rzeczywista", "", "", histogram.getImgHistogram(), intervals, HistogramType.FREQUENCY);
         ChartPanel imgChartPanel = new ChartPanel(imgHistogram);
-        imgChartPanel.setPreferredSize(new Dimension(570, 680));        
+        imgChartPanel.setPreferredSize(new Dimension(570, 680));
         jPanelHisImg.setLayout(new java.awt.BorderLayout());
         jPanelHisImg.add(imgChartPanel, BorderLayout.CENTER);
         jPanelHisImg.setVisible(true);
         jPanelHisImg.validate();
-
     }
 
     /**

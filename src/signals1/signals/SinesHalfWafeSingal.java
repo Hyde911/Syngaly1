@@ -28,5 +28,4 @@ public class SinesHalfWafeSingal extends SineLikeSignals {
             this.result[i] = new Complex(res, 0);
         }
     }
-
 }

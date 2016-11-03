@@ -23,7 +23,7 @@ public class VirtualSignalsTableModel extends DefaultTableModel {
     private SignalContainer container = SignalContainer.getInstance();
     private int rowsNumber = 0;
 
-    public VirtualSignalsTableModel(){
+    public VirtualSignalsTableModel() {
         addTableModelListener(new TableModelListener() {
             @Override
             public void tableChanged(TableModelEvent e) {
@@ -31,7 +31,7 @@ public class VirtualSignalsTableModel extends DefaultTableModel {
             }
         });
     }
-    
+
     @Override
     public int getRowCount() {
         return rowsNumber;
@@ -80,9 +80,9 @@ public class VirtualSignalsTableModel extends DefaultTableModel {
         }
         return null;
     }
-    
-    private Object getFill(Signals signal){
-        if (signal instanceof SquareSignals){
+
+    private Object getFill(Signals signal) {
+        if (signal instanceof SquareSignals) {
             return ((SquareSignals) signal).getFillFactor();
         }
         return null;

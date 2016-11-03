@@ -25,7 +25,7 @@ public class Impulse extends DiscreteSignal implements Serializable, ImpulseInte
     private final int ns;
 
     public Impulse(int samplingRate, int duration, int ns) {
-        super ();
+        super();
         this.ns = ns;
         this.samplingRate = samplingRate;
         this.duration = duration;
@@ -41,9 +41,9 @@ public class Impulse extends DiscreteSignal implements Serializable, ImpulseInte
     public int getSamplingRate() {
         return samplingRate;
     }
-    
+
     @Override
-    public Complex[] getValues(){
+    public Complex[] getValues() {
         return values;
     }
 
@@ -77,7 +77,7 @@ public class Impulse extends DiscreteSignal implements Serializable, ImpulseInte
     public double getAmplitude() {
         return A;
     }
-    
+
     private void calculateStats() {
         this.stats = StatsCalculator.getStats(values);
     }
