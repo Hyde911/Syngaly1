@@ -14,6 +14,7 @@ import signals1.operations.arithmetic.ArithmeticOperator;
 import signals1.operations.arithmetic.Division;
 import signals1.operations.arithmetic.Multiplication;
 import signals1.operations.arithmetic.Subtraction;
+import signals1.signals.discrete.ImpulseInterface;
 import signals1.tools.exceptions.DivideByZeroValueExcpetion;
 import signals1.tools.exceptions.NotSameSamplinRateExpcetion;
 
@@ -34,6 +35,7 @@ class AmplitudeOperations {
     private double startTime2;
     private double endTime1;
     private double endTime2;
+    private Class signalType;
 
     public AmplitudeOperations(DiscreteSignal signal1, DiscreteSignal signal2) throws NotSameSamplinRateExpcetion {
         if (signal1.getSamplingRate() != signal2.getSamplingRate()) {
@@ -42,22 +44,28 @@ class AmplitudeOperations {
         this.signal1 = signal1;
         this.signal2 = signal2;
         this.samplingRate = signal1.getSamplingRate();
+        if(signal1 instanceof ImpulseInterface && signal2 instanceof ImpulseInterface){
+            signalType = ImpulseInterface.class;
+        }
+        else{
+            signalType = DiscreteSignal.class;
+        }
         setStartTime();
     }
 
     public DerivedSignal add() {
         doCalculation(new Addition());
-        return new DerivedSignal(values, samplingRate, startTime, amplitude);
+        return new DerivedSignal(values, samplingRate, startTime, amplitude, signalType);
     }
 
     public DerivedSignal sub() {
         doCalculation(new Subtraction());
-        return new DerivedSignal(values, samplingRate, startTime, amplitude);
+        return new DerivedSignal(values, samplingRate, startTime, amplitude, signalType);
     }
 
     public DerivedSignal mul() {
         doCalculation(new Multiplication());
-        return new DerivedSignal(values, samplingRate, startTime, amplitude);
+        return new DerivedSignal(values, samplingRate, startTime, amplitude, signalType);
     }
 
     public DerivedSignal div() throws DivideByZeroValueExcpetion {
@@ -67,7 +75,7 @@ class AmplitudeOperations {
                 throw new DivideByZeroValueExcpetion();
             }
         }
-        return new DerivedSignal(values, samplingRate, startTime, amplitude);
+        return new DerivedSignal(values, samplingRate, startTime, amplitude, signalType);
     }
 
     private void doCalculation(ArithmeticOperator op) {
