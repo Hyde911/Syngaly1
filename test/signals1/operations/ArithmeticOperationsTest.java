@@ -107,8 +107,8 @@ public class ArithmeticOperationsTest {
         DerivedSignal signal2 = new DerivedSignal(Arrays.copyOf(values2, 8), 1, 0, 0);
         DerivedSignal result = AmplitudeCalculator.addSignals(signal1, signal2);
 
-        Complex[] expectedValues = new Complex[10];
-        Arrays.fill(expectedValues, Complex.ZERO);
+        Complex[] expectedValues = Arrays.copyOf(values1, 10);
+        
         for (int i = 0; i < 10; i++) {
             try {
                 expectedValues[i] = signal1.getValues()[i].add(signal2.getValues()[i]);
@@ -240,8 +240,8 @@ public class ArithmeticOperationsTest {
         DerivedSignal signal2 = new DerivedSignal(Arrays.copyOf(values2, 8), 1, 0, 0);
         DerivedSignal result = AmplitudeCalculator.subSignals(signal1, signal2);
 
-        Complex[] expectedValues = new Complex[10];
-        Arrays.fill(expectedValues, Complex.ZERO);
+        Complex[] expectedValues = Arrays.copyOf(values1, 10);
+        
         for (int i = 0; i < 10; i++) {
             try {
                 expectedValues[i] = signal1.getValues()[i].subtract(signal2.getValues()[i]);
@@ -392,8 +392,8 @@ public class ArithmeticOperationsTest {
         DerivedSignal signal2 = new DerivedSignal(Arrays.copyOf(values2, 8), 1, 0, 0);
         DerivedSignal result = AmplitudeCalculator.multiplySignals(signal2, signal1);
 
-        Complex[] expectedValues = new Complex[10];
-        Arrays.fill(expectedValues, Complex.ZERO);
+        Complex[] expectedValues = Arrays.copyOf(values1, 10);
+        
         for (int i = 0; i < 10; i++) {
             try {
                 expectedValues[i] = signal1.getValues()[i].multiply(signal2.getValues()[i]);
@@ -487,8 +487,8 @@ public class ArithmeticOperationsTest {
         DerivedSignal signal2 = new DerivedSignal(Arrays.copyOf(values2, 8), 1, 0, 0);
         DerivedSignal result = AmplitudeCalculator.divideSignals(signal1, signal2);
 
-        Complex[] expectedValues = new Complex[10];
-        Arrays.fill(expectedValues, Complex.ZERO);
+        Complex[] expectedValues = Arrays.copyOf(values1, 10);
+        
         for (int i = 0; i < 10; i++) {
             try {
                 expectedValues[i] = signal1.getValues()[i].divide(signal2.getValues()[i]);

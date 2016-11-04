@@ -156,16 +156,19 @@ class AmplitudeOperations {
             }
         }
         k = ((int) Math.abs(endTime1 - endTime2) * samplingRate);
+        int j = 0;
         if (endTime1 < endTime2) {
             for (int i = values.length - k; i < values.length; i++) {
                 if (i - k >= 0 && i >= 0) {
-                    values[i] = signal2.getValues()[i - k];
+                    values[i] = signal2.getValues()[signal2.getValues().length - k + j];
+                    j++;
                 }
             }
         } else if (endTime2 < endTime1) {
             for (int i = values.length - k; i < values.length; i++) {
                 if (i - k >= 0 && i >= 0) {
-                    values[i] = signal1.getValues()[i - k];
+                    values[i] = signal1.getValues()[signal1.getValues().length - k + j];
+                    j++;
                 }
             }
         }

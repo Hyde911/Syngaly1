@@ -19,6 +19,10 @@ public class DerivedSignal extends DiscreteSignal implements Serializable {
     
     private Class type;
 
+    public DerivedSignal(Complex[] values, int samplingRate, double startTime, double amplitude){
+        this(values, samplingRate, startTime, amplitude, DiscreteSignal.class);
+    }
+    
     public DerivedSignal(Complex[] values, int samplingRate, double startTime, double amplitude, Class type) {
         super();
         this.fullName = "sygnał pochodny";
