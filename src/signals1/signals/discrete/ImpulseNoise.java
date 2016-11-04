@@ -35,7 +35,7 @@ public class ImpulseNoise extends DiscreteSignal implements ImpulseInterface, Se
         this.values = new Complex[samples];
         this.fullName = "szum impulsowy";
         if (p == 0) {
-            Arrays.fill(values, new Complex[ZERO]);
+            Arrays.fill(values, new Complex(ZERO));
         } else {
             Random r = new Random();
             for (int i = 0; i < samples; i++) {
