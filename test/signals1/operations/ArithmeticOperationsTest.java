@@ -108,7 +108,7 @@ public class ArithmeticOperationsTest {
         DerivedSignal result = AmplitudeCalculator.addSignals(signal1, signal2);
 
         Complex[] expectedValues = Arrays.copyOf(values1, 10);
-        
+
         for (int i = 0; i < 10; i++) {
             try {
                 expectedValues[i] = signal1.getValues()[i].add(signal2.getValues()[i]);
@@ -125,8 +125,7 @@ public class ArithmeticOperationsTest {
         DerivedSignal signal2 = new DerivedSignal(Arrays.copyOf(values2, 8), 1, 0, 0);
         DerivedSignal result = AmplitudeCalculator.addSignals(signal2, signal1);
 
-        Complex[] expectedValues = new Complex[10];
-        Arrays.fill(expectedValues, Complex.ZERO);
+        Complex[] expectedValues = Arrays.copyOf(values1, 10);
         for (int i = 0; i < 10; i++) {
             try {
                 expectedValues[i] = signal1.getValues()[i].add(signal2.getValues()[i]);
@@ -147,12 +146,15 @@ public class ArithmeticOperationsTest {
 
         Complex[] expectedValues = new Complex[11];
         Arrays.fill(expectedValues, Complex.ZERO);
+        expectedValues[0] = values1[0];
         for (int i = 1; i < 11; i++) {
             try {
-                expectedValues[i] = signal1.getValues()[i].add(signal2.getValues()[i - 1]);
+                expectedValues[i] = signal2.getValues()[i - 1].add(signal1.getValues()[i]);
             } catch (ArrayIndexOutOfBoundsException ex) {
             }
         }
+        expectedValues[10] = values2[9];
+
         assertArrayEquals(expectedValues, result.getValues());
         assertEquals(expectedValues.length, result.getDuration(), 0.0001);
 
@@ -166,12 +168,14 @@ public class ArithmeticOperationsTest {
 
         Complex[] expectedValues = new Complex[11];
         Arrays.fill(expectedValues, Complex.ZERO);
+        expectedValues[0] = values1[0];
         for (int i = 1; i < 11; i++) {
             try {
-                expectedValues[i] = signal1.getValues()[i].add(signal2.getValues()[i - 1]);
+                expectedValues[i] = signal2.getValues()[i - 1].add(signal1.getValues()[i]);
             } catch (ArrayIndexOutOfBoundsException ex) {
             }
         }
+        expectedValues[10] = values2[9];
 
         assertArrayEquals(expectedValues, result.getValues());
         assertEquals(result.getDuration(), 11, 0.0001);
@@ -183,8 +187,7 @@ public class ArithmeticOperationsTest {
         DerivedSignal signal2 = new DerivedSignal(Arrays.copyOf(values2, 8), 1, 1, 0);
         DerivedSignal result = AmplitudeCalculator.addSignals(signal1, signal2);
 
-        Complex[] expectedValues = new Complex[10];
-        Arrays.fill(expectedValues, Complex.ZERO);
+        Complex[] expectedValues = Arrays.copyOf(values1, 10);
         for (int i = 1; i < 11; i++) {
             try {
                 expectedValues[i] = signal1.getValues()[i].add(signal2.getValues()[i - 1]);
@@ -204,12 +207,14 @@ public class ArithmeticOperationsTest {
 
         Complex[] expectedValues = new Complex[10];
         Arrays.fill(expectedValues, Complex.ZERO);
+        expectedValues[0] = values1[0];
         for (int i = 1; i < 11; i++) {
             try {
-                expectedValues[i] = signal1.getValues()[i].add(signal2.getValues()[i - 1]);
+                expectedValues[i] = values1[i].add(values2[i - 1]);
             } catch (ArrayIndexOutOfBoundsException ex) {
             }
         }
+        expectedValues[9] = values1[9];
 
         assertArrayEquals(expectedValues, result.getValues());
     }
@@ -241,7 +246,7 @@ public class ArithmeticOperationsTest {
         DerivedSignal result = AmplitudeCalculator.subSignals(signal1, signal2);
 
         Complex[] expectedValues = Arrays.copyOf(values1, 10);
-        
+
         for (int i = 0; i < 10; i++) {
             try {
                 expectedValues[i] = signal1.getValues()[i].subtract(signal2.getValues()[i]);
@@ -258,8 +263,7 @@ public class ArithmeticOperationsTest {
         DerivedSignal signal2 = new DerivedSignal(Arrays.copyOf(values2, 8), 1, 0, 0);
         DerivedSignal result = AmplitudeCalculator.subSignals(signal2, signal1);
 
-        Complex[] expectedValues = new Complex[10];
-        Arrays.fill(expectedValues, Complex.ZERO);
+        Complex[] expectedValues = Arrays.copyOf(values1, 10);
         for (int i = 0; i < 10; i++) {
             try {
                 expectedValues[i] = signal2.getValues()[i].subtract(signal1.getValues()[i]);
@@ -280,12 +284,15 @@ public class ArithmeticOperationsTest {
 
         Complex[] expectedValues = new Complex[11];
         Arrays.fill(expectedValues, Complex.ZERO);
+        expectedValues[0] = values1[0];
         for (int i = 1; i < 11; i++) {
             try {
-                expectedValues[i] = signal1.getValues()[i].subtract(signal2.getValues()[i - 1]);
+                expectedValues[i] = values1[i].subtract(values2[i - 1]);
             } catch (ArrayIndexOutOfBoundsException ex) {
             }
         }
+        expectedValues[10] = values2[9];
+
         assertArrayEquals(expectedValues, result.getValues());
         assertEquals(expectedValues.length, result.getDuration(), 0.0001);
 
@@ -299,12 +306,14 @@ public class ArithmeticOperationsTest {
 
         Complex[] expectedValues = new Complex[11];
         Arrays.fill(expectedValues, Complex.ZERO);
+        expectedValues[0] = values1[0];
         for (int i = 1; i < 11; i++) {
             try {
                 expectedValues[i] = signal2.getValues()[i - 1].subtract(signal1.getValues()[i]);
             } catch (ArrayIndexOutOfBoundsException ex) {
             }
         }
+        expectedValues[10] = values2[9];
 
         assertArrayEquals(expectedValues, result.getValues());
         assertEquals(result.getDuration(), 11, 0.0001);
@@ -316,8 +325,7 @@ public class ArithmeticOperationsTest {
         DerivedSignal signal2 = new DerivedSignal(Arrays.copyOf(values2, 8), 1, 1, 0);
         DerivedSignal result = AmplitudeCalculator.subSignals(signal1, signal2);
 
-        Complex[] expectedValues = new Complex[10];
-        Arrays.fill(expectedValues, Complex.ZERO);
+        Complex[] expectedValues = Arrays.copyOf(values1, 10);
         for (int i = 1; i < 11; i++) {
             try {
                 expectedValues[i] = signal1.getValues()[i].subtract(signal2.getValues()[i - 1]);
@@ -337,12 +345,14 @@ public class ArithmeticOperationsTest {
 
         Complex[] expectedValues = new Complex[10];
         Arrays.fill(expectedValues, Complex.ZERO);
+        expectedValues[0] = values1[0];
         for (int i = 1; i < 11; i++) {
             try {
-                expectedValues[i] = signal2.getValues()[i - 1].subtract(signal1.getValues()[i]);
+                expectedValues[i] = values2[i - 1].subtract(values1[i]);
             } catch (ArrayIndexOutOfBoundsException ex) {
             }
         }
+        expectedValues[9] = values1[9];
 
         assertArrayEquals(expectedValues, result.getValues());
     }
@@ -374,8 +384,7 @@ public class ArithmeticOperationsTest {
         DerivedSignal signal2 = new DerivedSignal(Arrays.copyOf(values2, 8), 1, 0, 0);
         DerivedSignal result = AmplitudeCalculator.multiplySignals(signal1, signal2);
 
-        Complex[] expectedValues = new Complex[10];
-        Arrays.fill(expectedValues, Complex.ZERO);
+        Complex[] expectedValues = Arrays.copyOf(values1, 10);
         for (int i = 0; i < 10; i++) {
             try {
                 expectedValues[i] = signal1.getValues()[i].multiply(signal2.getValues()[i]);
@@ -393,7 +402,7 @@ public class ArithmeticOperationsTest {
         DerivedSignal result = AmplitudeCalculator.multiplySignals(signal2, signal1);
 
         Complex[] expectedValues = Arrays.copyOf(values1, 10);
-        
+
         for (int i = 0; i < 10; i++) {
             try {
                 expectedValues[i] = signal1.getValues()[i].multiply(signal2.getValues()[i]);
@@ -414,12 +423,14 @@ public class ArithmeticOperationsTest {
 
         Complex[] expectedValues = new Complex[11];
         Arrays.fill(expectedValues, Complex.ZERO);
+        expectedValues[0] = values1[0];
         for (int i = 1; i < 11; i++) {
             try {
-                expectedValues[i] = signal1.getValues()[i].multiply(signal2.getValues()[i - 1]);
+                expectedValues[i] = signal2.getValues()[i - 1].multiply(signal1.getValues()[i]);
             } catch (ArrayIndexOutOfBoundsException ex) {
             }
         }
+        expectedValues[10] = values2[9];
         assertArrayEquals(expectedValues, result.getValues());
         assertEquals(expectedValues.length, result.getDuration(), 0.0001);
 
@@ -433,12 +444,14 @@ public class ArithmeticOperationsTest {
 
         Complex[] expectedValues = new Complex[11];
         Arrays.fill(expectedValues, Complex.ZERO);
+        expectedValues[0] = values1[0];
         for (int i = 1; i < 11; i++) {
             try {
-                expectedValues[i] = signal1.getValues()[i].multiply(signal2.getValues()[i - 1]);
+                expectedValues[i] = signal2.getValues()[i - 1].multiply(signal1.getValues()[i]);
             } catch (ArrayIndexOutOfBoundsException ex) {
             }
         }
+        expectedValues[10] = values2[9];
 
         assertArrayEquals(expectedValues, result.getValues());
         assertEquals(result.getDuration(), 11, 0.0001);
@@ -450,8 +463,7 @@ public class ArithmeticOperationsTest {
         DerivedSignal signal2 = new DerivedSignal(Arrays.copyOf(values2, 8), 1, 1, 0);
         DerivedSignal result = AmplitudeCalculator.multiplySignals(signal1, signal2);
 
-        Complex[] expectedValues = new Complex[10];
-        Arrays.fill(expectedValues, Complex.ZERO);
+        Complex[] expectedValues = Arrays.copyOf(values1, 10);;
         for (int i = 1; i < 11; i++) {
             try {
                 expectedValues[i] = signal1.getValues()[i].multiply(signal2.getValues()[i - 1]);
@@ -471,12 +483,14 @@ public class ArithmeticOperationsTest {
 
         Complex[] expectedValues = new Complex[10];
         Arrays.fill(expectedValues, Complex.ZERO);
+        expectedValues[0] = values1[0];
         for (int i = 1; i < 11; i++) {
             try {
-                expectedValues[i] = signal1.getValues()[i].multiply(signal2.getValues()[i - 1]);
+                expectedValues[i] = values1[i].multiply(values2[i - 1]);
             } catch (ArrayIndexOutOfBoundsException ex) {
             }
         }
+        expectedValues[9] = values1[9];
 
         assertArrayEquals(expectedValues, result.getValues());
     }
@@ -488,7 +502,7 @@ public class ArithmeticOperationsTest {
         DerivedSignal result = AmplitudeCalculator.divideSignals(signal1, signal2);
 
         Complex[] expectedValues = Arrays.copyOf(values1, 10);
-        
+
         for (int i = 0; i < 10; i++) {
             try {
                 expectedValues[i] = signal1.getValues()[i].divide(signal2.getValues()[i]);
@@ -500,13 +514,12 @@ public class ArithmeticOperationsTest {
     }
 
     @Test
-    public void dTest_FirstShorter() throws NotSameSamplinRateExpcetion, DivideByZeroValueExcpetion {
+    public void divTest_FirstShorter() throws NotSameSamplinRateExpcetion, DivideByZeroValueExcpetion {
         DerivedSignal signal1 = new DerivedSignal(values1, 1, 0, 0);
         DerivedSignal signal2 = new DerivedSignal(Arrays.copyOf(values2, 8), 1, 0, 0);
         DerivedSignal result = AmplitudeCalculator.divideSignals(signal2, signal1);
 
-        Complex[] expectedValues = new Complex[10];
-        Arrays.fill(expectedValues, Complex.ZERO);
+        Complex[] expectedValues = Arrays.copyOf(values1, 10);
         for (int i = 0; i < 10; i++) {
             try {
                 expectedValues[i] = signal2.getValues()[i].divide(signal1.getValues()[i]);
@@ -527,12 +540,15 @@ public class ArithmeticOperationsTest {
 
         Complex[] expectedValues = new Complex[11];
         Arrays.fill(expectedValues, Complex.ZERO);
+        expectedValues[0] = values1[0];
         for (int i = 1; i < 11; i++) {
             try {
-                expectedValues[i] = signal1.getValues()[i].divide(signal2.getValues()[i - 1]);
+                expectedValues[i] = values1[i].divide(values2[i - 1]);
             } catch (ArrayIndexOutOfBoundsException ex) {
             }
         }
+        expectedValues[10] = values2[9];
+
         assertArrayEquals(expectedValues, result.getValues());
         assertEquals(expectedValues.length, result.getDuration(), 0.0001);
 
@@ -546,12 +562,14 @@ public class ArithmeticOperationsTest {
 
         Complex[] expectedValues = new Complex[11];
         Arrays.fill(expectedValues, Complex.ZERO);
+        expectedValues[0] = values1[0];
         for (int i = 1; i < 11; i++) {
             try {
                 expectedValues[i] = signal2.getValues()[i - 1].divide(signal1.getValues()[i]);
             } catch (ArrayIndexOutOfBoundsException ex) {
             }
         }
+        expectedValues[10] = values2[9];
 
         assertArrayEquals(expectedValues, result.getValues());
         assertEquals(result.getDuration(), 11, 0.0001);
@@ -563,8 +581,7 @@ public class ArithmeticOperationsTest {
         DerivedSignal signal2 = new DerivedSignal(Arrays.copyOf(values2, 8), 1, 1, 0);
         DerivedSignal result = AmplitudeCalculator.divideSignals(signal1, signal2);
 
-        Complex[] expectedValues = new Complex[10];
-        Arrays.fill(expectedValues, Complex.ZERO);
+        Complex[] expectedValues = Arrays.copyOf(values1, 10);
         for (int i = 1; i < 11; i++) {
             try {
                 expectedValues[i] = signal1.getValues()[i].divide(signal2.getValues()[i - 1]);
@@ -584,12 +601,14 @@ public class ArithmeticOperationsTest {
 
         Complex[] expectedValues = new Complex[10];
         Arrays.fill(expectedValues, Complex.ZERO);
+        expectedValues[0] = values1[0];
         for (int i = 1; i < 11; i++) {
             try {
-                expectedValues[i] = signal2.getValues()[i - 1].divide(signal1.getValues()[i]);
+                expectedValues[i] = values2[i - 1].divide(values1[i]);
             } catch (ArrayIndexOutOfBoundsException ex) {
             }
         }
+        expectedValues[9] = values1[9];
 
         assertArrayEquals(expectedValues, result.getValues());
     }
@@ -599,7 +618,7 @@ public class ArithmeticOperationsTest {
         DerivedSignal signal1 = new DerivedSignal(values1, 1, 0, 0);
         Complex[] val = new Complex[10];
         Arrays.fill(val, Complex.ZERO);
-        
+
         DerivedSignal signal2 = new DerivedSignal(val, 1, 0, 0);
         AmplitudeCalculator.divideSignals(signal1, signal2);
     }
