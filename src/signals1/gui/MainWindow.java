@@ -210,7 +210,12 @@ public class MainWindow extends javax.swing.JFrame {
 
         jTextSamplingRate.setFont(new java.awt.Font("Tahoma", 0, 12)); // NOI18N
         jTextSamplingRate.setHorizontalAlignment(javax.swing.JTextField.CENTER);
-        jTextSamplingRate.setText("300");
+        jTextSamplingRate.setText("8048");
+        jTextSamplingRate.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jTextSamplingRateActionPerformed(evt);
+            }
+        });
 
         jButtonSampling.setFont(new java.awt.Font("Lucida Sans", 1, 14)); // NOI18N
         jButtonSampling.setText("Próbkuj sygnał");
@@ -594,6 +599,10 @@ public class MainWindow extends javax.swing.JFrame {
         fileDialog.setAction(evt.getActionCommand());
         fileDialog.setVisible(true);
     }//GEN-LAST:event_loadSignalActionPerformed
+
+    private void jTextSamplingRateActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jTextSamplingRateActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_jTextSamplingRateActionPerformed
 
     private void initInputForms() {
         sineInputPanel = new SineInputPanel(inputFormDimension);

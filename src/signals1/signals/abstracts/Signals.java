@@ -15,7 +15,7 @@ import org.apache.commons.math3.complex.Complex;
 public abstract class Signals {
 
     private final int id;
-    protected final int samplesPerSecond = 1_048_5;//76;
+    protected final int samplesPerSecond = 1_048_576;
     static AtomicInteger nextId = new AtomicInteger();
     protected double amplitude;
     protected double duration;
