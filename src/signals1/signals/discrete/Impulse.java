@@ -49,7 +49,7 @@ public class Impulse extends DiscreteSignal implements Serializable, ImpulseInte
 
     @Override
     public double getStartTime() {
-        return (1 - ns);
+        return (1-ns)/samplingRate;
     }
 
     @Override
