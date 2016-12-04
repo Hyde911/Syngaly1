@@ -7,7 +7,7 @@ package signals1.gui;
 
 import java.awt.BorderLayout;
 import java.text.DecimalFormat;
-import signals1.signals.discrete.DiscreteSignal;
+import signals1.discreteSignals.abstracts.DiscreteSignal;
 import signals1.stats.SignalStats;
 
 /**

@@ -3,10 +3,10 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package signals1.signals;
+package signals1.continuousSignals;
 
 import org.apache.commons.math3.complex.Complex;
-import signals1.signals.abstracts.SineLikeSignals;
+import signals1.continuousSignals.abstracts.SineLikeSignals;
 
 /**
  *
@@ -24,7 +24,7 @@ public class SinesHalfWafeSingal extends SineLikeSignals {
         this.result = new Complex[numberOfSamples];
         for (int i = 0; i < numberOfSamples; i++) {
             double tmp = ((2 * Math.PI) / samplesPerPeriod) * i;
-            double res = 0.5 * amplitude * (Math.sin(tmp) + Math.abs(Math.sin(tmp)));
+            double res = 0.5 * (Math.sin(tmp) + Math.abs(Math.sin(tmp)));
             this.result[i] = new Complex(res, 0);
         }
     }

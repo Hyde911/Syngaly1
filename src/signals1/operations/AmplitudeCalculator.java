@@ -5,8 +5,8 @@
  */
 package signals1.operations;
 
-import signals1.signals.discrete.DerivedSignal;
-import signals1.signals.discrete.DiscreteSignal;
+import signals1.discreteSignals.DerivedSignal;
+import signals1.discreteSignals.abstracts.DiscreteSignal;
 import signals1.tools.exceptions.DivideByZeroValueExcpetion;
 import signals1.tools.exceptions.NotSameSamplinRateExpcetion;
 

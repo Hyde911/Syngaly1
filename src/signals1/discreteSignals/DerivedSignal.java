@@ -3,8 +3,9 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package signals1.signals.discrete;
+package signals1.discreteSignals;
 
+import signals1.discreteSignals.abstracts.DiscreteSignal;
 import java.io.Serializable;
 import org.apache.commons.math3.complex.Complex;
 import signals1.stats.Histogram;

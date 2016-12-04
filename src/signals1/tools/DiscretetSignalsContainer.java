@@ -6,7 +6,7 @@
 package signals1.tools;
 
 import java.util.ArrayList;
-import signals1.signals.discrete.DiscreteSignal;
+import signals1.discreteSignals.abstracts.DiscreteSignal;
 
 /**
  *

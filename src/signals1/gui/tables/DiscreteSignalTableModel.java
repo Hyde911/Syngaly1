@@ -8,8 +8,8 @@ package signals1.gui.tables;
 import javax.swing.event.TableModelEvent;
 import javax.swing.event.TableModelListener;
 import javax.swing.table.DefaultTableModel;
-import signals1.signals.discrete.DiscreteSignal;
-import signals1.signals.discrete.PeriodicDiscreteSignal;
+import signals1.discreteSignals.abstracts.DiscreteSignal;
+import signals1.discreteSignals.PeriodicDiscreteSignal;
 import signals1.tools.DiscretetSignalsContainer;
 
 /**

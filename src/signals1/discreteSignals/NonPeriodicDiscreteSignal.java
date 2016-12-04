@@ -3,25 +3,29 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package signals1.signals.discrete;
+package signals1.discreteSignals;
 
+import signals1.discreteSignals.abstracts.DiscreteSignal;
 import java.io.Serializable;
 import org.apache.commons.math3.complex.Complex;
-import signals1.signals.abstracts.NonPeriodicSignals;
-import signals1.signals.abstracts.Signals;
+import signals1.continuousSignals.abstracts.NonPeriodicSignals;
+import signals1.continuousSignals.abstracts.Signals;
 import signals1.stats.Histogram;
 import signals1.stats.HistogramCalculator;
 import signals1.stats.SignalStats;
 import signals1.stats.StatsCalculator;
+import signals1.tools.quantisation.Quantizer;
 
 /**
  *
  * @author marr
  */
 public class NonPeriodicDiscreteSignal extends DiscreteSignal implements Serializable {
-
-    public NonPeriodicDiscreteSignal(NonPeriodicSignals noiseSignal, int samplingRate) {
+    private Quantizer quantizer;
+    
+    public NonPeriodicDiscreteSignal(NonPeriodicSignals noiseSignal, int samplingRate, Quantizer quantizer) {
         super();
+        this.quantizer = quantizer;
         this.samplingRate = samplingRate;
         this.startTime = noiseSignal.getStartTime();
         this.fullName = noiseSignal.getFullName();
@@ -64,8 +68,9 @@ public class NonPeriodicDiscreteSignal extends DiscreteSignal implements Seriali
     private void getSamples(Signals signal) {
         values = new Complex[(int) (samplingRate * signal.getDuration())];
         double factor = signal.getNumberOfSamples() / (1.0 * values.length);
+        Complex[]orValues =  signal.getSignal();
         for (int i = 0; i < values.length; i++) {
-            values[i] = signal.getSignal()[(int) (i * factor)];
+            values[i] = quantizer.quantizeSample(orValues[(int) (i * factor)], amplitude);
         }
     }
 

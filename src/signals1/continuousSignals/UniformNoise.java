@@ -3,11 +3,11 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package signals1.signals;
+package signals1.continuousSignals;
 
 import java.util.Random;
 import org.apache.commons.math3.complex.Complex;
-import signals1.signals.abstracts.NonPeriodicSignals;
+import signals1.continuousSignals.abstracts.NonPeriodicSignals;
 
 /**
  *
@@ -26,7 +26,7 @@ public class UniformNoise extends NonPeriodicSignals {
         Random rand = new Random();
         this.result = new Complex[numberOfSamples];
         for (int i = 0; i < numberOfSamples; i++) {
-            this.result[i] = new Complex(rand.nextDouble() * amplitude, 0);
+            this.result[i] = new Complex(rand.nextDouble(), 0);
         }
     }
 }

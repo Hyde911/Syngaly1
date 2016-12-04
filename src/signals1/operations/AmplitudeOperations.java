@@ -8,13 +8,13 @@ package signals1.operations;
 import java.util.Arrays;
 import org.apache.commons.math3.complex.Complex;
 import signals1.operations.arithmetic.Addition;
-import signals1.signals.discrete.DerivedSignal;
-import signals1.signals.discrete.DiscreteSignal;
+import signals1.discreteSignals.DerivedSignal;
+import signals1.discreteSignals.abstracts.DiscreteSignal;
 import signals1.operations.arithmetic.ArithmeticOperator;
 import signals1.operations.arithmetic.Division;
 import signals1.operations.arithmetic.Multiplication;
 import signals1.operations.arithmetic.Subtraction;
-import signals1.signals.discrete.ImpulseInterface;
+import signals1.discreteSignals.abstracts.ImpulseInterface;
 import signals1.tools.exceptions.DivideByZeroValueExcpetion;
 import signals1.tools.exceptions.NotSameSamplinRateExpcetion;
 

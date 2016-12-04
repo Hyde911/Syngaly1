@@ -3,10 +3,10 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package signals1.signals;
+package signals1.continuousSignals;
 
 import org.apache.commons.math3.complex.Complex;
-import signals1.signals.abstracts.NonPeriodicSignals;
+import signals1.continuousSignals.abstracts.NonPeriodicSignals;
 
 /**
  *
@@ -34,7 +34,7 @@ public class StrokeSignal extends NonPeriodicSignals {
             if (i < (strokeTime - startTime) * this.samplesPerSecond) {
                 result[i] = Complex.ZERO;
             } else {
-                result[i] = new Complex(amplitude);
+                result[i] = new Complex(1);
             }
         }
     }

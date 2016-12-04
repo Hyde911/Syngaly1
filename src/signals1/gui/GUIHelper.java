@@ -9,7 +9,7 @@ import java.io.File;
 import java.lang.reflect.Method;
 import java.util.logging.Level;
 import java.util.logging.Logger;
-import signals1.signals.discrete.DiscreteSignal;
+import signals1.discreteSignals.abstracts.DiscreteSignal;
 import signals1.tools.SignalSerializationHelper;
 
 /**

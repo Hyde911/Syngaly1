@@ -3,10 +3,10 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package signals1.signals;
+package signals1.continuousSignals;
 
 import org.apache.commons.math3.complex.Complex;
-import signals1.signals.abstracts.SquareSignals;
+import signals1.continuousSignals.abstracts.SquareSignals;
 
 /**
  *
@@ -30,9 +30,9 @@ public class SymetricSquareSignal extends SquareSignals {
                 sampleOfPeriod = 0;
             }
             if (sampleOfPeriod < samplesPerPeriod * fillFactor * 0.01) {
-                this.result[i] = new Complex(amplitude, 0);
+                this.result[i] = new Complex(1, 0);
             } else {
-                this.result[i] = new Complex(-amplitude, 0);
+                this.result[i] = new Complex(-1, 0);
             }
             sampleOfPeriod++;
         }

@@ -7,10 +7,10 @@ package signals1.gui.inputForms;
 
 import java.awt.Dimension;
 import javax.swing.JOptionPane;
-import signals1.signals.GaussianNoise;
-import signals1.signals.StrokeSignal;
-import signals1.signals.UniformNoise;
-import signals1.signals.abstracts.NonPeriodicSignals;
+import signals1.continuousSignals.GaussianNoise;
+import signals1.continuousSignals.StrokeSignal;
+import signals1.continuousSignals.UniformNoise;
+import signals1.continuousSignals.abstracts.NonPeriodicSignals;
 
 
 /**

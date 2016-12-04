@@ -16,9 +16,9 @@ import org.jfree.chart.axis.NumberAxis;
 import org.jfree.chart.axis.NumberTickUnit;
 import org.jfree.data.xy.XYSeries;
 import org.jfree.data.xy.XYSeriesCollection;
-import signals1.signals.discrete.DerivedSignal;
-import signals1.signals.discrete.ImpulseInterface;
-import signals1.signals.discrete.DiscreteSignal;
+import signals1.discreteSignals.DerivedSignal;
+import signals1.discreteSignals.abstracts.ImpulseInterface;
+import signals1.discreteSignals.abstracts.DiscreteSignal;
 
 /**
  *

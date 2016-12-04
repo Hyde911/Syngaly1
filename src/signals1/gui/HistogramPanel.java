@@ -26,6 +26,9 @@ public class HistogramPanel extends javax.swing.JPanel {
      */
     public HistogramPanel(Histogram histogram, int intervals) {
         initComponents();
+        if (histogram.getImgHistogram().length == 1){
+            return;
+        }
         JFreeChart realHistogram = buildHistogram("składowa rzeczywista", "", "", histogram.getRealHistogram(), intervals, HistogramType.FREQUENCY);
         ChartPanel realChartPanel = new ChartPanel(realHistogram);
         realChartPanel.setPreferredSize(new Dimension(570, 680));

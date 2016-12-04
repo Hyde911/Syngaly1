@@ -8,9 +8,9 @@ package signals1.gui.tables;
 import javax.swing.event.TableModelEvent;
 import javax.swing.event.TableModelListener;
 import javax.swing.table.DefaultTableModel;
-import signals1.signals.abstracts.PeriodicSignals;
-import signals1.signals.abstracts.Signals;
-import signals1.signals.abstracts.SquareSignals;
+import signals1.continuousSignals.abstracts.PeriodicSignals;
+import signals1.continuousSignals.abstracts.Signals;
+import signals1.continuousSignals.abstracts.SquareSignals;
 import signals1.tools.SignalContainer;
 
 /**

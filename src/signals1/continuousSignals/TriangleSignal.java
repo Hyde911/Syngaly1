@@ -3,10 +3,10 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package signals1.signals;
+package signals1.continuousSignals;
 
 import org.apache.commons.math3.complex.Complex;
-import signals1.signals.abstracts.SquareSignals;
+import signals1.continuousSignals.abstracts.SquareSignals;
 
 /**
  *
@@ -31,11 +31,10 @@ public class TriangleSignal extends SquareSignals {
             }
             if (sampleOfPeriod < samplesPerPeriod * fillFactor * 0.01) {
                 double tmp = sampleOfPeriod / (samplesPerPeriod * fillFactor * 0.01);
-                tmp = tmp * amplitude;
                 this.result[i] = new Complex(tmp, 0);
             } else {
                 double tmp = (sampleOfPeriod - samplesPerPeriod * fillFactor * 0.01) / (samplesPerPeriod * (100 - fillFactor) * 0.01);
-                tmp = (1 - tmp) * (amplitude);
+                tmp = (1 - tmp);
                 this.result[i] = new Complex(tmp, 0);
             }
             sampleOfPeriod++;

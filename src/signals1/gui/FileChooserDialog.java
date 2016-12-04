@@ -5,7 +5,7 @@
  */
 package signals1.gui;
 
-import signals1.signals.discrete.DiscreteSignal;
+import signals1.discreteSignals.abstracts.DiscreteSignal;
 
 /**
  *

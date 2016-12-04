@@ -3,17 +3,19 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package signals1.signals.discrete;
+package signals1.discreteSignals;
 
+import signals1.discreteSignals.abstracts.DiscreteSignal;
 import java.io.Serializable;
 import java.util.Arrays;
 import org.apache.commons.math3.complex.Complex;
-import signals1.signals.abstracts.PeriodicSignals;
-import signals1.signals.abstracts.Signals;
+import signals1.continuousSignals.abstracts.PeriodicSignals;
+import signals1.continuousSignals.abstracts.Signals;
 import signals1.stats.Histogram;
 import signals1.stats.HistogramCalculator;
 import signals1.stats.SignalStats;
 import signals1.stats.StatsCalculator;
+import signals1.tools.quantisation.Quantizer;
 
 /**
  *
@@ -25,9 +27,11 @@ public class PeriodicDiscreteSignal extends DiscreteSignal implements Serializab
     private int numberOfWholePeriods;
     private int samplesPerPeriod;
     private int numberOfSamples;
+    private Quantizer quantizer;
 
-    public PeriodicDiscreteSignal(PeriodicSignals periodicSignal, int samplingRate) {
+    public PeriodicDiscreteSignal(PeriodicSignals periodicSignal, int samplingRate, Quantizer quantizer) {
         super();
+        this.quantizer = quantizer;
         this.samplingRate = samplingRate;
         this.startTime = periodicSignal.getStartTime();
         this.fullName = periodicSignal.getFullName();
@@ -85,6 +89,9 @@ public class PeriodicDiscreteSignal extends DiscreteSignal implements Serializab
     @Override
     public Histogram getHistogram(int numberOfIntervals) {
         int wholePeriodSamples = samplesPerPeriod * numberOfWholePeriods;
+        if (wholePeriodSamples < 1){
+            return Histogram.NULLHISTOGRAM;
+        }
         Complex[] samplesForStats = Arrays.copyOf(values, wholePeriodSamples);
         HistogramCalculator hisCalc = new HistogramCalculator(samplesForStats);
         return hisCalc.getHistogram(numberOfIntervals);
@@ -93,8 +100,9 @@ public class PeriodicDiscreteSignal extends DiscreteSignal implements Serializab
     private void getSamples(Signals signal) {
         values = new Complex[numberOfSamples];
         double factor = signal.getNumberOfSamples() / (1.0 * values.length);
-        for (int i = 0; i < values.length; i++) {
-            values[i] = signal.getSignal()[(int) (i * factor)];
+        Complex[]orValues =  signal.getSignal();
+        for (int i = 0; i < numberOfSamples; i++) {
+            values[i] = quantizer.quantizeSample(orValues[(int) (i * factor)], amplitude);
         }
     }
 }

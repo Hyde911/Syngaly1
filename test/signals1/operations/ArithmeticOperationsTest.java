@@ -13,7 +13,7 @@ import org.junit.Before;
 import org.junit.BeforeClass;
 import org.junit.Test;
 import static org.junit.Assert.*;
-import signals1.signals.discrete.DerivedSignal;
+import signals1.discreteSignals.DerivedSignal;
 import signals1.tools.exceptions.DivideByZeroValueExcpetion;
 import signals1.tools.exceptions.NotSameSamplinRateExpcetion;
 

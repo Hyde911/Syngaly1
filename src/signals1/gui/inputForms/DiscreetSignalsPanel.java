@@ -7,9 +7,9 @@ package signals1.gui.inputForms;
 
 import java.awt.Dimension;
 import javax.swing.JOptionPane;
-import signals1.signals.discrete.Impulse;
-import signals1.signals.discrete.ImpulseNoise;
-import signals1.signals.discrete.DiscreteSignal;
+import signals1.discreteSignals.Impulse;
+import signals1.discreteSignals.ImpulseNoise;
+import signals1.discreteSignals.abstracts.DiscreteSignal;
 
 /**
  *

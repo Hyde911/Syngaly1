@@ -3,7 +3,7 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package signals1.signals.abstracts;
+package signals1.continuousSignals.abstracts;
 
 import org.apache.commons.math3.complex.Complex;
 

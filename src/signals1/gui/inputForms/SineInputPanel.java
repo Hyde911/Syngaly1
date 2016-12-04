@@ -7,10 +7,10 @@ package signals1.gui.inputForms;
 
 import java.awt.Dimension;
 import javax.swing.JOptionPane;
-import signals1.signals.SineModSingal;
-import signals1.signals.SineSignal;
-import signals1.signals.SinesHalfWafeSingal;
-import signals1.signals.abstracts.SineLikeSignals;
+import signals1.continuousSignals.SineModSingal;
+import signals1.continuousSignals.SineSignal;
+import signals1.continuousSignals.SinesHalfWafeSingal;
+import signals1.continuousSignals.abstracts.SineLikeSignals;
 
 /**
  *

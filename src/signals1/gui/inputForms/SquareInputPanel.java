@@ -7,10 +7,10 @@ package signals1.gui.inputForms;
 
 import java.awt.Dimension;
 import javax.swing.JOptionPane;
-import signals1.signals.SquareSignal;
-import signals1.signals.SymetricSquareSignal;
-import signals1.signals.TriangleSignal;
-import signals1.signals.abstracts.SquareSignals;
+import signals1.continuousSignals.SquareSignal;
+import signals1.continuousSignals.SymetricSquareSignal;
+import signals1.continuousSignals.TriangleSignal;
+import signals1.continuousSignals.abstracts.SquareSignals;
 
 /**
  *

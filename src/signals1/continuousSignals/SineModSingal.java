@@ -3,10 +3,10 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package signals1.signals;
+package signals1.continuousSignals;
 
 import org.apache.commons.math3.complex.Complex;
-import signals1.signals.abstracts.SineLikeSignals;
+import signals1.continuousSignals.abstracts.SineLikeSignals;
 
 /**
  *
@@ -24,7 +24,7 @@ public class SineModSingal extends SineLikeSignals {
         this.result = new Complex[numberOfSamples];
         for (int i = 0; i < numberOfSamples; i++) {
             double temp = ((2 * Math.PI) / samplesPerPeriod) * (i);
-            this.result[i] = new Complex(Math.abs(amplitude * Math.sin(temp)), 0);
+            this.result[i] = new Complex(Math.abs(Math.sin(temp)), 0);
         }
     }
 }
