@@ -7,6 +7,7 @@ package signals1.app;
 
 
 import signals1.gui.MainWindow;
+import signals1.tools.constatns.QuantizationTables;
 
 /**
  *
