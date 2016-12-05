@@ -8,6 +8,7 @@ package signals1.tools.constatns;
 import signals1.tools.quantisation.MeanQuantizer;
 import signals1.tools.quantisation.NoneQuantizer;
 import signals1.tools.quantisation.Quantizer;
+import signals1.tools.quantisation.RoundDownQuantizer;
 
 /**
  *
@@ -17,10 +18,10 @@ public class Quantizers {
 
     public static Quantizer GetQuantizer(int id, int nubmerOfBits) {
         switch (id) {
-            case 1:
-                return new MeanQuantizer(nubmerOfBits);
             case 2:
                 return new MeanQuantizer(nubmerOfBits);
+            case 1:
+                return new RoundDownQuantizer(nubmerOfBits);
             default:
                 return new NoneQuantizer(nubmerOfBits);
         }

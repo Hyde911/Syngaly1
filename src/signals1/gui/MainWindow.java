@@ -216,7 +216,7 @@ public class MainWindow extends javax.swing.JFrame {
 
         jTextSamplingRate.setFont(new java.awt.Font("Tahoma", 1, 12)); // NOI18N
         jTextSamplingRate.setHorizontalAlignment(javax.swing.JTextField.CENTER);
-        jTextSamplingRate.setText("8048");
+        jTextSamplingRate.setText("1024");
         jTextSamplingRate.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jTextSamplingRateActionPerformed(evt);
@@ -334,8 +334,8 @@ public class MainWindow extends javax.swing.JFrame {
         jLabel8.setText("Liczba bitów kwantyzacji");
 
         jComboQuantBits.setFont(new java.awt.Font("Tahoma", 1, 11)); // NOI18N
-        jComboQuantBits.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "1", "2", "4", "8", "16", "24", " " }));
-        jComboQuantBits.setSelectedIndex(3);
+        jComboQuantBits.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "1", "2", "4", "6", "8", "12", "16", " " }));
+        jComboQuantBits.setSelectedIndex(4);
         jComboQuantBits.setToolTipText("");
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
@@ -518,9 +518,9 @@ public class MainWindow extends javax.swing.JFrame {
             return;
         }
         if (virtualSignal instanceof PeriodicSignals) {
-            disSignalContainer.add(new PeriodicDiscreteSignal((PeriodicSignals) virtualSignal, sampling, Quantizers.GetQuantizer(jComboQType.getSelectedIndex(), jComboQuantBits.getSelectedIndex())));
+            disSignalContainer.add(new PeriodicDiscreteSignal((PeriodicSignals) virtualSignal, sampling, Quantizers.GetQuantizer(jComboQType.getSelectedIndex(),Integer.parseInt((String)jComboQuantBits.getSelectedItem()))));
         } else if (virtualSignal instanceof NonPeriodicSignals) {
-            disSignalContainer.add(new NonPeriodicDiscreteSignal((NonPeriodicSignals) virtualSignal, sampling, Quantizers.GetQuantizer(jComboQType.getSelectedIndex(), jComboQuantBits.getSelectedIndex())));
+            disSignalContainer.add(new NonPeriodicDiscreteSignal((NonPeriodicSignals) virtualSignal, sampling, Quantizers.GetQuantizer(jComboQType.getSelectedIndex(), Integer.parseInt((String)jComboQuantBits.getSelectedItem()))));
         }
         discreteTableModel.fireTableDataChanged();
     }//GEN-LAST:event_jButtonSamplingActionPerformed
