@@ -24,8 +24,6 @@ import signals1.continuousSignals.abstracts.PeriodicSignals;
 import signals1.continuousSignals.abstracts.Signals;
 import signals1.converter.Converters;
 import signals1.converter.D2AConverterService;
-import signals1.converter.FOHConverter;
-import signals1.converter.ZOHConverter;
 import signals1.discreteSignals.abstracts.DiscreteSignal;
 import signals1.discreteSignals.NonPeriodicDiscreteSignal;
 import signals1.discreteSignals.PeriodicDiscreteSignal;
@@ -40,7 +38,7 @@ import signals1.tools.exceptions.NotSameSamplinRateExpcetion;
  * @author marr
  */
 public class MainWindow extends javax.swing.JFrame {
-
+    
     private Dimension inputFormDimension = new Dimension(400, 320);
     private SineInputPanel sineInputPanel;
     private NoiseInputPanel noiseInputPanel;
@@ -57,7 +55,7 @@ public class MainWindow extends javax.swing.JFrame {
      * Creates new form NewJFrame
      */
     public MainWindow() {
-
+        
         initLookAndFeel();
         initComponents();
         initInputForms();
@@ -72,7 +70,7 @@ public class MainWindow extends javax.swing.JFrame {
         });
         instance = this;
     }
-
+    
     public static MainWindow getInstance() {
         return instance;
     }
@@ -123,6 +121,7 @@ public class MainWindow extends javax.swing.JFrame {
         jButtonSampling1 = new javax.swing.JButton();
         jLabel9 = new javax.swing.JLabel();
         jComboConvType1 = new javax.swing.JComboBox<>();
+        jButtonCompare = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setTitle("Sygnały");
@@ -365,6 +364,15 @@ public class MainWindow extends javax.swing.JFrame {
             }
         });
 
+        jButtonCompare.setFont(new java.awt.Font("Dialog", 0, 14)); // NOI18N
+        jButtonCompare.setText("Porównaj sygnały");
+        jButtonCompare.setActionCommand("loadSignal");
+        jButtonCompare.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButtonCompareActionPerformed(evt);
+            }
+        });
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
@@ -447,7 +455,8 @@ public class MainWindow extends javax.swing.JFrame {
                                 .addGap(18, 18, 18)
                                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                                     .addComponent(saveSignal, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                                    .addComponent(loadSignal, javax.swing.GroupLayout.PREFERRED_SIZE, 163, javax.swing.GroupLayout.PREFERRED_SIZE))))
+                                    .addComponent(loadSignal, javax.swing.GroupLayout.PREFERRED_SIZE, 163, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                    .addComponent(jButtonCompare, javax.swing.GroupLayout.PREFERRED_SIZE, 163, javax.swing.GroupLayout.PREFERRED_SIZE))))
                         .addGap(33, 33, 33))))
         );
         layout.setVerticalGroup(
@@ -487,18 +496,6 @@ public class MainWindow extends javax.swing.JFrame {
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
                             .addGroup(layout.createSequentialGroup()
                                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                                    .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                                        .addComponent(saveSignal, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                                        .addComponent(jButtonAddSignals, javax.swing.GroupLayout.PREFERRED_SIZE, 49, javax.swing.GroupLayout.PREFERRED_SIZE))
-                                    .addComponent(jLabel6, javax.swing.GroupLayout.PREFERRED_SIZE, 32, javax.swing.GroupLayout.PREFERRED_SIZE))
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                                    .addComponent(loadSignal, javax.swing.GroupLayout.DEFAULT_SIZE, 70, Short.MAX_VALUE)
-                                    .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                                        .addComponent(jButtonSubtractSignals, javax.swing.GroupLayout.PREFERRED_SIZE, 49, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                        .addComponent(jLabel8, javax.swing.GroupLayout.PREFERRED_SIZE, 32, javax.swing.GroupLayout.PREFERRED_SIZE))))
-                            .addGroup(layout.createSequentialGroup()
-                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
                                     .addComponent(jLabel9, javax.swing.GroupLayout.PREFERRED_SIZE, 32, javax.swing.GroupLayout.PREFERRED_SIZE)
                                     .addGroup(layout.createSequentialGroup()
                                         .addComponent(jComboConvType1, javax.swing.GroupLayout.PREFERRED_SIZE, 33, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -515,14 +512,28 @@ public class MainWindow extends javax.swing.JFrame {
                                     .addGroup(layout.createSequentialGroup()
                                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                                         .addComponent(jButtonSampling1, javax.swing.GroupLayout.PREFERRED_SIZE, 31, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                                .addGap(22, 22, 22)))
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                        .addComponent(jButtonMultiplySignals, javax.swing.GroupLayout.PREFERRED_SIZE, 49, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                            .addComponent(jButtonDvideSignals, javax.swing.GroupLayout.PREFERRED_SIZE, 49, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(jButtonShowSignal, javax.swing.GroupLayout.PREFERRED_SIZE, 38, javax.swing.GroupLayout.PREFERRED_SIZE))
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                                .addGap(98, 98, 98)
+                                .addComponent(jButtonShowSignal, javax.swing.GroupLayout.PREFERRED_SIZE, 38, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED))
+                            .addGroup(layout.createSequentialGroup()
+                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                                    .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                                        .addComponent(saveSignal, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                        .addComponent(jButtonAddSignals, javax.swing.GroupLayout.PREFERRED_SIZE, 49, javax.swing.GroupLayout.PREFERRED_SIZE))
+                                    .addComponent(jLabel6, javax.swing.GroupLayout.PREFERRED_SIZE, 32, javax.swing.GroupLayout.PREFERRED_SIZE))
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                                    .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                                        .addComponent(jButtonSubtractSignals, javax.swing.GroupLayout.PREFERRED_SIZE, 49, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                        .addComponent(jLabel8, javax.swing.GroupLayout.PREFERRED_SIZE, 32, javax.swing.GroupLayout.PREFERRED_SIZE))
+                                    .addComponent(loadSignal, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                                .addComponent(jButtonMultiplySignals, javax.swing.GroupLayout.PREFERRED_SIZE, 49, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                    .addComponent(jButtonDvideSignals, javax.swing.GroupLayout.PREFERRED_SIZE, 49, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                    .addComponent(jButtonCompare, javax.swing.GroupLayout.PREFERRED_SIZE, 49, javax.swing.GroupLayout.PREFERRED_SIZE))
+                                .addGap(34, 34, 34)))
                         .addComponent(jCheckBoxOperationOrder))
                     .addGroup(layout.createSequentialGroup()
                         .addGap(143, 143, 143)
@@ -572,9 +583,9 @@ public class MainWindow extends javax.swing.JFrame {
             return;
         }
         if (virtualSignal instanceof PeriodicSignals) {
-            disSignalContainer.add(new PeriodicDiscreteSignal((PeriodicSignals) virtualSignal, sampling, Quantizers.getQuantizer(jComboQType.getSelectedIndex(),Integer.parseInt((String)jComboQuantBits.getSelectedItem()))));
+            disSignalContainer.add(new PeriodicDiscreteSignal((PeriodicSignals) virtualSignal, sampling, Quantizers.getQuantizer(jComboQType.getSelectedIndex(), Integer.parseInt((String) jComboQuantBits.getSelectedItem()))));
         } else if (virtualSignal instanceof NonPeriodicSignals) {
-            disSignalContainer.add(new NonPeriodicDiscreteSignal((NonPeriodicSignals) virtualSignal, sampling, Quantizers.getQuantizer(jComboQType.getSelectedIndex(), Integer.parseInt((String)jComboQuantBits.getSelectedItem()))));
+            disSignalContainer.add(new NonPeriodicDiscreteSignal((NonPeriodicSignals) virtualSignal, sampling, Quantizers.getQuantizer(jComboQType.getSelectedIndex(), Integer.parseInt((String) jComboQuantBits.getSelectedItem()))));
         }
         discreteTableModel.fireTableDataChanged();
     }//GEN-LAST:event_jButtonSamplingActionPerformed
@@ -584,12 +595,12 @@ public class MainWindow extends javax.swing.JFrame {
         if (selectedDiscreteSignal < 0) {
             return;
         }
-
+        
         DiscreteSignal signal = disSignalContainer.getById(getIdFromDiscreteTable(selectedDiscreteSignal));
         if (signal == null) {
             return;
         }
-
+        
         AmplitudePanel amPanel = new AmplitudePanel(signal, false);
         AmplitudePanel modAndShiftPanel = new AmplitudePanel(signal, true);
         HistogramPanel hisPanel = new HistogramPanel(signal.getHistogram(jSliderHistNo.getValue()), jSliderHistNo.getValue());
@@ -706,21 +717,39 @@ public class MainWindow extends javax.swing.JFrame {
         
         int sampling = Integer.parseInt(jTextSamplingRate.getText());
         
-        D2AConverterService service = new D2AConverterService( new Converters((Converters.Types) jComboConvType1.getSelectedItem()).getConverter(), signal, sampling);
+        D2AConverterService service = new D2AConverterService(new Converters((Converters.Types) jComboConvType1.getSelectedItem()).getConverter(), signal, sampling);
         addDiscreteSignal(service.getOutput());
-       
+
     }//GEN-LAST:event_jButtonSampling1ActionPerformed
 
     private void jComboConvType1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jComboConvType1ActionPerformed
         // TODO add your handling code here:
     }//GEN-LAST:event_jComboConvType1ActionPerformed
 
+    private void jButtonCompareActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonCompareActionPerformed
+        if (jTableDiscrete.getSelectedRowCount() != 2) {
+            return;
+        }
+        int[] signals = new int[2];
+        if (jCheckBoxOperationOrder.isSelected()) {
+            signals[0] = getIdFromDiscreteTable(jTableDiscrete.getSelectedRows()[0]);
+            signals[1] = getIdFromDiscreteTable(jTableDiscrete.getSelectedRows()[1]);
+        } else {
+            signals[1] = getIdFromDiscreteTable(jTableDiscrete.getSelectedRows()[0]);
+            signals[0] = getIdFromDiscreteTable(jTableDiscrete.getSelectedRows()[1]);
+            
+        }
+        CompareDialog compare = new CompareDialog(signals[0], signals[1]);
+        compare.setVisible(true);
+        
+    }//GEN-LAST:event_jButtonCompareActionPerformed
+    
     private void initInputForms() {
         sineInputPanel = new SineInputPanel(inputFormDimension);
         noiseInputPanel = new NoiseInputPanel(inputFormDimension);
         squareInputPanel = new SquareInputPanel(inputFormDimension);
         discreetPanel = new DiscreetSignalsPanel(inputFormDimension);
-
+        
         jPanelSineSignals.setLayout(new java.awt.BorderLayout());
         jPanelSineSignals.add(sineInputPanel, BorderLayout.CENTER);
         jPanelNoiseSignals.setLayout(new java.awt.BorderLayout());
@@ -729,13 +758,13 @@ public class MainWindow extends javax.swing.JFrame {
         jPanelSquareSignals.add(squareInputPanel, BorderLayout.CENTER);
         jPanelDiscreteSignals.setLayout(new java.awt.BorderLayout());
         jPanelDiscreteSignals.add(discreetPanel, BorderLayout.CENTER);
-
+        
         jPanelSineSignals.validate();
         jPanelNoiseSignals.validate();
         jPanelSquareSignals.validate();
         jPanelDiscreteSignals.validate();
     }
-
+    
     private void setUpVirtualTable() {
         jTableVirtual.getColumnModel().getColumn(0).setPreferredWidth(25);
         jTableVirtual.getColumnModel().getColumn(1).setPreferredWidth(175);
@@ -745,7 +774,7 @@ public class MainWindow extends javax.swing.JFrame {
         jTableVirtual.getColumnModel().getColumn(5).setPreferredWidth(60);
         jTableVirtual.getColumnModel().getColumn(5).setPreferredWidth(95);
     }
-
+    
     private void setUpDiscreteTable() {
         jTableDiscrete.getColumnModel().getColumn(0).setPreferredWidth(25);
         jTableDiscrete.getColumnModel().getColumn(1).setPreferredWidth(175);
@@ -754,7 +783,7 @@ public class MainWindow extends javax.swing.JFrame {
         jTableDiscrete.getColumnModel().getColumn(4).setPreferredWidth(60);
         jTableDiscrete.getColumnModel().getColumn(5).setPreferredWidth(60);
     }
-
+    
     private static void initLookAndFeel() {
         String lookAndFeel = null;
         lookAndFeel = UIManager.getSystemLookAndFeelClassName();
@@ -765,20 +794,20 @@ public class MainWindow extends javax.swing.JFrame {
             //TODO :)
         }
     }
-
+    
     private int getIdFromDiscreteTable(int row) {
         return (int) jTableDiscrete.getModel().getValueAt(row, 0);
     }
-
+    
     private int getIdFromVirtualTable(int row) {
         return (int) jTableVirtual.getModel().getValueAt(row, 0);
     }
-
+    
     private DiscreteSignal getSelectedSignal() {
         DiscreteSignal signal = disSignalContainer.getById(getIdFromDiscreteTable(jTableDiscrete.getSelectedRows()[0]));
         return signal;
     }
-
+    
     private DiscreteSignal[] getSignalsForCalculation() {
         if (jTableDiscrete.getSelectedRowCount() != 2) {
             return null;
@@ -790,7 +819,7 @@ public class MainWindow extends javax.swing.JFrame {
         } else {
             signals[1] = disSignalContainer.getById(getIdFromDiscreteTable(jTableDiscrete.getSelectedRows()[0]));
             signals[0] = disSignalContainer.getById(getIdFromDiscreteTable(jTableDiscrete.getSelectedRows()[1]));
-
+            
         }
         return signals;
     }
@@ -799,6 +828,7 @@ public class MainWindow extends javax.swing.JFrame {
     private javax.swing.JButton jButtonAddSignals;
     private javax.swing.JButton jButtonClearDiscreteTable1;
     private javax.swing.JButton jButtonClearVirtualTable;
+    private javax.swing.JButton jButtonCompare;
     private javax.swing.JButton jButtonDvideSignals;
     private javax.swing.JButton jButtonGenerateSignal;
     private javax.swing.JButton jButtonMultiplySignals;
