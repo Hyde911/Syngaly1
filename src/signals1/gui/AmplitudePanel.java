@@ -44,19 +44,25 @@ public class AmplitudePanel extends javax.swing.JPanel {
         ChartPanel imgChart;
 
         if (isModAndPhase) {
-            if (signal instanceof ImpulseInterface || (signal instanceof DerivedSignal && ((DerivedSignal)signal).getType() == ImpulseInterface.class)) {
+            if (signal instanceof ImpulseInterface || (signal instanceof DerivedSignal && ((DerivedSignal) signal).getType() == ImpulseInterface.class)) {
                 realChart = getScatterPlot(signal.getValuesModAndShift(), true, signal.getStartTime(), signal.getSamplingRate(), isModAndPhase);
                 imgChart = getScatterPlot(signal.getValuesModAndShift(), false, signal.getStartTime(), signal.getSamplingRate(), isModAndPhase);
-            } else {
+            } else if (signal instanceof DerivedSignal) {
                 realChart = getChart(signal.getValuesModAndShift(), true, signal.getStartTime(), signal.getSamplingRate(), isModAndPhase);
                 imgChart = getChart(signal.getValuesModAndShift(), false, signal.getStartTime(), signal.getSamplingRate(), isModAndPhase);
+            } else {
+                realChart = getScatterPlot(signal.getValuesModAndShift(), true, signal.getStartTime(), signal.getSamplingRate(), isModAndPhase);
+                imgChart = getScatterPlot(signal.getValuesModAndShift(), false, signal.getStartTime(), signal.getSamplingRate(), isModAndPhase);
             }
-        } else if (signal instanceof ImpulseInterface || (signal instanceof DerivedSignal && ((DerivedSignal)signal).getType() == ImpulseInterface.class)) {
+        } else if (signal instanceof ImpulseInterface || (signal instanceof DerivedSignal && ((DerivedSignal) signal).getType() == ImpulseInterface.class)) {
             realChart = getScatterPlot(signal.getValues(), true, signal.getStartTime(), signal.getSamplingRate(), isModAndPhase);
             imgChart = getScatterPlot(signal.getValues(), false, signal.getStartTime(), signal.getSamplingRate(), isModAndPhase);
+        } else if (signal instanceof DerivedSignal) {
+            realChart = getChart(signal.getValuesModAndShift(), true, signal.getStartTime(), signal.getSamplingRate(), isModAndPhase);
+            imgChart = getChart(signal.getValuesModAndShift(), false, signal.getStartTime(), signal.getSamplingRate(), isModAndPhase);
         } else {
-            realChart = getChart(signal.getValues(), true, signal.getStartTime(), signal.getSamplingRate(), isModAndPhase);
-            imgChart = getChart(signal.getValues(), false, signal.getStartTime(), signal.getSamplingRate(), isModAndPhase);
+            realChart = getScatterPlot(signal.getValues(), true, signal.getStartTime(), signal.getSamplingRate(), isModAndPhase);
+            imgChart = getScatterPlot(signal.getValues(), false, signal.getStartTime(), signal.getSamplingRate(), isModAndPhase);
         }
 
         jPanelReal.setLayout(new java.awt.BorderLayout());

@@ -16,7 +16,7 @@ import signals1.tools.quantisation.RoundDownQuantizer;
  */
 public class Quantizers {
 
-    public static Quantizer GetQuantizer(int id, int nubmerOfBits) {
+    public static Quantizer getQuantizer(int id, int nubmerOfBits) {
         switch (id) {
             case 2:
                 return new MeanQuantizer(nubmerOfBits);
