@@ -51,7 +51,7 @@ public class SINCConverter implements D2AConverter {
             double factor = SINC((newSample - i) * (1.0 * originalSamplingRate / newSamplingRate));
             ret = ret.add(oldVal * factor);
         }
-        return ret;
+        return ret.multiply((1.0 * originalSamplingRate / newSamplingRate));
     }
 
     public static double SINC(double n) {
