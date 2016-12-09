@@ -14,14 +14,24 @@ import signals1.converter.Converters.Types;
 public class Converters {
 
     public enum Types {
-        ZOH,
-        FOH,
-        SINC;
+        ZOH("zero-order hold"),
+        FOH("first-order hold"),
+        SINC("sinus cardinalis");
+        private final String display;
+
+        private Types(String s) {
+            display = s;
+        }
+
+        @Override
+        public String toString() {
+            return display;
+        }
     }
-    
-    Types type; 
-    
-    public Converters(Types type){
+
+    Types type;
+
+    public Converters(Types type) {
         this.type = type;
     }
 
