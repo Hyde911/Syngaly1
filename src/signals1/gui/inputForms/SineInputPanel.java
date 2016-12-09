@@ -106,7 +106,7 @@ public class SineInputPanel extends javax.swing.JPanel {
 
         jTextDuration.setFont(new java.awt.Font("Tahoma", 0, 12)); // NOI18N
         jTextDuration.setHorizontalAlignment(javax.swing.JTextField.CENTER);
-        jTextDuration.setText("10");
+        jTextDuration.setText("1");
         jTextDuration.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jTextDurationActionPerformed(evt);
@@ -132,7 +132,7 @@ public class SineInputPanel extends javax.swing.JPanel {
             .addGroup(layout.createSequentialGroup()
                 .addContainerGap()
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(jComboBox1, 0, 471, Short.MAX_VALUE)
+                    .addComponent(jComboBox1, 0, 419, Short.MAX_VALUE)
                     .addGroup(layout.createSequentialGroup()
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addGroup(layout.createSequentialGroup()
@@ -173,7 +173,7 @@ public class SineInputPanel extends javax.swing.JPanel {
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel5, javax.swing.GroupLayout.PREFERRED_SIZE, 32, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(jTextStartTime, javax.swing.GroupLayout.DEFAULT_SIZE, 32, Short.MAX_VALUE))
-                .addContainerGap(158, Short.MAX_VALUE))
+                .addContainerGap(114, Short.MAX_VALUE))
         );
     }// </editor-fold>//GEN-END:initComponents
 

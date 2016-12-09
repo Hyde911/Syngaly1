@@ -224,7 +224,7 @@ public class MainWindow extends javax.swing.JFrame {
 
         jTextSamplingRate.setFont(new java.awt.Font("Tahoma", 1, 12)); // NOI18N
         jTextSamplingRate.setHorizontalAlignment(javax.swing.JTextField.CENTER);
-        jTextSamplingRate.setText("1024");
+        jTextSamplingRate.setText("128");
         jTextSamplingRate.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jTextSamplingRateActionPerformed(evt);

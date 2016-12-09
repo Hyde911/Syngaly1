@@ -7,13 +7,18 @@ package signals1.gui;
 
 import java.awt.BasicStroke;
 import java.awt.BorderLayout;
+import java.awt.Color;
 import java.awt.Dimension;
+import java.awt.Shape;
+import java.awt.geom.Ellipse2D;
 import org.apache.commons.math3.complex.Complex;
 import org.jfree.chart.ChartFactory;
 import org.jfree.chart.ChartPanel;
 import org.jfree.chart.JFreeChart;
 import org.jfree.chart.axis.NumberAxis;
 import org.jfree.chart.axis.NumberTickUnit;
+import org.jfree.chart.plot.XYPlot;
+import org.jfree.chart.renderer.xy.XYItemRenderer;
 import org.jfree.data.xy.XYSeries;
 import org.jfree.data.xy.XYSeriesCollection;
 import signals1.discreteSignals.DerivedSignal;
@@ -34,6 +39,7 @@ public class AmplitudePanel extends javax.swing.JPanel {
     private static final String CZAS = "czas";
     private final int chartDimensionX = 1150;
     private final int chartDimensionY = 350;
+    private static final Shape circleSmall = new Ellipse2D.Double(2, 2, 2, 2);
 
     /**
      * Creates new form AmplitudePanel
@@ -151,6 +157,10 @@ public class AmplitudePanel extends javax.swing.JPanel {
         }
 
         JFreeChart chart = ChartFactory.createScatterPlot(title, CZAS, AMPLITUDA, createDataset(values, isReal, startTime, title, samplingRate));
+        XYPlot xyPlot = (XYPlot) chart.getPlot();
+        XYItemRenderer renderer = xyPlot.getRenderer();
+        renderer.setSeriesShape(0, circleSmall);
+        renderer.setSeriesPaint(0, Color.RED);
         ChartPanel chartPanel = new ChartPanel(chart);
         chartPanel.setPreferredSize(new Dimension(chartDimensionX, chartDimensionY));
         return chartPanel;
@@ -172,7 +182,7 @@ public class AmplitudePanel extends javax.swing.JPanel {
                 createDataset(values, isReal, startTime, title, samplingRate));
         NumberAxis xAxis = new NumberAxis();
         xAxis.setTickUnit(new NumberTickUnit(1));
-        chart.getXYPlot().getRenderer().setSeriesStroke(0, new BasicStroke(0.6f));
+        chart.getXYPlot().getRenderer().setSeriesStroke(0, new BasicStroke(0.1f));
         ChartPanel chartPanel = new ChartPanel(chart);
         chartPanel.setPreferredSize(new Dimension(chartDimensionX, chartDimensionY));
         return chartPanel;
