@@ -48,7 +48,7 @@ public class SINCConverter implements D2AConverter {
         }
         for (int i = start; i < end; i++) {
             double oldVal = values[(int) (i * (1.0 * originalSamplingRate / newSamplingRate))].getReal();
-            double factor = SINC(newSample - i);
+            double factor = SINC((newSample - i) * (1.0 * originalSamplingRate / newSamplingRate));
             ret = ret.add(oldVal * factor);
         }
         return ret;
