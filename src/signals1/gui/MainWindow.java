@@ -85,10 +85,7 @@ public class MainWindow extends javax.swing.JFrame {
     private void initComponents() {
 
         jPaneTabs = new javax.swing.JTabbedPane();
-        jPanelNoiseSignals = new javax.swing.JPanel();
         jPanelSineSignals = new javax.swing.JPanel();
-        jPanelSquareSignals = new javax.swing.JPanel();
-        jPanelDiscreteSignals = new javax.swing.JPanel();
         jButtonGenerateSignal = new javax.swing.JButton();
         jSliderHistNo = new javax.swing.JSlider();
         jLabel7 = new javax.swing.JLabel();
@@ -130,21 +127,6 @@ public class MainWindow extends javax.swing.JFrame {
         jPaneTabs.setFont(new java.awt.Font("Arial", 0, 12)); // NOI18N
         jPaneTabs.setPreferredSize(new java.awt.Dimension(420, 320));
 
-        jPanelNoiseSignals.setPreferredSize(inputFormDimension);
-
-        javax.swing.GroupLayout jPanelNoiseSignalsLayout = new javax.swing.GroupLayout(jPanelNoiseSignals);
-        jPanelNoiseSignals.setLayout(jPanelNoiseSignalsLayout);
-        jPanelNoiseSignalsLayout.setHorizontalGroup(
-            jPanelNoiseSignalsLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 425, Short.MAX_VALUE)
-        );
-        jPanelNoiseSignalsLayout.setVerticalGroup(
-            jPanelNoiseSignalsLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 291, Short.MAX_VALUE)
-        );
-
-        jPaneTabs.addTab("Szumy", jPanelNoiseSignals);
-
         jPanelSineSignals.setPreferredSize(inputFormDimension);
 
         javax.swing.GroupLayout jPanelSineSignalsLayout = new javax.swing.GroupLayout(jPanelSineSignals);
@@ -155,40 +137,10 @@ public class MainWindow extends javax.swing.JFrame {
         );
         jPanelSineSignalsLayout.setVerticalGroup(
             jPanelSineSignalsLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 291, Short.MAX_VALUE)
+            .addGap(0, 293, Short.MAX_VALUE)
         );
 
-        jPaneTabs.addTab("Sygnały sinusoidalne", jPanelSineSignals);
-
-        jPanelSquareSignals.setPreferredSize(inputFormDimension);
-
-        javax.swing.GroupLayout jPanelSquareSignalsLayout = new javax.swing.GroupLayout(jPanelSquareSignals);
-        jPanelSquareSignals.setLayout(jPanelSquareSignalsLayout);
-        jPanelSquareSignalsLayout.setHorizontalGroup(
-            jPanelSquareSignalsLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 425, Short.MAX_VALUE)
-        );
-        jPanelSquareSignalsLayout.setVerticalGroup(
-            jPanelSquareSignalsLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 291, Short.MAX_VALUE)
-        );
-
-        jPaneTabs.addTab("Sygnały prostokątne", jPanelSquareSignals);
-
-        jPanelDiscreteSignals.setPreferredSize(inputFormDimension);
-
-        javax.swing.GroupLayout jPanelDiscreteSignalsLayout = new javax.swing.GroupLayout(jPanelDiscreteSignals);
-        jPanelDiscreteSignals.setLayout(jPanelDiscreteSignalsLayout);
-        jPanelDiscreteSignalsLayout.setHorizontalGroup(
-            jPanelDiscreteSignalsLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 425, Short.MAX_VALUE)
-        );
-        jPanelDiscreteSignalsLayout.setVerticalGroup(
-            jPanelDiscreteSignalsLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 291, Short.MAX_VALUE)
-        );
-
-        jPaneTabs.addTab("Sygnały dyskretne", jPanelDiscreteSignals);
+        jPaneTabs.addTab("Typ Sygnału", jPanelSineSignals);
 
         jButtonGenerateSignal.setFont(new java.awt.Font("Lucida Sans", 1, 14)); // NOI18N
         jButtonGenerateSignal.setText("Generuj Sygnał Pseudociągły");
@@ -551,21 +503,22 @@ public class MainWindow extends javax.swing.JFrame {
 
     private void jButtonGenerateSignalActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonGenerateSignalActionPerformed
         Signals signal = null;
-        switch (jPaneTabs.getSelectedIndex()) {
-            case 1:
-                signal = sineInputPanel.getSingal();
-                break;
-            case 2:
-                signal = squareInputPanel.getSingal();
-                break;
-            case 3:
-                DiscreteSignal sig = discreetPanel.getSingal();
-                disSignalContainer.add(sig);
-                discreteTableModel.fireTableDataChanged();
-                break;
-            default:
-                signal = noiseInputPanel.getSingal();
-        }
+//        switch (jPaneTabs.getSelectedIndex()) {
+//            case 1:
+//                signal = sineInputPanel.getSingal();
+//                break;
+//            case 2:
+//                signal = squareInputPanel.getSingal();
+//                break;
+//            case 3:
+//                DiscreteSignal sig = discreetPanel.getSingal();
+//                disSignalContainer.add(sig);
+//                discreteTableModel.fireTableDataChanged();
+//                break;
+//            default:
+//                signal = noiseInputPanel.getSingal();
+//        }
+        signal = sineInputPanel.getSingal();
         if (signal != null) {
             signalContainer.add(signal);
             virtulTableModel.fireTableDataChanged();
@@ -752,17 +705,17 @@ public class MainWindow extends javax.swing.JFrame {
         
         jPanelSineSignals.setLayout(new java.awt.BorderLayout());
         jPanelSineSignals.add(sineInputPanel, BorderLayout.CENTER);
-        jPanelNoiseSignals.setLayout(new java.awt.BorderLayout());
-        jPanelNoiseSignals.add(noiseInputPanel, BorderLayout.CENTER);
-        jPanelSquareSignals.setLayout(new java.awt.BorderLayout());
-        jPanelSquareSignals.add(squareInputPanel, BorderLayout.CENTER);
-        jPanelDiscreteSignals.setLayout(new java.awt.BorderLayout());
-        jPanelDiscreteSignals.add(discreetPanel, BorderLayout.CENTER);
+//        jPanelNoiseSignals.setLayout(new java.awt.BorderLayout());
+//        jPanelNoiseSignals.add(noiseInputPanel, BorderLayout.CENTER);
+//        jPanelSquareSignals.setLayout(new java.awt.BorderLayout());
+//        jPanelSquareSignals.add(squareInputPanel, BorderLayout.CENTER);
+//        jPanelDiscreteSignals.setLayout(new java.awt.BorderLayout());
+//        jPanelDiscreteSignals.add(discreetPanel, BorderLayout.CENTER);
         
         jPanelSineSignals.validate();
-        jPanelNoiseSignals.validate();
-        jPanelSquareSignals.validate();
-        jPanelDiscreteSignals.validate();
+//        jPanelNoiseSignals.validate();
+//        jPanelSquareSignals.validate();
+//        jPanelDiscreteSignals.validate();
     }
     
     private void setUpVirtualTable() {
@@ -849,10 +802,7 @@ public class MainWindow extends javax.swing.JFrame {
     private javax.swing.JLabel jLabel8;
     private javax.swing.JLabel jLabel9;
     private javax.swing.JTabbedPane jPaneTabs;
-    private javax.swing.JPanel jPanelDiscreteSignals;
-    private javax.swing.JPanel jPanelNoiseSignals;
     private javax.swing.JPanel jPanelSineSignals;
-    private javax.swing.JPanel jPanelSquareSignals;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JScrollPane jScrollPane2;
     private javax.swing.JSeparator jSeparator1;
