@@ -101,16 +101,9 @@ public class MainWindow extends javax.swing.JFrame {
         jButtonShowSignal = new javax.swing.JButton();
         jSeparator2 = new javax.swing.JSeparator();
         jLabel2 = new javax.swing.JLabel();
-        jLabel3 = new javax.swing.JLabel();
-        jButtonAddSignals = new javax.swing.JButton();
-        jButtonSubtractSignals = new javax.swing.JButton();
-        jButtonMultiplySignals = new javax.swing.JButton();
-        jButtonDvideSignals = new javax.swing.JButton();
         jButtonClearVirtualTable = new javax.swing.JButton();
         jButtonClearDiscreteTable1 = new javax.swing.JButton();
         jCheckBoxOperationOrder = new javax.swing.JCheckBox();
-        saveSignal = new javax.swing.JButton();
-        loadSignal = new javax.swing.JButton();
         jComboQType = new javax.swing.JComboBox<>();
         jLabel6 = new javax.swing.JLabel();
         jLabel8 = new javax.swing.JLabel();
@@ -208,46 +201,6 @@ public class MainWindow extends javax.swing.JFrame {
         jLabel2.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         jLabel2.setText("Próbkowanie Sygnałów");
 
-        jLabel3.setFont(new java.awt.Font("Verdana", 1, 20)); // NOI18N
-        jLabel3.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
-        jLabel3.setText("Operacje na sygnałach");
-
-        jButtonAddSignals.setFont(new java.awt.Font("Arial", 1, 36)); // NOI18N
-        jButtonAddSignals.setText("+");
-        jButtonAddSignals.setPreferredSize(new java.awt.Dimension(60, 60));
-        jButtonAddSignals.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButtonAddSignalsActionPerformed(evt);
-            }
-        });
-
-        jButtonSubtractSignals.setFont(new java.awt.Font("Arial", 1, 36)); // NOI18N
-        jButtonSubtractSignals.setText("-");
-        jButtonSubtractSignals.setPreferredSize(new java.awt.Dimension(60, 60));
-        jButtonSubtractSignals.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButtonSubtractSignalsActionPerformed(evt);
-            }
-        });
-
-        jButtonMultiplySignals.setFont(new java.awt.Font("Arial", 1, 36)); // NOI18N
-        jButtonMultiplySignals.setText("\u00D7");
-        jButtonMultiplySignals.setPreferredSize(new java.awt.Dimension(60, 60));
-        jButtonMultiplySignals.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButtonMultiplySignalsActionPerformed(evt);
-            }
-        });
-
-        jButtonDvideSignals.setFont(new java.awt.Font("Arial", 1, 36)); // NOI18N
-        jButtonDvideSignals.setText("\u00F7");
-        jButtonDvideSignals.setPreferredSize(new java.awt.Dimension(60, 60));
-        jButtonDvideSignals.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButtonDvideSignalsActionPerformed(evt);
-            }
-        });
-
         jButtonClearVirtualTable.setText("Wyczyść");
         jButtonClearVirtualTable.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -264,24 +217,6 @@ public class MainWindow extends javax.swing.JFrame {
 
         jCheckBoxOperationOrder.setFont(new java.awt.Font("Tahoma", 1, 11)); // NOI18N
         jCheckBoxOperationOrder.setText("Odwróć kolejność");
-
-        saveSignal.setFont(new java.awt.Font("Dialog", 0, 18)); // NOI18N
-        saveSignal.setText("Zapisz");
-        saveSignal.setActionCommand("saveSignal");
-        saveSignal.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                saveSignalActionPerformed(evt);
-            }
-        });
-
-        loadSignal.setFont(new java.awt.Font("Dialog", 0, 18)); // NOI18N
-        loadSignal.setText("Odczytaj");
-        loadSignal.setActionCommand("loadSignal");
-        loadSignal.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                loadSignalActionPerformed(evt);
-            }
-        });
 
         jComboQType.setFont(new java.awt.Font("Tahoma", 1, 12)); // NOI18N
         jComboQType.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Brak kwantyzacji", "Kwantyzacja równomierna z obcięciem", "Kwantyzacja równomierna z zaokrąglaniem" }));
@@ -332,60 +267,56 @@ public class MainWindow extends javax.swing.JFrame {
             .addComponent(jSeparator1)
             .addComponent(jSeparator2)
             .addGroup(layout.createSequentialGroup()
-                .addContainerGap()
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(layout.createSequentialGroup()
-                        .addComponent(jPaneTabs, javax.swing.GroupLayout.PREFERRED_SIZE, 430, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addContainerGap()
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addGroup(layout.createSequentialGroup()
-                                .addGap(177, 177, 177)
-                                .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 348, javax.swing.GroupLayout.PREFERRED_SIZE))
-                            .addGroup(layout.createSequentialGroup()
-                                .addGap(18, 18, 18)
+                                .addComponent(jPaneTabs, javax.swing.GroupLayout.PREFERRED_SIZE, 430, javax.swing.GroupLayout.PREFERRED_SIZE)
                                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                    .addComponent(jButtonClearVirtualTable, javax.swing.GroupLayout.PREFERRED_SIZE, 84, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                    .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 695, javax.swing.GroupLayout.PREFERRED_SIZE)))))
-                    .addComponent(jButtonGenerateSignal, javax.swing.GroupLayout.PREFERRED_SIZE, 430, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addContainerGap(218, Short.MAX_VALUE))
-            .addGroup(layout.createSequentialGroup()
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
-                    .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 607, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addGroup(javax.swing.GroupLayout.Alignment.LEADING, layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                        .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                            .addGap(112, 112, 112)
-                            .addComponent(jLabel2, javax.swing.GroupLayout.PREFERRED_SIZE, 348, javax.swing.GroupLayout.PREFERRED_SIZE))
-                        .addGroup(layout.createSequentialGroup()
-                            .addComponent(jLabel5)
-                            .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                            .addComponent(jTextSamplingRate, javax.swing.GroupLayout.PREFERRED_SIZE, 100, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                    .addComponent(jButtonClearDiscreteTable1, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.PREFERRED_SIZE, 84, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addGroup(javax.swing.GroupLayout.Alignment.LEADING, layout.createSequentialGroup()
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(jLabel8, javax.swing.GroupLayout.PREFERRED_SIZE, 180, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addGroup(layout.createSequentialGroup()
-                                .addContainerGap()
-                                .addComponent(jLabel6, javax.swing.GroupLayout.PREFERRED_SIZE, 141, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                                .addComponent(jComboQuantBits, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                                .addComponent(jButtonSampling)
-                                .addGap(12, 12, 12))
-                            .addGroup(layout.createSequentialGroup()
-                                .addComponent(jComboQType, javax.swing.GroupLayout.PREFERRED_SIZE, 256, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                            .addGroup(layout.createSequentialGroup()
-                                .addComponent(jLabel9, javax.swing.GroupLayout.PREFERRED_SIZE, 141, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                .addComponent(jComboConvType1, javax.swing.GroupLayout.PREFERRED_SIZE, 190, javax.swing.GroupLayout.PREFERRED_SIZE))
-                            .addComponent(jButtonSampling1, javax.swing.GroupLayout.PREFERRED_SIZE, 142, javax.swing.GroupLayout.PREFERRED_SIZE))))
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                    .addGroup(layout.createSequentialGroup()
+                                        .addGap(177, 177, 177)
+                                        .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 348, javax.swing.GroupLayout.PREFERRED_SIZE))
+                                    .addGroup(layout.createSequentialGroup()
+                                        .addGap(18, 18, 18)
+                                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                            .addComponent(jButtonClearVirtualTable, javax.swing.GroupLayout.PREFERRED_SIZE, 84, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                            .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 695, javax.swing.GroupLayout.PREFERRED_SIZE)))))
+                            .addComponent(jButtonGenerateSignal, javax.swing.GroupLayout.PREFERRED_SIZE, 430, javax.swing.GroupLayout.PREFERRED_SIZE)))
                     .addGroup(layout.createSequentialGroup()
-                        .addGap(148, 148, 148)
-                        .addComponent(jLabel3, javax.swing.GroupLayout.PREFERRED_SIZE, 348, javax.swing.GroupLayout.PREFERRED_SIZE))
-                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
+                            .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 607, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addGroup(javax.swing.GroupLayout.Alignment.LEADING, layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                                    .addGap(112, 112, 112)
+                                    .addComponent(jLabel2, javax.swing.GroupLayout.PREFERRED_SIZE, 348, javax.swing.GroupLayout.PREFERRED_SIZE))
+                                .addGroup(layout.createSequentialGroup()
+                                    .addComponent(jLabel5)
+                                    .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                                    .addComponent(jTextSamplingRate, javax.swing.GroupLayout.PREFERRED_SIZE, 100, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                            .addComponent(jButtonClearDiscreteTable1, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.PREFERRED_SIZE, 84, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addGroup(javax.swing.GroupLayout.Alignment.LEADING, layout.createSequentialGroup()
+                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                    .addComponent(jLabel8, javax.swing.GroupLayout.PREFERRED_SIZE, 180, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                    .addGroup(layout.createSequentialGroup()
+                                        .addContainerGap()
+                                        .addComponent(jLabel6, javax.swing.GroupLayout.PREFERRED_SIZE, 141, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                                        .addComponent(jComboQuantBits, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                                        .addComponent(jButtonSampling)
+                                        .addGap(12, 12, 12))
+                                    .addGroup(layout.createSequentialGroup()
+                                        .addComponent(jComboQType, javax.swing.GroupLayout.PREFERRED_SIZE, 256, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
+                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                                    .addGroup(layout.createSequentialGroup()
+                                        .addComponent(jLabel9, javax.swing.GroupLayout.PREFERRED_SIZE, 141, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                        .addComponent(jComboConvType1, javax.swing.GroupLayout.PREFERRED_SIZE, 190, javax.swing.GroupLayout.PREFERRED_SIZE))
+                                    .addComponent(jButtonSampling1, javax.swing.GroupLayout.PREFERRED_SIZE, 142, javax.swing.GroupLayout.PREFERRED_SIZE))))
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                             .addGroup(layout.createSequentialGroup()
                                 .addGap(6, 6, 6)
@@ -394,22 +325,12 @@ public class MainWindow extends javax.swing.JFrame {
                                     .addComponent(jLabel7, javax.swing.GroupLayout.PREFERRED_SIZE, 266, javax.swing.GroupLayout.PREFERRED_SIZE)))
                             .addGroup(layout.createSequentialGroup()
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                                .addComponent(jButtonShowSignal, javax.swing.GroupLayout.DEFAULT_SIZE, 272, Short.MAX_VALUE)))
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(jCheckBoxOperationOrder)
-                            .addGroup(layout.createSequentialGroup()
-                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                                    .addComponent(jButtonAddSignals, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                    .addComponent(jButtonSubtractSignals, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                    .addComponent(jButtonMultiplySignals, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                    .addComponent(jButtonDvideSignals, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                                .addGap(18, 18, 18)
-                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                                    .addComponent(saveSignal, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                                    .addComponent(loadSignal, javax.swing.GroupLayout.PREFERRED_SIZE, 163, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                    .addComponent(jButtonCompare, javax.swing.GroupLayout.PREFERRED_SIZE, 163, javax.swing.GroupLayout.PREFERRED_SIZE))))
-                        .addGap(33, 33, 33))))
+                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                    .addComponent(jCheckBoxOperationOrder)
+                                    .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                        .addComponent(jButtonCompare, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                        .addComponent(jButtonShowSignal, javax.swing.GroupLayout.DEFAULT_SIZE, 272, Short.MAX_VALUE)))))))
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -435,16 +356,14 @@ public class MainWindow extends javax.swing.JFrame {
                         .addComponent(jSeparator2, javax.swing.GroupLayout.PREFERRED_SIZE, 10, javax.swing.GroupLayout.PREFERRED_SIZE))
                     .addGroup(layout.createSequentialGroup()
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                            .addComponent(jLabel2)
-                            .addComponent(jLabel3))))
+                        .addComponent(jLabel2)))
                 .addGap(49, 49, 49)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel5, javax.swing.GroupLayout.PREFERRED_SIZE, 32, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(jTextSamplingRate, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(layout.createSequentialGroup()
-                        .addGap(5, 5, 5)
+                        .addGap(22, 22, 22)
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
                             .addGroup(layout.createSequentialGroup()
                                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
@@ -464,29 +383,18 @@ public class MainWindow extends javax.swing.JFrame {
                                     .addGroup(layout.createSequentialGroup()
                                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                                         .addComponent(jButtonSampling1, javax.swing.GroupLayout.PREFERRED_SIZE, 31, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                                .addGap(98, 98, 98)
-                                .addComponent(jButtonShowSignal, javax.swing.GroupLayout.PREFERRED_SIZE, 38, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED))
-                            .addGroup(layout.createSequentialGroup()
-                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                                    .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                                        .addComponent(saveSignal, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                                        .addComponent(jButtonAddSignals, javax.swing.GroupLayout.PREFERRED_SIZE, 49, javax.swing.GroupLayout.PREFERRED_SIZE))
-                                    .addComponent(jLabel6, javax.swing.GroupLayout.PREFERRED_SIZE, 32, javax.swing.GroupLayout.PREFERRED_SIZE))
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                                    .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                                        .addComponent(jButtonSubtractSignals, javax.swing.GroupLayout.PREFERRED_SIZE, 49, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                        .addComponent(jLabel8, javax.swing.GroupLayout.PREFERRED_SIZE, 32, javax.swing.GroupLayout.PREFERRED_SIZE))
-                                    .addComponent(loadSignal, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                                .addGap(9, 9, 9)
+                                .addComponent(jCheckBoxOperationOrder)
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                                .addComponent(jButtonMultiplySignals, javax.swing.GroupLayout.PREFERRED_SIZE, 49, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addComponent(jButtonCompare, javax.swing.GroupLayout.PREFERRED_SIZE, 49, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                                .addComponent(jButtonShowSignal, javax.swing.GroupLayout.PREFERRED_SIZE, 38, javax.swing.GroupLayout.PREFERRED_SIZE))
+                            .addGroup(layout.createSequentialGroup()
+                                .addComponent(jLabel6, javax.swing.GroupLayout.PREFERRED_SIZE, 32, javax.swing.GroupLayout.PREFERRED_SIZE)
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                    .addComponent(jButtonDvideSignals, javax.swing.GroupLayout.PREFERRED_SIZE, 49, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                    .addComponent(jButtonCompare, javax.swing.GroupLayout.PREFERRED_SIZE, 49, javax.swing.GroupLayout.PREFERRED_SIZE))
-                                .addGap(34, 34, 34)))
-                        .addComponent(jCheckBoxOperationOrder))
+                                .addComponent(jLabel8, javax.swing.GroupLayout.PREFERRED_SIZE, 32, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addGap(149, 149, 149)))
+                        .addGap(0, 0, Short.MAX_VALUE))
                     .addGroup(layout.createSequentialGroup()
                         .addGap(143, 143, 143)
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
@@ -562,65 +470,6 @@ public class MainWindow extends javax.swing.JFrame {
         outputWindow.setVisible(true);
     }//GEN-LAST:event_jButtonShowSignalActionPerformed
 
-    private void jButtonAddSignalsActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonAddSignalsActionPerformed
-        DiscreteSignal[] signals = getSignalsForCalculation();
-        if (signals != null) {
-            try {
-                disSignalContainer.add(AmplitudeCalculator.addSignals(signals[0], signals[1]));
-                discreteTableModel.fireTableDataChanged();
-            } catch (NotSameSamplinRateExpcetion ex) {
-                JOptionPane.showMessageDialog(this, "Wybierz sygnały o takiej samej częstotliwości próbkowania", "Błąd", JOptionPane.ERROR_MESSAGE);
-            } finally {
-                discreteTableModel.fireTableDataChanged();
-            }
-        }
-
-    }//GEN-LAST:event_jButtonAddSignalsActionPerformed
-
-    private void jButtonSubtractSignalsActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonSubtractSignalsActionPerformed
-        DiscreteSignal[] signals = getSignalsForCalculation();
-        if (signals != null) {
-            try {
-                disSignalContainer.add(AmplitudeCalculator.subSignals(signals[0], signals[1]));
-                discreteTableModel.fireTableDataChanged();
-            } catch (NotSameSamplinRateExpcetion ex) {
-                JOptionPane.showMessageDialog(this, "Wybierz sygnały o takiej samej częstotliwości próbkowania", "Błąd", JOptionPane.ERROR_MESSAGE);
-            } finally {
-                discreteTableModel.fireTableDataChanged();
-            }
-        }
-    }//GEN-LAST:event_jButtonSubtractSignalsActionPerformed
-
-    private void jButtonMultiplySignalsActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonMultiplySignalsActionPerformed
-        DiscreteSignal[] signals = getSignalsForCalculation();
-        if (signals != null) {
-            try {
-                disSignalContainer.add(AmplitudeCalculator.multiplySignals(signals[0], signals[1]));
-                discreteTableModel.fireTableDataChanged();
-            } catch (NotSameSamplinRateExpcetion ex) {
-                JOptionPane.showMessageDialog(this, "Wybierz sygnały o takiej samej częstotliwości próbkowania", "Błąd", JOptionPane.ERROR_MESSAGE);
-            } finally {
-                discreteTableModel.fireTableDataChanged();
-            }
-        }
-    }//GEN-LAST:event_jButtonMultiplySignalsActionPerformed
-
-    private void jButtonDvideSignalsActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonDvideSignalsActionPerformed
-        DiscreteSignal[] signals = getSignalsForCalculation();
-        if (signals != null) {
-            try {
-                disSignalContainer.add(AmplitudeCalculator.divideSignals(signals[0], signals[1]));
-                discreteTableModel.fireTableDataChanged();
-            } catch (NotSameSamplinRateExpcetion ex) {
-                JOptionPane.showMessageDialog(this, "Wybierz sygnały o takiej samej częstotliwości próbkowania", "Błąd", JOptionPane.ERROR_MESSAGE);
-            } catch (DivideByZeroValueExcpetion ex) {
-                JOptionPane.showMessageDialog(this, "Sygnał w dzielniku posiada próbkę o wartości 0", "Błąd", JOptionPane.ERROR_MESSAGE);
-            } finally {
-                discreteTableModel.fireTableDataChanged();
-            }
-        }
-    }//GEN-LAST:event_jButtonDvideSignalsActionPerformed
-
     private void jButtonClearVirtualTableActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonClearVirtualTableActionPerformed
         signalContainer.clear();
         virtulTableModel.fireTableDataChanged();
@@ -630,29 +479,6 @@ public class MainWindow extends javax.swing.JFrame {
         disSignalContainer.clear();
         discreteTableModel.fireTableDataChanged();
     }//GEN-LAST:event_jButtonClearDiscreteTable1ActionPerformed
-
-    private void saveSignalActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_saveSignalActionPerformed
-        int selectedDiscreteSignal = jTableDiscrete.getSelectedRow();
-        if (selectedDiscreteSignal < 0) {
-            return;
-        }
-        fileDialog.setDialogType(JFileChooser.SAVE_DIALOG);
-        DiscreteSignal selected = getSelectedSignal();
-        if (selected == null) {
-            JOptionPane.showMessageDialog(this, "Wybierz sygnał do zapisu", "Błąd", JOptionPane.ERROR_MESSAGE);
-        } else {
-            fileDialog.setSignal(selected);
-            fileDialog.setAction(evt.getActionCommand());
-            fileDialog.setVisible(true);
-        }
-    }//GEN-LAST:event_saveSignalActionPerformed
-
-    private void loadSignalActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_loadSignalActionPerformed
-        fileDialog.setDialogType(JFileChooser.OPEN_DIALOG);
-        fileDialog.setSignal(null);
-        fileDialog.setAction(evt.getActionCommand());
-        fileDialog.setVisible(true);
-    }//GEN-LAST:event_loadSignalActionPerformed
 
     private void jTextSamplingRateActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jTextSamplingRateActionPerformed
         // TODO add your handling code here:
@@ -778,24 +604,19 @@ public class MainWindow extends javax.swing.JFrame {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JButton jButtonAddSignals;
     private javax.swing.JButton jButtonClearDiscreteTable1;
     private javax.swing.JButton jButtonClearVirtualTable;
     private javax.swing.JButton jButtonCompare;
-    private javax.swing.JButton jButtonDvideSignals;
     private javax.swing.JButton jButtonGenerateSignal;
-    private javax.swing.JButton jButtonMultiplySignals;
     private javax.swing.JButton jButtonSampling;
     private javax.swing.JButton jButtonSampling1;
     private javax.swing.JButton jButtonShowSignal;
-    private javax.swing.JButton jButtonSubtractSignals;
     private javax.swing.JCheckBox jCheckBoxOperationOrder;
     private javax.swing.JComboBox<String> jComboConvType1;
     private javax.swing.JComboBox<String> jComboQType;
     private javax.swing.JComboBox<String> jComboQuantBits;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
-    private javax.swing.JLabel jLabel3;
     private javax.swing.JLabel jLabel5;
     private javax.swing.JLabel jLabel6;
     private javax.swing.JLabel jLabel7;
@@ -811,8 +632,6 @@ public class MainWindow extends javax.swing.JFrame {
     private javax.swing.JTable jTableDiscrete;
     private javax.swing.JTable jTableVirtual;
     private javax.swing.JTextField jTextSamplingRate;
-    private javax.swing.JButton loadSignal;
-    private javax.swing.JButton saveSignal;
     // End of variables declaration//GEN-END:variables
 
     public void addDiscreteSignal(DiscreteSignal loadSignal) {
