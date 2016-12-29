@@ -31,12 +31,12 @@ public class SINCConverter implements D2AConverter {
         newSamplingRate = samplingRate;
 
         for (int i = 0; i < newValues.length; i++) {
-            newValues[i] = interpolate(30, i, i);
+            newValues[i] = interpolate(30, i);
         }
         return new DerivedSignal(newValues, samplingRate, input.getStartTime(), input.getAmplitude());
     }
 
-    public Complex interpolate(int window, int oldSample, int newSample) {
+    public Complex interpolate(int window, int newSample) {
         Complex ret = Complex.ZERO;
         int start = newSample - (window / 2);
         if (start <= 0) {

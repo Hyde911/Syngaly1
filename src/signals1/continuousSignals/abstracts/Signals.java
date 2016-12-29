@@ -37,7 +37,7 @@ public abstract class Signals {
         this.startTime = startTime;
         this.amplitude = amplitude;
         this.duration = duration;
-        this.numberOfSamples = (int) this.duration * samplesPerSecond;
+        this.numberOfSamples = (int) (this.duration * samplesPerSecond);
     }
 
     public Complex[] getSignal() {

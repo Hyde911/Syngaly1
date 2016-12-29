@@ -100,7 +100,7 @@ public class PeriodicDiscreteSignal extends DiscreteSignal implements Serializab
 
     private void getSamples(Signals signal) {
         values = new Complex[numberOfSamples];
-        double factor = signal.getNumberOfSamples() / (1.0 * values.length);
+        double factor = (1.0 * signal.getNumberOfSamples()) / (1.0 * values.length);
         Complex[]orValues =  signal.getSignal();
         for (int i = 0; i < numberOfSamples; i++) {
             values[i] = quantizer.quantizeSample(orValues[(int) (i * factor)], amplitude);
