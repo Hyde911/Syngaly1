@@ -112,7 +112,7 @@ public class SquareInputPanel extends javax.swing.JPanel {
 
         jTextDuration.setFont(new java.awt.Font("Tahoma", 0, 12)); // NOI18N
         jTextDuration.setHorizontalAlignment(javax.swing.JTextField.CENTER);
-        jTextDuration.setText("10");
+        jTextDuration.setText("1");
         jTextDuration.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jTextDurationActionPerformed(evt);
@@ -173,7 +173,7 @@ public class SquareInputPanel extends javax.swing.JPanel {
                                 .addComponent(jLabel5, javax.swing.GroupLayout.PREFERRED_SIZE, 178, javax.swing.GroupLayout.PREFERRED_SIZE)
                                 .addGap(18, 18, 18)
                                 .addComponent(jTextStartTime, javax.swing.GroupLayout.PREFERRED_SIZE, 56, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                        .addGap(0, 105, Short.MAX_VALUE)))
+                        .addGap(0, 249, Short.MAX_VALUE)))
                 .addContainerGap())
         );
         layout.setVerticalGroup(

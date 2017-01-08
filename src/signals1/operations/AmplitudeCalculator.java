@@ -16,22 +16,22 @@ import signals1.tools.exceptions.NotSameSamplinRateExpcetion;
  */
 public class AmplitudeCalculator {
 
-    public static DerivedSignal addSignals(DiscreteSignal s1, DiscreteSignal s2) throws NotSameSamplinRateExpcetion {
+    public static DerivedSignal AddSignals(DiscreteSignal s1, DiscreteSignal s2) throws NotSameSamplinRateExpcetion {
         AmplitudeOperations op = new AmplitudeOperations(s1, s2);
         return op.add();
     }
 
-    public static DerivedSignal subSignals(DiscreteSignal s1, DiscreteSignal s2) throws NotSameSamplinRateExpcetion {
+    public static DerivedSignal SubSignals(DiscreteSignal s1, DiscreteSignal s2) throws NotSameSamplinRateExpcetion {
         AmplitudeOperations op = new AmplitudeOperations(s1, s2);
         return op.sub();
     }
 
-    public static DerivedSignal multiplySignals(DiscreteSignal s1, DiscreteSignal s2) throws NotSameSamplinRateExpcetion {
+    public static DerivedSignal MultiplySignals(DiscreteSignal s1, DiscreteSignal s2) throws NotSameSamplinRateExpcetion {
         AmplitudeOperations op = new AmplitudeOperations(s1, s2);
         return op.mul();
     }
 
-    public static DerivedSignal divideSignals(DiscreteSignal s1, DiscreteSignal s2) throws NotSameSamplinRateExpcetion, DivideByZeroValueExcpetion {
+    public static DerivedSignal DivideSignals(DiscreteSignal s1, DiscreteSignal s2) throws NotSameSamplinRateExpcetion, DivideByZeroValueExcpetion {
         AmplitudeOperations op = new AmplitudeOperations(s1, s2);
         return op.div();
     }

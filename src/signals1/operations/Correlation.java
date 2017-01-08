@@ -13,9 +13,9 @@ import signals1.discreteSignals.abstracts.DiscreteSignal;
  *
  * @author marr
  */
-public class Convolution {
-
-    public static DerivedSignal CalculateConvolutions(DiscreteSignal signal1, DiscreteSignal signal2) {
+public class Correlation {
+    
+        public static DerivedSignal CalculateCorrelation(DiscreteSignal signal1, DiscreteSignal signal2) {
         int numberOfSamples1 = signal1.getValues().length;
         int numberOfSamples2 = signal2.getValues().length;
         int newSize = numberOfSamples1 + numberOfSamples2 - 1;
@@ -27,7 +27,7 @@ public class Convolution {
         for (int i = 0; i < newSize; i++) {
             i1 = i;
             tmp = Complex.ZERO;
-            for (int j = 0; j < numberOfSamples2; j++) {
+            for (int j = numberOfSamples2 - 1; j >= 0; j--) {
                 if (i1 >= 0 && i1 < numberOfSamples1) {
                     tmp = tmp.add(signal1.getValues()[i1].multiply(signal2.getValues()[j]));
                 }
@@ -35,6 +35,7 @@ public class Convolution {
                 resValues[i] = tmp;
             }
         }
+
         DerivedSignal result = new DerivedSignal(resValues, signal1.getSamplingRate(), signal1.getStartTime(), signal1.getAmplitude());
         return result;
     }

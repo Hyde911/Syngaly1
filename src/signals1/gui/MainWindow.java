@@ -8,7 +8,6 @@ package signals1.gui;
 import java.awt.BorderLayout;
 import java.awt.Dimension;
 import javax.swing.DefaultComboBoxModel;
-import javax.swing.JFileChooser;
 import javax.swing.JOptionPane;
 import javax.swing.UIManager;
 import javax.swing.UnsupportedLookAndFeelException;
@@ -27,10 +26,11 @@ import signals1.converter.D2AConverterService;
 import signals1.discreteSignals.abstracts.DiscreteSignal;
 import signals1.discreteSignals.NonPeriodicDiscreteSignal;
 import signals1.discreteSignals.PeriodicDiscreteSignal;
+import signals1.operations.Convolution;
+import signals1.operations.Correlation;
 import signals1.tools.DiscretetSignalsContainer;
 import signals1.tools.SignalContainer;
 import signals1.tools.constatns.Quantizers;
-import signals1.tools.exceptions.DivideByZeroValueExcpetion;
 import signals1.tools.exceptions.NotSameSamplinRateExpcetion;
 
 /**
@@ -39,15 +39,15 @@ import signals1.tools.exceptions.NotSameSamplinRateExpcetion;
  */
 public class MainWindow extends javax.swing.JFrame {
 
-    private Dimension inputFormDimension = new Dimension(400, 320);
+    private final Dimension inputFormDimension = new Dimension(400, 320);
     private SineInputPanel sineInputPanel;
     private NoiseInputPanel noiseInputPanel;
     private SquareInputPanel squareInputPanel;
     private DiscreetSignalsPanel discreetPanel;
-    private SignalContainer signalContainer = SignalContainer.getInstance();
-    private DiscretetSignalsContainer disSignalContainer = DiscretetSignalsContainer.getInstance();
-    private VirtualSignalsTableModel virtulTableModel = new VirtualSignalsTableModel();
-    private DiscreteSignalTableModel discreteTableModel = new DiscreteSignalTableModel();
+    private final SignalContainer signalContainer = SignalContainer.getInstance();
+    private final DiscretetSignalsContainer disSignalContainer = DiscretetSignalsContainer.getInstance();
+    private final VirtualSignalsTableModel virtulTableModel = new VirtualSignalsTableModel();
+    private final DiscreteSignalTableModel discreteTableModel = new DiscreteSignalTableModel();
     private FileChooserDialog fileDialog;
     private static MainWindow instance = null;
 
@@ -84,8 +84,11 @@ public class MainWindow extends javax.swing.JFrame {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
+        jPanel1 = new javax.swing.JPanel();
+        jTabbedPane1 = new javax.swing.JTabbedPane();
         jPaneTabs = new javax.swing.JTabbedPane();
         jPanelSineSignals = new javax.swing.JPanel();
+        jPanelSquareSignals = new javax.swing.JPanel();
         jButtonGenerateSignal = new javax.swing.JButton();
         jSliderHistNo = new javax.swing.JSlider();
         jLabel7 = new javax.swing.JLabel();
@@ -114,6 +117,19 @@ public class MainWindow extends javax.swing.JFrame {
         jButtonCompare = new javax.swing.JButton();
         jButtonAddSignals = new javax.swing.JButton();
         jLabel3 = new javax.swing.JLabel();
+        jButtonConvolution = new javax.swing.JButton();
+        jButtonCorrelation = new javax.swing.JButton();
+
+        javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
+        jPanel1.setLayout(jPanel1Layout);
+        jPanel1Layout.setHorizontalGroup(
+            jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGap(0, 100, Short.MAX_VALUE)
+        );
+        jPanel1Layout.setVerticalGroup(
+            jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGap(0, 100, Short.MAX_VALUE)
+        );
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setTitle("Sygnały");
@@ -132,10 +148,23 @@ public class MainWindow extends javax.swing.JFrame {
         );
         jPanelSineSignalsLayout.setVerticalGroup(
             jPanelSineSignalsLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 293, Short.MAX_VALUE)
+            .addGap(0, 291, Short.MAX_VALUE)
         );
 
         jPaneTabs.addTab("Typ Sygnału", jPanelSineSignals);
+
+        javax.swing.GroupLayout jPanelSquareSignalsLayout = new javax.swing.GroupLayout(jPanelSquareSignals);
+        jPanelSquareSignals.setLayout(jPanelSquareSignalsLayout);
+        jPanelSquareSignalsLayout.setHorizontalGroup(
+            jPanelSquareSignalsLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGap(0, 425, Short.MAX_VALUE)
+        );
+        jPanelSquareSignalsLayout.setVerticalGroup(
+            jPanelSquareSignalsLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGap(0, 291, Short.MAX_VALUE)
+        );
+
+        jPaneTabs.addTab("Sygnały prostokątne", jPanelSquareSignals);
 
         jButtonGenerateSignal.setFont(new java.awt.Font("Lucida Sans", 1, 14)); // NOI18N
         jButtonGenerateSignal.setText("Generuj Sygnał Pseudociągły");
@@ -170,7 +199,7 @@ public class MainWindow extends javax.swing.JFrame {
 
         jTextSamplingRate.setFont(new java.awt.Font("Tahoma", 1, 12)); // NOI18N
         jTextSamplingRate.setHorizontalAlignment(javax.swing.JTextField.CENTER);
-        jTextSamplingRate.setText("128");
+        jTextSamplingRate.setText("1024");
         jTextSamplingRate.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jTextSamplingRateActionPerformed(evt);
@@ -274,6 +303,22 @@ public class MainWindow extends javax.swing.JFrame {
         jLabel3.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         jLabel3.setText("Operacje na sygnałach");
 
+        jButtonConvolution.setFont(new java.awt.Font("Tahoma", 1, 12)); // NOI18N
+        jButtonConvolution.setText("SPLOT");
+        jButtonConvolution.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButtonConvolutionActionPerformed(evt);
+            }
+        });
+
+        jButtonCorrelation.setFont(new java.awt.Font("Tahoma", 1, 12)); // NOI18N
+        jButtonCorrelation.setText("KORELACJA");
+        jButtonCorrelation.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButtonCorrelationActionPerformed(evt);
+            }
+        });
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
@@ -352,7 +397,11 @@ public class MainWindow extends javax.swing.JFrame {
                         .addGap(44, 44, 44))
                     .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
                         .addComponent(jButtonAddSignals, javax.swing.GroupLayout.PREFERRED_SIZE, 52, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(314, 314, 314))))
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                        .addComponent(jButtonConvolution, javax.swing.GroupLayout.PREFERRED_SIZE, 104, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                        .addComponent(jButtonCorrelation, javax.swing.GroupLayout.PREFERRED_SIZE, 104, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(86, 86, 86))))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -389,7 +438,11 @@ public class MainWindow extends javax.swing.JFrame {
                             .addComponent(jTextSamplingRate, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
                     .addGroup(layout.createSequentialGroup()
                         .addGap(18, 18, 18)
-                        .addComponent(jButtonAddSignals, javax.swing.GroupLayout.PREFERRED_SIZE, 49, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                                .addComponent(jButtonConvolution, javax.swing.GroupLayout.PREFERRED_SIZE, 49, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addComponent(jButtonCorrelation, javax.swing.GroupLayout.PREFERRED_SIZE, 49, javax.swing.GroupLayout.PREFERRED_SIZE))
+                            .addComponent(jButtonAddSignals, javax.swing.GroupLayout.PREFERRED_SIZE, 49, javax.swing.GroupLayout.PREFERRED_SIZE))))
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(layout.createSequentialGroup()
                         .addGap(22, 22, 22)
@@ -402,10 +455,10 @@ public class MainWindow extends javax.swing.JFrame {
                             .addGroup(layout.createSequentialGroup()
                                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
                                     .addComponent(jLabel9, javax.swing.GroupLayout.PREFERRED_SIZE, 32, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                    .addComponent(jComboQType, javax.swing.GroupLayout.PREFERRED_SIZE, 33, javax.swing.GroupLayout.PREFERRED_SIZE)
                                     .addGroup(layout.createSequentialGroup()
                                         .addComponent(jComboConvType1, javax.swing.GroupLayout.PREFERRED_SIZE, 33, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                        .addGap(1, 1, 1))
-                                    .addComponent(jComboQType, javax.swing.GroupLayout.PREFERRED_SIZE, 33, javax.swing.GroupLayout.PREFERRED_SIZE))
+                                        .addGap(1, 1, 1)))
                                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                                     .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                                         .addGroup(layout.createSequentialGroup()
@@ -440,22 +493,15 @@ public class MainWindow extends javax.swing.JFrame {
 
     private void jButtonGenerateSignalActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonGenerateSignalActionPerformed
         Signals signal = null;
-//        switch (jPaneTabs.getSelectedIndex()) {
-//            case 1:
-//                signal = sineInputPanel.getSingal();
-//                break;
-//            case 2:
-//                signal = squareInputPanel.getSingal();
-//                break;
-//            case 3:
-//                DiscreteSignal sig = discreetPanel.getSingal();
-//                disSignalContainer.add(sig);
-//                discreteTableModel.fireTableDataChanged();
-//                break;
-//            default:
-//                signal = noiseInputPanel.getSingal();
-//        }
-        signal = sineInputPanel.getSingal();
+        int tmp = jPaneTabs.getSelectedIndex();
+        switch (jPaneTabs.getSelectedIndex()) {
+            case 0:
+                signal = sineInputPanel.getSingal();
+                break;
+            case 1:
+                signal = squareInputPanel.getSingal();
+                break;
+           }
         if (signal != null) {
             signalContainer.add(signal);
             virtulTableModel.fireTableDataChanged();
@@ -556,7 +602,7 @@ public class MainWindow extends javax.swing.JFrame {
         DiscreteSignal[] signals = getSignalsForCalculation();
         if (signals != null) {
             try {
-                disSignalContainer.add(AmplitudeCalculator.addSignals(signals[0], signals[1]));
+                disSignalContainer.add(AmplitudeCalculator.AddSignals(signals[0], signals[1]));
                 discreteTableModel.fireTableDataChanged();
             } catch (NotSameSamplinRateExpcetion ex) {
                 JOptionPane.showMessageDialog(this, "Wybierz sygnały o takiej samej częstotliwości próbkowania", "Błąd", JOptionPane.ERROR_MESSAGE);
@@ -565,6 +611,22 @@ public class MainWindow extends javax.swing.JFrame {
             }
         }
     }//GEN-LAST:event_jButtonAddSignalsActionPerformed
+
+    private void jButtonConvolutionActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonConvolutionActionPerformed
+        DiscreteSignal[] signals = getSignalsForCalculation();
+        if (signals != null) {
+            disSignalContainer.add(Convolution.CalculateConvolutions(signals[0], signals[1]));
+            discreteTableModel.fireTableDataChanged();
+        }
+    }//GEN-LAST:event_jButtonConvolutionActionPerformed
+
+    private void jButtonCorrelationActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonCorrelationActionPerformed
+        DiscreteSignal[] signals = getSignalsForCalculation();
+        if (signals != null) {
+            disSignalContainer.add(Correlation.CalculateCorrelation(signals[0], signals[1]));
+            discreteTableModel.fireTableDataChanged();
+        }
+    }//GEN-LAST:event_jButtonCorrelationActionPerformed
 
     private void initInputForms() {
         sineInputPanel = new SineInputPanel(inputFormDimension);
@@ -576,14 +638,14 @@ public class MainWindow extends javax.swing.JFrame {
         jPanelSineSignals.add(sineInputPanel, BorderLayout.CENTER);
 //        jPanelNoiseSignals.setLayout(new java.awt.BorderLayout());
 //        jPanelNoiseSignals.add(noiseInputPanel, BorderLayout.CENTER);
-//        jPanelSquareSignals.setLayout(new java.awt.BorderLayout());
-//        jPanelSquareSignals.add(squareInputPanel, BorderLayout.CENTER);
+        jPanelSquareSignals.setLayout(new java.awt.BorderLayout());
+        jPanelSquareSignals.add(squareInputPanel, BorderLayout.CENTER);
 //        jPanelDiscreteSignals.setLayout(new java.awt.BorderLayout());
 //        jPanelDiscreteSignals.add(discreetPanel, BorderLayout.CENTER);
 
         jPanelSineSignals.validate();
 //        jPanelNoiseSignals.validate();
-//        jPanelSquareSignals.validate();
+        jPanelSquareSignals.validate();
 //        jPanelDiscreteSignals.validate();
     }
 
@@ -651,6 +713,8 @@ public class MainWindow extends javax.swing.JFrame {
     private javax.swing.JButton jButtonClearDiscreteTable1;
     private javax.swing.JButton jButtonClearVirtualTable;
     private javax.swing.JButton jButtonCompare;
+    private javax.swing.JButton jButtonConvolution;
+    private javax.swing.JButton jButtonCorrelation;
     private javax.swing.JButton jButtonGenerateSignal;
     private javax.swing.JButton jButtonSampling;
     private javax.swing.JButton jButtonSampling1;
@@ -668,12 +732,15 @@ public class MainWindow extends javax.swing.JFrame {
     private javax.swing.JLabel jLabel8;
     private javax.swing.JLabel jLabel9;
     private javax.swing.JTabbedPane jPaneTabs;
+    private javax.swing.JPanel jPanel1;
     private javax.swing.JPanel jPanelSineSignals;
+    private javax.swing.JPanel jPanelSquareSignals;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JScrollPane jScrollPane2;
     private javax.swing.JSeparator jSeparator1;
     private javax.swing.JSeparator jSeparator2;
     private javax.swing.JSlider jSliderHistNo;
+    private javax.swing.JTabbedPane jTabbedPane1;
     private javax.swing.JTable jTableDiscrete;
     private javax.swing.JTable jTableVirtual;
     private javax.swing.JTextField jTextSamplingRate;

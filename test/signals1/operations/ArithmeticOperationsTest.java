@@ -77,7 +77,7 @@ public class ArithmeticOperationsTest {
     public void testAdd_DifferentSamplingRates() throws NotSameSamplinRateExpcetion {
         DerivedSignal signal1 = new DerivedSignal(values1, 1, 0, 0);
         DerivedSignal signal2 = new DerivedSignal(values2, 2, 0, 0);
-        AmplitudeCalculator.addSignals(signal1, signal2);
+        AmplitudeCalculator.AddSignals(signal1, signal2);
     }
 
     @Test
@@ -85,7 +85,7 @@ public class ArithmeticOperationsTest {
         double startTime = 0;
         DerivedSignal signal1 = new DerivedSignal(values1, 1, startTime, 0);
         DerivedSignal signal2 = new DerivedSignal(values2, 1, startTime, 0);
-        DerivedSignal result = AmplitudeCalculator.addSignals(signal1, signal2);
+        DerivedSignal result = AmplitudeCalculator.AddSignals(signal1, signal2);
 
         Complex[] expectedValues = new Complex[10];
         Arrays.fill(expectedValues, Complex.ZERO);
@@ -105,7 +105,7 @@ public class ArithmeticOperationsTest {
     public void addTest_SecondShorter() throws NotSameSamplinRateExpcetion {
         DerivedSignal signal1 = new DerivedSignal(values1, 1, 0, 0);
         DerivedSignal signal2 = new DerivedSignal(Arrays.copyOf(values2, 8), 1, 0, 0);
-        DerivedSignal result = AmplitudeCalculator.addSignals(signal1, signal2);
+        DerivedSignal result = AmplitudeCalculator.AddSignals(signal1, signal2);
 
         Complex[] expectedValues = Arrays.copyOf(values1, 10);
 
@@ -123,7 +123,7 @@ public class ArithmeticOperationsTest {
     public void addTest_FirstShorter() throws NotSameSamplinRateExpcetion {
         DerivedSignal signal1 = new DerivedSignal(values1, 1, 0, 0);
         DerivedSignal signal2 = new DerivedSignal(Arrays.copyOf(values2, 8), 1, 0, 0);
-        DerivedSignal result = AmplitudeCalculator.addSignals(signal2, signal1);
+        DerivedSignal result = AmplitudeCalculator.AddSignals(signal2, signal1);
 
         Complex[] expectedValues = Arrays.copyOf(values1, 10);
         for (int i = 0; i < 10; i++) {
@@ -142,7 +142,7 @@ public class ArithmeticOperationsTest {
 
         DerivedSignal signal1 = new DerivedSignal(values1, 1, 0, 0);
         DerivedSignal signal2 = new DerivedSignal(values2, 1, 1, 0);
-        DerivedSignal result = AmplitudeCalculator.addSignals(signal1, signal2);
+        DerivedSignal result = AmplitudeCalculator.AddSignals(signal1, signal2);
 
         Complex[] expectedValues = new Complex[11];
         Arrays.fill(expectedValues, Complex.ZERO);
@@ -164,7 +164,7 @@ public class ArithmeticOperationsTest {
     public void addTest_FirstShifted() throws NotSameSamplinRateExpcetion {
         DerivedSignal signal1 = new DerivedSignal(values1, 1, 0, 0);
         DerivedSignal signal2 = new DerivedSignal(values2, 1, 1, 0);
-        DerivedSignal result = AmplitudeCalculator.addSignals(signal2, signal1);
+        DerivedSignal result = AmplitudeCalculator.AddSignals(signal2, signal1);
 
         Complex[] expectedValues = new Complex[11];
         Arrays.fill(expectedValues, Complex.ZERO);
@@ -185,7 +185,7 @@ public class ArithmeticOperationsTest {
     public void addTest_FirstShiftedAndShorter() throws NotSameSamplinRateExpcetion {
         DerivedSignal signal1 = new DerivedSignal(values1, 1, 0, 0);
         DerivedSignal signal2 = new DerivedSignal(Arrays.copyOf(values2, 8), 1, 1, 0);
-        DerivedSignal result = AmplitudeCalculator.addSignals(signal1, signal2);
+        DerivedSignal result = AmplitudeCalculator.AddSignals(signal1, signal2);
 
         Complex[] expectedValues = Arrays.copyOf(values1, 10);
         for (int i = 1; i < 11; i++) {
@@ -203,7 +203,7 @@ public class ArithmeticOperationsTest {
     public void addTest_SecondShiftedAndShorter() throws NotSameSamplinRateExpcetion {
         DerivedSignal signal1 = new DerivedSignal(values1, 1, 0, 0);
         DerivedSignal signal2 = new DerivedSignal(Arrays.copyOf(values2, 8), 1, 1, 0);
-        DerivedSignal result = AmplitudeCalculator.addSignals(signal2, signal1);
+        DerivedSignal result = AmplitudeCalculator.AddSignals(signal2, signal1);
 
         Complex[] expectedValues = new Complex[10];
         Arrays.fill(expectedValues, Complex.ZERO);
@@ -224,7 +224,7 @@ public class ArithmeticOperationsTest {
         double startTime = 0;
         DerivedSignal signal1 = new DerivedSignal(values1, 1, startTime, 0);
         DerivedSignal signal2 = new DerivedSignal(values2, 1, startTime, 0);
-        DerivedSignal result = AmplitudeCalculator.subSignals(signal1, signal2);
+        DerivedSignal result = AmplitudeCalculator.SubSignals(signal1, signal2);
 
         Complex[] expectedValues = new Complex[10];
         Arrays.fill(expectedValues, Complex.ZERO);
@@ -243,7 +243,7 @@ public class ArithmeticOperationsTest {
     public void subTest_SecondShorter() throws NotSameSamplinRateExpcetion {
         DerivedSignal signal1 = new DerivedSignal(values1, 1, 0, 0);
         DerivedSignal signal2 = new DerivedSignal(Arrays.copyOf(values2, 8), 1, 0, 0);
-        DerivedSignal result = AmplitudeCalculator.subSignals(signal1, signal2);
+        DerivedSignal result = AmplitudeCalculator.SubSignals(signal1, signal2);
 
         Complex[] expectedValues = Arrays.copyOf(values1, 10);
 
@@ -261,7 +261,7 @@ public class ArithmeticOperationsTest {
     public void subTest_FirstShorter() throws NotSameSamplinRateExpcetion {
         DerivedSignal signal1 = new DerivedSignal(values1, 1, 0, 0);
         DerivedSignal signal2 = new DerivedSignal(Arrays.copyOf(values2, 8), 1, 0, 0);
-        DerivedSignal result = AmplitudeCalculator.subSignals(signal2, signal1);
+        DerivedSignal result = AmplitudeCalculator.SubSignals(signal2, signal1);
 
         Complex[] expectedValues = Arrays.copyOf(values1, 10);
         for (int i = 0; i < 10; i++) {
@@ -280,7 +280,7 @@ public class ArithmeticOperationsTest {
 
         DerivedSignal signal1 = new DerivedSignal(values1, 1, 0, 0);
         DerivedSignal signal2 = new DerivedSignal(values2, 1, 1, 0);
-        DerivedSignal result = AmplitudeCalculator.subSignals(signal1, signal2);
+        DerivedSignal result = AmplitudeCalculator.SubSignals(signal1, signal2);
 
         Complex[] expectedValues = new Complex[11];
         Arrays.fill(expectedValues, Complex.ZERO);
@@ -302,7 +302,7 @@ public class ArithmeticOperationsTest {
     public void subTest_FirstShifted() throws NotSameSamplinRateExpcetion {
         DerivedSignal signal1 = new DerivedSignal(values1, 1, 0, 0);
         DerivedSignal signal2 = new DerivedSignal(values2, 1, 1, 0);
-        DerivedSignal result = AmplitudeCalculator.subSignals(signal2, signal1);
+        DerivedSignal result = AmplitudeCalculator.SubSignals(signal2, signal1);
 
         Complex[] expectedValues = new Complex[11];
         Arrays.fill(expectedValues, Complex.ZERO);
@@ -323,7 +323,7 @@ public class ArithmeticOperationsTest {
     public void subTest_FirstShiftedAndShorter() throws NotSameSamplinRateExpcetion {
         DerivedSignal signal1 = new DerivedSignal(values1, 1, 0, 0);
         DerivedSignal signal2 = new DerivedSignal(Arrays.copyOf(values2, 8), 1, 1, 0);
-        DerivedSignal result = AmplitudeCalculator.subSignals(signal1, signal2);
+        DerivedSignal result = AmplitudeCalculator.SubSignals(signal1, signal2);
 
         Complex[] expectedValues = Arrays.copyOf(values1, 10);
         for (int i = 1; i < 11; i++) {
@@ -341,7 +341,7 @@ public class ArithmeticOperationsTest {
     public void subTest_SecondShiftedAndShorter() throws NotSameSamplinRateExpcetion {
         DerivedSignal signal1 = new DerivedSignal(values1, 1, 0, 0);
         DerivedSignal signal2 = new DerivedSignal(Arrays.copyOf(values2, 8), 1, 1, 0);
-        DerivedSignal result = AmplitudeCalculator.subSignals(signal2, signal1);
+        DerivedSignal result = AmplitudeCalculator.SubSignals(signal2, signal1);
 
         Complex[] expectedValues = new Complex[10];
         Arrays.fill(expectedValues, Complex.ZERO);
@@ -362,7 +362,7 @@ public class ArithmeticOperationsTest {
         double startTime = 0;
         DerivedSignal signal1 = new DerivedSignal(values1, 1, startTime, 0);
         DerivedSignal signal2 = new DerivedSignal(values2, 1, startTime, 0);
-        DerivedSignal result = AmplitudeCalculator.multiplySignals(signal1, signal2);
+        DerivedSignal result = AmplitudeCalculator.MultiplySignals(signal1, signal2);
 
         Complex[] expectedValues = new Complex[10];
         Arrays.fill(expectedValues, Complex.ZERO);
@@ -382,7 +382,7 @@ public class ArithmeticOperationsTest {
     public void mulTest_SecondShorter() throws NotSameSamplinRateExpcetion {
         DerivedSignal signal1 = new DerivedSignal(values1, 1, 0, 0);
         DerivedSignal signal2 = new DerivedSignal(Arrays.copyOf(values2, 8), 1, 0, 0);
-        DerivedSignal result = AmplitudeCalculator.multiplySignals(signal1, signal2);
+        DerivedSignal result = AmplitudeCalculator.MultiplySignals(signal1, signal2);
 
         Complex[] expectedValues = Arrays.copyOf(values1, 10);
         for (int i = 0; i < 10; i++) {
@@ -399,7 +399,7 @@ public class ArithmeticOperationsTest {
     public void mulTest_FirstShorter() throws NotSameSamplinRateExpcetion {
         DerivedSignal signal1 = new DerivedSignal(values1, 1, 0, 0);
         DerivedSignal signal2 = new DerivedSignal(Arrays.copyOf(values2, 8), 1, 0, 0);
-        DerivedSignal result = AmplitudeCalculator.multiplySignals(signal2, signal1);
+        DerivedSignal result = AmplitudeCalculator.MultiplySignals(signal2, signal1);
 
         Complex[] expectedValues = Arrays.copyOf(values1, 10);
 
@@ -419,7 +419,7 @@ public class ArithmeticOperationsTest {
 
         DerivedSignal signal1 = new DerivedSignal(values1, 1, 0, 0);
         DerivedSignal signal2 = new DerivedSignal(values2, 1, 1, 0);
-        DerivedSignal result = AmplitudeCalculator.multiplySignals(signal1, signal2);
+        DerivedSignal result = AmplitudeCalculator.MultiplySignals(signal1, signal2);
 
         Complex[] expectedValues = new Complex[11];
         Arrays.fill(expectedValues, Complex.ZERO);
@@ -440,7 +440,7 @@ public class ArithmeticOperationsTest {
     public void mulTest_FirstShifted() throws NotSameSamplinRateExpcetion {
         DerivedSignal signal1 = new DerivedSignal(values1, 1, 0, 0);
         DerivedSignal signal2 = new DerivedSignal(values2, 1, 1, 0);
-        DerivedSignal result = AmplitudeCalculator.multiplySignals(signal2, signal1);
+        DerivedSignal result = AmplitudeCalculator.MultiplySignals(signal2, signal1);
 
         Complex[] expectedValues = new Complex[11];
         Arrays.fill(expectedValues, Complex.ZERO);
@@ -461,7 +461,7 @@ public class ArithmeticOperationsTest {
     public void mulTest_FirstShiftedAndShorter() throws NotSameSamplinRateExpcetion {
         DerivedSignal signal1 = new DerivedSignal(values1, 1, 0, 0);
         DerivedSignal signal2 = new DerivedSignal(Arrays.copyOf(values2, 8), 1, 1, 0);
-        DerivedSignal result = AmplitudeCalculator.multiplySignals(signal1, signal2);
+        DerivedSignal result = AmplitudeCalculator.MultiplySignals(signal1, signal2);
 
         Complex[] expectedValues = Arrays.copyOf(values1, 10);;
         for (int i = 1; i < 11; i++) {
@@ -479,7 +479,7 @@ public class ArithmeticOperationsTest {
     public void mulTest_SecondShiftedAndShorter() throws NotSameSamplinRateExpcetion {
         DerivedSignal signal1 = new DerivedSignal(values1, 1, 0, 0);
         DerivedSignal signal2 = new DerivedSignal(Arrays.copyOf(values2, 8), 1, 1, 0);
-        DerivedSignal result = AmplitudeCalculator.multiplySignals(signal2, signal1);
+        DerivedSignal result = AmplitudeCalculator.MultiplySignals(signal2, signal1);
 
         Complex[] expectedValues = new Complex[10];
         Arrays.fill(expectedValues, Complex.ZERO);
@@ -499,7 +499,7 @@ public class ArithmeticOperationsTest {
     public void divTest_SecondShorter() throws NotSameSamplinRateExpcetion, DivideByZeroValueExcpetion {
         DerivedSignal signal1 = new DerivedSignal(values1, 1, 0, 0);
         DerivedSignal signal2 = new DerivedSignal(Arrays.copyOf(values2, 8), 1, 0, 0);
-        DerivedSignal result = AmplitudeCalculator.divideSignals(signal1, signal2);
+        DerivedSignal result = AmplitudeCalculator.DivideSignals(signal1, signal2);
 
         Complex[] expectedValues = Arrays.copyOf(values1, 10);
 
@@ -517,7 +517,7 @@ public class ArithmeticOperationsTest {
     public void divTest_FirstShorter() throws NotSameSamplinRateExpcetion, DivideByZeroValueExcpetion {
         DerivedSignal signal1 = new DerivedSignal(values1, 1, 0, 0);
         DerivedSignal signal2 = new DerivedSignal(Arrays.copyOf(values2, 8), 1, 0, 0);
-        DerivedSignal result = AmplitudeCalculator.divideSignals(signal2, signal1);
+        DerivedSignal result = AmplitudeCalculator.DivideSignals(signal2, signal1);
 
         Complex[] expectedValues = Arrays.copyOf(values1, 10);
         for (int i = 0; i < 10; i++) {
@@ -536,7 +536,7 @@ public class ArithmeticOperationsTest {
 
         DerivedSignal signal1 = new DerivedSignal(values1, 1, 0, 0);
         DerivedSignal signal2 = new DerivedSignal(values2, 1, 1, 0);
-        DerivedSignal result = AmplitudeCalculator.divideSignals(signal1, signal2);
+        DerivedSignal result = AmplitudeCalculator.DivideSignals(signal1, signal2);
 
         Complex[] expectedValues = new Complex[11];
         Arrays.fill(expectedValues, Complex.ZERO);
@@ -558,7 +558,7 @@ public class ArithmeticOperationsTest {
     public void divTest_FirstShifted() throws NotSameSamplinRateExpcetion, DivideByZeroValueExcpetion {
         DerivedSignal signal1 = new DerivedSignal(values1, 1, 0, 0);
         DerivedSignal signal2 = new DerivedSignal(values2, 1, 1, 0);
-        DerivedSignal result = AmplitudeCalculator.divideSignals(signal2, signal1);
+        DerivedSignal result = AmplitudeCalculator.DivideSignals(signal2, signal1);
 
         Complex[] expectedValues = new Complex[11];
         Arrays.fill(expectedValues, Complex.ZERO);
@@ -579,7 +579,7 @@ public class ArithmeticOperationsTest {
     public void divTest_FirstShiftedAndShorter() throws NotSameSamplinRateExpcetion, DivideByZeroValueExcpetion {
         DerivedSignal signal1 = new DerivedSignal(values1, 1, 0, 0);
         DerivedSignal signal2 = new DerivedSignal(Arrays.copyOf(values2, 8), 1, 1, 0);
-        DerivedSignal result = AmplitudeCalculator.divideSignals(signal1, signal2);
+        DerivedSignal result = AmplitudeCalculator.DivideSignals(signal1, signal2);
 
         Complex[] expectedValues = Arrays.copyOf(values1, 10);
         for (int i = 1; i < 11; i++) {
@@ -597,7 +597,7 @@ public class ArithmeticOperationsTest {
     public void divTest_SecondShiftedAndShorter() throws NotSameSamplinRateExpcetion, DivideByZeroValueExcpetion {
         DerivedSignal signal1 = new DerivedSignal(values1, 1, 0, 0);
         DerivedSignal signal2 = new DerivedSignal(Arrays.copyOf(values2, 8), 1, 1, 0);
-        DerivedSignal result = AmplitudeCalculator.divideSignals(signal2, signal1);
+        DerivedSignal result = AmplitudeCalculator.DivideSignals(signal2, signal1);
 
         Complex[] expectedValues = new Complex[10];
         Arrays.fill(expectedValues, Complex.ZERO);
@@ -620,6 +620,6 @@ public class ArithmeticOperationsTest {
         Arrays.fill(val, Complex.ZERO);
 
         DerivedSignal signal2 = new DerivedSignal(val, 1, 0, 0);
-        AmplitudeCalculator.divideSignals(signal1, signal2);
+        AmplitudeCalculator.DivideSignals(signal1, signal2);
     }
 }
