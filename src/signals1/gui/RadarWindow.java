@@ -5,6 +5,8 @@
  */
 package signals1.gui;
 
+import signals1.tools.RadarParameters;
+
 /**
  *
  * @author marr
@@ -13,8 +15,9 @@ public class RadarWindow extends javax.swing.JFrame {
 
     /**
      * Creates new form RadarWindow
+     * @param parameters
      */
-    public RadarWindow() {
+    public RadarWindow(RadarParameters parameters) {
         initComponents();
     }
 
@@ -27,7 +30,7 @@ public class RadarWindow extends javax.swing.JFrame {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
-        setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
+        setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);

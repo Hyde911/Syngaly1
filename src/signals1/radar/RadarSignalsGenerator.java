@@ -5,10 +5,8 @@
  */
 package signals1.radar;
 
-import java.util.logging.Level;
-import java.util.logging.Logger;
+import java.util.Arrays;
 import signals1.continuousSignals.SineSignal;
-import signals1.continuousSignals.abstracts.PeriodicSignals;
 import signals1.discreteSignals.DerivedSignal;
 import signals1.discreteSignals.PeriodicDiscreteSignal;
 import signals1.operations.AmplitudeCalculator;
@@ -19,12 +17,17 @@ import signals1.tools.quantisation.NoneQuantizer;
  *
  * @author marr
  */
-class RadarSignalsGenerator {
+public class RadarSignalsGenerator {
 
     private DerivedSignal radarSignal;
+    private DerivedSignal probingSignal;
+    private final int samplesPerProbe;
+    private final double probingDuration;
 
     public RadarSignalsGenerator(double period1, double period2, int samplingRate, double probingDuration) {
         generateRadarSignal(period1, period2, samplingRate, probingDuration);
+        samplesPerProbe = (int)(samplingRate * probingDuration);
+        this.probingDuration = probingDuration;
     }
 
     private void generateRadarSignal(double period1, double period2, int samplingRate, double probingDuration) {
@@ -38,9 +41,27 @@ class RadarSignalsGenerator {
         } catch (NotSameSamplinRateExpcetion ex) {
 
         }
+        probingSignal = new DerivedSignal(Arrays.copyOf(radarSignal.getValues(), samplesPerProbe), samplingRate, 0, radarSignal.getAmplitude());
     }
 
-    public void setRadarSignal(DerivedSignal radarSignal) {
-        this.radarSignal = radarSignal;
+    public DerivedSignal getResponseSignal(int startSample){
+        int startPosition = startSample % (samplesPerProbe * 2);
+        return new DerivedSignal(Arrays.copyOfRange(radarSignal.getValues(), startPosition, samplesPerProbe), radarSignal.getSamplingRate(), 0, radarSignal.getAmplitude());
+    }
+
+    public DerivedSignal getRadarSignal() {
+        return radarSignal;
+    }
+
+    public int getSamplesPerProbe() {
+        return samplesPerProbe;
+    }
+
+    public DerivedSignal getProbingSignal() {
+        return probingSignal;
+    }
+
+    public double getProbingDuration() {
+        return probingDuration;
     }
 }

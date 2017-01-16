@@ -44,10 +44,9 @@ class AmplitudeOperations {
         this.signal1 = signal1;
         this.signal2 = signal2;
         this.samplingRate = signal1.getSamplingRate();
-        if(signal1 instanceof ImpulseInterface && signal2 instanceof ImpulseInterface){
+        if (signal1 instanceof ImpulseInterface && signal2 instanceof ImpulseInterface) {
             signalType = ImpulseInterface.class;
-        }
-        else{
+        } else {
             signalType = DiscreteSignal.class;
         }
         setStartTime();

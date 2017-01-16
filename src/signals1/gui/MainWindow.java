@@ -7,10 +7,15 @@ package signals1.gui;
 
 import java.awt.BorderLayout;
 import java.awt.Dimension;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import javax.swing.DefaultComboBoxModel;
 import javax.swing.JOptionPane;
+import javax.swing.JTabbedPane;
 import javax.swing.UIManager;
 import javax.swing.UnsupportedLookAndFeelException;
+import javax.swing.event.ChangeEvent;
+import javax.swing.event.ChangeListener;
 import signals1.gui.inputForms.DiscreetSignalsPanel;
 import signals1.gui.inputForms.NoiseInputPanel;
 import signals1.gui.inputForms.SineInputPanel;
@@ -26,11 +31,14 @@ import signals1.converter.D2AConverterService;
 import signals1.discreteSignals.abstracts.DiscreteSignal;
 import signals1.discreteSignals.NonPeriodicDiscreteSignal;
 import signals1.discreteSignals.PeriodicDiscreteSignal;
+import signals1.gui.inputForms.RadarInputPanel;
 import signals1.operations.Convolution;
 import signals1.operations.Correlation;
 import signals1.tools.DiscretetSignalsContainer;
+import signals1.tools.RadarParameters;
 import signals1.tools.SignalContainer;
 import signals1.tools.constatns.Quantizers;
+import signals1.tools.exceptions.InputValidationException;
 import signals1.tools.exceptions.NotSameSamplinRateExpcetion;
 
 /**
@@ -41,9 +49,10 @@ public class MainWindow extends javax.swing.JFrame {
 
     private final Dimension inputFormDimension = new Dimension(400, 320);
     private SineInputPanel sineInputPanel;
-    private NoiseInputPanel noiseInputPanel;
+//    private NoiseInputPanel noiseInputPanel;
     private SquareInputPanel squareInputPanel;
-    private DiscreetSignalsPanel discreetPanel;
+//    private DiscreetSignalsPanel discreetPanel;
+    private RadarInputPanel radarInputPanel;
     private final SignalContainer signalContainer = SignalContainer.getInstance();
     private final DiscretetSignalsContainer disSignalContainer = DiscretetSignalsContainer.getInstance();
     private final VirtualSignalsTableModel virtulTableModel = new VirtualSignalsTableModel();
@@ -89,6 +98,7 @@ public class MainWindow extends javax.swing.JFrame {
         jPaneTabs = new javax.swing.JTabbedPane();
         jPanelSineSignals = new javax.swing.JPanel();
         jPanelSquareSignals = new javax.swing.JPanel();
+        jPanelRadar = new javax.swing.JPanel();
         jButtonGenerateSignal = new javax.swing.JButton();
         jSliderHistNo = new javax.swing.JSlider();
         jLabel7 = new javax.swing.JLabel();
@@ -137,6 +147,11 @@ public class MainWindow extends javax.swing.JFrame {
 
         jPaneTabs.setFont(new java.awt.Font("Arial", 0, 12)); // NOI18N
         jPaneTabs.setPreferredSize(new java.awt.Dimension(420, 320));
+        jPaneTabs.addChangeListener(new javax.swing.event.ChangeListener() {
+            public void stateChanged(javax.swing.event.ChangeEvent evt) {
+                jPaneTabsStateChanged(evt);
+            }
+        });
 
         jPanelSineSignals.setPreferredSize(inputFormDimension);
 
@@ -165,6 +180,19 @@ public class MainWindow extends javax.swing.JFrame {
         );
 
         jPaneTabs.addTab("Sygnały prostokątne", jPanelSquareSignals);
+
+        javax.swing.GroupLayout jPanelRadarLayout = new javax.swing.GroupLayout(jPanelRadar);
+        jPanelRadar.setLayout(jPanelRadarLayout);
+        jPanelRadarLayout.setHorizontalGroup(
+            jPanelRadarLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGap(0, 425, Short.MAX_VALUE)
+        );
+        jPanelRadarLayout.setVerticalGroup(
+            jPanelRadarLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGap(0, 291, Short.MAX_VALUE)
+        );
+
+        jPaneTabs.addTab("Radar", jPanelRadar);
 
         jButtonGenerateSignal.setFont(new java.awt.Font("Lucida Sans", 1, 14)); // NOI18N
         jButtonGenerateSignal.setText("Generuj Sygnał Pseudociągły");
@@ -493,7 +521,6 @@ public class MainWindow extends javax.swing.JFrame {
 
     private void jButtonGenerateSignalActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonGenerateSignalActionPerformed
         Signals signal = null;
-        int tmp = jPaneTabs.getSelectedIndex();
         switch (jPaneTabs.getSelectedIndex()) {
             case 0:
                 signal = sineInputPanel.getSingal();
@@ -501,7 +528,19 @@ public class MainWindow extends javax.swing.JFrame {
             case 1:
                 signal = squareInputPanel.getSingal();
                 break;
-           }
+            case 2:
+        {
+            try {
+                RadarParameters param = radarInputPanel.getParameters();
+                RadarWindow radarWindow = new RadarWindow(param);
+                radarWindow.setVisible(true);
+            } catch (InputValidationException ex) {
+                JOptionPane.showMessageDialog(this, "Walidacja danych wejściowych nie powiodła się", "Błąd", JOptionPane.ERROR_MESSAGE);
+                return;
+            }
+        }
+
+        }
         if (signal != null) {
             signalContainer.add(signal);
             virtulTableModel.fireTableDataChanged();
@@ -628,24 +667,40 @@ public class MainWindow extends javax.swing.JFrame {
         }
     }//GEN-LAST:event_jButtonCorrelationActionPerformed
 
+    private void jPaneTabsStateChanged(javax.swing.event.ChangeEvent evt) {//GEN-FIRST:event_jPaneTabsStateChanged
+        switch (jPaneTabs.getSelectedIndex()) {
+            case 2:
+                jButtonGenerateSignal.setText("Dokonaj pomiaru");
+                break;
+            default:
+                jButtonGenerateSignal.setText("Generuj Sygnał Pseudociągły");
+                break;
+        }
+    }//GEN-LAST:event_jPaneTabsStateChanged
+
     private void initInputForms() {
         sineInputPanel = new SineInputPanel(inputFormDimension);
-        noiseInputPanel = new NoiseInputPanel(inputFormDimension);
         squareInputPanel = new SquareInputPanel(inputFormDimension);
-        discreetPanel = new DiscreetSignalsPanel(inputFormDimension);
+        radarInputPanel = new RadarInputPanel();
 
+//        discreetPanel = new DiscreetSignalsPanel(inputFormDimension);
+//        noiseInputPanel = new NoiseInputPanel(inputFormDimension);
         jPanelSineSignals.setLayout(new java.awt.BorderLayout());
         jPanelSineSignals.add(sineInputPanel, BorderLayout.CENTER);
-//        jPanelNoiseSignals.setLayout(new java.awt.BorderLayout());
-//        jPanelNoiseSignals.add(noiseInputPanel, BorderLayout.CENTER);
         jPanelSquareSignals.setLayout(new java.awt.BorderLayout());
         jPanelSquareSignals.add(squareInputPanel, BorderLayout.CENTER);
+        jPanelRadar.setLayout(new java.awt.BorderLayout());
+        jPanelRadar.add(radarInputPanel, BorderLayout.CENTER);
+
+//        jPanelNoiseSignals.setLayout(new java.awt.BorderLayout());
+//        jPanelNoiseSignals.add(noiseInputPanel, BorderLayout.CENTER);
 //        jPanelDiscreteSignals.setLayout(new java.awt.BorderLayout());
 //        jPanelDiscreteSignals.add(discreetPanel, BorderLayout.CENTER);
-
-        jPanelSineSignals.validate();
-//        jPanelNoiseSignals.validate();
         jPanelSquareSignals.validate();
+        jPanelRadar.validate();
+        jPanelSineSignals.validate();
+
+//        jPanelNoiseSignals.validate();
 //        jPanelDiscreteSignals.validate();
     }
 
@@ -733,6 +788,7 @@ public class MainWindow extends javax.swing.JFrame {
     private javax.swing.JLabel jLabel9;
     private javax.swing.JTabbedPane jPaneTabs;
     private javax.swing.JPanel jPanel1;
+    private javax.swing.JPanel jPanelRadar;
     private javax.swing.JPanel jPanelSineSignals;
     private javax.swing.JPanel jPanelSquareSignals;
     private javax.swing.JScrollPane jScrollPane1;

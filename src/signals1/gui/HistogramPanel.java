@@ -26,7 +26,7 @@ public class HistogramPanel extends javax.swing.JPanel {
      */
     public HistogramPanel(Histogram histogram, int intervals) {
         initComponents();
-        return;/*
+
         if (histogram.getImgHistogram().length == 1){
             return;
         }
@@ -44,7 +44,7 @@ public class HistogramPanel extends javax.swing.JPanel {
         jPanelHisImg.setLayout(new java.awt.BorderLayout());
         jPanelHisImg.add(imgChartPanel, BorderLayout.CENTER);
         jPanelHisImg.setVisible(true);
-        jPanelHisImg.validate();*/
+        jPanelHisImg.validate();
     }
 
     /**

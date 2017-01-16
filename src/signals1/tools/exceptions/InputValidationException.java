@@ -3,16 +3,12 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package signals1.radar;
+package signals1.tools.exceptions;
 
 /**
  *
  * @author marr
  */
-public class RadarResponseSimulator {
-    
-    
-
-    
+public class InputValidationException extends Exception{
     
 }
