@@ -13,6 +13,10 @@ import org.apache.commons.math3.complex.Complex;
  */
 public class NoneQuantizer extends Quantizer{
 
+    public NoneQuantizer(){
+        this(1);
+    }
+    
     public NoneQuantizer(int bitsNumber) {
         super(bitsNumber);
     }
