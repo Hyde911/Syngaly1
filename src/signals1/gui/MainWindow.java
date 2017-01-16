@@ -5,6 +5,7 @@
  */
 package signals1.gui;
 
+import signals1.gui.radar.RadarWindow;
 import java.awt.BorderLayout;
 import java.awt.Dimension;
 import java.util.logging.Level;
@@ -31,7 +32,7 @@ import signals1.converter.D2AConverterService;
 import signals1.discreteSignals.abstracts.DiscreteSignal;
 import signals1.discreteSignals.NonPeriodicDiscreteSignal;
 import signals1.discreteSignals.PeriodicDiscreteSignal;
-import signals1.gui.inputForms.RadarInputPanel;
+import signals1.gui.radar.RadarInputPanel;
 import signals1.operations.Convolution;
 import signals1.operations.Correlation;
 import signals1.tools.DiscretetSignalsContainer;

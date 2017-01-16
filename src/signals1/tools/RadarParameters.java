@@ -14,18 +14,20 @@ public class RadarParameters {
     private final double secondCompomentPeriod;
     private final int samplingRate;
     private final double buforLength;
-    private final double initial;
+    private final double initialDistance;
     private final double velocity;
     private final double interval;
+    private final double waveSpeed;
 
-    public RadarParameters(double firstCompomentPeriod, double secondCompomentPeriod, int samplingRate, double buforLength, double initial, double velocity, double interval) {
+    public RadarParameters(double firstCompomentPeriod, double secondCompomentPeriod, int samplingRate, double buforLength, double initialDistance, double velocity, double interval, double waveSpeed) {
         this.firstCompomentPeriod = firstCompomentPeriod;
         this.secondCompomentPeriod = secondCompomentPeriod;
         this.samplingRate = samplingRate;
         this.buforLength = buforLength;
-        this.initial = initial;
+        this.initialDistance = initialDistance;
         this.velocity = velocity;
         this.interval = interval;
+        this.waveSpeed = waveSpeed;
     }
 
     public double getFirstCompomentPeriod() {
@@ -44,16 +46,20 @@ public class RadarParameters {
         return buforLength;
     }
 
-    public double getInitial() {
-        return initial;
-    }
-
     public double getVelocity() {
         return velocity;
     }
 
     public double getInterval() {
         return interval;
+    }
+
+    public double getInitialDistance() {
+        return initialDistance;
+    }
+
+    public double getWaveSpeed() {
+        return waveSpeed;
     }
             
 }

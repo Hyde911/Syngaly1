@@ -10,6 +10,7 @@ import signals1.continuousSignals.SineSignal;
 import signals1.discreteSignals.DerivedSignal;
 import signals1.discreteSignals.PeriodicDiscreteSignal;
 import signals1.operations.AmplitudeCalculator;
+import signals1.tools.RadarParameters;
 import signals1.tools.exceptions.NotSameSamplinRateExpcetion;
 import signals1.tools.quantisation.NoneQuantizer;
 
@@ -22,35 +23,32 @@ public class RadarSignalsGenerator {
     private DerivedSignal radarSignal;
     private DerivedSignal probingSignal;
     private final int samplesPerProbe;
-    private final double probingDuration;
+    private final double amplitude = 1;
+    private final RadarParameters params;
 
-    public RadarSignalsGenerator(double period1, double period2, int samplingRate, double probingDuration) {
-        generateRadarSignal(period1, period2, samplingRate, probingDuration);
-        samplesPerProbe = (int)(samplingRate * probingDuration);
-        this.probingDuration = probingDuration;
+    public RadarSignalsGenerator(RadarParameters params) {
+        this.params = params;
+        generateRadarSignal();
+        samplesPerProbe = (int) (params.getSamplingRate() * params.getBuforLength());
     }
 
-    private void generateRadarSignal(double period1, double period2, int samplingRate, double probingDuration) {
-        double duration = probingDuration * 2;
-        SineSignal signal1 = new SineSignal(0, 1, duration, period1);
-        SineSignal signal2 = new SineSignal(0, 1, duration, period2);
-        PeriodicDiscreteSignal disSignal1 = new PeriodicDiscreteSignal(signal1, samplingRate, new NoneQuantizer());
-        PeriodicDiscreteSignal disSignal2 = new PeriodicDiscreteSignal(signal2, samplingRate, new NoneQuantizer());
+    private void generateRadarSignal() {
+        double duration = params.getBuforLength() * 2;
+        SineSignal signal1 = new SineSignal(0, amplitude, duration, params.getFirstCompomentPeriod());
+        SineSignal signal2 = new SineSignal(0, amplitude, duration, params.getSecondCompomentPeriod());
+        PeriodicDiscreteSignal disSignal1 = new PeriodicDiscreteSignal(signal1, params.getSamplingRate(), new NoneQuantizer());
+        PeriodicDiscreteSignal disSignal2 = new PeriodicDiscreteSignal(signal2, params.getSamplingRate(), new NoneQuantizer());
         try {
             radarSignal = AmplitudeCalculator.AddSignals(disSignal1, disSignal2);
         } catch (NotSameSamplinRateExpcetion ex) {
 
         }
-        probingSignal = new DerivedSignal(Arrays.copyOf(radarSignal.getValues(), samplesPerProbe), samplingRate, 0, radarSignal.getAmplitude());
+        probingSignal = new DerivedSignal(Arrays.copyOf(radarSignal.getValues(), samplesPerProbe), params.getSamplingRate(), 0, radarSignal.getAmplitude());
     }
 
-    public DerivedSignal getResponseSignal(int startSample){
+    public DerivedSignal getResponseSignal(int startSample) {
         int startPosition = startSample % (samplesPerProbe * 2);
         return new DerivedSignal(Arrays.copyOfRange(radarSignal.getValues(), startPosition, samplesPerProbe), radarSignal.getSamplingRate(), 0, radarSignal.getAmplitude());
-    }
-
-    public DerivedSignal getRadarSignal() {
-        return radarSignal;
     }
 
     public int getSamplesPerProbe() {
@@ -59,9 +57,5 @@ public class RadarSignalsGenerator {
 
     public DerivedSignal getProbingSignal() {
         return probingSignal;
-    }
-
-    public double getProbingDuration() {
-        return probingDuration;
     }
 }

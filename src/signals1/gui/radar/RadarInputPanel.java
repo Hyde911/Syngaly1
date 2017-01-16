@@ -3,7 +3,7 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package signals1.gui.inputForms;
+package signals1.gui.radar;
 
 import signals1.tools.RadarParameters;
 import signals1.tools.exceptions.InputValidationException;
@@ -21,10 +21,24 @@ public class RadarInputPanel extends javax.swing.JPanel {
         initComponents();
     }
 
-    public RadarParameters getParameters() throws InputValidationException{
-        throw new InputValidationException();
+    public RadarParameters getParameters() throws InputValidationException {
+        RadarParameters params;
+        try {
+            double firstCompomentPeriod = Double.parseDouble(jTextPeriod1.getText());
+            double secondCompomentPeriod = Double.parseDouble(jTextPeriod2.getText());
+            int samplingRate = Integer.parseInt(jTextSamplingRate.getText());
+            double buforLength = Double.parseDouble(jTextBuferSize.getText());
+            double initialDistance = Double.parseDouble(jTextDistance.getText());
+            double velocity = Double.parseDouble(jTextVelocity.getText());
+            double interval = Double.parseDouble(jTextInterval.getText());
+            double waveSpeed = Double.parseDouble(jTextWaveSpeed.getText());
+            params = new RadarParameters(firstCompomentPeriod, secondCompomentPeriod, samplingRate, buforLength, initialDistance, velocity, interval, waveSpeed);
+        } catch (Exception ex) {
+            throw new InputValidationException();
+        }
+        return params;
     }
-    
+
     /**
      * This method is called from within the constructor to initialize the form.
      * WARNING: Do NOT modify this code. The content of this method is always
@@ -47,7 +61,9 @@ public class RadarInputPanel extends javax.swing.JPanel {
         jTextBuferSize = new javax.swing.JTextField();
         jTextDistance = new javax.swing.JTextField();
         jTextVelocity = new javax.swing.JTextField();
-        jTextVelocity1 = new javax.swing.JTextField();
+        jTextInterval = new javax.swing.JTextField();
+        jLabel10 = new javax.swing.JLabel();
+        jTextWaveSpeed = new javax.swing.JTextField();
 
         jLabel3.setFont(new java.awt.Font("Verdana", 1, 12)); // NOI18N
         jLabel3.setHorizontalAlignment(javax.swing.SwingConstants.RIGHT);
@@ -87,7 +103,7 @@ public class RadarInputPanel extends javax.swing.JPanel {
 
         jTextSamplingRate.setFont(new java.awt.Font("Verdana", 1, 12)); // NOI18N
         jTextSamplingRate.setHorizontalAlignment(javax.swing.JTextField.CENTER);
-        jTextSamplingRate.setText("0.3");
+        jTextSamplingRate.setText("4096");
 
         jTextBuferSize.setFont(new java.awt.Font("Verdana", 1, 12)); // NOI18N
         jTextBuferSize.setHorizontalAlignment(javax.swing.JTextField.CENTER);
@@ -101,9 +117,22 @@ public class RadarInputPanel extends javax.swing.JPanel {
         jTextVelocity.setHorizontalAlignment(javax.swing.JTextField.CENTER);
         jTextVelocity.setText("1000");
 
-        jTextVelocity1.setFont(new java.awt.Font("Verdana", 1, 12)); // NOI18N
-        jTextVelocity1.setHorizontalAlignment(javax.swing.JTextField.CENTER);
-        jTextVelocity1.setText("50");
+        jTextInterval.setFont(new java.awt.Font("Verdana", 1, 12)); // NOI18N
+        jTextInterval.setHorizontalAlignment(javax.swing.JTextField.CENTER);
+        jTextInterval.setText("50");
+
+        jLabel10.setFont(new java.awt.Font("Verdana", 1, 12)); // NOI18N
+        jLabel10.setHorizontalAlignment(javax.swing.SwingConstants.RIGHT);
+        jLabel10.setText("Prędkość rozchodzenia się fali [m/s]");
+
+        jTextWaveSpeed.setFont(new java.awt.Font("Verdana", 1, 12)); // NOI18N
+        jTextWaveSpeed.setHorizontalAlignment(javax.swing.JTextField.CENTER);
+        jTextWaveSpeed.setText("343");
+        jTextWaveSpeed.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jTextWaveSpeedActionPerformed(evt);
+            }
+        });
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(this);
         this.setLayout(layout);
@@ -117,7 +146,8 @@ public class RadarInputPanel extends javax.swing.JPanel {
                     .addComponent(jLabel3, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                     .addComponent(jLabel7, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                     .addComponent(jLabel8, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(jLabel9, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                    .addComponent(jLabel9, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(jLabel10, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(jTextPeriod1, javax.swing.GroupLayout.PREFERRED_SIZE, 56, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -126,7 +156,8 @@ public class RadarInputPanel extends javax.swing.JPanel {
                     .addComponent(jTextBuferSize, javax.swing.GroupLayout.PREFERRED_SIZE, 56, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(jTextDistance, javax.swing.GroupLayout.PREFERRED_SIZE, 56, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(jTextVelocity, javax.swing.GroupLayout.PREFERRED_SIZE, 56, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jTextVelocity1, javax.swing.GroupLayout.PREFERRED_SIZE, 56, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(jTextInterval, javax.swing.GroupLayout.PREFERRED_SIZE, 56, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jTextWaveSpeed, javax.swing.GroupLayout.PREFERRED_SIZE, 56, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(0, 63, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
@@ -159,13 +190,22 @@ public class RadarInputPanel extends javax.swing.JPanel {
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel9, javax.swing.GroupLayout.PREFERRED_SIZE, 29, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jTextVelocity1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addContainerGap(50, Short.MAX_VALUE))
+                    .addComponent(jTextInterval, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jLabel10, javax.swing.GroupLayout.PREFERRED_SIZE, 29, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jTextWaveSpeed, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addContainerGap(15, Short.MAX_VALUE))
         );
     }// </editor-fold>//GEN-END:initComponents
 
+    private void jTextWaveSpeedActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jTextWaveSpeedActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_jTextWaveSpeedActionPerformed
+
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JLabel jLabel10;
     private javax.swing.JLabel jLabel3;
     private javax.swing.JLabel jLabel4;
     private javax.swing.JLabel jLabel5;
@@ -175,10 +215,11 @@ public class RadarInputPanel extends javax.swing.JPanel {
     private javax.swing.JLabel jLabel9;
     private javax.swing.JTextField jTextBuferSize;
     private javax.swing.JTextField jTextDistance;
+    private javax.swing.JTextField jTextInterval;
     private javax.swing.JTextField jTextPeriod1;
     private javax.swing.JTextField jTextPeriod2;
     private javax.swing.JTextField jTextSamplingRate;
     private javax.swing.JTextField jTextVelocity;
-    private javax.swing.JTextField jTextVelocity1;
+    private javax.swing.JTextField jTextWaveSpeed;
     // End of variables declaration//GEN-END:variables
 }
