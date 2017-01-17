@@ -78,7 +78,7 @@
                   <Component id="jLabel5" alignment="3" min="-2" pref="32" max="-2" attributes="0"/>
                   <Component id="jTextStartTime" alignment="3" pref="32" max="32767" attributes="0"/>
               </Group>
-              <EmptySpace pref="114" max="32767" attributes="0"/>
+              <EmptySpace pref="139" max="32767" attributes="0"/>
           </Group>
       </Group>
     </DimensionLayout>
