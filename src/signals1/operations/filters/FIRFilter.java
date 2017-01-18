@@ -13,13 +13,15 @@ import signals1.operations.windows.WindowFunction;
  */
 public abstract class FIRFilter {
     
+    protected WindowFunction window;
     protected double[] filter = null;
     protected int order;
     protected double lowFrqCutoff;
     protected double highFrqCutoff;
     protected double samplingRate;
 
-    public FIRFilter(final int order, final double lowFrqCutoff, final double highFrqCutoff, final double samplingRate) {
+    public FIRFilter(final WindowFunction window, final int order, final double lowFrqCutoff, final double highFrqCutoff, final double samplingRate) {
+        this.window = window;
         this.order = order;
         this.lowFrqCutoff = lowFrqCutoff;
         this.highFrqCutoff = highFrqCutoff;

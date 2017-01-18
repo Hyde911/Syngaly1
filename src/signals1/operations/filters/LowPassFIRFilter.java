@@ -6,6 +6,7 @@
 package signals1.operations.filters;
 
 import signals1.operations.MathFunctions;
+import signals1.operations.windows.WindowFunction;
 
 /**
  *
@@ -13,8 +14,8 @@ import signals1.operations.MathFunctions;
  */
 public class LowPassFIRFilter extends FIRFilter{
     
-    public LowPassFIRFilter(final int order, final double fc, final double fs){
-        super(order, fc, Double.POSITIVE_INFINITY, fs);
+    public LowPassFIRFilter(final WindowFunction window, final int order, final double fc, final double fs){
+        super(window, order, fc, Double.POSITIVE_INFINITY, fs);
         final double cutoff = lowFrqCutoff / samplingRate;
         filter = new double[order + 1];
         final double factor = 2.0 * cutoff;
@@ -22,6 +23,7 @@ public class LowPassFIRFilter extends FIRFilter{
         for (int i = 0; i < filter.length; i++){
             filter[i] = factor * MathFunctions.SINC(factor * (i - half));
         }
+        filter = window.apply(filter);
     }
 
     @Override

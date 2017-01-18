@@ -18,20 +18,22 @@ public abstract class WindowFunction {
     }
 
 
-    public void apply(double[] filter) {
+    public double[] apply(double[] filter) {
         this.length = filter.length;
 
         for (int n = 0; n < filter.length; n++) {
             filter[n] *= value(filter.length, n);
         }
+        return filter;
     }
 
-    public void apply(double[] filter, int offset, int length) {
+    public double[] apply(double[] filter, int offset, int length) {
         this.length = length;
 
         for (int n = offset; n < offset + length; ++n) {
             filter[n] *= value(length, n - offset);
         }
+        return filter;
     }
 
 

@@ -5,24 +5,26 @@
  */
 package signals1.operations.filters;
 
+import signals1.operations.windows.WindowFunction;
+
 /**
  *
  * @author glabg
  */
 public class BandPassFIRFilter extends FIRFilter {
 
-    public BandPassFIRFilter(int order, double lowFrqCutoff, double highFrqCutoff, double samplingRate) {
-        super(order, lowFrqCutoff, highFrqCutoff, samplingRate);
-        filter = createBandstop(order, lowFrqCutoff, highFrqCutoff, samplingRate);
+    public BandPassFIRFilter(final WindowFunction window, final int order, final double lowFrqCutoff, final double highFrqCutoff, final double samplingRate) {
+        super(window, order, lowFrqCutoff, highFrqCutoff, samplingRate);
+        filter = createBandstop();
         final int half = order >> 1;
         for (int i = 0; i < filter.length; i++) {
             filter[i] = (i == half ? 1.0 : 0.0) - filter[i];
         }
     }
 
-    public double[] createBandstop(final int order, final double fcl, final double fch, final double fs) {
-        final double[] low = new LowPassFIRFilter(order, fcl, fs).getFilter();
-        final double[] high = new HighPassFIRFilter(order, fch, fs).getFilter();
+    public double[] createBandstop() {
+        final double[] low = new LowPassFIRFilter(window, order, lowFrqCutoff, samplingRate).getFilter();
+        final double[] high = new HighPassFIRFilter(window, order, highFrqCutoff, samplingRate).getFilter();
         for (int i = 0; i < low.length; i++) {
             low[i] += high[i];
         }

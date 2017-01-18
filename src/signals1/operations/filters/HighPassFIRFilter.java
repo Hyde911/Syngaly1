@@ -6,6 +6,7 @@
 package signals1.operations.filters;
 
 import signals1.operations.MathFunctions;
+import signals1.operations.windows.WindowFunction;
 
 /**
  *
@@ -13,8 +14,8 @@ import signals1.operations.MathFunctions;
  */
 public class HighPassFIRFilter extends FIRFilter{
     
-    public HighPassFIRFilter(final int order, final double fc, final double fs){
-        super(order, 0d, fc, fs);
+    public HighPassFIRFilter(final WindowFunction window, final int order, final double fc, final double fs){
+        super(window, order, 0d, fc, fs);
         final double cutoff = highFrqCutoff / samplingRate;
         filter = new double[order + 1];
         final double factor = 2.0 * cutoff;
@@ -22,7 +23,7 @@ public class HighPassFIRFilter extends FIRFilter{
         for (int i = 0; i < filter.length; i++){
             filter[i] = (i == half ? 1.0 : 0.0) - factor * MathFunctions.SINC(factor * (i - half));
         }
-
+        filter = window.apply(filter);
     }
 
     @Override
