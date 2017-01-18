@@ -13,6 +13,6 @@ public class HammingWindow extends WindowFunction {
 
     @Override
     protected double value(int length, int index) {
-        return 0.54f - 0.46f * (double) Math.cos(TWO_PI * index / (length - 1));
+        return 0.54d - 0.46d * (double) Math.cos(TWO_PI * index / (length - 1));
     }
 }

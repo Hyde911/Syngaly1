@@ -13,7 +13,7 @@ public class HanningWindow extends WindowFunction{
 
     @Override
     protected double value(int length, int index) {
-         return 0.5f * (1f - (double) Math.cos(TWO_PI * index / (length - 1f)));
+         return 0.5f * (1d - (double) Math.cos(TWO_PI * index / (length - 1d)));
     }
     
 }
