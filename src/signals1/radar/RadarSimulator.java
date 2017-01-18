@@ -25,8 +25,8 @@ public class RadarSimulator {
     
     public RadarResponse generateResponse (double distance, double velocity){
         DerivedSignal probingSignal = signals.getProbingSignal();
-        DerivedSignal responseSignal1 = signals.getResponseSignal((int)(distance / params.getWaveSpeed()));
-        DerivedSignal responseSignal2 = signals.getResponseSignal((int)(distance + params.getInterval() * velocity / params.getWaveSpeed()));        
+        DerivedSignal responseSignal1 = signals.getResponseSignal((int)((distance * 2)/ params.getWaveSpeed()));
+        DerivedSignal responseSignal2 = signals.getResponseSignal((int)(((distance * 2) + (params.getInterval() * velocity)) / params.getWaveSpeed()));        
         return new RadarResponse(probingSignal, responseSignal1, responseSignal2, distance, velocity, velocity);
     }
     
