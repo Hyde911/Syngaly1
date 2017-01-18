@@ -5,11 +5,22 @@
  */
 package signals1.gui.radar;
 
+import java.awt.BorderLayout;
+import java.awt.Color;
+import java.awt.Dimension;
+import java.awt.Shape;
+import java.awt.geom.Ellipse2D;
 import org.apache.commons.math3.complex.Complex;
+import org.jfree.chart.ChartFactory;
 import org.jfree.chart.ChartPanel;
+import org.jfree.chart.JFreeChart;
+import org.jfree.chart.plot.XYPlot;
+import org.jfree.chart.renderer.xy.XYItemRenderer;
 import org.jfree.data.xy.XYSeries;
 import org.jfree.data.xy.XYSeriesCollection;
 import signals1.discreteSignals.abstracts.DiscreteSignal;
+import signals1.radar.RadarResponse;
+import signals1.radar.RadarResponseAnalysis;
 
 /**
  *
@@ -17,26 +28,60 @@ import signals1.discreteSignals.abstracts.DiscreteSignal;
  */
 public class RadarChartsPanel extends javax.swing.JPanel {
 
-    private DiscreteSignal signal1;
-    private DiscreteSignal signal2;
+    private static final Shape CIRCLESMALL = new Ellipse2D.Double(2, 2, 2, 2);
+    private final int chartDimensionX = 900;
+    private final int chartDimensionY = 195;
+//    private DiscreteSignal signal1;
+//    private DiscreteSignal signal2;
     private ChartPanel signalsChart;
     private ChartPanel correlationChart;
 
     /**
      * Creates new form RadarChartsPanel
      */
-    public RadarChartsPanel(DiscreteSignal signal1, DiscreteSignal signal2) {
+    public RadarChartsPanel(RadarResponse signalReponse, RadarResponseAnalysis analysis) {
         initComponents();
+        jPanelCharts1.setLayout(new java.awt.BorderLayout());
+        jPanelCharts1.add(getSignalCharts(signalReponse.getProbingSignal().getValues(), signalReponse.getFirstResponse().getValues(), "Pierwszy pomiar"), BorderLayout.CENTER);
+        jPanelCharts1.setVisible(true);
+        jPanelCharts1.validate();
+    }
+
+    private ChartPanel getSignalCharts(Complex[] probingSignal, Complex[] responseSignal, String title) {
+
+        XYSeriesCollection dataSet = createDataset(probingSignal, "sygnał wysyłany");
+        addDataset(dataSet, responseSignal, "sygnał zwrotny");
+
+        JFreeChart chart = ChartFactory.createScatterPlot(title, "probka", "amplituda", dataSet);
+        XYPlot xyPlot = (XYPlot) chart.getPlot();
+        XYItemRenderer renderer = xyPlot.getRenderer();
+        renderer.setSeriesShape(0, CIRCLESMALL);
+        renderer.setSeriesPaint(0, Color.RED);
+        renderer.setSeriesShape(1, CIRCLESMALL);
+        renderer.setSeriesPaint(1, Color.BLUE);
+        ChartPanel chartPanel = new ChartPanel(chart);
+        chartPanel.setPreferredSize(new Dimension(chartDimensionX, chartDimensionY));
+        return chartPanel;
     }
 
     private XYSeriesCollection createDataset(Complex[] values, String title) {
         XYSeries series = new XYSeries(title);
         double x;
         double y;
-        for (int i = 0; i < values.length; i++){
+        for (int i = 0; i < values.length; i++) {
             series.add(i, values[i].getReal());
         }
         return new XYSeriesCollection(series);
+    }
+
+    private void addDataset(XYSeriesCollection dataset, Complex[] values, String title) {
+        XYSeries series = new XYSeries(title);
+        double x;
+        double y;
+        for (int i = 0; i < values.length; i++) {
+            series.add(i, values[i].getReal());
+        }
+        dataset.addSeries(series);
     }
 
     /**
@@ -48,54 +93,92 @@ public class RadarChartsPanel extends javax.swing.JPanel {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
-        jPanelCharts = new javax.swing.JPanel();
-        jPanelCorrelation = new javax.swing.JPanel();
+        jPanelCharts1 = new javax.swing.JPanel();
+        jPanelCorrelation1 = new javax.swing.JPanel();
+        jPanelCharts2 = new javax.swing.JPanel();
+        jPanelCorrelation2 = new javax.swing.JPanel();
 
         setPreferredSize(new java.awt.Dimension(900, 720));
 
-        javax.swing.GroupLayout jPanelChartsLayout = new javax.swing.GroupLayout(jPanelCharts);
-        jPanelCharts.setLayout(jPanelChartsLayout);
-        jPanelChartsLayout.setHorizontalGroup(
-            jPanelChartsLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+        jPanelCharts1.setPreferredSize(new java.awt.Dimension(900, 195));
+
+        javax.swing.GroupLayout jPanelCharts1Layout = new javax.swing.GroupLayout(jPanelCharts1);
+        jPanelCharts1.setLayout(jPanelCharts1Layout);
+        jPanelCharts1Layout.setHorizontalGroup(
+            jPanelCharts1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGap(0, 900, Short.MAX_VALUE)
         );
-        jPanelChartsLayout.setVerticalGroup(
-            jPanelChartsLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 350, Short.MAX_VALUE)
+        jPanelCharts1Layout.setVerticalGroup(
+            jPanelCharts1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGap(0, 195, Short.MAX_VALUE)
         );
 
-        jPanelCorrelation.setPreferredSize(new java.awt.Dimension(900, 350));
+        jPanelCorrelation1.setPreferredSize(new java.awt.Dimension(900, 195));
 
-        javax.swing.GroupLayout jPanelCorrelationLayout = new javax.swing.GroupLayout(jPanelCorrelation);
-        jPanelCorrelation.setLayout(jPanelCorrelationLayout);
-        jPanelCorrelationLayout.setHorizontalGroup(
-            jPanelCorrelationLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+        javax.swing.GroupLayout jPanelCorrelation1Layout = new javax.swing.GroupLayout(jPanelCorrelation1);
+        jPanelCorrelation1.setLayout(jPanelCorrelation1Layout);
+        jPanelCorrelation1Layout.setHorizontalGroup(
+            jPanelCorrelation1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGap(0, 0, Short.MAX_VALUE)
         );
-        jPanelCorrelationLayout.setVerticalGroup(
-            jPanelCorrelationLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 350, Short.MAX_VALUE)
+        jPanelCorrelation1Layout.setVerticalGroup(
+            jPanelCorrelation1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGap(0, 195, Short.MAX_VALUE)
+        );
+
+        jPanelCharts2.setPreferredSize(new java.awt.Dimension(900, 195));
+
+        javax.swing.GroupLayout jPanelCharts2Layout = new javax.swing.GroupLayout(jPanelCharts2);
+        jPanelCharts2.setLayout(jPanelCharts2Layout);
+        jPanelCharts2Layout.setHorizontalGroup(
+            jPanelCharts2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGap(0, 0, Short.MAX_VALUE)
+        );
+        jPanelCharts2Layout.setVerticalGroup(
+            jPanelCharts2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGap(0, 195, Short.MAX_VALUE)
+        );
+
+        jPanelCorrelation2.setPreferredSize(new java.awt.Dimension(900, 195));
+
+        javax.swing.GroupLayout jPanelCorrelation2Layout = new javax.swing.GroupLayout(jPanelCorrelation2);
+        jPanelCorrelation2.setLayout(jPanelCorrelation2Layout);
+        jPanelCorrelation2Layout.setHorizontalGroup(
+            jPanelCorrelation2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGap(0, 0, Short.MAX_VALUE)
+        );
+        jPanelCorrelation2Layout.setVerticalGroup(
+            jPanelCorrelation2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGap(0, 195, Short.MAX_VALUE)
         );
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(this);
         this.setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(jPanelCharts, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-            .addComponent(jPanelCorrelation, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+            .addComponent(jPanelCharts1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+            .addComponent(jPanelCorrelation1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+            .addComponent(jPanelCharts2, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+            .addComponent(jPanelCorrelation2, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
-                .addComponent(jPanelCharts, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addComponent(jPanelCharts1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(jPanelCorrelation, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addComponent(jPanelCharts2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(jPanelCorrelation1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 8, Short.MAX_VALUE)
+                .addComponent(jPanelCorrelation2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
         );
     }// </editor-fold>//GEN-END:initComponents
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JPanel jPanelCharts;
-    private javax.swing.JPanel jPanelCorrelation;
+    private javax.swing.JPanel jPanelCharts1;
+    private javax.swing.JPanel jPanelCharts2;
+    private javax.swing.JPanel jPanelCorrelation1;
+    private javax.swing.JPanel jPanelCorrelation2;
     // End of variables declaration//GEN-END:variables
 }
