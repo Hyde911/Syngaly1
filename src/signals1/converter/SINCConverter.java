@@ -5,11 +5,10 @@
  */
 package signals1.converter;
 
-import org.apache.commons.lang3.ArrayUtils;
-import org.apache.commons.math3.analysis.function.Sinc;
 import org.apache.commons.math3.complex.Complex;
 import signals1.discreteSignals.DerivedSignal;
 import signals1.discreteSignals.abstracts.DiscreteSignal;
+import signals1.operations.MathFunctions;
 
 /**
  *
@@ -48,17 +47,11 @@ public class SINCConverter implements D2AConverter {
         }
         for (int i = start; i < end; i++) {
             double oldVal = values[(int) (i * (1.0 * originalSamplingRate / newSamplingRate))].getReal();
-            double factor = SINC((newSample - i) * (1.0 * originalSamplingRate / newSamplingRate));
+            double factor = MathFunctions.SINC((newSample - i) * (1.0 * originalSamplingRate / newSamplingRate));
             ret = ret.add(oldVal * factor);
         }
         return ret.multiply((1.0 * originalSamplingRate / newSamplingRate));
     }
 
-    public static double SINC(double n) {
-        if (n == 0) {
-            return 1;
-        } else {
-            return Math.sin(Math.PI * n) / (Math.PI * n);
-        }
-    }
+
 }
