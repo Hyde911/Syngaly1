@@ -9,6 +9,7 @@ import java.awt.BorderLayout;
 import signals1.radar.RadarSimulator;
 import signals1.tools.RadarParameters;
 import signals1.radar.RadarResponse;
+import signals1.radar.RadarResponseAnalysis;
 
 /**
  *
@@ -19,6 +20,7 @@ public class RadarWindow extends javax.swing.JFrame {
     private RadarSimulator radarSimulator;
     private RadarResponse response;
     private RadarParameters parameters;
+    private RadarResponseAnalysis analysis;
 
     /**
      * Creates new form RadarWindow
@@ -29,12 +31,13 @@ public class RadarWindow extends javax.swing.JFrame {
         this.parameters = parameters;
         this.radarSimulator = new RadarSimulator(parameters);
         this.response = radarSimulator.generateResponse(parameters.getInitialDistance(), parameters.getVelocity());
+        this.analysis = radarSimulator.ProcessRadarResponse(response);
         initComponents();
         addCharts();
     }
 
     private void addCharts() {
-        RadarChartsPanel chartsPanel = new RadarChartsPanel(response, null);
+        RadarChartsPanel chartsPanel = new RadarChartsPanel(response, analysis);
         jPanelCharts.setLayout(new java.awt.BorderLayout());
         jPanelCharts.add(chartsPanel, BorderLayout.CENTER);
         jPanelCharts.revalidate();

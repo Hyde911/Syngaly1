@@ -49,8 +49,9 @@ public class RadarSignalsGenerator {
         probingSignal = new DerivedSignal(Arrays.copyOf(radarSignal.getValues(), samplesPerProbe), params.getSamplingRate(), 0, amplitude);
     }
 
-    public DerivedSignal getResponseSignal(int startSample) {
-        int startPosition = startSample % (samplesPerProbe * 2);
+    public DerivedSignal getResponseSignal(int miliSecondsDelay) {
+        int startSample = params.getSamplingRate() * miliSecondsDelay / 1000;
+        int startPosition = startSample % (samplesPerProbe);
         return new DerivedSignal(Arrays.copyOfRange(radarSignal.getValues(), startPosition, startPosition + samplesPerProbe), radarSignal.getSamplingRate(), 0, radarSignal.getAmplitude());
     }
 

@@ -25,12 +25,14 @@ public class RadarSimulator {
     
     public RadarResponse generateResponse (double distance, double velocity){
         DerivedSignal probingSignal = signals.getProbingSignal();
-        DerivedSignal responseSignal1 = signals.getResponseSignal(500);
-        return new RadarResponse(probingSignal, responseSignal1, probingSignal, distance, velocity, velocity);
+        DerivedSignal responseSignal1 = signals.getResponseSignal((int)(distance / params.getWaveSpeed()));
+        DerivedSignal responseSignal2 = signals.getResponseSignal((int)(distance * velocity / params.getWaveSpeed()));        
+        return new RadarResponse(probingSignal, responseSignal1, responseSignal2, distance, velocity, velocity);
     }
     
     public RadarResponseAnalysis ProcessRadarResponse (RadarResponse response){
-//        DerivedSignal correlation1 = Correlation.CalculateCorrelation(signals.getProbingSignal(), signals.getResponseSignal(0))
-        return null;
+        DerivedSignal correlation1 = Correlation.CalculateCorrelation(response.getProbingSignal(), response.getFirstResponse());
+        DerivedSignal correlation2= Correlation.CalculateCorrelation(response.getProbingSignal(), response.getSecondRespone());
+        return new RadarResponseAnalysis(correlation1, correlation2, 0, 0);
     }
 }
