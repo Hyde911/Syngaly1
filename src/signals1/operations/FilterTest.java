@@ -5,6 +5,7 @@
  */
 package signals1.operations;
 
+import signals1.discreteSignals.DerivedSignal;
 import signals1.operations.filters.FIRFilter;
 import signals1.operations.filters.LowPassFIRFilter;
 import signals1.operations.windows.HammingWindow;
@@ -17,7 +18,7 @@ public class FilterTest {
     
     public static void test(){
         FIRFilter filter = new LowPassFIRFilter(new HammingWindow(), 1, 10, 1000);
-        filter.getFilter();
+        DerivedSignal filterSignal = new DerivedSignal(filter.getFilter(),1000, 0, 1);
         
     }
 }

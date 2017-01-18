@@ -5,6 +5,7 @@
  */
 package signals1.operations.filters;
 
+import org.apache.commons.math3.complex.Complex;
 import signals1.operations.MathFunctions;
 import signals1.operations.windows.WindowFunction;
 
@@ -17,17 +18,17 @@ public class HighPassFIRFilter extends FIRFilter{
     public HighPassFIRFilter(final WindowFunction window, final int order, final double fc, final double fs){
         super(window, order, 0d, fc, fs);
         final double cutoff = highFrqCutoff / samplingRate;
-        filter = new double[order + 1];
+        filter = new Complex[order + 1];
         final double factor = 2.0 * cutoff;
         final int half = order >> 1;
         for (int i = 0; i < filter.length; i++){
-            filter[i] = (i == half ? 1.0 : 0.0) - factor * MathFunctions.SINC(factor * (i - half));
+            filter[i] = new Complex((i == half ? 1.0 : 0.0) - factor * MathFunctions.SINC(factor * (i - half)));
         }
         filter = window.apply(filter);
     }
 
     @Override
-    public double[] getFilter() {
+    public Complex[] getFilter() {
         return filter;
     }
 }

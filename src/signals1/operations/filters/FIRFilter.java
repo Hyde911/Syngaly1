@@ -5,6 +5,7 @@
  */
 package signals1.operations.filters;
 
+import org.apache.commons.math3.complex.Complex;
 import signals1.operations.windows.WindowFunction;
 
 /**
@@ -14,7 +15,7 @@ import signals1.operations.windows.WindowFunction;
 public abstract class FIRFilter {
     
     protected WindowFunction window;
-    protected double[] filter = null;
+    protected Complex[] filter = null;
     protected int order;
     protected double lowFrqCutoff;
     protected double highFrqCutoff;
@@ -28,6 +29,6 @@ public abstract class FIRFilter {
         this.samplingRate = samplingRate;
     }
     
-    public abstract double[] getFilter();
+    public abstract Complex[] getFilter();
     
 }

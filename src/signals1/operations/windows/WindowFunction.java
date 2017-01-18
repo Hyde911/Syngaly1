@@ -5,6 +5,8 @@
  */
 package signals1.operations.windows;
 
+import org.apache.commons.math3.complex.Complex;
+
 /**
  *
  * @author glabg
@@ -18,29 +20,33 @@ public abstract class WindowFunction {
     }
 
 
-    public double[] apply(double[] filter) {
+    public Complex[] apply(Complex[] filter) {
         this.length = filter.length;
 
         for (int n = 0; n < filter.length; n++) {
-            filter[n] *= value(filter.length, n);
+            double real = filter[n].getReal();
+            real *= value(filter.length, n);
+            filter[n] = new Complex(real);
         }
         return filter;
     }
 
-    public double[] apply(double[] filter, int offset, int length) {
+    public Complex[] apply(Complex[] filter, int offset, int length) {
         this.length = length;
 
         for (int n = offset; n < offset + length; ++n) {
-            filter[n] *= value(length, n - offset);
+            double real = filter[n].getReal();
+            real *= value(length, n - offset);
+            filter[n] = new Complex(real);
         }
         return filter;
     }
 
 
-    public double[] generateCurve(int length) {
-        double[] samples = new double[length];
+    public Complex[] generateCurve(int length) {
+        Complex[] samples = new Complex[length];
         for (int n = 0; n < length; n++) {
-            samples[n] = 1f * value(length, n);
+            samples[n] = new Complex(1d * value(length, n));
         }
         return samples;
     }
