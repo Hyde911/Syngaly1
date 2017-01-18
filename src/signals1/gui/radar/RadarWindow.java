@@ -5,7 +5,10 @@
  */
 package signals1.gui.radar;
 
+import java.awt.BorderLayout;
+import signals1.radar.RadarSimulator;
 import signals1.tools.RadarParameters;
+import signals1.radar.RadarResponse;
 
 /**
  *
@@ -13,12 +16,28 @@ import signals1.tools.RadarParameters;
  */
 public class RadarWindow extends javax.swing.JFrame {
 
+    private RadarSimulator radarSimulator;
+    private RadarResponse response;
+    private RadarParameters parameters;
+
     /**
      * Creates new form RadarWindow
+     *
      * @param parameters
      */
     public RadarWindow(RadarParameters parameters) {
+        this.parameters = parameters;
+        this.radarSimulator = new RadarSimulator(parameters);
+        this.response = radarSimulator.generateResponse(parameters.getInitialDistance(), parameters.getVelocity());
         initComponents();
+        addCharts();
+    }
+
+    private void addCharts() {
+        RadarChartsPanel chartsPanel = new RadarChartsPanel(response, null);
+        jPanelCharts.setLayout(new java.awt.BorderLayout());
+        jPanelCharts.add(chartsPanel, BorderLayout.CENTER);
+        jPanelCharts.revalidate();
     }
 
     /**
@@ -36,7 +55,7 @@ public class RadarWindow extends javax.swing.JFrame {
         setLocation(new java.awt.Point(500, 0));
         setResizable(false);
 
-        jPanelCharts.setPreferredSize(new java.awt.Dimension(100, 700));
+        jPanelCharts.setPreferredSize(new java.awt.Dimension(1000, 800));
 
         javax.swing.GroupLayout jPanelChartsLayout = new javax.swing.GroupLayout(jPanelCharts);
         jPanelCharts.setLayout(jPanelChartsLayout);
@@ -46,7 +65,7 @@ public class RadarWindow extends javax.swing.JFrame {
         );
         jPanelChartsLayout.setVerticalGroup(
             jPanelChartsLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 700, Short.MAX_VALUE)
+            .addGap(0, 798, Short.MAX_VALUE)
         );
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
@@ -55,15 +74,14 @@ public class RadarWindow extends javax.swing.JFrame {
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
                 .addContainerGap(278, Short.MAX_VALUE)
-                .addComponent(jPanelCharts, javax.swing.GroupLayout.PREFERRED_SIZE, 1000, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addComponent(jPanelCharts, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(22, 22, 22))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                .addContainerGap(28, Short.MAX_VALUE)
-                .addComponent(jPanelCharts, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(72, 72, 72))
+                .addContainerGap()
+                .addComponent(jPanelCharts, javax.swing.GroupLayout.DEFAULT_SIZE, 798, Short.MAX_VALUE))
         );
 
         pack();

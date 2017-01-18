@@ -127,12 +127,12 @@ class AmplitudeOperations {
     private void setNumberOfSamples() {
         this.startTime1 = signal1.getStartTime();
         this.startTime2 = signal2.getStartTime();
-        this.endTime1 = startTime1 + (signal1.getValues().length / signal1.getSamplingRate());
-        this.endTime2 = startTime2 + (signal2.getValues().length / signal2.getSamplingRate());
+        this.endTime1 = startTime1 + (signal1.getValues().length * 1.0 / signal1.getSamplingRate());
+        this.endTime2 = startTime2 + (signal2.getValues().length * 1.0 / signal2.getSamplingRate());
         if (endTime1 >= endTime2) {
-            numberOfSamples = (int) (endTime1 - this.startTime) * this.samplingRate;
+            numberOfSamples = (int) ((endTime1 - this.startTime) * this.samplingRate);
         } else {
-            numberOfSamples = (int) (endTime2 - this.startTime) * this.samplingRate;
+            numberOfSamples = (int) ((endTime2 - this.startTime) * this.samplingRate);
         }
         this.values = new Complex[numberOfSamples];
         fillValues();

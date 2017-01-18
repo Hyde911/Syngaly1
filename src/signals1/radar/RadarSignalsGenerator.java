@@ -6,6 +6,7 @@
 package signals1.radar;
 
 import java.util.Arrays;
+import org.apache.commons.math3.complex.Complex;
 import signals1.continuousSignals.SineSignal;
 import signals1.discreteSignals.DerivedSignal;
 import signals1.discreteSignals.PeriodicDiscreteSignal;
@@ -28,14 +29,15 @@ public class RadarSignalsGenerator {
 
     public RadarSignalsGenerator(RadarParameters params) {
         this.params = params;
+        samplesPerProbe = (int) (params.getSamplingRate() * params.getBuforLength()) / 1000;
         generateRadarSignal();
-        samplesPerProbe = (int) (params.getSamplingRate() * params.getBuforLength());
+        
     }
 
     private void generateRadarSignal() {
-        double duration = params.getBuforLength() * 2;
-        SineSignal signal1 = new SineSignal(0, amplitude, duration, params.getFirstCompomentPeriod());
-        SineSignal signal2 = new SineSignal(0, amplitude, duration, params.getSecondCompomentPeriod());
+        double duration = (params.getBuforLength() * 2)/1000;
+        SineSignal signal1 = new SineSignal(0, amplitude, duration, params.getFirstCompomentPeriod() / 1000);
+        SineSignal signal2 = new SineSignal(0, amplitude, duration, params.getSecondCompomentPeriod() / 1000);
         PeriodicDiscreteSignal disSignal1 = new PeriodicDiscreteSignal(signal1, params.getSamplingRate(), new NoneQuantizer());
         PeriodicDiscreteSignal disSignal2 = new PeriodicDiscreteSignal(signal2, params.getSamplingRate(), new NoneQuantizer());
         try {
@@ -43,12 +45,13 @@ public class RadarSignalsGenerator {
         } catch (NotSameSamplinRateExpcetion ex) {
 
         }
-        probingSignal = new DerivedSignal(Arrays.copyOf(radarSignal.getValues(), samplesPerProbe), params.getSamplingRate(), 0, radarSignal.getAmplitude());
+        Complex []tmp = Arrays.copyOf(radarSignal.getValues(), samplesPerProbe);
+        probingSignal = new DerivedSignal(Arrays.copyOf(radarSignal.getValues(), samplesPerProbe), params.getSamplingRate(), 0, amplitude);
     }
 
     public DerivedSignal getResponseSignal(int startSample) {
         int startPosition = startSample % (samplesPerProbe * 2);
-        return new DerivedSignal(Arrays.copyOfRange(radarSignal.getValues(), startPosition, samplesPerProbe), radarSignal.getSamplingRate(), 0, radarSignal.getAmplitude());
+        return new DerivedSignal(Arrays.copyOfRange(radarSignal.getValues(), startPosition, startPosition + samplesPerProbe), radarSignal.getSamplingRate(), 0, radarSignal.getAmplitude());
     }
 
     public int getSamplesPerProbe() {

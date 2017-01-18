@@ -82,9 +82,14 @@ public class PeriodicDiscreteSignal extends DiscreteSignal implements Serializab
     }
 
     private void calculateStats() {
+        if (numberOfWholePeriods > 0){
         int wholePeriodSamples = samplesPerPeriod * numberOfWholePeriods;
         Complex[] samplesForStats = Arrays.copyOf(values, wholePeriodSamples);
         this.stats = StatsCalculator.getStats(samplesForStats);
+        }
+        else{
+            this.stats = new SignalStats(0, 0, 0, 0, 0);
+        }
     }
 
     @Override
