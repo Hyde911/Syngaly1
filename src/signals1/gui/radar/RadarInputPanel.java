@@ -95,11 +95,16 @@ public class RadarInputPanel extends javax.swing.JPanel {
 
         jTextPeriod1.setFont(new java.awt.Font("Verdana", 1, 12)); // NOI18N
         jTextPeriod1.setHorizontalAlignment(javax.swing.JTextField.CENTER);
-        jTextPeriod1.setText("500");
+        jTextPeriod1.setText("50");
 
         jTextPeriod2.setFont(new java.awt.Font("Verdana", 1, 12)); // NOI18N
         jTextPeriod2.setHorizontalAlignment(javax.swing.JTextField.CENTER);
-        jTextPeriod2.setText("300");
+        jTextPeriod2.setText("30");
+        jTextPeriod2.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jTextPeriod2ActionPerformed(evt);
+            }
+        });
 
         jTextSamplingRate.setFont(new java.awt.Font("Verdana", 1, 12)); // NOI18N
         jTextSamplingRate.setHorizontalAlignment(javax.swing.JTextField.CENTER);
@@ -107,19 +112,19 @@ public class RadarInputPanel extends javax.swing.JPanel {
 
         jTextBuferSize.setFont(new java.awt.Font("Verdana", 1, 12)); // NOI18N
         jTextBuferSize.setHorizontalAlignment(javax.swing.JTextField.CENTER);
-        jTextBuferSize.setText("1000");
+        jTextBuferSize.setText("200");
 
         jTextDistance.setFont(new java.awt.Font("Verdana", 1, 12)); // NOI18N
         jTextDistance.setHorizontalAlignment(javax.swing.JTextField.CENTER);
-        jTextDistance.setText("1000");
+        jTextDistance.setText("1500");
 
         jTextVelocity.setFont(new java.awt.Font("Verdana", 1, 12)); // NOI18N
         jTextVelocity.setHorizontalAlignment(javax.swing.JTextField.CENTER);
-        jTextVelocity.setText("1000");
+        jTextVelocity.setText("30");
 
         jTextInterval.setFont(new java.awt.Font("Verdana", 1, 12)); // NOI18N
         jTextInterval.setHorizontalAlignment(javax.swing.JTextField.CENTER);
-        jTextInterval.setText("50");
+        jTextInterval.setText("10");
 
         jLabel10.setFont(new java.awt.Font("Verdana", 1, 12)); // NOI18N
         jLabel10.setHorizontalAlignment(javax.swing.SwingConstants.RIGHT);
@@ -202,6 +207,10 @@ public class RadarInputPanel extends javax.swing.JPanel {
     private void jTextWaveSpeedActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jTextWaveSpeedActionPerformed
         // TODO add your handling code here:
     }//GEN-LAST:event_jTextWaveSpeedActionPerformed
+
+    private void jTextPeriod2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jTextPeriod2ActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_jTextPeriod2ActionPerformed
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables

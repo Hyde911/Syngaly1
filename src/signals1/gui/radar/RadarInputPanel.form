@@ -160,7 +160,7 @@
           <Font name="Verdana" size="12" style="1"/>
         </Property>
         <Property name="horizontalAlignment" type="int" value="0"/>
-        <Property name="text" type="java.lang.String" value="500"/>
+        <Property name="text" type="java.lang.String" value="50"/>
       </Properties>
     </Component>
     <Component class="javax.swing.JTextField" name="jTextPeriod2">
@@ -169,8 +169,11 @@
           <Font name="Verdana" size="12" style="1"/>
         </Property>
         <Property name="horizontalAlignment" type="int" value="0"/>
-        <Property name="text" type="java.lang.String" value="300"/>
+        <Property name="text" type="java.lang.String" value="30"/>
       </Properties>
+      <Events>
+        <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="jTextPeriod2ActionPerformed"/>
+      </Events>
     </Component>
     <Component class="javax.swing.JTextField" name="jTextSamplingRate">
       <Properties>
@@ -187,7 +190,7 @@
           <Font name="Verdana" size="12" style="1"/>
         </Property>
         <Property name="horizontalAlignment" type="int" value="0"/>
-        <Property name="text" type="java.lang.String" value="1000"/>
+        <Property name="text" type="java.lang.String" value="200"/>
       </Properties>
     </Component>
     <Component class="javax.swing.JTextField" name="jTextDistance">
@@ -196,7 +199,7 @@
           <Font name="Verdana" size="12" style="1"/>
         </Property>
         <Property name="horizontalAlignment" type="int" value="0"/>
-        <Property name="text" type="java.lang.String" value="1000"/>
+        <Property name="text" type="java.lang.String" value="1500"/>
       </Properties>
     </Component>
     <Component class="javax.swing.JTextField" name="jTextVelocity">
@@ -205,7 +208,7 @@
           <Font name="Verdana" size="12" style="1"/>
         </Property>
         <Property name="horizontalAlignment" type="int" value="0"/>
-        <Property name="text" type="java.lang.String" value="1000"/>
+        <Property name="text" type="java.lang.String" value="30"/>
       </Properties>
     </Component>
     <Component class="javax.swing.JTextField" name="jTextInterval">
@@ -214,7 +217,7 @@
           <Font name="Verdana" size="12" style="1"/>
         </Property>
         <Property name="horizontalAlignment" type="int" value="0"/>
-        <Property name="text" type="java.lang.String" value="50"/>
+        <Property name="text" type="java.lang.String" value="10"/>
       </Properties>
     </Component>
     <Component class="javax.swing.JLabel" name="jLabel10">

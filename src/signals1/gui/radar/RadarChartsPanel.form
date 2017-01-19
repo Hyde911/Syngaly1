@@ -3,7 +3,7 @@
 <Form version="1.3" maxVersion="1.9" type="org.netbeans.modules.form.forminfo.JPanelFormInfo">
   <Properties>
     <Property name="preferredSize" type="java.awt.Dimension" editor="org.netbeans.beaninfo.editors.DimensionEditor">
-      <Dimension value="[900, 720]"/>
+      <Dimension value="[900, 800]"/>
     </Property>
   </Properties>
   <AuxValues>
@@ -22,8 +22,8 @@
     <DimensionLayout dim="0">
       <Group type="103" groupAlignment="0" attributes="0">
           <Component id="jPanelCharts1" max="32767" attributes="0"/>
-          <Component id="jPanelCorrelation1" alignment="0" max="32767" attributes="0"/>
           <Component id="jPanelCharts2" alignment="0" max="32767" attributes="0"/>
+          <Component id="jPanelCorrelation1" alignment="0" max="32767" attributes="0"/>
           <Component id="jPanelCorrelation2" alignment="0" max="32767" attributes="0"/>
       </Group>
     </DimensionLayout>
@@ -32,10 +32,10 @@
           <Group type="102" alignment="0" attributes="0">
               <Component id="jPanelCharts1" min="-2" max="-2" attributes="0"/>
               <EmptySpace max="-2" attributes="0"/>
-              <Component id="jPanelCharts2" min="-2" max="-2" attributes="0"/>
-              <EmptySpace max="-2" attributes="0"/>
               <Component id="jPanelCorrelation1" min="-2" max="-2" attributes="0"/>
-              <EmptySpace pref="8" max="32767" attributes="0"/>
+              <EmptySpace max="-2" attributes="0"/>
+              <Component id="jPanelCharts2" min="-2" max="-2" attributes="0"/>
+              <EmptySpace max="32767" attributes="0"/>
               <Component id="jPanelCorrelation2" min="-2" max="-2" attributes="0"/>
           </Group>
       </Group>
@@ -62,7 +62,7 @@
         </DimensionLayout>
       </Layout>
     </Container>
-    <Container class="javax.swing.JPanel" name="jPanelCorrelation1">
+    <Container class="javax.swing.JPanel" name="jPanelCharts2">
       <Properties>
         <Property name="preferredSize" type="java.awt.Dimension" editor="org.netbeans.beaninfo.editors.DimensionEditor">
           <Dimension value="[900, 195]"/>
@@ -82,7 +82,7 @@
         </DimensionLayout>
       </Layout>
     </Container>
-    <Container class="javax.swing.JPanel" name="jPanelCharts2">
+    <Container class="javax.swing.JPanel" name="jPanelCorrelation1">
       <Properties>
         <Property name="preferredSize" type="java.awt.Dimension" editor="org.netbeans.beaninfo.editors.DimensionEditor">
           <Dimension value="[900, 195]"/>
