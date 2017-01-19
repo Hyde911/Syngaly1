@@ -52,4 +52,6 @@ public abstract class WindowFunction {
     }
 
     protected abstract double value(int length, int index);
+    
+
 }
