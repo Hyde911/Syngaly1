@@ -29,15 +29,15 @@ public class RadarSignalsGenerator {
 
     public RadarSignalsGenerator(RadarParameters params) {
         this.params = params;
-        samplesPerProbe = (int) (params.getSamplingRate() * params.getBuforLength()) / 1000;
+        samplesPerProbe = (int) (params.getSamplingRate() * params.getBuforLength());
         generateRadarSignal();
         
     }
 
     private void generateRadarSignal() {
-        double duration = (params.getBuforLength() * 2)/1000;
-        SineSignal signal1 = new SineSignal(0, amplitude, duration, params.getFirstCompomentPeriod() / 1000);
-        SineSignal signal2 = new SineSignal(0, amplitude, duration, params.getSecondCompomentPeriod() / 1000);
+        double duration = getDuration();// (params.getBuforLength() * 2)/1000;
+        SineSignal signal1 = new SineSignal(0, amplitude, duration, params.getFirstCompomentPeriod());
+        SineSignal signal2 = new SineSignal(0, amplitude, duration, params.getSecondCompomentPeriod());
         PeriodicDiscreteSignal disSignal1 = new PeriodicDiscreteSignal(signal1, params.getSamplingRate(), new NoneQuantizer());
         PeriodicDiscreteSignal disSignal2 = new PeriodicDiscreteSignal(signal2, params.getSamplingRate(), new NoneQuantizer());
         try {
@@ -49,9 +49,9 @@ public class RadarSignalsGenerator {
         probingSignal = new DerivedSignal(Arrays.copyOf(radarSignal.getValues(), samplesPerProbe), params.getSamplingRate(), 0, amplitude);
     }
 
-    public DerivedSignal getResponseSignal(int miliSecondsDelay) {
-        int startSample = params.getSamplingRate() * miliSecondsDelay / 1000;
-        int startPosition = startSample % (samplesPerProbe);
+    public DerivedSignal getResponseSignal(double miliSecondsDelay) {
+        int startSample = (int)(params.getSamplingRate() * miliSecondsDelay);
+        int startPosition = startSample;// startSample % (samplesPerProbe);
         return new DerivedSignal(Arrays.copyOfRange(radarSignal.getValues(), startPosition, startPosition + samplesPerProbe), radarSignal.getSamplingRate(), 0, radarSignal.getAmplitude());
     }
 
@@ -62,4 +62,13 @@ public class RadarSignalsGenerator {
     public DerivedSignal getProbingSignal() {
         return probingSignal;
     }
+    
+    private double getDuration(){
+        double duration = 0;
+        double velocity = params.getVelocity();
+        double time = params.getInterval();
+        duration = (((velocity * time) + params.getInitialDistance()) / params.getSamplingRate());
+        return duration;
+    }
+    
 }

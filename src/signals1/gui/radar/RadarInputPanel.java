@@ -24,13 +24,13 @@ public class RadarInputPanel extends javax.swing.JPanel {
     public RadarParameters getParameters() throws InputValidationException {
         RadarParameters params;
         try {
-            double firstCompomentPeriod = Double.parseDouble(jTextPeriod1.getText());
-            double secondCompomentPeriod = Double.parseDouble(jTextPeriod2.getText());
+            double firstCompomentPeriod = Double.parseDouble(jTextPeriod1.getText()) / 1000;
+            double secondCompomentPeriod = Double.parseDouble(jTextPeriod2.getText())/ 1000;
             int samplingRate = Integer.parseInt(jTextSamplingRate.getText());
-            double buforLength = Double.parseDouble(jTextBuferSize.getText());
+            double buforLength = Double.parseDouble(jTextBuferSize.getText()) / 1000;
             double initialDistance = Double.parseDouble(jTextDistance.getText());
             double velocity = Double.parseDouble(jTextVelocity.getText());
-            double interval = Double.parseDouble(jTextInterval.getText());
+            double interval = Double.parseDouble(jTextInterval.getText()) / 1000;
             double waveSpeed = Double.parseDouble(jTextWaveSpeed.getText());
             params = new RadarParameters(firstCompomentPeriod, secondCompomentPeriod, samplingRate, buforLength, initialDistance, velocity, interval, waveSpeed);
         } catch (Exception ex) {
@@ -108,7 +108,7 @@ public class RadarInputPanel extends javax.swing.JPanel {
 
         jTextSamplingRate.setFont(new java.awt.Font("Verdana", 1, 12)); // NOI18N
         jTextSamplingRate.setHorizontalAlignment(javax.swing.JTextField.CENTER);
-        jTextSamplingRate.setText("4096");
+        jTextSamplingRate.setText("4000");
 
         jTextBuferSize.setFont(new java.awt.Font("Verdana", 1, 12)); // NOI18N
         jTextBuferSize.setHorizontalAlignment(javax.swing.JTextField.CENTER);
@@ -116,11 +116,11 @@ public class RadarInputPanel extends javax.swing.JPanel {
 
         jTextDistance.setFont(new java.awt.Font("Verdana", 1, 12)); // NOI18N
         jTextDistance.setHorizontalAlignment(javax.swing.JTextField.CENTER);
-        jTextDistance.setText("1500");
+        jTextDistance.setText("0");
 
         jTextVelocity.setFont(new java.awt.Font("Verdana", 1, 12)); // NOI18N
         jTextVelocity.setHorizontalAlignment(javax.swing.JTextField.CENTER);
-        jTextVelocity.setText("30");
+        jTextVelocity.setText("300");
 
         jTextInterval.setFont(new java.awt.Font("Verdana", 1, 12)); // NOI18N
         jTextInterval.setHorizontalAlignment(javax.swing.JTextField.CENTER);

@@ -15,13 +15,15 @@ public class RadarResponseAnalysis {
     DerivedSignal correlation1;
     DerivedSignal correlation2;
     double calculatedVelocity;
-    double calculatedDistance;
+    double calculatedInitialDistance;
+    double calculatedFinalDistance;
 
-    public RadarResponseAnalysis(DerivedSignal correlation1, DerivedSignal correlation2, double calculatedVelocity, double calculatedDistance) {
+    public RadarResponseAnalysis(DerivedSignal correlation1, DerivedSignal correlation2, double calculatedVelocity, double calculatedInitialDistance, double calculatedFinalDistance) {
         this.correlation1 = correlation1;
         this.correlation2 = correlation2;
         this.calculatedVelocity = calculatedVelocity;
-        this.calculatedDistance = calculatedDistance;
+        this.calculatedInitialDistance = calculatedInitialDistance;
+        this.calculatedFinalDistance = calculatedFinalDistance;
     }
 
     public DerivedSignal getCorrelation1() {
@@ -36,7 +38,12 @@ public class RadarResponseAnalysis {
         return calculatedVelocity;
     }
 
-    public double getCalculatedDistance() {
-        return calculatedDistance;
+    public double getCalculatedInitialDistance() {
+        return calculatedInitialDistance;
     }
+
+    public double getCalculatedFinalDistance() {
+        return calculatedFinalDistance;
+    }
+
 }

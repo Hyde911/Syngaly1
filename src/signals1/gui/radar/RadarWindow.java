@@ -32,6 +32,7 @@ public class RadarWindow extends javax.swing.JFrame {
         this.radarSimulator = new RadarSimulator(parameters);
         this.response = radarSimulator.generateResponse(parameters.getInitialDistance(), parameters.getVelocity());
         this.analysis = radarSimulator.ProcessRadarResponse(response);
+        System.out.println(analysis.getCalculatedInitialDistance());
         initComponents();
         addCharts();
     }

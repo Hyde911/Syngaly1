@@ -69,9 +69,9 @@ public class RadarChartsPanel extends javax.swing.JPanel {
         XYPlot xyPlot = (XYPlot) chart.getPlot();
         XYItemRenderer renderer = xyPlot.getRenderer();
         renderer.setSeriesShape(0, CIRCLESMALL);
-        renderer.setSeriesPaint(0, Color.RED);
+        renderer.setSeriesPaint(0, Color.BLUE);
         renderer.setSeriesShape(1, CIRCLESMALL);
-        renderer.setSeriesPaint(1, Color.BLUE);
+        renderer.setSeriesPaint(1, Color.RED);
         ChartPanel chartPanel = new ChartPanel(chart);
         chartPanel.setPreferredSize(new Dimension(chartDimensionX, chartDimensionY));
         return chartPanel;
