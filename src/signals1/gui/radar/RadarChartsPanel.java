@@ -19,7 +19,6 @@ import org.jfree.chart.renderer.xy.XYItemRenderer;
 import org.jfree.data.xy.XYSeries;
 import org.jfree.data.xy.XYSeriesCollection;
 import signals1.radar.RadarResponse;
-import signals1.radar.RadarResponseAnalysis;
 
 /**
  *
@@ -32,22 +31,19 @@ public class RadarChartsPanel extends javax.swing.JPanel {
     private final int chartDimensionY = 195;
 //    private DiscreteSignal signal1;
 //    private DiscreteSignal signal2;
-    private ChartPanel signalsChart;
-    private ChartPanel correlationChart;
-
     /**
      * Creates new form RadarChartsPanel
      * @param signalReponse
      * @param analysis
      */
-    public RadarChartsPanel(RadarResponse signalReponse, RadarResponseAnalysis analysis) {
+    public RadarChartsPanel(RadarResponse signalReponse) {
         initComponents();
         jPanelCharts1.setLayout(new java.awt.BorderLayout());
         jPanelCharts1.add(getSignalCharts(signalReponse.getProbingSignal().getValues(), signalReponse.getFirstResponse().getValues(), "Pierwszy pomiar"), BorderLayout.CENTER);
         jPanelCharts1.setVisible(true);
         jPanelCharts1.validate();
         jPanelCorrelation1.setLayout(new java.awt.BorderLayout());
-        jPanelCorrelation1.add(getCorrelationChart(analysis.getCorrelation1().getValues(), "Korelacja drugiej odpowiedzi"), BorderLayout.CENTER);
+        jPanelCorrelation1.add(getCorrelationChart(signalReponse.getCorrelation1().getValues(), "Korelacja pierwszej odpowiedzi"), BorderLayout.CENTER);
         jPanelCorrelation1.setVisible(true);
         jPanelCorrelation1.validate();
         jPanelCharts2.setLayout(new java.awt.BorderLayout());
@@ -55,7 +51,7 @@ public class RadarChartsPanel extends javax.swing.JPanel {
         jPanelCharts2.setVisible(true);
         jPanelCharts2.validate();
         jPanelCorrelation2.setLayout(new java.awt.BorderLayout());
-        jPanelCorrelation2.add(getCorrelationChart(analysis.getCorrelation2().getValues(), "Korelacja pierwszej odpowiedzi"), BorderLayout.CENTER);
+        jPanelCorrelation2.add(getCorrelationChart(signalReponse.getCorrelation2().getValues(), "Korelacja drugiej odpowiedzi"), BorderLayout.CENTER);
         jPanelCorrelation2.setVisible(true);
         jPanelCorrelation2.validate();        
     }

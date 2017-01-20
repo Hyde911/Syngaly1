@@ -29,16 +29,16 @@
               </Group>
               <EmptySpace type="unrelated" max="-2" attributes="0"/>
               <Group type="103" groupAlignment="0" attributes="0">
-                  <Component id="jTextPeriod1" min="-2" pref="56" max="-2" attributes="0"/>
-                  <Component id="jTextPeriod2" min="-2" pref="56" max="-2" attributes="0"/>
-                  <Component id="jTextSamplingRate" min="-2" pref="56" max="-2" attributes="0"/>
-                  <Component id="jTextBuferSize" min="-2" pref="56" max="-2" attributes="0"/>
-                  <Component id="jTextDistance" min="-2" pref="56" max="-2" attributes="0"/>
-                  <Component id="jTextVelocity" min="-2" pref="56" max="-2" attributes="0"/>
-                  <Component id="jTextInterval" min="-2" pref="56" max="-2" attributes="0"/>
-                  <Component id="jTextWaveSpeed" min="-2" pref="56" max="-2" attributes="0"/>
+                  <Component id="jTextDistance" alignment="0" max="32767" attributes="0"/>
+                  <Component id="jTextBuferSize" alignment="0" max="32767" attributes="0"/>
+                  <Component id="jTextSamplingRate" alignment="0" max="32767" attributes="0"/>
+                  <Component id="jTextPeriod2" alignment="0" max="32767" attributes="0"/>
+                  <Component id="jTextPeriod1" alignment="0" max="32767" attributes="0"/>
+                  <Component id="jTextInterval" alignment="0" max="32767" attributes="0"/>
+                  <Component id="jTextVelocity" alignment="0" max="32767" attributes="0"/>
+                  <Component id="jTextWaveSpeed" alignment="0" pref="69" max="32767" attributes="0"/>
               </Group>
-              <EmptySpace min="0" pref="63" max="32767" attributes="0"/>
+              <EmptySpace min="-2" pref="50" max="-2" attributes="0"/>
           </Group>
       </Group>
     </DimensionLayout>
@@ -160,7 +160,7 @@
           <Font name="Verdana" size="12" style="1"/>
         </Property>
         <Property name="horizontalAlignment" type="int" value="0"/>
-        <Property name="text" type="java.lang.String" value="50"/>
+        <Property name="text" type="java.lang.String" value="22"/>
       </Properties>
     </Component>
     <Component class="javax.swing.JTextField" name="jTextPeriod2">
@@ -169,7 +169,7 @@
           <Font name="Verdana" size="12" style="1"/>
         </Property>
         <Property name="horizontalAlignment" type="int" value="0"/>
-        <Property name="text" type="java.lang.String" value="30"/>
+        <Property name="text" type="java.lang.String" value="15"/>
       </Properties>
       <Events>
         <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="jTextPeriod2ActionPerformed"/>
@@ -181,7 +181,7 @@
           <Font name="Verdana" size="12" style="1"/>
         </Property>
         <Property name="horizontalAlignment" type="int" value="0"/>
-        <Property name="text" type="java.lang.String" value="4000"/>
+        <Property name="text" type="java.lang.String" value="12000"/>
       </Properties>
     </Component>
     <Component class="javax.swing.JTextField" name="jTextBuferSize">
@@ -190,7 +190,7 @@
           <Font name="Verdana" size="12" style="1"/>
         </Property>
         <Property name="horizontalAlignment" type="int" value="0"/>
-        <Property name="text" type="java.lang.String" value="200"/>
+        <Property name="text" type="java.lang.String" value="400"/>
       </Properties>
     </Component>
     <Component class="javax.swing.JTextField" name="jTextDistance">
@@ -199,7 +199,7 @@
           <Font name="Verdana" size="12" style="1"/>
         </Property>
         <Property name="horizontalAlignment" type="int" value="0"/>
-        <Property name="text" type="java.lang.String" value="0"/>
+        <Property name="text" type="java.lang.String" value="500"/>
       </Properties>
     </Component>
     <Component class="javax.swing.JTextField" name="jTextVelocity">
@@ -217,7 +217,7 @@
           <Font name="Verdana" size="12" style="1"/>
         </Property>
         <Property name="horizontalAlignment" type="int" value="0"/>
-        <Property name="text" type="java.lang.String" value="10"/>
+        <Property name="text" type="java.lang.String" value="1000"/>
       </Properties>
     </Component>
     <Component class="javax.swing.JLabel" name="jLabel10">
@@ -235,7 +235,7 @@
           <Font name="Verdana" size="12" style="1"/>
         </Property>
         <Property name="horizontalAlignment" type="int" value="0"/>
-        <Property name="text" type="java.lang.String" value="343"/>
+        <Property name="text" type="java.lang.String" value="300000"/>
       </Properties>
       <Events>
         <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="jTextWaveSpeedActionPerformed"/>

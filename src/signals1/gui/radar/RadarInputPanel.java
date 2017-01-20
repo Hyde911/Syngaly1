@@ -5,7 +5,7 @@
  */
 package signals1.gui.radar;
 
-import signals1.tools.RadarParameters;
+import signals1.radar.RadarParameters;
 import signals1.tools.exceptions.InputValidationException;
 
 /**
@@ -95,11 +95,11 @@ public class RadarInputPanel extends javax.swing.JPanel {
 
         jTextPeriod1.setFont(new java.awt.Font("Verdana", 1, 12)); // NOI18N
         jTextPeriod1.setHorizontalAlignment(javax.swing.JTextField.CENTER);
-        jTextPeriod1.setText("50");
+        jTextPeriod1.setText("22");
 
         jTextPeriod2.setFont(new java.awt.Font("Verdana", 1, 12)); // NOI18N
         jTextPeriod2.setHorizontalAlignment(javax.swing.JTextField.CENTER);
-        jTextPeriod2.setText("30");
+        jTextPeriod2.setText("15");
         jTextPeriod2.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jTextPeriod2ActionPerformed(evt);
@@ -108,15 +108,15 @@ public class RadarInputPanel extends javax.swing.JPanel {
 
         jTextSamplingRate.setFont(new java.awt.Font("Verdana", 1, 12)); // NOI18N
         jTextSamplingRate.setHorizontalAlignment(javax.swing.JTextField.CENTER);
-        jTextSamplingRate.setText("4000");
+        jTextSamplingRate.setText("12000");
 
         jTextBuferSize.setFont(new java.awt.Font("Verdana", 1, 12)); // NOI18N
         jTextBuferSize.setHorizontalAlignment(javax.swing.JTextField.CENTER);
-        jTextBuferSize.setText("200");
+        jTextBuferSize.setText("400");
 
         jTextDistance.setFont(new java.awt.Font("Verdana", 1, 12)); // NOI18N
         jTextDistance.setHorizontalAlignment(javax.swing.JTextField.CENTER);
-        jTextDistance.setText("0");
+        jTextDistance.setText("500");
 
         jTextVelocity.setFont(new java.awt.Font("Verdana", 1, 12)); // NOI18N
         jTextVelocity.setHorizontalAlignment(javax.swing.JTextField.CENTER);
@@ -124,7 +124,7 @@ public class RadarInputPanel extends javax.swing.JPanel {
 
         jTextInterval.setFont(new java.awt.Font("Verdana", 1, 12)); // NOI18N
         jTextInterval.setHorizontalAlignment(javax.swing.JTextField.CENTER);
-        jTextInterval.setText("10");
+        jTextInterval.setText("1000");
 
         jLabel10.setFont(new java.awt.Font("Verdana", 1, 12)); // NOI18N
         jLabel10.setHorizontalAlignment(javax.swing.SwingConstants.RIGHT);
@@ -132,7 +132,7 @@ public class RadarInputPanel extends javax.swing.JPanel {
 
         jTextWaveSpeed.setFont(new java.awt.Font("Verdana", 1, 12)); // NOI18N
         jTextWaveSpeed.setHorizontalAlignment(javax.swing.JTextField.CENTER);
-        jTextWaveSpeed.setText("343");
+        jTextWaveSpeed.setText("300000");
         jTextWaveSpeed.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jTextWaveSpeedActionPerformed(evt);
@@ -155,15 +155,15 @@ public class RadarInputPanel extends javax.swing.JPanel {
                     .addComponent(jLabel10, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(jTextPeriod1, javax.swing.GroupLayout.PREFERRED_SIZE, 56, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jTextPeriod2, javax.swing.GroupLayout.PREFERRED_SIZE, 56, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jTextSamplingRate, javax.swing.GroupLayout.PREFERRED_SIZE, 56, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jTextBuferSize, javax.swing.GroupLayout.PREFERRED_SIZE, 56, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jTextDistance, javax.swing.GroupLayout.PREFERRED_SIZE, 56, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jTextVelocity, javax.swing.GroupLayout.PREFERRED_SIZE, 56, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jTextInterval, javax.swing.GroupLayout.PREFERRED_SIZE, 56, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jTextWaveSpeed, javax.swing.GroupLayout.PREFERRED_SIZE, 56, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(0, 63, Short.MAX_VALUE))
+                    .addComponent(jTextDistance)
+                    .addComponent(jTextBuferSize)
+                    .addComponent(jTextSamplingRate)
+                    .addComponent(jTextPeriod2)
+                    .addComponent(jTextPeriod1)
+                    .addComponent(jTextInterval)
+                    .addComponent(jTextVelocity)
+                    .addComponent(jTextWaveSpeed, javax.swing.GroupLayout.DEFAULT_SIZE, 69, Short.MAX_VALUE))
+                .addGap(50, 50, 50))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)

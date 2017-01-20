@@ -8,7 +8,6 @@ package signals1.radar;
 import org.apache.commons.math3.complex.Complex;
 import signals1.discreteSignals.DerivedSignal;
 import signals1.operations.Correlation;
-import signals1.tools.RadarParameters;
 
 /**
  *
@@ -17,29 +16,41 @@ import signals1.tools.RadarParameters;
 public class RadarSimulator {
 
     private final RadarParameters params;
-    private RadarSignalsGenerator signals;
+    private final RadarSignalsGenerator signals;
+    private RadarResponse response;
     
     public RadarSimulator (RadarParameters params){
         this.params = params;
         signals = new RadarSignalsGenerator(params);
     }
     
-    public RadarResponse generateResponse (double distance, double velocity){
+    public RadarResponse generateResponse (){
+        if (response != null){
+            return response;
+        }
+        
         DerivedSignal probingSignal = signals.getProbingSignal();
-        DerivedSignal responseSignal1 = signals.getResponseSignal(((distance * 2)/ params.getWaveSpeed()));
-        DerivedSignal responseSignal2 = signals.getResponseSignal((((distance * 2) + (params.getInterval() * velocity)) / params.getWaveSpeed()));        
-        return new RadarResponse(probingSignal, responseSignal1, responseSignal2, distance, velocity, velocity);
+        DerivedSignal firstResposne = signals.getFirstResponse();
+        DerivedSignal secondResponse = signals.getSecondResponse();
+        DerivedSignal correlation1 = Correlation.CalculateCorrelation(signals.getProbingSignal(), signals.getFirstResponse());
+        DerivedSignal correlation2 = Correlation.CalculateCorrelation(signals.getProbingSignal(), signals.getSecondResponse());
+        
+        double calculatedInitialDistance = calculateDistance(correlation1);
+        double calculatedFinalDistance = calculateDistance(correlation2);
+        double calculatedVelocity = (calculatedFinalDistance - calculatedInitialDistance) / params.getInterval();
+        
+        response = new RadarResponse(   probingSignal,
+                                        firstResposne,
+                                        secondResponse,
+                                        correlation1,
+                                        correlation2,
+                                        calculatedVelocity,
+                                        calculatedInitialDistance,
+                                        calculatedFinalDistance);
+        return response;
     }
     
-    public RadarResponseAnalysis ProcessRadarResponse (RadarResponse response){
-        DerivedSignal correlation1 = Correlation.CalculateCorrelation(response.getProbingSignal(), response.getFirstResponse());
-        DerivedSignal correlation2= Correlation.CalculateCorrelation(response.getProbingSignal(), response.getSecondRespone());
-        double initialDistance = CalculateDistance(correlation1);
-        double finalDistance = CalculateDistance(correlation2);
-        return new RadarResponseAnalysis(correlation1, correlation2, (Math.abs(initialDistance -  finalDistance) / params.getInterval()), initialDistance, finalDistance);
-    }
-    
-    private double CalculateDistance(DerivedSignal correlation){
+    private double calculateDistance(DerivedSignal correlation){
         Complex[] values = correlation.getValues();
         int middle = values.length / 2;
         int shift = 0;

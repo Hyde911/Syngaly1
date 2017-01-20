@@ -13,24 +13,24 @@ import signals1.discreteSignals.DerivedSignal;
  */
 public class RadarResponse {
     
-    DerivedSignal probingSignal;
-    DerivedSignal firstResponse;
-    DerivedSignal secondRespone;
-    double timeInterval;
-    double waveSpeed;
-    double samplingRate;
+    private final DerivedSignal probingSignal;
+    private final DerivedSignal firstResponse;
+    private final DerivedSignal secondRespone;
+    private final DerivedSignal correlation1;
+    private final DerivedSignal correlation2;    
+    private final double calculatedVelocity;
+    private final double calculatedInitialDistance;
+    private final double calculateFinalDistance;
 
-    public RadarResponse(DerivedSignal probingSignal, DerivedSignal firstResponse, DerivedSignal secondRespone, double timeInterval, double waveSpeed, double samplingRate) {
+    public RadarResponse(DerivedSignal probingSignal, DerivedSignal firstResponse, DerivedSignal secondRespone, DerivedSignal correlation1, DerivedSignal correlation2, double calculatedVelocity, double calculatedInitialDistance, double calculateFinalDistance) {
         this.probingSignal = probingSignal;
         this.firstResponse = firstResponse;
         this.secondRespone = secondRespone;
-        this.timeInterval = timeInterval;
-        this.waveSpeed = waveSpeed;
-        this.samplingRate = samplingRate;
-    }
-
-    public double getSamplingRate() {
-        return samplingRate;
+        this.correlation1 = correlation1;
+        this.correlation2 = correlation2;
+        this.calculatedVelocity = calculatedVelocity;
+        this.calculatedInitialDistance = calculatedInitialDistance;
+        this.calculateFinalDistance = calculateFinalDistance;
     }
 
     public DerivedSignal getProbingSignal() {
@@ -45,11 +45,25 @@ public class RadarResponse {
         return secondRespone;
     }
 
-    public double getTimeInterval() {
-        return timeInterval;
+    public DerivedSignal getCorrelation1() {
+        return correlation1;
     }
 
-    public double getWaveSpeed() {
-        return waveSpeed;
+    public DerivedSignal getCorrelation2() {
+        return correlation2;
     }
+
+    public double getCalculatedVelocity() {
+        return calculatedVelocity;
+    }
+
+    public double getCalculatedInitialDistance() {
+        return calculatedInitialDistance;
+    }
+
+    public double getCalculateFinalDistance() {
+        return calculateFinalDistance;
+    }
+    
+    
 }

@@ -42,7 +42,7 @@ import signals1.operations.filters.HighPassFIRFilter;
 import signals1.operations.filters.LowPassFIRFilter;
 import signals1.operations.windows.Windows;
 import signals1.tools.DiscretetSignalsContainer;
-import signals1.tools.RadarParameters;
+import signals1.radar.RadarParameters;
 import signals1.tools.SignalContainer;
 import signals1.tools.constatns.Quantizers;
 import signals1.tools.exceptions.InputValidationException;

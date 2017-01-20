@@ -11,7 +11,6 @@ import signals1.continuousSignals.SineSignal;
 import signals1.discreteSignals.DerivedSignal;
 import signals1.discreteSignals.PeriodicDiscreteSignal;
 import signals1.operations.AmplitudeCalculator;
-import signals1.tools.RadarParameters;
 import signals1.tools.exceptions.NotSameSamplinRateExpcetion;
 import signals1.tools.quantisation.NoneQuantizer;
 
@@ -21,8 +20,10 @@ import signals1.tools.quantisation.NoneQuantizer;
  */
 public class RadarSignalsGenerator {
 
-    private DerivedSignal radarSignal;
-    private DerivedSignal probingSignal;
+    private final DerivedSignal radarSignal;
+    private final DerivedSignal probingSignal;
+    private final DerivedSignal firstResponse;
+    private final DerivedSignal secondResponse;
     private final int samplesPerProbe;
     private final double amplitude = 1;
     private final RadarParameters params;
@@ -30,29 +31,10 @@ public class RadarSignalsGenerator {
     public RadarSignalsGenerator(RadarParameters params) {
         this.params = params;
         samplesPerProbe = (int) (params.getSamplingRate() * params.getBuforLength());
-        generateRadarSignal();
-        
-    }
-
-    private void generateRadarSignal() {
-        double duration = getDuration();// (params.getBuforLength() * 2)/1000;
-        SineSignal signal1 = new SineSignal(0, amplitude, duration, params.getFirstCompomentPeriod());
-        SineSignal signal2 = new SineSignal(0, amplitude, duration, params.getSecondCompomentPeriod());
-        PeriodicDiscreteSignal disSignal1 = new PeriodicDiscreteSignal(signal1, params.getSamplingRate(), new NoneQuantizer());
-        PeriodicDiscreteSignal disSignal2 = new PeriodicDiscreteSignal(signal2, params.getSamplingRate(), new NoneQuantizer());
-        try {
-            radarSignal = AmplitudeCalculator.AddSignals(disSignal1, disSignal2);
-        } catch (NotSameSamplinRateExpcetion ex) {
-
-        }
-        Complex []tmp = Arrays.copyOf(radarSignal.getValues(), samplesPerProbe);
-        probingSignal = new DerivedSignal(Arrays.copyOf(radarSignal.getValues(), samplesPerProbe), params.getSamplingRate(), 0, amplitude);
-    }
-
-    public DerivedSignal getResponseSignal(double miliSecondsDelay) {
-        int startSample = (int)(params.getSamplingRate() * miliSecondsDelay);
-        int startPosition = startSample;// startSample % (samplesPerProbe);
-        return new DerivedSignal(Arrays.copyOfRange(radarSignal.getValues(), startPosition, startPosition + samplesPerProbe), radarSignal.getSamplingRate(), 0, radarSignal.getAmplitude());
+        radarSignal = generateRadarSignal();
+        probingSignal = generateProbingSignal();
+        firstResponse = getResponseSignal(getSamplesShiftFromDistance(params.getInitialDistance()));
+        secondResponse = getResponseSignal(getSamplesShiftFromDistance(params.getInitialDistance() + (params.getInterval() * params.getVelocity())));
     }
 
     public int getSamplesPerProbe() {
@@ -62,13 +44,44 @@ public class RadarSignalsGenerator {
     public DerivedSignal getProbingSignal() {
         return probingSignal;
     }
-    
-    private double getDuration(){
-        double duration = 0;
-        double velocity = params.getVelocity();
-        double time = params.getInterval();
-        duration = (((velocity * time) + params.getInitialDistance()) / params.getSamplingRate());
-        return duration;
+
+    public DerivedSignal getFirstResponse() {
+        return firstResponse;
+    }
+
+    public DerivedSignal getSecondResponse() {
+        return secondResponse;
     }
     
+    private DerivedSignal generateRadarSignal() {
+        double duration = getDuration();
+        SineSignal signal1 = new SineSignal(0, amplitude, duration, params.getFirstCompomentPeriod());
+        SineSignal signal2 = new SineSignal(0, amplitude, duration, params.getSecondCompomentPeriod());
+        PeriodicDiscreteSignal disSignal1 = new PeriodicDiscreteSignal(signal1, params.getSamplingRate(), new NoneQuantizer());
+        PeriodicDiscreteSignal disSignal2 = new PeriodicDiscreteSignal(signal2, params.getSamplingRate(), new NoneQuantizer());
+        try {
+            return AmplitudeCalculator.AddSignals(disSignal1, disSignal2);
+        } catch (NotSameSamplinRateExpcetion ex) {
+            return null;
+        }
+    }
+    
+    private double getDuration() {
+        int initialShift = getSamplesShiftFromDistance(params.getInitialDistance());
+        int additionaShift = getSamplesShiftFromDistance(Math.abs(params.getVelocity()) * params.getInterval());
+        return (initialShift + additionaShift + samplesPerProbe) * 1.5 / params.getSamplingRate();
+    }
+
+    private int getSamplesShiftFromDistance(double distance) {
+        double time = (distance * 2) / params.getWaveSpeed();
+        return (int) (time * params.getSamplingRate());
+    }
+
+    private DerivedSignal generateProbingSignal() {
+        return new DerivedSignal(Arrays.copyOf(radarSignal.getValues(), samplesPerProbe), params.getSamplingRate(), 0, amplitude);
+    }
+
+    private DerivedSignal getResponseSignal(int shift) {
+        return new DerivedSignal(Arrays.copyOfRange(radarSignal.getValues(), shift, shift + samplesPerProbe), radarSignal.getSamplingRate(), 0, radarSignal.getAmplitude());
+    }
 }
