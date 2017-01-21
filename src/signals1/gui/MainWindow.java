@@ -141,7 +141,7 @@ public class MainWindow extends javax.swing.JFrame {
         jLabel10 = new javax.swing.JLabel();
         jLabel11 = new javax.swing.JLabel();
         jComboFIRFilter = new javax.swing.JComboBox<>();
-        jTextM = new javax.swing.JTextField();
+        jTextFilterOrder = new javax.swing.JTextField();
         jLabel12 = new javax.swing.JLabel();
         jLabel14 = new javax.swing.JLabel();
         jTextSamplingRate3 = new javax.swing.JTextField();
@@ -394,12 +394,12 @@ public class MainWindow extends javax.swing.JFrame {
             }
         });
 
-        jTextM.setFont(new java.awt.Font("Tahoma", 1, 12)); // NOI18N
-        jTextM.setHorizontalAlignment(javax.swing.JTextField.CENTER);
-        jTextM.setText("256");
-        jTextM.addActionListener(new java.awt.event.ActionListener() {
+        jTextFilterOrder.setFont(new java.awt.Font("Tahoma", 1, 12)); // NOI18N
+        jTextFilterOrder.setHorizontalAlignment(javax.swing.JTextField.CENTER);
+        jTextFilterOrder.setText("256");
+        jTextFilterOrder.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jTextMActionPerformed(evt);
+                jTextFilterOrderActionPerformed(evt);
             }
         });
 
@@ -546,7 +546,7 @@ public class MainWindow extends javax.swing.JFrame {
                                                         .addComponent(jLabel12, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
                                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                                                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
-                                                    .addComponent(jTextM)
+                                                    .addComponent(jTextFilterOrder)
                                                     .addComponent(jTextSamplingRate3, javax.swing.GroupLayout.DEFAULT_SIZE, 100, Short.MAX_VALUE)))))
                                     .addGroup(layout.createSequentialGroup()
                                         .addGap(161, 161, 161)
@@ -594,7 +594,7 @@ public class MainWindow extends javax.swing.JFrame {
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                             .addComponent(jLabel9, javax.swing.GroupLayout.PREFERRED_SIZE, 32, javax.swing.GroupLayout.PREFERRED_SIZE)
                             .addComponent(jComboWindow, javax.swing.GroupLayout.PREFERRED_SIZE, 33, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(jTextM, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(jTextFilterOrder, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                             .addComponent(jLabel12, javax.swing.GroupLayout.PREFERRED_SIZE, 32, javax.swing.GroupLayout.PREFERRED_SIZE))
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -854,9 +854,9 @@ public class MainWindow extends javax.swing.JFrame {
         // TODO add your handling code here:
     }//GEN-LAST:event_jComboFIRFilterActionPerformed
 
-    private void jTextMActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jTextMActionPerformed
+    private void jTextFilterOrderActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jTextFilterOrderActionPerformed
         // TODO add your handling code here:
-    }//GEN-LAST:event_jTextMActionPerformed
+    }//GEN-LAST:event_jTextFilterOrderActionPerformed
 
     private void jTextSamplingRate3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jTextSamplingRate3ActionPerformed
         // TODO add your handling code here:
@@ -875,7 +875,7 @@ public class MainWindow extends javax.swing.JFrame {
         double sampling = Double.parseDouble(jTextSamplingRate3.getText());
         double lowCutoffFreq = Double.parseDouble(lowCutoffFreqTextField.getText());
         double highCutoffReq = Double.parseDouble(highCutoffReqTextField.getText());
-        int order = Integer.parseInt(highCutoffReqTextField.getText());
+        int order = Integer.parseInt(jTextFilterOrder.getText());
         int firIndex = jComboFIRFilter.getSelectedIndex();
         FIRFilter filter = null;
         switch(firIndex){
@@ -1023,7 +1023,7 @@ public class MainWindow extends javax.swing.JFrame {
     private javax.swing.JTabbedPane jTabbedPane1;
     private javax.swing.JTable jTableDiscrete;
     private javax.swing.JTable jTableVirtual;
-    private javax.swing.JTextField jTextM;
+    private javax.swing.JTextField jTextFilterOrder;
     private javax.swing.JTextField jTextSamplingRate;
     private javax.swing.JTextField jTextSamplingRate3;
     private javax.swing.JTextField lowCutoffFreqTextField;
