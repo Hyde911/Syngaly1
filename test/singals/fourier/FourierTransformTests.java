@@ -70,6 +70,13 @@ public class FourierTransformTests {
     }
     
     @Test
+    public void definitionTransformBothWaysTest() throws NotPowerOfTwoException{
+        Complex[] transform = DefinitionFourierTransform.Transform(data);
+        Complex[] reverse = DefinitionFourierTransform.InvTransform(transform);
+        compareComplexArrays(data, reverse);
+    }
+            
+    @Test
     public void fftTest() throws NotPowerOfTwoException {
         Complex[] transform = FastFourierTransform.Ffs(data);
         compareComplexArrays(transformData, transform);
@@ -96,7 +103,7 @@ public class FourierTransformTests {
     private void compareComplexArrays(Complex[] expected, Complex[] result) {
         Assert.assertEquals(expected.length, result.length);
         for (int i = 0; i < expected.length; i++) {
-            Assert.assertTrue("i: " + i + " exp: " + expected[i] + " res: " + result[i], Complex.equals(expected[i], result[i], 0.005));
+            Assert.assertTrue("i: " + i + " exp: " + expected[i] + " res: " + result[i], Complex.equals(expected[i], result[i], 0.0001));
         }
     }
 
