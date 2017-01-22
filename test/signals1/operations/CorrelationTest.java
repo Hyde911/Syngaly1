@@ -56,7 +56,7 @@ public class CorrelationTest {
         DerivedSignal result = Correlation.CalculateCorrelation(signal1, signal2);
         assertEquals(expResult.getValues().length, result.getValues().length);
         for (int i = 0; i < expResult.getValues().length; i++){
-            assertTrue(Complex.equals(expResult.getValues()[i], result.getValues()[i], 0.00001));
+            assertTrue(Complex.equals(expResult.getValues()[i], result.getValues()[i], 1E-10));
         }
     }
 

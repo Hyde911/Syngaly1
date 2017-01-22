@@ -26,6 +26,7 @@ public abstract class DiscreteSignal implements Serializable {
     protected int samplingRate;
     protected SignalStats stats;
     protected Complex[] values;
+    protected Complex[] valuesWithAmplitude;
 
     protected DiscreteSignal() {
         id = nextId.incrementAndGet();

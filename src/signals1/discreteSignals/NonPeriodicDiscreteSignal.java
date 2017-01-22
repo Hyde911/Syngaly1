@@ -21,7 +21,7 @@ import signals1.tools.quantisation.Quantizer;
  * @author marr
  */
 public class NonPeriodicDiscreteSignal extends DiscreteSignal implements Serializable {
-    private Quantizer quantizer;
+    private final Quantizer quantizer;
     
     public NonPeriodicDiscreteSignal(NonPeriodicSignals noiseSignal, int samplingRate, Quantizer quantizer) {
         super();

@@ -25,10 +25,10 @@ import signals1.tools.quantisation.Quantizer;
 public class PeriodicDiscreteSignal extends DiscreteSignal implements Serializable {
 
     private double period;
-    private int numberOfWholePeriods;
-    private int samplesPerPeriod;
-    private int numberOfSamples;
-    private Quantizer quantizer;
+    private final int numberOfWholePeriods;
+    private final int samplesPerPeriod;
+    private final int numberOfSamples;
+    private final Quantizer quantizer;
 
     public PeriodicDiscreteSignal(PeriodicSignals periodicSignal, int samplingRate, Quantizer quantizer) {
         super();
