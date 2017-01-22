@@ -5,18 +5,14 @@
  */
 package singals.fourier;
 
+import java.util.Random;
 import org.apache.commons.math3.complex.Complex;
 import org.junit.Assert;
 import org.junit.Test;
-import signals1.continuousSignals.SineSignal;
-import signals1.discreteSignals.DerivedSignal;
-import signals1.discreteSignals.PeriodicDiscreteSignal;
-import signals1.discreteSignals.abstracts.DiscreteSignal;
 import signals1.fourier.DefinitionFourierTransform;
 import signals1.fourier.FFT;
 import signals1.fourier.FastFourierTransform;
-import signals1.operations.AmplitudeCalculator;
-import signals1.tools.quantisation.NoneQuantizer;
+import signals1.tools.exceptions.NotPowerOfTwoException;
 
 /**
  *
@@ -24,62 +20,92 @@ import signals1.tools.quantisation.NoneQuantizer;
  */
 public class FourierTransformTests {
 
-    private final Complex[] signalData;
-    private final Complex[] transformateData;
+    private final Complex[] data;
+    private final Complex[] transformData;
 
     public FourierTransformTests() throws Exception {
-        SineSignal signal1 = new SineSignal(0, 1, 1, 0.5);
-        SineSignal signal2 = new SineSignal(0, 2, 1, 0.06);
-        SineSignal signal3 = new SineSignal(0, 4, 1, 0.9);
-        PeriodicDiscreteSignal disSignal1 = new PeriodicDiscreteSignal(signal1, 8192, new NoneQuantizer());
-        PeriodicDiscreteSignal disSignal2 = new PeriodicDiscreteSignal(signal2, 8192, new NoneQuantizer());
-        PeriodicDiscreteSignal disSignal3 = new PeriodicDiscreteSignal(signal3, 8192, new NoneQuantizer());
-        DerivedSignal signal;
-        try {
-            signal = AmplitudeCalculator.AddSignals(disSignal1, disSignal2);
-            signal = AmplitudeCalculator.AddSignals(signal, disSignal3);
-            signalData = signal.getValues();
-        } catch (Exception ex) {
-            throw ex;
-        }
-        transformateData = FFT.fft(signalData);
+        data = generateData(64);
+        transformData = FFT.fft(data);
     }
 
     @Test
     public void externalLibraryTest() {
-        Complex[] transform = FFT.fft(signalData);
+        Complex[] transform = FFT.fft(data);
         Complex[] reverse = FFT.ifft(transform);
-        compareComplexArrays(signalData, reverse);
+        compareComplexArrays(data, reverse);
     }
-
+    
     @Test
     public void definitionTransformTest() {
-        Complex[] transform = DefinitionFourierTransform.transform(signalData);
-        compareComplexArrays(transformateData, transform);
+        Complex[] transform;
+        try {
+            transform = DefinitionFourierTransform.Transform(data);
+            compareComplexArrays(transformData, transform);
+        } catch (NotPowerOfTwoException ex) {
+            Assert.fail();
+        }
     }
 
     @Test
     public void definitionInvTransormTest() {
-        Complex[] reverse = DefinitionFourierTransform.invTransform(transformateData);
-        compareComplexArrays(signalData, reverse);
+        Complex[] reverse;
+        try {
+            reverse = DefinitionFourierTransform.InvTransform(transformData);
+            compareComplexArrays(data, reverse);
+        } catch (NotPowerOfTwoException ex) {
+            Assert.fail();
+        }
+    }
+
+    @Test (expected = NotPowerOfTwoException.class)
+    public void definitionTransformNotPowerOfException() throws NotPowerOfTwoException{
+        Complex[] invalidData = new Complex[10];
+        Complex[] res = DefinitionFourierTransform.Transform(invalidData);
+    }
+
+    @Test (expected = NotPowerOfTwoException.class)
+    public void definitionInvTransformNotPowerOfException() throws NotPowerOfTwoException{
+        Complex[] invalidData = new Complex[10];
+        Complex[] res = DefinitionFourierTransform.InvTransform(invalidData);
+    }
+    
+    @Test
+    public void fftTest() throws NotPowerOfTwoException {
+        Complex[] transform = FastFourierTransform.Ffs(data);
+        compareComplexArrays(transformData, transform);
     }
 
     @Test
-    public void fftTest() {
-        Complex[] transform = FastFourierTransform.ffs(signalData);
-        compareComplexArrays(transformateData, transform);
+    public void ifftTest() throws NotPowerOfTwoException {
+        Complex[] reverse = FastFourierTransform.Iffs(transformData);
+        compareComplexArrays(data, reverse);
     }
 
-    @Test
-    public void ifftTest() {
-        Complex[] reverse = FastFourierTransform.iffs(transformateData);
-        compareComplexArrays(signalData, reverse);
+    @Test (expected = NotPowerOfTwoException.class)
+    public void fftTestNotPowerOfException() throws NotPowerOfTwoException{
+        Complex[] invalidData = new Complex[10];
+        Complex[] res = FastFourierTransform.Ffs(invalidData);
     }
 
+    @Test (expected = NotPowerOfTwoException.class)
+    public void ifftTestNotPowerOfException() throws NotPowerOfTwoException{
+        Complex[] invalidData = new Complex[10];
+        Complex[] res = FastFourierTransform.Iffs(invalidData);
+    }
+    
     private void compareComplexArrays(Complex[] expected, Complex[] result) {
         Assert.assertEquals(expected.length, result.length);
         for (int i = 0; i < expected.length; i++) {
-            Assert.assertTrue(Complex.equals(expected[i], result[i], 0.005));
+            Assert.assertTrue("i: " + i + " exp: " + expected[i] + " res: " + result[i], Complex.equals(expected[i], result[i], 0.005));
         }
+    }
+
+    private Complex[] generateData(int n) {
+        Complex[] result = new Complex[n];
+        Random rand = new Random();
+        for (int i = 1; i <= n; i++) {
+            result[i - 1] = new Complex(rand.nextDouble(), rand.nextDouble());
+        }
+        return result;
     }
 }

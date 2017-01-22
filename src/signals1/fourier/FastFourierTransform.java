@@ -6,18 +6,27 @@
 package signals1.fourier;
 
 import org.apache.commons.math3.complex.Complex;
+import signals1.tools.exceptions.NotPowerOfTwoException;
 
 /**
  *
  * @author marr
  */
 public class FastFourierTransform {
-    
-    public static Complex[] ffs(Complex[] data){
+
+    public static Complex[] Ffs(Complex[] data) throws NotPowerOfTwoException {
+        int length = data.length;
+        if ((length & (length - 1)) != 0) {
+            throw new NotPowerOfTwoException();
+        }
         return null;
     }
-    
-    public static Complex[] iffs(Complex[] data){
+
+    public static Complex[] Iffs(Complex[] data) throws NotPowerOfTwoException {
+        int length = data.length;
+        if ((length & (length - 1)) != 0) {
+            throw new NotPowerOfTwoException();
+        }
         return null;
     }
 }
