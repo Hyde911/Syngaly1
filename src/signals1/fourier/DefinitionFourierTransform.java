@@ -19,13 +19,14 @@ public class DefinitionFourierTransform {
         if ((length & (length - 1)) != 0) {
             throw new NotPowerOfTwoException();
         }
+        Complex wFactor = CalculateWFactor(length);
+        
         Complex[] result = new Complex[length];
-
+        
         for (int i = 0; i < length; i++) {
             result[i] = Complex.ZERO;
             for (int j = 0; j < length; j++) {
-                double core = -2.0 * i * j / length;
-                result[i] = result[i].add(CalculateImPower(core).multiply(data[j]));
+                result[i] = result[i].add(wFactor.pow(-1.0 * i * j).multiply(data[j]));
             }
         }
 
@@ -37,13 +38,14 @@ public class DefinitionFourierTransform {
         if ((length & (length - 1)) != 0) {
             throw new NotPowerOfTwoException();
         }
+        Complex wFactor = CalculateWFactor(length);
+        
         Complex[] result = new Complex[length];
 
         for (int i = 0; i < length; i++) {
             result[i] = Complex.ZERO;
             for (int j = 0; j < length; j++) {
-                double core = 2.0 * i * j / length;
-                result[i] = result[i].add(CalculateImPower(core).multiply(data[j]));
+                result[i] = result[i].add(wFactor.pow(1.0 * i * j).multiply(data[j]));
             }
             result[i] = result[i].divide(length);
         }
@@ -53,5 +55,9 @@ public class DefinitionFourierTransform {
 
     private static Complex CalculateImPower(double value) {
         return new Complex(Math.cos(value * Math.PI), Math.sin(value * Math.PI));
+    }
+    
+    private static Complex  CalculateWFactor(int n ){
+        return new Complex(Math.cos(2.0 * Math.PI / n), Math.sin(2.0 * Math.PI / n));
     }
 }
