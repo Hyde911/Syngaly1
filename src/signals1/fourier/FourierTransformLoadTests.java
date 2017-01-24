@@ -21,7 +21,7 @@ public class FourierTransformLoadTests {
      * @param args the command line arguments
      */
     public static void main(String[] args) {
-        int n = 1024;
+        int n = 2048;
         Complex[] data = new Complex[n];
         Random rand = new Random();
         for (int i = 0; i < n; i++) {
@@ -53,7 +53,7 @@ public class FourierTransformLoadTests {
 
         start = System.nanoTime();
         try {
-            FastFourierTransform.Ffs(data);
+            FastFourierTransform.RecursiveFfs(data);
         } catch (NotPowerOfTwoException ex) {
         }
         stop = System.nanoTime();

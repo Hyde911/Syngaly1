@@ -34,7 +34,7 @@ public class FourierTransformTests {
         Complex[] reverse = FFT.ifft(transform);
         compareComplexArrays(data, reverse);
     }
-    
+
     @Test
     public void definitionTransformTest() {
         Complex[] transform;
@@ -57,25 +57,56 @@ public class FourierTransformTests {
         }
     }
 
-    @Test (expected = NotPowerOfTwoException.class)
-    public void definitionTransformNotPowerOfException() throws NotPowerOfTwoException{
+    @Test(expected = NotPowerOfTwoException.class)
+    public void definitionTransformNotPowerOfException() throws NotPowerOfTwoException {
         Complex[] invalidData = new Complex[10];
         Complex[] res = DefinitionFourierTransform.Transform(invalidData);
     }
 
-    @Test (expected = NotPowerOfTwoException.class)
-    public void definitionInvTransformNotPowerOfException() throws NotPowerOfTwoException{
+    @Test(expected = NotPowerOfTwoException.class)
+    public void definitionInvTransformNotPowerOfException() throws NotPowerOfTwoException {
         Complex[] invalidData = new Complex[10];
         Complex[] res = DefinitionFourierTransform.InvTransform(invalidData);
     }
-    
+
     @Test
-    public void definitionTransformBothWaysTest() throws NotPowerOfTwoException{
+    public void definitionTransformBothWaysTest() throws NotPowerOfTwoException {
         Complex[] transform = DefinitionFourierTransform.Transform(data);
         Complex[] reverse = DefinitionFourierTransform.InvTransform(transform);
         compareComplexArrays(data, reverse);
     }
-            
+
+    @Test
+    public void recursiveFftTest() throws NotPowerOfTwoException {
+        Complex[] transform = FastFourierTransform.RecursiveFfs(data);
+        compareComplexArrays(transformData, transform);
+    }
+
+    @Test
+    public void recursiveIfftTest() throws NotPowerOfTwoException {
+        Complex[] reverse = FastFourierTransform.RecursiveIffs(transformData);
+        compareComplexArrays(data, reverse);
+    }
+
+    @Test(expected = NotPowerOfTwoException.class)
+    public void recursiveFftTestNotPowerOfException() throws NotPowerOfTwoException {
+        Complex[] invalidData = new Complex[10];
+        Complex[] res = FastFourierTransform.RecursiveFfs(invalidData);
+    }
+
+    @Test(expected = NotPowerOfTwoException.class)
+    public void recursiveIfftTestNotPowerOfException() throws NotPowerOfTwoException {
+        Complex[] invalidData = new Complex[10];
+        Complex[] res = FastFourierTransform.RecursiveIffs(invalidData);
+    }
+
+    private void compareComplexArrays(Complex[] expected, Complex[] result) {
+        Assert.assertEquals(expected.length, result.length);
+        for (int i = 0; i < expected.length; i++) {
+            Assert.assertTrue("i: " + i + " exp: " + expected[i] + " res: " + result[i], Complex.equals(expected[i], result[i], 0.0001));
+        }
+    }
+
     @Test
     public void fftTest() throws NotPowerOfTwoException {
         Complex[] transform = FastFourierTransform.Ffs(data);
@@ -84,27 +115,20 @@ public class FourierTransformTests {
 
     @Test
     public void ifftTest() throws NotPowerOfTwoException {
-        Complex[] reverse = FastFourierTransform.Iffs(transformData);
+        Complex[] reverse = FastFourierTransform.IFfs(transformData);
         compareComplexArrays(data, reverse);
     }
 
-    @Test (expected = NotPowerOfTwoException.class)
-    public void fftTestNotPowerOfException() throws NotPowerOfTwoException{
+    @Test(expected = NotPowerOfTwoException.class)
+    public void fftTestNotPowerOfException() throws NotPowerOfTwoException {
         Complex[] invalidData = new Complex[10];
         Complex[] res = FastFourierTransform.Ffs(invalidData);
     }
 
-    @Test (expected = NotPowerOfTwoException.class)
-    public void ifftTestNotPowerOfException() throws NotPowerOfTwoException{
+    @Test(expected = NotPowerOfTwoException.class)
+    public void ifftTestNotPowerOfException() throws NotPowerOfTwoException {
         Complex[] invalidData = new Complex[10];
-        Complex[] res = FastFourierTransform.Iffs(invalidData);
-    }
-    
-    private void compareComplexArrays(Complex[] expected, Complex[] result) {
-        Assert.assertEquals(expected.length, result.length);
-        for (int i = 0; i < expected.length; i++) {
-            Assert.assertTrue("i: " + i + " exp: " + expected[i] + " res: " + result[i], Complex.equals(expected[i], result[i], 0.0001));
-        }
+        Complex[] res = FastFourierTransform.IFfs(invalidData);
     }
 
     private Complex[] generateData(int n) {

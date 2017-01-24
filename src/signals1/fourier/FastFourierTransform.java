@@ -15,76 +15,91 @@ import signals1.tools.exceptions.NotPowerOfTwoException;
  */
 public class FastFourierTransform {
 
+    public static Complex[] RecursiveFfs(Complex[] data) throws NotPowerOfTwoException {
+        int length = data.length;
+        if ((length & (length - 1)) != 0) {
+            throw new NotPowerOfTwoException();
+        }
+
+        Complex halfWFactor = CalculateWFactor(length / 2);
+        Complex wFactor = CalculateWFactor(length);
+
+        if (length > 8) {
+            Complex[] firstHalf = RecursiveFfs(Arrays.copyOf(data, length / 2));
+            Complex[] secondHalf = RecursiveFfs(Arrays.copyOfRange(data, length / 2, length));
+            Complex[] whole = new Complex[length];
+            for (int i = 0; i < length; i += 2) {
+                whole[i] = firstHalf[i / 2];
+                whole[i + 1] = secondHalf[i / 2];
+            }
+            return whole;
+        } else {
+            Complex[] result = new Complex[length];
+            for (int i = 0; i < length / 2; i++) {
+                Complex evenPart = Complex.ZERO;
+                Complex oddPart = Complex.ZERO;
+                for (int j = 0; j < length / 2; j++) {
+                    evenPart = evenPart.add(halfWFactor.pow(-1.0 * i * j).multiply(data[j * 2]));
+                    oddPart = oddPart.add(halfWFactor.pow(-1.0 * i * j).multiply(data[(j * 2 + 1)]));
+                }
+                oddPart = oddPart.multiply(wFactor.pow(-1.0 * i));
+                result[i] = oddPart.add(evenPart);
+                result[i + length / 2] = evenPart.subtract(oddPart);
+            }
+
+            return result;
+        }
+    }
+
+    public static Complex[] RecursiveIffs(Complex[] data) throws NotPowerOfTwoException {
+        int length = data.length;
+        if ((length & (length - 1)) != 0) {
+            throw new NotPowerOfTwoException();
+        }
+        Complex halfWFactor = CalculateWFactor(length / 2);
+        Complex wFactor = CalculateWFactor(length);
+
+        if (length > 8) {
+            Complex[] firstHalf = RecursiveFfs(Arrays.copyOf(data, length / 2));
+            Complex[] secondHalf = RecursiveFfs(Arrays.copyOfRange(data, length / 2, length));
+            Complex[] whole = new Complex[length];
+            for (int i = 0; i < length; i += 2) {
+                whole[i] = firstHalf[i / 2];
+                whole[i + 1] = secondHalf[i / 2];
+            }
+            return whole;
+        } else {
+            Complex[] result = new Complex[length];
+            for (int i = 0; i < length / 2; i++) {
+                Complex evenHalf = Complex.ZERO;
+                Complex oddHalf = Complex.ZERO;
+                for (int j = 0; j < length / 2; j++) {
+                    evenHalf = evenHalf.add(halfWFactor.pow(1.0 * i * j).multiply(data[j * 2]));
+                    oddHalf = oddHalf.add(halfWFactor.pow(1.0 * i * j).multiply(data[(j * 2 + 1)]));
+                }
+                oddHalf = oddHalf.multiply(wFactor.pow(1.0 * i));
+                result[i] = oddHalf.add(evenHalf).divide(length);
+                result[i + length / 2] = evenHalf.subtract(oddHalf).divide(length);
+            }
+
+            return result;
+        }
+    }
+
     public static Complex[] Ffs(Complex[] data) throws NotPowerOfTwoException {
         int length = data.length;
         if ((length & (length - 1)) != 0) {
             throw new NotPowerOfTwoException();
         }
-
-        Complex halfWFactor = CalculateWFactor(length / 2);
-        Complex wFactor = CalculateWFactor(length);
-
-        if (length >8){
-            Complex[] firstHalf = Ffs(Arrays.copyOf(data, length / 2));
-            Complex[] secondHalf = Ffs(Arrays.copyOfRange(data, length / 2, length));
-            Complex[] whole = new Complex[length];
-            for (int i = 0; i < length; i += 2){
-                whole[i] = firstHalf[i / 2];
-                whole[i + 1] = secondHalf[i / 2];
-            }
-            return whole;
-        }
-        
-        else{
-        Complex[] result = new Complex[length];
-        for (int i = 0; i < length; i++) {
-            Complex evenPart = Complex.ZERO;
-            Complex oddPart = Complex.ZERO;
-            for (int j = 0; j < length / 2; j ++){
-                evenPart = evenPart.add(halfWFactor.pow(-1.0 * i * j).multiply(data[j * 2]));
-                oddPart = oddPart.add(halfWFactor.pow(-1.0 * i * j).multiply(data[(j * 2 + 1)]));
-            }
-            oddPart = oddPart.multiply(wFactor.pow(-1.0 * i));
-            result[i] = oddPart.add(evenPart);
-        }
-        
-        return result;
-        }
+        return null;
     }
 
-    public static Complex[] Iffs(Complex[] data) throws NotPowerOfTwoException {
+    public static Complex[] IFfs(Complex[] data) throws NotPowerOfTwoException {
         int length = data.length;
         if ((length & (length - 1)) != 0) {
             throw new NotPowerOfTwoException();
         }
-        Complex halfWFactor = CalculateWFactor(length / 2);
-        Complex wFactor = CalculateWFactor(length);
-
-        if (length >8){
-            Complex[] firstHalf = Ffs(Arrays.copyOf(data, length / 2));
-            Complex[] secondHalf = Ffs(Arrays.copyOfRange(data, length / 2, length));
-            Complex[] whole = new Complex[length];
-            for (int i = 0; i < length; i += 2){
-                whole[i] = firstHalf[i / 2];
-                whole[i + 1] = secondHalf[i / 2];
-            }
-            return whole;
-        }
-        else{
-        Complex[] result = new Complex[length];
-        for (int i = 0; i < length; i++) {
-            Complex firsHalf = Complex.ZERO;
-            Complex secondHalf = Complex.ZERO;
-            for (int j = 0; j < length / 2; j ++){
-                firsHalf = firsHalf.add(halfWFactor.pow(1.0 * i * j).multiply(data[j * 2]));
-                secondHalf = secondHalf.add(halfWFactor.pow(1.0 * i * j).multiply(data[(j * 2 + 1)]));
-            }
-            secondHalf = secondHalf.multiply(wFactor.pow(1.0 * i));
-            result[i] = secondHalf.add(firsHalf).divide(length);
-        }
-        
-        return result;
-        }
+        return null;
     }
 
     private static Complex CalculateWFactor(int n) {
