@@ -31,7 +31,7 @@ public class FastFourierTransform {
             oddPart[i] = data[2 * i + 1];
             evenPart[i] = data[2 * i];
         }
-        
+
         oddPart = RecursiveFfs(oddPart);
         evenPart = RecursiveFfs(evenPart);
 
@@ -49,28 +49,11 @@ public class FastFourierTransform {
         if ((length & (length - 1)) != 0) {
             throw new NotPowerOfTwoException();
         }
+        Complex[] tmp = ComplexConjugate(data, 1);
 
-        if (length == 1) {
-            return data;
-        }
-        Complex[] oddPart = new Complex[length / 2];
-        Complex[] evenPart = new Complex[length / 2];
+        tmp = RecursiveFfs(tmp);
 
-        for (int i = 0; i < length / 2; i++) {
-            oddPart[i] = data[2 * i + 1];
-            evenPart[i] = data[2 * i];
-        }
-        
-        oddPart = RecursiveFfs(oddPart);
-        evenPart = RecursiveFfs(evenPart);
-
-        Complex[] result = new Complex[length];
-        for (int i = 0; i < length / 2; i++) {
-            Complex wFactor = CalculateWFactor(length);
-            result[i] = evenPart[i].add(wFactor.pow(i).multiply(oddPart[i]));
-            result[i + length / 2] = evenPart[i].subtract(wFactor.pow(i).multiply(oddPart[i]));
-        }
-        return result;
+        return ComplexConjugate(tmp, length);
     }
 
     public static Complex[] Ffs(Complex[] data) throws NotPowerOfTwoException {
@@ -92,4 +75,13 @@ public class FastFourierTransform {
     private static Complex CalculateWFactor(int n) {
         return new Complex(Math.cos(2.0 * Math.PI / n), Math.sin(2.0 * Math.PI / n));
     }
+
+    private static Complex[] ComplexConjugate(Complex[] data, int div) {
+        for (int i = 0; i < data.length; i++) {
+            data[i] = data[i].conjugate().divide(div);
+        }
+        return data;
+    }
+
+    
 }
