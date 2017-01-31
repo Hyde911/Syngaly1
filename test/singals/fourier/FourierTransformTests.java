@@ -24,7 +24,7 @@ public class FourierTransformTests {
     private final Complex[] transformData;
 
     public FourierTransformTests() throws Exception {
-        data = generateData(4);
+        data = generateData(16);
         transformData = FFT.fft(data);
     }
 

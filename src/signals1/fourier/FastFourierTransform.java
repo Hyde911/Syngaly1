@@ -21,34 +21,27 @@ public class FastFourierTransform {
             throw new NotPowerOfTwoException();
         }
 
-        Complex halfWFactor = CalculateWFactor(length / 2);
-        Complex wFactor = CalculateWFactor(length);
-
-        if (length > 8) {
-            Complex[] firstHalf = RecursiveFfs(Arrays.copyOf(data, length / 2));
-            Complex[] secondHalf = RecursiveFfs(Arrays.copyOfRange(data, length / 2, length));
-            Complex[] whole = new Complex[length];
-            for (int i = 0; i < length; i += 2) {
-                whole[i] = firstHalf[i / 2];
-                whole[i + 1] = secondHalf[i / 2];
-            }
-            return whole;
-        } else {
-            Complex[] result = new Complex[length];
-            for (int i = 0; i < length / 2; i++) {
-                Complex evenPart = Complex.ZERO;
-                Complex oddPart = Complex.ZERO;
-                for (int j = 0; j < length / 2; j++) {
-                    evenPart = evenPart.add(halfWFactor.pow(-1.0 * i * j).multiply(data[j * 2]));
-                    oddPart = oddPart.add(halfWFactor.pow(-1.0 * i * j).multiply(data[(j * 2 + 1)]));
-                }
-                oddPart = oddPart.multiply(wFactor.pow(-1.0 * i));
-                result[i] = oddPart.add(evenPart);
-                result[i + length / 2] = evenPart.subtract(oddPart);
-            }
-
-            return result;
+        if (length == 1) {
+            return data;
         }
+        Complex[] oddPart = new Complex[length / 2];
+        Complex[] evenPart = new Complex[length / 2];
+
+        for (int i = 0; i < length / 2; i++) {
+            oddPart[i] = data[2 * i + 1];
+            evenPart[i] = data[2 * i];
+        }
+        
+        oddPart = RecursiveFfs(oddPart);
+        evenPart = RecursiveFfs(evenPart);
+
+        Complex[] result = new Complex[length];
+        for (int i = 0; i < length / 2; i++) {
+            Complex wFactor = CalculateWFactor(length);
+            result[i] = evenPart[i].add(wFactor.pow(-1 * i).multiply(oddPart[i]));
+            result[i + length / 2] = evenPart[i].subtract(wFactor.pow(-1 * i).multiply(oddPart[i]));
+        }
+        return result;
     }
 
     public static Complex[] RecursiveIffs(Complex[] data) throws NotPowerOfTwoException {
@@ -56,34 +49,28 @@ public class FastFourierTransform {
         if ((length & (length - 1)) != 0) {
             throw new NotPowerOfTwoException();
         }
-        Complex halfWFactor = CalculateWFactor(length / 2);
-        Complex wFactor = CalculateWFactor(length);
 
-        if (length > 8) {
-            Complex[] firstHalf = RecursiveFfs(Arrays.copyOf(data, length / 2));
-            Complex[] secondHalf = RecursiveFfs(Arrays.copyOfRange(data, length / 2, length));
-            Complex[] whole = new Complex[length];
-            for (int i = 0; i < length; i += 2) {
-                whole[i] = firstHalf[i / 2];
-                whole[i + 1] = secondHalf[i / 2];
-            }
-            return whole;
-        } else {
-            Complex[] result = new Complex[length];
-            for (int i = 0; i < length / 2; i++) {
-                Complex evenHalf = Complex.ZERO;
-                Complex oddHalf = Complex.ZERO;
-                for (int j = 0; j < length / 2; j++) {
-                    evenHalf = evenHalf.add(halfWFactor.pow(1.0 * i * j).multiply(data[j * 2]));
-                    oddHalf = oddHalf.add(halfWFactor.pow(1.0 * i * j).multiply(data[(j * 2 + 1)]));
-                }
-                oddHalf = oddHalf.multiply(wFactor.pow(1.0 * i));
-                result[i] = oddHalf.add(evenHalf).divide(length);
-                result[i + length / 2] = evenHalf.subtract(oddHalf).divide(length);
-            }
-
-            return result;
+        if (length == 1) {
+            return data;
         }
+        Complex[] oddPart = new Complex[length / 2];
+        Complex[] evenPart = new Complex[length / 2];
+
+        for (int i = 0; i < length / 2; i++) {
+            oddPart[i] = data[2 * i + 1];
+            evenPart[i] = data[2 * i];
+        }
+        
+        oddPart = RecursiveFfs(oddPart);
+        evenPart = RecursiveFfs(evenPart);
+
+        Complex[] result = new Complex[length];
+        for (int i = 0; i < length / 2; i++) {
+            Complex wFactor = CalculateWFactor(length);
+            result[i] = evenPart[i].add(wFactor.pow(i).multiply(oddPart[i]));
+            result[i + length / 2] = evenPart[i].subtract(wFactor.pow(i).multiply(oddPart[i]));
+        }
+        return result;
     }
 
     public static Complex[] Ffs(Complex[] data) throws NotPowerOfTwoException {
