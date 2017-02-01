@@ -80,7 +80,16 @@ public class FourierTransformTests {
             Assert.fail();
         }
     }
-    
+    @Test
+    public void ggFFTvsDFT() {
+        Complex[] transform;
+        try {
+            transform = GGFourierTransform.fft_recursive(data);
+            compareComplexArrays(transform, GGFourierTransform.dft(data, false));
+        } catch (NotPowerOfTwoException ex) {
+            Assert.fail();
+        }
+    }
 
     @Test
     public void definitionInvTransormTest() {
