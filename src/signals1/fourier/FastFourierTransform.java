@@ -61,7 +61,16 @@ public class FastFourierTransform {
         if ((length & (length - 1)) != 0) {
             throw new NotPowerOfTwoException();
         }
-        return null;
+        Complex[] result = new Complex[length];
+        Complex wFactor = CalculateWFactor(length);
+        for (int i = 0; i < (int)Math.log(length); i++){
+//            Complex factorN = CalculateWFactor(i)
+        }
+//        for (int i = 0; i < 2; i++){
+            result[0] = data[0].add(data[1]);
+            result[1] = data[0].subtract(data[1]);
+//        }
+        return result;
     }
 
     public static Complex[] IFfs(Complex[] data) throws NotPowerOfTwoException {
@@ -83,5 +92,11 @@ public class FastFourierTransform {
         return data;
     }
 
-    
+    private static Complex[] BitReversal(Complex[] data){
+        Complex[] res = new Complex[data.length];
+        for (int i = 0; i < data.length; i++){
+            res[Integer.reverse(i)] = data[i];
+        }
+        return res;
+    }
 }

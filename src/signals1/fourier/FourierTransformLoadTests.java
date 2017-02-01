@@ -17,10 +17,32 @@ import signals1.tools.exceptions.NotPowerOfTwoException;
  */
 public class FourierTransformLoadTests {
 
+    private static int reverse(int n) {
+        if (n == 0){
+            return 0;
+        }
+        int len = (int)(Math.log(n)/Math.log(2));
+        if (len%2 == 0){
+            for (int i = 0; i < len; i++){
+                
+            }
+        }else{
+            for (int i = 0; i <len + 1; i++){
+                
+            }
+        }
+        return 0;
+    }
+
     /**
      * @param args the command line arguments
      */
     public static void main(String[] args) {
+
+        for (int i = 0; i < 8; i++) {
+            System.out.println(reverse(i));
+        }
+
         int n = 2048;
         Complex[] data = new Complex[n];
         Random rand = new Random();
