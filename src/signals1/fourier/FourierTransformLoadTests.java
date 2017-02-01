@@ -17,18 +17,19 @@ import signals1.tools.exceptions.NotPowerOfTwoException;
  */
 public class FourierTransformLoadTests {
 
-    private static int reverse(int n) {
+    private static int reverse(int n, int len) {
         if (n == 0){
             return 0;
         }
-        int len = (int)(Math.log(n)/Math.log(2));
         if (len%2 == 0){
+            int middle = len/2;
             for (int i = 0; i < len; i++){
                 
             }
         }else{
-            for (int i = 0; i <len + 1; i++){
-                
+            int middle = (len / 2) + 1;
+            for (int i = 0; i <len / 2  + 1; i++){
+//                byte b1 = 
             }
         }
         return 0;
@@ -40,7 +41,7 @@ public class FourierTransformLoadTests {
     public static void main(String[] args) {
 
         for (int i = 0; i < 8; i++) {
-            System.out.println(reverse(i));
+            System.out.println(reverse(i, 3));
         }
 
         int n = 2048;
