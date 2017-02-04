@@ -109,6 +109,9 @@ public class FastFourierTransform {
     }
 
     private static Complex CalculateWFactor(int n) {
+        if (n == 0){
+            return Complex.ONE;
+        }
         return new Complex(Math.cos(2.0 * Math.PI / n), Math.sin(2.0 * Math.PI / n));
     }
 

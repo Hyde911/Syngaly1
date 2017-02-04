@@ -22,8 +22,8 @@ public class FourierTransformLoadTests {
      */
     public static void main(String[] args) {
 
-        int n = 2048;
-        int iterations = 10;
+        int n = 4096;
+        int iterations = 40;
         Complex[] data = new Complex[n];
         Random rand = new Random();
         for (int i = 0; i < n; i++) {
