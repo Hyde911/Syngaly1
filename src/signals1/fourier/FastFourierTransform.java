@@ -37,7 +37,7 @@ public class FastFourierTransform {
 
         Complex[] result = new Complex[length];
         for (int i = 0; i < length / 2; i++) {
-            Complex wFactor = CalculateWFactor(length).pow(-1 * i).multiply(oddPart[i]);
+            Complex wFactor = CalculateWFactor(i, length).multiply(oddPart[i]);
             result[i] = evenPart[i].add(wFactor);
             result[i + length / 2] = evenPart[i].subtract(wFactor);
         }
@@ -49,11 +49,11 @@ public class FastFourierTransform {
         if ((length & (length - 1)) != 0) {
             throw new NotPowerOfTwoException();
         }
-        Complex[] tmp = ComplexConjugate(data, 1);
+        Complex[] tmp = ComplexConjugateWithDivision(data, 1);
 
         tmp = RecursiveFfs(tmp);
 
-        return ComplexConjugate(tmp, length);
+        return ComplexConjugateWithDivision(tmp, length);
     }
 
     public static Complex[] Ffs(Complex[] data) throws NotPowerOfTwoException {
@@ -76,18 +76,20 @@ public class FastFourierTransform {
         }
         Complex first;
         Complex second;
-
         //iterate over levels
         for (int i = levels - 1; i >= 0; i--) {
+
             //block size
             int tmpLength = (int) (length / Math.pow(2, i));
-            Complex wFactor = CalculateWFactor(tmpLength);
+
             //iterate over blocks in level
             for (int j = 0; j < length / tmpLength; j++) {
+
                 //iterate over butterlies inside block
-                for (int k = j * tmpLength; k < (tmpLength / 2) + (j * tmpLength); k++) {
+                int blocStart = (j * tmpLength);
+                for (int k = blocStart; k < (tmpLength / 2) + blocStart; k++) {
                     first = data[k];
-                    second = data[k + (tmpLength / 2)].multiply(wFactor.pow(-k));
+                    second = data[k + (tmpLength / 2)].multiply(CalculateWFactor((k - blocStart), tmpLength));
                     data[k] = first.add(second);
                     data[k + (tmpLength / 2)] = first.subtract(second);
                 }
@@ -101,33 +103,29 @@ public class FastFourierTransform {
         if ((length & (length - 1)) != 0) {
             throw new NotPowerOfTwoException();
         }
-        Complex[] tmp = ComplexConjugate(data, 1);
+        Complex[] tmp = ComplexConjugateWithDivision(data, 1);
 
         tmp = Ffs(tmp);
 
-        return ComplexConjugate(tmp, length);
+        return ComplexConjugateWithDivision(tmp, length);
     }
 
-    private static Complex CalculateWFactor(int n) {
-        if (n == 0){
-            return Complex.ONE;
-        }
-        return new Complex(Math.cos(2.0 * Math.PI / n), Math.sin(2.0 * Math.PI / n));
+    private static Complex CalculateWFactor(int k, int n) {
+        return new Complex(Math.cos(-2.0 * Math.PI  * k / n), Math.sin(-2.0 * Math.PI * k/ n));
     }
 
-    private static Complex[] ComplexConjugate(Complex[] data, int div) {
-        for (int i = 0; i < data.length; i++) {
-            data[i] = data[i].conjugate().divide(div);
+    private static Complex[] ComplexConjugateWithDivision(Complex[] data, int div) {
+        if (div == 1) {
+            for (int i = 0; i < data.length; i++) {
+                data[i] = data[i].conjugate();
+            }
+        } else {
+            for (int i = 0; i < data.length; i++) {
+                data[i] = data[i].conjugate().divide(div);
+            }
         }
         return data;
     }
 
-    private static Complex[] BitReversal(Complex[] data) {
-        Complex[] res = new Complex[data.length];
-        for (int i = 0; i < data.length; i++) {
-            res[Integer.reverse(i)] = data[i];
-        }
-        return res;
-    }
 
 }
