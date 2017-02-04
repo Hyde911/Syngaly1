@@ -26,7 +26,7 @@ public class FourierTransformTests {
     private final Complex[] mgDFTData;
 
     public FourierTransformTests() throws Exception {
-        data = generateData(16);
+        data = generateData(128);
         transformData = FFT.fft(data);
         mgDFTData = DefinitionFourierTransform.Transform(data);
     }
