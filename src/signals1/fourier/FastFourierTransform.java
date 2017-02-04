@@ -74,6 +74,9 @@ public class FastFourierTransform {
                 data[reversedIndex] = tmp;
             }
         }
+        Complex first;
+        Complex second;
+
         //iterate over levels
         for (int i = levels - 1; i >= 0; i--) {
             //block size
@@ -83,8 +86,8 @@ public class FastFourierTransform {
             for (int j = 0; j < length / tmpLength; j++) {
                 //iterate over butterlies inside block
                 for (int k = j * tmpLength; k < (tmpLength / 2) + (j * tmpLength); k++) {
-                    Complex first = data[k];
-                    Complex second = data[k + (tmpLength / 2)].multiply(wFactor.pow(-k));
+                    first = data[k];
+                    second = data[k + (tmpLength / 2)].multiply(wFactor.pow(-k));
                     data[k] = first.add(second);
                     data[k + (tmpLength / 2)] = first.subtract(second);
                 }
@@ -123,4 +126,5 @@ public class FastFourierTransform {
         }
         return res;
     }
+
 }

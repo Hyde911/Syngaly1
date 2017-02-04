@@ -26,7 +26,7 @@ public class FourierTransformTests {
     private final Complex[] mgDFTData;
 
     public FourierTransformTests() throws Exception {
-        data = generateData(128);
+        data = generateData(512);
         transformData = FFT.fft(data);
         mgDFTData = DefinitionFourierTransform.Transform(data);
     }
@@ -136,13 +136,13 @@ public class FourierTransformTests {
     @Test(expected = NotPowerOfTwoException.class)
     public void recursiveFftTestNotPowerOfException() throws NotPowerOfTwoException {
         Complex[] invalidData = new Complex[10];
-        Complex[] res = FastFourierTransform.RecursiveFfs(invalidData);
+        FastFourierTransform.RecursiveFfs(invalidData);
     }
 
     @Test(expected = NotPowerOfTwoException.class)
     public void recursiveIfftTestNotPowerOfException() throws NotPowerOfTwoException {
         Complex[] invalidData = new Complex[10];
-        Complex[] res = FastFourierTransform.RecursiveIffs(invalidData);
+        FastFourierTransform.RecursiveIffs(invalidData);
     }
 
     private void compareComplexArrays(Complex[] expected, Complex[] result) {
@@ -167,13 +167,13 @@ public class FourierTransformTests {
     @Test(expected = NotPowerOfTwoException.class)
     public void fftTestNotPowerOfException() throws NotPowerOfTwoException {
         Complex[] invalidData = new Complex[10];
-        Complex[] res = FastFourierTransform.Ffs(invalidData);
+        FastFourierTransform.Ffs(invalidData);
     }
 
     @Test(expected = NotPowerOfTwoException.class)
     public void ifftTestNotPowerOfException() throws NotPowerOfTwoException {
         Complex[] invalidData = new Complex[10];
-        Complex[] res = FastFourierTransform.IFfs(invalidData);
+        FastFourierTransform.IFfs(invalidData);
     }
 
     private Complex[] generateData(int n) {
