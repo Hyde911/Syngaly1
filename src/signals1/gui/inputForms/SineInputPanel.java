@@ -16,9 +16,9 @@ import signals1.continuousSignals.abstracts.SineLikeSignals;
  *
  * @author marr
  */
-public class SineInputPanel extends javax.swing.JPanel {
+public class SineInputPanel extends javax.swing.JPanel implements InputPanel{
 
-    private Dimension dimension;
+    private final Dimension dimension;
 
     /**
      * Creates new form NewJPanel
@@ -28,6 +28,7 @@ public class SineInputPanel extends javax.swing.JPanel {
         initComponents();
     }
 
+    @Override
     public SineLikeSignals getSingal() {
         double amplitude = 0;
         double period = 0;
@@ -45,11 +46,11 @@ public class SineInputPanel extends javax.swing.JPanel {
 
         switch (jComboBox1.getSelectedIndex()) {
             case 0:
-                return new SineSignal(startTime, amplitude, duration, period);
+                return new SineSignal(startTime, amplitude, duration, period, 2);
             case 1:
-                return new SinesHalfWafeSingal(startTime, amplitude, duration, period);
+                return new SinesHalfWafeSingal(startTime, amplitude, duration, period, 1);
             default:
-                return new SineModSingal(startTime, amplitude, duration, period);
+                return new SineModSingal(startTime, amplitude, duration, period, 1);
         }
     }
 

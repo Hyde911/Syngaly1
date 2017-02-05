@@ -14,8 +14,8 @@ import signals1.continuousSignals.abstracts.SineLikeSignals;
  */
 public class SineModSingal extends SineLikeSignals {
 
-    public SineModSingal(double startTime, double amplitude, double duration, double period) {
-        super(startTime, amplitude, duration, period);
+    public SineModSingal(double startTime, double amplitude, double duration, double period, double phaseShift) {
+        super(startTime, amplitude, duration, period, phaseShift);
         this.fullName = "sin modulo";
     }
 

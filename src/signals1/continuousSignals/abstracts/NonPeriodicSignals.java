@@ -9,7 +9,7 @@ package signals1.continuousSignals.abstracts;
  *
  * @author marr
  */
-public abstract class NonPeriodicSignals extends Signals {
+public abstract class NonPeriodicSignals extends AbstractSignal {
 
     public NonPeriodicSignals(double startTime, double amplitude, double duration) {
         super(startTime, amplitude, duration);

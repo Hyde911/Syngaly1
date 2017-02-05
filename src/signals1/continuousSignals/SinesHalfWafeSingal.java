@@ -14,8 +14,8 @@ import signals1.continuousSignals.abstracts.SineLikeSignals;
  */
 public class SinesHalfWafeSingal extends SineLikeSignals {
 
-    public SinesHalfWafeSingal(double startTime, double amplitude, double duration, double period) {
-        super(startTime, amplitude, duration, period);
+    public SinesHalfWafeSingal(double startTime, double amplitude, double duration, double period, double phaseShift) {
+        super(startTime, amplitude, duration, period, phaseShift);
         this.fullName = "sin wyprostowany";
     }
 

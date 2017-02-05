@@ -9,7 +9,7 @@ package signals1.continuousSignals.abstracts;
  *
  * @author marr
  */
-public abstract class PeriodicSignals extends Signals {
+public abstract class PeriodicSignals extends AbstractSignal {
 
     protected double period;
     protected int numberOfWholePeriods;

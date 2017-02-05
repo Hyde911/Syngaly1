@@ -18,13 +18,7 @@ import signals1.stats.StatsCalculator;
  */
 public class DerivedSignal extends DiscreteSignal implements Serializable {
     
-    private Class type;
-
-    public DerivedSignal(Complex[] values, int samplingRate, double startTime, double amplitude){
-        this(values, samplingRate, startTime, amplitude, DiscreteSignal.class);
-    }
-    
-    public DerivedSignal(Complex[] values, int samplingRate, double startTime, double amplitude, Class type) {
+    public DerivedSignal(Complex[] values, int samplingRate, double startTime, double amplitude) {
         super();
         this.fullName = "sygnał pochodny";
         this.samplingRate = samplingRate;
@@ -32,7 +26,6 @@ public class DerivedSignal extends DiscreteSignal implements Serializable {
         this.amplitude = amplitude;
         this.values = values;
         this.duration = values.length * 1.0 / samplingRate;
-        this.type = type;
         calculateStats();
     }
 
@@ -44,9 +37,5 @@ public class DerivedSignal extends DiscreteSignal implements Serializable {
 
     private void calculateStats() {
         this.stats = StatsCalculator.getStats(values);
-    }
-    
-    public Class getType(){
-        return type;
     }
 }

@@ -11,7 +11,10 @@ package signals1.continuousSignals.abstracts;
  */
 public abstract class SineLikeSignals extends PeriodicSignals {
 
-    public SineLikeSignals(double startTime, double amplitude, double duration, double period) {
+    protected double phaseShift;
+    
+    public SineLikeSignals(double startTime, double amplitude, double duration, double period, double phaseShift) {
         super(startTime, amplitude, duration, period);
+        this.phaseShift = phaseShift * 2 * Math.PI;
     }
 }

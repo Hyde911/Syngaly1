@@ -10,7 +10,7 @@ import java.io.Serializable;
 import java.util.Arrays;
 import org.apache.commons.math3.complex.Complex;
 import signals1.continuousSignals.abstracts.PeriodicSignals;
-import signals1.continuousSignals.abstracts.Signals;
+import signals1.continuousSignals.abstracts.AbstractSignal;
 import signals1.stats.Histogram;
 import signals1.stats.HistogramCalculator;
 import signals1.stats.SignalStats;
@@ -103,7 +103,7 @@ public class PeriodicDiscreteSignal extends DiscreteSignal implements Serializab
         return hisCalc.getHistogram(numberOfIntervals);
     }
 
-    private void getSamples(Signals signal) {
+    private void getSamples(AbstractSignal signal) {
         values = new Complex[numberOfSamples];
         double factor = (1.0 * signal.getNumberOfSamples()) / (1.0 * values.length);
         Complex[]orValues =  signal.getSignal();

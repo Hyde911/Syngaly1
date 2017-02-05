@@ -12,7 +12,7 @@ import org.apache.commons.math3.complex.Complex;
  *
  * @author marr
  */
-public abstract class Signals {
+public abstract class AbstractSignal {
 
     private final int id;
     protected final int samplesPerSecond = 524_288;
@@ -24,7 +24,7 @@ public abstract class Signals {
     protected double startTime;
     protected String fullName = "";
 
-    private Signals() {
+    private AbstractSignal() {
         id = nextId.incrementAndGet();
     }
 
@@ -32,7 +32,7 @@ public abstract class Signals {
         return id;
     }
 
-    public Signals(double startTime, double amplitude, double duration) {
+    public AbstractSignal(double startTime, double amplitude, double duration) {
         this();
         this.startTime = startTime;
         this.amplitude = amplitude;

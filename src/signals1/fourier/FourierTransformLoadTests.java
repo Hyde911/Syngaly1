@@ -22,8 +22,8 @@ public class FourierTransformLoadTests {
      */
     public static void main(String[] args) {
 
-        int n = 8192;
-        int iterations = 40;
+        int n = 1048576;
+        int iterations = 1;
         Complex[] data = new Complex[n];
         Random rand = new Random();
         for (int i = 0; i < n; i++) {
@@ -44,12 +44,12 @@ public class FourierTransformLoadTests {
         System.out.println("Definition transform");
 
         start = System.nanoTime();
-        for (int i = 0; i < iterations; i++) {
-            try {
-                DefinitionFourierTransform.Transform(data);
-            } catch (NotPowerOfTwoException ex) {
-            }
-        }
+//        for (int i = 0; i < iterations; i++) {
+//            try {
+//                DefinitionFourierTransform.Transform(data);
+//            } catch (NotPowerOfTwoException ex) {
+//            }
+//        }
         stop = System.nanoTime();
 
         System.out.println(((stop - start) / 1000000) + "[ms]");

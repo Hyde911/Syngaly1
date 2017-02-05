@@ -44,6 +44,6 @@ public class GUIHelper {
     }
 
     public static void loadSignal(final File file) {
-        MainWindow.getInstance().addDiscreteSignal(SignalSerializationHelper.loadSignal(file));
+        MainWindow.GetInstance().addDiscreteSignal(SignalSerializationHelper.loadSignal(file));
     }
 }

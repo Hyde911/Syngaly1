@@ -9,7 +9,7 @@ import javax.swing.event.TableModelEvent;
 import javax.swing.event.TableModelListener;
 import javax.swing.table.DefaultTableModel;
 import signals1.continuousSignals.abstracts.PeriodicSignals;
-import signals1.continuousSignals.abstracts.Signals;
+import signals1.continuousSignals.abstracts.AbstractSignal;
 import signals1.continuousSignals.abstracts.SquareSignals;
 import signals1.tools.SignalContainer;
 
@@ -49,7 +49,7 @@ public class VirtualSignalsTableModel extends DefaultTableModel {
 
     @Override
     public Object getValueAt(int rowIndex, int columnIndex) {
-        Signals signal = container.get(rowIndex);
+        AbstractSignal signal = container.get(rowIndex);
         switch (columnIndex) {
             case 0:
                 return signal.getId();
@@ -74,14 +74,14 @@ public class VirtualSignalsTableModel extends DefaultTableModel {
         return false;
     }
 
-    private Object getPeriod(Signals signal) {
+    private Object getPeriod(AbstractSignal signal) {
         if (signal instanceof PeriodicSignals) {
             return ((PeriodicSignals) signal).getPeriod();
         }
         return null;
     }
 
-    private Object getFill(Signals signal) {
+    private Object getFill(AbstractSignal signal) {
         if (signal instanceof SquareSignals) {
             return ((SquareSignals) signal).getFillFactor();
         }

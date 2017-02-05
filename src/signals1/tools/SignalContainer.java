@@ -6,9 +6,9 @@
 package signals1.tools;
 
 import java.util.ArrayList;
-import signals1.continuousSignals.abstracts.Signals;
+import signals1.continuousSignals.abstracts.AbstractSignal;
 
-public class SignalContainer extends ArrayList<Signals> {
+public class SignalContainer extends ArrayList<AbstractSignal> {
 
     private static SignalContainer INSTANCE;
 
@@ -19,11 +19,11 @@ public class SignalContainer extends ArrayList<Signals> {
         return INSTANCE;
     }
 
-    public Signals getById(int id) {
+    public AbstractSignal getById(int id) {
         if (id < 1) {
             return null;
         }
-        for (Signals s : this){
+        for (AbstractSignal s : this){
             if (s.getId() == id){
                 return s;
             }

@@ -17,9 +17,9 @@ import signals1.continuousSignals.abstracts.NonPeriodicSignals;
  *
  * @author marr
  */
-public class NoiseInputPanel extends javax.swing.JPanel {
+public class NoiseInputPanel extends javax.swing.JPanel implements InputPanel{
 
-    private Dimension dimension;
+    private final Dimension dimension;
 
     /**
      * Creates new form NewJPanel
@@ -29,16 +29,15 @@ public class NoiseInputPanel extends javax.swing.JPanel {
         initComponents();
     }
 
+    @Override
     public NonPeriodicSignals getSingal() {
         double amplitude = 0;
         double duration = 0;
         double startTime = 0;
-        double strokeTime = 0;
         try {
             amplitude = Double.parseDouble(jTextAmplitude.getText());
             duration = Double.parseDouble(jTextDuration.getText());
             startTime = Double.parseDouble(jTextStartTime.getText());
-            strokeTime = Double.parseDouble(jTextStrokeTime.getText());
         } catch (NumberFormatException ex) {
             JOptionPane.showMessageDialog(this, "Niepoprawna wartość", "Błąd", JOptionPane.ERROR_MESSAGE);
             return null;
@@ -46,8 +45,6 @@ public class NoiseInputPanel extends javax.swing.JPanel {
         switch (jComboBox1.getSelectedIndex()) {
             case 0:
                 return new GaussianNoise(startTime, amplitude, duration);
-            case 2:
-                return new StrokeSignal(startTime, amplitude, duration, strokeTime);
             default:
                 return new UniformNoise(startTime, amplitude, duration);
         }
@@ -75,7 +72,7 @@ public class NoiseInputPanel extends javax.swing.JPanel {
         setPreferredSize(dimension);
 
         jComboBox1.setFont(new java.awt.Font("Verdana", 0, 12)); // NOI18N
-        jComboBox1.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Szum gaussowski", "Szum jednostajny", "Skok jednostkowy" }));
+        jComboBox1.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Szum gaussowski", "Szum jednostajny" }));
 
         jLabel1.setFont(new java.awt.Font("Verdana", 1, 12)); // NOI18N
         jLabel1.setText("Amplituda");
@@ -83,11 +80,6 @@ public class NoiseInputPanel extends javax.swing.JPanel {
         jTextAmplitude.setFont(new java.awt.Font("Tahoma", 0, 12)); // NOI18N
         jTextAmplitude.setHorizontalAlignment(javax.swing.JTextField.CENTER);
         jTextAmplitude.setText("1");
-        jTextAmplitude.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jTextAmplitudeActionPerformed(evt);
-            }
-        });
 
         jLabel3.setFont(new java.awt.Font("Verdana", 1, 12)); // NOI18N
         jLabel3.setText("Czas trwania[s]");
@@ -95,11 +87,6 @@ public class NoiseInputPanel extends javax.swing.JPanel {
         jTextDuration.setFont(new java.awt.Font("Tahoma", 0, 12)); // NOI18N
         jTextDuration.setHorizontalAlignment(javax.swing.JTextField.CENTER);
         jTextDuration.setText("10");
-        jTextDuration.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jTextDurationActionPerformed(evt);
-            }
-        });
 
         jLabel5.setFont(new java.awt.Font("Verdana", 1, 12)); // NOI18N
         jLabel5.setText("Czas początkowy");
@@ -107,11 +94,6 @@ public class NoiseInputPanel extends javax.swing.JPanel {
         jTextStartTime.setFont(new java.awt.Font("Tahoma", 0, 12)); // NOI18N
         jTextStartTime.setHorizontalAlignment(javax.swing.JTextField.CENTER);
         jTextStartTime.setText("0");
-        jTextStartTime.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jTextStartTimeActionPerformed(evt);
-            }
-        });
 
         jLabel6.setFont(new java.awt.Font("Verdana", 1, 12)); // NOI18N
         jLabel6.setText("Czas skoku");
@@ -119,11 +101,6 @@ public class NoiseInputPanel extends javax.swing.JPanel {
         jTextStrokeTime.setFont(new java.awt.Font("Tahoma", 0, 12)); // NOI18N
         jTextStrokeTime.setHorizontalAlignment(javax.swing.JTextField.CENTER);
         jTextStrokeTime.setText("2");
-        jTextStrokeTime.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jTextStrokeTimeActionPerformed(evt);
-            }
-        });
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(this);
         this.setLayout(layout);
@@ -151,7 +128,7 @@ public class NoiseInputPanel extends javax.swing.JPanel {
                                 .addComponent(jLabel6, javax.swing.GroupLayout.PREFERRED_SIZE, 178, javax.swing.GroupLayout.PREFERRED_SIZE)
                                 .addGap(18, 18, 18)
                                 .addComponent(jTextStrokeTime, javax.swing.GroupLayout.PREFERRED_SIZE, 56, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                        .addGap(0, 166, Short.MAX_VALUE)))
+                        .addGap(0, 171, Short.MAX_VALUE)))
                 .addContainerGap())
         );
         layout.setVerticalGroup(
@@ -167,33 +144,17 @@ public class NoiseInputPanel extends javax.swing.JPanel {
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel3, javax.swing.GroupLayout.PREFERRED_SIZE, 32, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(jTextDuration, javax.swing.GroupLayout.DEFAULT_SIZE, 32, Short.MAX_VALUE))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(jTextStartTime, javax.swing.GroupLayout.DEFAULT_SIZE, 47, Short.MAX_VALUE)
-                    .addComponent(jLabel5, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 32, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                    .addComponent(jLabel5, javax.swing.GroupLayout.DEFAULT_SIZE, 32, Short.MAX_VALUE)
+                    .addComponent(jTextStartTime))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel6, javax.swing.GroupLayout.PREFERRED_SIZE, 32, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(jTextStrokeTime, javax.swing.GroupLayout.PREFERRED_SIZE, 32, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addContainerGap(27, Short.MAX_VALUE))
+                .addContainerGap(111, Short.MAX_VALUE))
         );
     }// </editor-fold>//GEN-END:initComponents
-
-    private void jTextAmplitudeActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jTextAmplitudeActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_jTextAmplitudeActionPerformed
-
-    private void jTextDurationActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jTextDurationActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_jTextDurationActionPerformed
-
-    private void jTextStartTimeActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jTextStartTimeActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_jTextStartTimeActionPerformed
-
-    private void jTextStrokeTimeActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jTextStrokeTimeActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_jTextStrokeTimeActionPerformed
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables

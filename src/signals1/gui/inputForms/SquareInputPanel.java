@@ -16,9 +16,9 @@ import signals1.continuousSignals.abstracts.SquareSignals;
  *
  * @author marr
  */
-public class SquareInputPanel extends javax.swing.JPanel {
+public class SquareInputPanel extends javax.swing.JPanel implements InputPanel {
 
-    private Dimension dimension;
+    private final Dimension dimension;
 
     /**
      * Creates new form NewJPanel
@@ -28,6 +28,7 @@ public class SquareInputPanel extends javax.swing.JPanel {
         initComponents();
     }
 
+    @Override
     public SquareSignals getSingal() {
         double amplitude = 0;
         double period = 0;

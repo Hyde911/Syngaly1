@@ -9,7 +9,7 @@ import signals1.discreteSignals.abstracts.DiscreteSignal;
 import java.io.Serializable;
 import org.apache.commons.math3.complex.Complex;
 import signals1.continuousSignals.abstracts.NonPeriodicSignals;
-import signals1.continuousSignals.abstracts.Signals;
+import signals1.continuousSignals.abstracts.AbstractSignal;
 import signals1.stats.Histogram;
 import signals1.stats.HistogramCalculator;
 import signals1.stats.SignalStats;
@@ -65,7 +65,7 @@ public class NonPeriodicDiscreteSignal extends DiscreteSignal implements Seriali
         return stats;
     }
 
-    private void getSamples(Signals signal) {
+    private void getSamples(AbstractSignal signal) {
         values = new Complex[(int) (samplingRate * signal.getDuration())];
         double factor = signal.getNumberOfSamples() / (1.0 * values.length);
         Complex[]orValues =  signal.getSignal();

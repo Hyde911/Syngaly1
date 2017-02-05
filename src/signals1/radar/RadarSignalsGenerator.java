@@ -55,8 +55,8 @@ public class RadarSignalsGenerator {
     
     private DerivedSignal generateRadarSignal() {
         double duration = getDuration();
-        SineSignal signal1 = new SineSignal(0, amplitude, duration, params.getFirstCompomentPeriod());
-        SineSignal signal2 = new SineSignal(0, amplitude, duration, params.getSecondCompomentPeriod());
+        SineSignal signal1 = new SineSignal(0, amplitude, duration, params.getFirstCompomentPeriod(), 1);
+        SineSignal signal2 = new SineSignal(0, amplitude, duration, params.getSecondCompomentPeriod(),1);
         PeriodicDiscreteSignal disSignal1 = new PeriodicDiscreteSignal(signal1, params.getSamplingRate(), new NoneQuantizer());
         PeriodicDiscreteSignal disSignal2 = new PeriodicDiscreteSignal(signal2, params.getSamplingRate(), new NoneQuantizer());
         try {
