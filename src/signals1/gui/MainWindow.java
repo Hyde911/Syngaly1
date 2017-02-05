@@ -719,11 +719,12 @@ public class MainWindow extends javax.swing.JFrame {
         if (signal == null) {
             return;
         }
-        AmplitudePanel amPanel = new AmplitudePanel(signal, false);
-        AmplitudePanel modAndShiftPanel = new AmplitudePanel(signal, true);
+        OutputPanel amPanel = new OutputPanelAmplitude(signal);
+        OutputPanel modAndShiftPanel = new OutputPanelModAndPhase(signal);
+        OutputPanel freqPanel = new OutputPanelFrequency(signal);
         HistogramPanel hisPanel = new HistogramPanel(signal.getHistogram(jSliderHistNo.getValue()), jSliderHistNo.getValue());
         HistogramPanel hisModAndShiftPanel = new HistogramPanel(signal.getHistogramModAndShift(jSliderHistNo.getValue()), jSliderHistNo.getValue());
-        OutputWindow outputWindow = new OutputWindow(signal, amPanel, hisPanel, modAndShiftPanel, hisModAndShiftPanel);
+        OutputWindow outputWindow = new OutputWindow(signal, amPanel, hisPanel, modAndShiftPanel, hisModAndShiftPanel, freqPanel);
         outputWindow.setVisible(true);
     }//GEN-LAST:event_jButtonShowSignalActionPerformed
 

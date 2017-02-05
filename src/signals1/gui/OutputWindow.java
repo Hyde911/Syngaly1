@@ -21,7 +21,7 @@ public class OutputWindow extends javax.swing.JFrame {
     /**
      * Creates new form OutputWindow
      */
-    public OutputWindow(DiscreteSignal signal, AmplitudePanel aplitudeCharts, HistogramPanel hisPanel, AmplitudePanel modAndPhaseChart, HistogramPanel hisModAndPhase) {
+    public OutputWindow(DiscreteSignal signal, OutputPanel aplitudeCharts, HistogramPanel hisPanel, OutputPanel modAndPhaseChart, HistogramPanel hisModAndPhase, OutputPanel freqCharts) {
         initComponents();
 
         showStats(signal.getStats());
@@ -39,6 +39,10 @@ public class OutputWindow extends javax.swing.JFrame {
         jPanelHist2.setLayout(new java.awt.BorderLayout());
         jPanelHist2.add(hisModAndPhase, BorderLayout.CENTER);
         jPanelHist2.revalidate();
+        
+        jPanelFourier.setLayout(new java.awt.BorderLayout());
+        jPanelFourier.add(freqCharts, BorderLayout.CENTER);        
+        jPanelFourier.validate();
     }
 
     /**
@@ -66,6 +70,7 @@ public class OutputWindow extends javax.swing.JFrame {
         jPanelHist1 = new javax.swing.JPanel();
         jPanelAmp2 = new javax.swing.JPanel();
         jPanelHist2 = new javax.swing.JPanel();
+        jPanelFourier = new javax.swing.JPanel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
         setResizable(false);
@@ -163,6 +168,19 @@ public class OutputWindow extends javax.swing.JFrame {
 
         jTabbedPane.addTab("Histogram modułu i fazy", jPanelHist2);
 
+        javax.swing.GroupLayout jPanelFourierLayout = new javax.swing.GroupLayout(jPanelFourier);
+        jPanelFourier.setLayout(jPanelFourierLayout);
+        jPanelFourierLayout.setHorizontalGroup(
+            jPanelFourierLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGap(0, 1174, Short.MAX_VALUE)
+        );
+        jPanelFourierLayout.setVerticalGroup(
+            jPanelFourierLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGap(0, 781, Short.MAX_VALUE)
+        );
+
+        jTabbedPane.addTab("Transformata Fouriera", jPanelFourier);
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
@@ -256,6 +274,7 @@ public class OutputWindow extends javax.swing.JFrame {
     private javax.swing.JLabel jLabel6;
     private javax.swing.JPanel jPanelAmp1;
     private javax.swing.JPanel jPanelAmp2;
+    private javax.swing.JPanel jPanelFourier;
     private javax.swing.JPanel jPanelHist1;
     private javax.swing.JPanel jPanelHist2;
     private javax.swing.JTabbedPane jTabbedPane;

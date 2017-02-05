@@ -24,7 +24,7 @@ public class SineSignal extends SineLikeSignals {
         this.result = new Complex[numberOfSamples];
         for (int i = 0; i < numberOfSamples; i++) {
             double temp = ((2 * Math.PI) / samplesPerPeriod) * (i);
-            this.result[i] = new Complex(Math.sin(temp), 0);
+            this.result[i] = new Complex(Math.sin(temp + phaseShift), 0);
         }
     }
 }

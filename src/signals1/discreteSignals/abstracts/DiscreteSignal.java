@@ -8,8 +8,11 @@ package signals1.discreteSignals.abstracts;
 import java.io.Serializable;
 import java.util.concurrent.atomic.AtomicInteger;
 import org.apache.commons.math3.complex.Complex;
+import signals1.fourier.FastFourierTransform;
+import signals1.fourier.FourierTransformLoadTests;
 import signals1.stats.Histogram;
 import signals1.stats.SignalStats;
+import signals1.tools.exceptions.NotPowerOfTwoException;
 
 /**
  *
@@ -26,8 +29,8 @@ public abstract class DiscreteSignal implements Serializable {
     protected int samplingRate;
     protected SignalStats stats;
     protected Complex[] values;
-    protected Complex[] valuesWithAmplitude;
-
+    protected Complex[] freqSpectrum;
+    
     protected DiscreteSignal() {
         id = nextId.incrementAndGet();
     }
@@ -71,6 +74,13 @@ public abstract class DiscreteSignal implements Serializable {
         return id;
     }
 
+    public Complex[] getFourierTransformate() throws NotPowerOfTwoException{
+        if (freqSpectrum == null){
+            freqSpectrum = FastFourierTransform.Ffs(values);
+        }
+        return freqSpectrum;
+    }
+    
     public double getStartTime() {
         return startTime;
     }
