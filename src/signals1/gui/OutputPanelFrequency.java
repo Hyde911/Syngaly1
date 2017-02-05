@@ -30,8 +30,8 @@ public class OutputPanelFrequency extends OutputPanel {
         ChartPanel imgChart;
 
         try {
-            realChart = getScatterPlot(signal.getFourierTransformate(), false, signal.getStartTime(), signal.getSamplingRate());
-            imgChart = getScatterPlot(signal.getFourierTransformate(), true, signal.getStartTime(), signal.getSamplingRate());
+            realChart = getScatterPlot(signal.getFourierTransformate(), true, 0, signal.getSamplingRate());
+            imgChart = getScatterPlot(signal.getFourierTransformate(), false, 0, signal.getSamplingRate());
         } catch (NotPowerOfTwoException ex) {
             return;
         }
@@ -50,18 +50,18 @@ public class OutputPanelFrequency extends OutputPanel {
     @Override
     protected final XYSeriesCollection createDataset(Complex[] values, boolean isReal, double startTime, String title, int samplingRate) {
         XYSeries series = new XYSeries(title);
-        int i = 0;
         double x;
         double y;
-        for (Complex v : values) {
+        int halfLength = values.length / 2;
+        for (int i = 0; i < halfLength; i++){
             if (isReal) {
-                y = v.getReal();
+                y = values[i].getReal();
             } else {
-                y = v.getImaginary();
+                y = values[i].getImaginary();
             }
             x = i + (startTime * samplingRate);
             series.add(x, y);
-            i++;
+            i++;            
         }
         return new XYSeriesCollection(series);
     }
