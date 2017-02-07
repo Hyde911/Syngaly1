@@ -5,6 +5,7 @@
  */
 package singals.fourier;
 
+import java.util.Arrays;
 import java.util.Random;
 import org.apache.commons.math3.complex.Complex;
 import org.junit.Assert;
@@ -23,12 +24,10 @@ public class FourierTransformTests {
 
     private final Complex[] data;
     private final Complex[] transformData;
-    private final Complex[] mgDFTData;
 
     public FourierTransformTests() throws Exception {
         data = generateData(128);
-        transformData = FFT.fft(data);
-        mgDFTData = DefinitionFourierTransform.Transform(data);
+        transformData = FFT.fft(data);       
     }
 
     @Test
@@ -52,8 +51,10 @@ public class FourierTransformTests {
     @Test
     public void ggDFTvsMG_DFT() {
         Complex[] transform;
+        Complex[] mgDFTData;
         try {
             transform = GGFourierTransform.dft(data, false);
+            mgDFTData = DefinitionFourierTransform.Transform(data);
             compareComplexArrays(mgDFTData, transform);
         } catch (NotPowerOfTwoException ex) {
             Assert.fail();
@@ -151,11 +152,24 @@ public class FourierTransformTests {
             Assert.assertTrue("i: " + i + " exp: " + expected[i] + " res: " + result[i], Complex.equals(expected[i], result[i], 0.0001));
         }
     }
+    
+    @Test
+    public void ggfftTest() throws NotPowerOfTwoException {
+        Complex[] transform = Arrays.copyOf(data, data.length);
+        GGFourierTransform.fft_in_situ(transform);
+        compareComplexArrays(transformData, transform);
+    }
 
     @Test
     public void fftTest() throws NotPowerOfTwoException {
         Complex[] transform = FastFourierTransform.Ffs(data);
         compareComplexArrays(transformData, transform);
+    }
+    
+    @Test
+    public void fftTest_1() throws NotPowerOfTwoException {
+        Complex[] transform = FastFourierTransform.Ffs(data);
+        compareComplexArrays(data, transform);
     }
 
     @Test
