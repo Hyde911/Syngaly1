@@ -15,7 +15,7 @@ import signals1.tools.exceptions.NotPowerOfTwoException;
  */
 public class FastFourierTransform {
 
-    public static Complex[] RecursiveFfs(Complex[] data) throws NotPowerOfTwoException {
+    public static Complex[] RecursiveFft(Complex[] data) throws NotPowerOfTwoException {
         int length = data.length;
         if ((length & (length - 1)) != 0) {
             throw new NotPowerOfTwoException();
@@ -32,8 +32,8 @@ public class FastFourierTransform {
             evenPart[i] = data[2 * i];
         }
 
-        oddPart = RecursiveFfs(oddPart);
-        evenPart = RecursiveFfs(evenPart);
+        oddPart = RecursiveFft(oddPart);
+        evenPart = RecursiveFft(evenPart);
 
         Complex[] result = new Complex[length];
         for (int i = 0; i < length / 2; i++) {
@@ -44,22 +44,23 @@ public class FastFourierTransform {
         return result;
     }
 
-    public static Complex[] RecursiveIffs(Complex[] data) throws NotPowerOfTwoException {
+    public static Complex[] RecursiveIfft(Complex[] data) throws NotPowerOfTwoException {
         int length = data.length;
         if ((length & (length - 1)) != 0) {
             throw new NotPowerOfTwoException();
         }
         Complex[] tmp = ComplexConjugateWithDivision(data, 1);
 
-        tmp = RecursiveFfs(tmp);
+        tmp = RecursiveFft(tmp);
 
         return ComplexConjugateWithDivision(tmp, length);
     }
 
-    public static Complex[] Ffs(Complex[] data) throws NotPowerOfTwoException {
+    public static Complex[] Fft(Complex[] data) throws NotPowerOfTwoException {
         int length = data.length;
         if ((length & (length - 1)) != 0) {
-            throw new NotPowerOfTwoException();
+            data = FillToPowerOfTwo(data);
+            length = data.length;
         }
 
         //log2(length)
@@ -98,14 +99,15 @@ public class FastFourierTransform {
         return data;
     }
 
-    public static Complex[] IFfs(Complex[] data) throws NotPowerOfTwoException {
+    public static Complex[] IFft(Complex[] data) throws NotPowerOfTwoException {
         int length = data.length;
         if ((length & (length - 1)) != 0) {
-            throw new NotPowerOfTwoException();
+            data = FillToPowerOfTwo(data);
+            length = data.length;
         }
         Complex[] tmp = ComplexConjugateWithDivision(data, 1);
 
-        tmp = Ffs(tmp);
+        tmp = Fft(tmp);
 
         return ComplexConjugateWithDivision(tmp, length);
     }
@@ -127,5 +129,15 @@ public class FastFourierTransform {
         return data;
     }
 
+    private static Complex[] FillToPowerOfTwo(Complex[] data){
+        int length = data.length;
+        int nextPowerOfTwo = (int)Math.ceil(((Math.log(length) / Math.log(2))));
+        Complex[] newData = new Complex[(int)Math.pow(2, nextPowerOfTwo)];
+        Arrays.fill(newData, Complex.ZERO);
+        for (int i = 0; i < length; i++){
+            newData[i] = data[i];
+        }
+        return newData;
+    }
 
 }
