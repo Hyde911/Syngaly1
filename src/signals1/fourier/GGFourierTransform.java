@@ -19,7 +19,7 @@ public class GGFourierTransform {
     
     public static void fft_in_situ(Complex[] data) throws NotPowerOfTwoException{
         int N = data.length;
-        if ((N & (N - 1)) != 0) {
+        if (!isPowerOf2(N)) {
             throw new NotPowerOfTwoException();
         }
        
@@ -54,7 +54,7 @@ public class GGFourierTransform {
         if(N==1){
             return input;
         }
-        if ((N & (N - 1)) != 0) {
+        if (!isPowerOf2(N)) {
             throw new NotPowerOfTwoException();
         }
         Complex[] result = new Complex[N];
@@ -78,7 +78,7 @@ public class GGFourierTransform {
 
     public static Complex[] ifft_recursive(Complex[] input) throws NotPowerOfTwoException{
         int N = input.length;
-        if ((N & (N - 1)) != 0) {
+        if (!isPowerOf2(N)) {
             throw new NotPowerOfTwoException();
         }
         Complex[] result = getCoupled(input);
@@ -102,7 +102,7 @@ public class GGFourierTransform {
 
     public static Complex[] dft(Complex[] input, boolean isReversed) throws NotPowerOfTwoException {
         int N = input.length;
-        if ((N & (N - 1)) != 0) {
+        if (!isPowerOf2(N)) {
             throw new NotPowerOfTwoException();
         }
         Complex[] result = new Complex[N];
@@ -160,4 +160,7 @@ public class GGFourierTransform {
         }
     }
 
+    private static boolean isPowerOf2(int n){
+        return (n > 0) && ((n & (n - 1)) == 0);
+    }
 }
