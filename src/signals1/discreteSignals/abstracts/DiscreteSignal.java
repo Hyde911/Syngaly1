@@ -10,7 +10,6 @@ import java.util.Arrays;
 import java.util.concurrent.atomic.AtomicInteger;
 import org.apache.commons.math3.complex.Complex;
 import signals1.fourier.FastFourierTransform;
-import signals1.fourier.FourierTransformLoadTests;
 import signals1.stats.Histogram;
 import signals1.stats.SignalStats;
 import signals1.tools.exceptions.NotPowerOfTwoException;

@@ -161,6 +161,7 @@ public class MainWindow extends javax.swing.JFrame {
         jLabel16 = new javax.swing.JLabel();
         highCutoffReqTextField = new javax.swing.JTextField();
         jButtonConvolution1 = new javax.swing.JButton();
+        jCheckBoxFFTSignalOperation = new javax.swing.JCheckBox();
 
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
         jPanel1.setLayout(jPanel1Layout);
@@ -434,6 +435,9 @@ public class MainWindow extends javax.swing.JFrame {
             }
         });
 
+        jCheckBoxFFTSignalOperation.setFont(new java.awt.Font("Tahoma", 1, 11)); // NOI18N
+        jCheckBoxFFTSignalOperation.setText("Transformaty");
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
@@ -489,17 +493,20 @@ public class MainWindow extends javax.swing.JFrame {
                                     .addGroup(layout.createSequentialGroup()
                                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                            .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                                                .addComponent(jButtonShowSignal, javax.swing.GroupLayout.DEFAULT_SIZE, 190, Short.MAX_VALUE)
+                                                .addComponent(jCheckBoxOperationOrder)
+                                                .addComponent(jButtonCompare, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                                             .addGroup(layout.createSequentialGroup()
                                                 .addGap(24, 24, 24)
                                                 .addComponent(jButtonAddSignals, javax.swing.GroupLayout.PREFERRED_SIZE, 52, javax.swing.GroupLayout.PREFERRED_SIZE)
                                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                                                .addComponent(jButtonConvolution, javax.swing.GroupLayout.PREFERRED_SIZE, 104, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                                                .addComponent(jButtonCorrelation, javax.swing.GroupLayout.PREFERRED_SIZE, 104, javax.swing.GroupLayout.PREFERRED_SIZE))
-                                            .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                                                .addComponent(jButtonShowSignal, javax.swing.GroupLayout.DEFAULT_SIZE, 190, Short.MAX_VALUE)
-                                                .addComponent(jCheckBoxOperationOrder)
-                                                .addComponent(jButtonCompare, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))))))
+                                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                                    .addComponent(jCheckBoxFFTSignalOperation)
+                                                    .addGroup(layout.createSequentialGroup()
+                                                        .addComponent(jButtonConvolution, javax.swing.GroupLayout.PREFERRED_SIZE, 104, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                                                        .addComponent(jButtonCorrelation, javax.swing.GroupLayout.PREFERRED_SIZE, 104, javax.swing.GroupLayout.PREFERRED_SIZE))))))))
                             .addGroup(layout.createSequentialGroup()
                                 .addContainerGap()
                                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -645,11 +652,14 @@ public class MainWindow extends javax.swing.JFrame {
                                             .addGroup(layout.createSequentialGroup()
                                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                                                 .addComponent(jButtonSampling1, javax.swing.GroupLayout.PREFERRED_SIZE, 31, javax.swing.GroupLayout.PREFERRED_SIZE))))
-                                    .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                                            .addComponent(jButtonConvolution, javax.swing.GroupLayout.PREFERRED_SIZE, 49, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                            .addComponent(jButtonCorrelation, javax.swing.GroupLayout.PREFERRED_SIZE, 49, javax.swing.GroupLayout.PREFERRED_SIZE))
-                                        .addComponent(jButtonAddSignals, javax.swing.GroupLayout.PREFERRED_SIZE, 49, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                                    .addGroup(layout.createSequentialGroup()
+                                        .addComponent(jCheckBoxFFTSignalOperation)
+                                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                            .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                                                .addComponent(jButtonConvolution, javax.swing.GroupLayout.PREFERRED_SIZE, 49, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                                .addComponent(jButtonCorrelation, javax.swing.GroupLayout.PREFERRED_SIZE, 49, javax.swing.GroupLayout.PREFERRED_SIZE))
+                                            .addComponent(jButtonAddSignals, javax.swing.GroupLayout.PREFERRED_SIZE, 49, javax.swing.GroupLayout.PREFERRED_SIZE))))
                                 .addGap(9, 9, 9)
                                 .addComponent(jCheckBoxOperationOrder)
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
@@ -672,7 +682,7 @@ public class MainWindow extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void jButtonGenerateSignalActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonGenerateSignalActionPerformed
-        
+
         switch (jPaneInputTabs.getSelectedIndex()) {
             case 0:
                 addDiscreteSignal(sineInputPanel);
@@ -795,7 +805,20 @@ public class MainWindow extends javax.swing.JFrame {
     private void jButtonConvolutionActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonConvolutionActionPerformed
         DiscreteSignal[] signals = getSignalsForCalculation();
         if (signals != null) {
-            disSignalContainer.add(Convolution.CalculateConvolutions(signals[0], signals[1]));
+            if (jCheckBoxFFTSignalOperation.isSelected()) {
+                try {
+                    disSignalContainer.add(Convolution.CalculateConvolutions(signals[0].getFourierTransformate(), 
+                                                                             signals[1].getFourierTransformate(), 
+                                                                             signals[0].getSamplingRate(), 
+                                                                             signals[0].getStartTime(), 
+                                                                             signals[0].getAmplitude()));
+                } catch (NotPowerOfTwoException ex) {
+                    Logger.getLogger(MainWindow.class.getName()).log(Level.SEVERE, null, ex);
+                }
+            }else{
+                disSignalContainer.add(Convolution.CalculateConvolutions(signals[0], signals[1]));
+            }
+
             discreteTableModel.fireTableDataChanged();
         }
     }//GEN-LAST:event_jButtonConvolutionActionPerformed
@@ -837,12 +860,8 @@ public class MainWindow extends javax.swing.JFrame {
             default:
                 filter = new BandPassFIRFilter(new Windows((Windows.Types) jComboWindow.getSelectedItem()).getWindows(), order, lowCutoffFreq, highCutoffReq, sampling);
         }
-        Complex[] values = null;
-        try {
-            values = GGFourierTransform.ifft_recursive(filter.getFilter());
-        } catch (NotPowerOfTwoException ex) {
-            Logger.getLogger(MainWindow.class.getName()).log(Level.SEVERE, null, ex);
-        }
+        Complex[] values = filter.getFilter();
+
         DerivedSignal signal = new DerivedSignal(values, (int) sampling, 0, 1);
         addDiscreteSignal(signal);
 
@@ -917,14 +936,14 @@ public class MainWindow extends javax.swing.JFrame {
         return signals;
     }
 
-    private void addDiscreteSignal(InputPanel inputPanel){
+    private void addDiscreteSignal(InputPanel inputPanel) {
         AbstractSignal signal = inputPanel.getSingal();
-        if (signal != null){
+        if (signal != null) {
             signalContainer.add(signal);
             virtulTableModel.fireTableDataChanged();
         }
     }
-    
+
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JTextField highCutoffReqTextField;
     private javax.swing.JButton jButtonAddSignals;
@@ -938,6 +957,7 @@ public class MainWindow extends javax.swing.JFrame {
     private javax.swing.JButton jButtonSampling;
     private javax.swing.JButton jButtonSampling1;
     private javax.swing.JButton jButtonShowSignal;
+    private javax.swing.JCheckBox jCheckBoxFFTSignalOperation;
     private javax.swing.JCheckBox jCheckBoxOperationOrder;
     private javax.swing.JComboBox<String> jComboConvType1;
     private javax.swing.JComboBox<String> jComboFIRFilter;
