@@ -16,85 +16,87 @@ import signals1.tools.exceptions.NotPowerOfTwoException;
  * m - output element
  */
 public class GGFourierTransform {
-    
-    public static void fft_in_situ(Complex[] data) throws NotPowerOfTwoException{
+
+    public static void fft_in_situ(Complex[] data) throws NotPowerOfTwoException {
         int N = data.length;
         if (!isPowerOf2(N)) {
-            throw new NotPowerOfTwoException();
+            data = FillToPowerOfTwo(data);
+            N = data.length;
         }
-       
-        int levels = (int) (Math.log(N)/Math.log(2));
-        
+
+        int levels = (int) (Math.log(N) / Math.log(2));
+
         //przestawianie kolejności
         reorderData(data, levels);
-        
+
         int blockSize;
         int blockStart;
         Complex first;
         Complex seccond;
         //iteruj poziomy od ostatniego
-        for (int i = levels-1; i >= 0; i--) {
+        for (int i = levels - 1; i >= 0; i--) {
             //iteruj bloki na tym poziomie
-            blockSize = (int) (N/Math.pow(2, i));
-            for(int j = 0; j < N/blockSize; j++){
+            blockSize = (int) (N / Math.pow(2, i));
+            for (int j = 0; j < N / blockSize; j++) {
                 //iteruj motylki w bloku 
-                blockStart = j*blockSize;
-                for(int k = blockStart; k < (blockSize/2)+blockStart; k++){
+                blockStart = j * blockSize;
+                for (int k = blockStart; k < (blockSize / 2) + blockStart; k++) {
                     first = data[k];
-                    seccond = data[k+(blockSize/2)].multiply(getW(k-blockStart, blockSize));
+                    seccond = data[k + (blockSize / 2)].multiply(getW(k - blockStart, blockSize));
                     data[k] = first.add(seccond);
-                    data[k+(blockSize/2)] = first.subtract(seccond);
+                    data[k + (blockSize / 2)] = first.subtract(seccond);
                 }
             }
         }
     }
-  
+
     public static Complex[] fft_recursive(Complex[] input) throws NotPowerOfTwoException {
         int N = input.length;
-        if(N==1){
+        if (N == 1) {
             return input;
         }
         if (!isPowerOf2(N)) {
-            throw new NotPowerOfTwoException();
+            input = FillToPowerOfTwo(input);
+            N = input.length;
         }
         Complex[] result = new Complex[N];
-        Complex[] even = new Complex[N / 2];        
+        Complex[] even = new Complex[N / 2];
         Complex[] odd = new Complex[N / 2];
-        
+
         splitTableToOddAndEven(input, even, odd);
         odd = fft_recursive(odd);
         even = fft_recursive(even);
-        
-        
-        for (int m = 0; m < N/2; m++) {
+
+        for (int m = 0; m < N / 2; m++) {
             double angle = -2 * m * Math.PI / N;
             Complex w = new Complex(Math.cos(angle), Math.sin(angle));
             result[m] = even[m].add(w.multiply(odd[m]));
-            result[m + N/2] = even[m].subtract(w.multiply(odd[m]));
+            result[m + N / 2] = even[m].subtract(w.multiply(odd[m]));
         }
 
         return result;
     }
 
-    public static Complex[] ifft_recursive(Complex[] input) throws NotPowerOfTwoException{
+    public static Complex[] ifft_recursive(Complex[] input) throws NotPowerOfTwoException {
         int N = input.length;
         if (!isPowerOf2(N)) {
-            throw new NotPowerOfTwoException();
+            input = FillToPowerOfTwo(input);
+            N = input.length;
         }
         Complex[] result = getCoupled(input);
         //transformata na sprzężonych
         result = fft_recursive(result);
         //przeskalowanie nowych sprzężonych - dzielenie przez N
         result = getCoupled(result);
-        for(int m = 0; m<N; m++){
-            result[m] = new Complex(result[m].getReal()/N, result[m].getImaginary()/N);
+        for (int m = 0; m < N; m++) {
+            result[m] = new Complex(result[m].getReal() / N, result[m].getImaginary() / N);
         }
-                
+
         return result;
     }
-    
+
     private static void splitTableToOddAndEven(Complex[] input, Complex[] even, Complex[] odd) {
-        for (int n = 0; n < input.length/2; n++) {
+        for (int n = 0; n < input.length / 2; n++) {
             even[n] = input[n * 2];
             odd[n] = input[n * 2 + 1];
         }
@@ -103,7 +105,8 @@ public class GGFourierTransform {
     public static Complex[] dft(Complex[] input, boolean isReversed) throws NotPowerOfTwoException {
         int N = input.length;
         if (!isPowerOf2(N)) {
-            throw new NotPowerOfTwoException();
+            input = FillToPowerOfTwo(input);
+            N = input.length;
         }
         Complex[] result = new Complex[N];
         Arrays.fill(result, Complex.ZERO);
@@ -120,16 +123,16 @@ public class GGFourierTransform {
         return result;
     }
 
-    private static Complex getW(int k, int N){
-        double angle = -2d * Math.PI * k/N;
-        return new Complex( Math.cos(angle),
-                            Math.sin(angle));
+    private static Complex getW(int k, int N) {
+        double angle = -2d * Math.PI * k / N;
+        return new Complex(Math.cos(angle),
+                Math.sin(angle));
     }
-    
+
     private static Complex getW(int N) {
         double angle = 2d * Math.PI / N;
-        return new Complex( Math.cos(angle),
-                            Math.sin(angle));
+        return new Complex(Math.cos(angle),
+                Math.sin(angle));
     }
 
     private static int getDirection(boolean isReversed) {
@@ -141,18 +144,18 @@ public class GGFourierTransform {
 
     private static Complex[] getCoupled(Complex[] input) {
         int N = input.length;
-        Complex[] result = new Complex[N];      
-        for(int n = 0; n < N; n++){
+        Complex[] result = new Complex[N];
+        for (int n = 0; n < N; n++) {
             result[n] = input[n].conjugate();
-        }        
+        }
         return result;
     }
 
     private static void reorderData(Complex[] input, int levels) {
         Complex bufor;
-        for(int i = 0; i < input.length; i++){
+        for (int i = 0; i < input.length; i++) {
             int reverseIndex = Integer.reverse(i) >>> (32 - levels);
-            if(reverseIndex > i){
+            if (reverseIndex > i) {
                 bufor = input[i];
                 input[i] = input[reverseIndex];
                 input[reverseIndex] = bufor;
@@ -160,7 +163,18 @@ public class GGFourierTransform {
         }
     }
 
-    private static boolean isPowerOf2(int n){
+    private static boolean isPowerOf2(int n) {
         return (n > 0) && ((n & (n - 1)) == 0);
+    }
+
+    private static Complex[] FillToPowerOfTwo(Complex[] data) {
+        int length = data.length;
+        int nextPowerOfTwo = (int) Math.ceil(((Math.log(length) / Math.log(2))));
+        Complex[] newData = new Complex[(int) Math.pow(2, nextPowerOfTwo)];
+        Arrays.fill(newData, Complex.ZERO);
+        for (int i = 0; i < length; i++) {
+            newData[i] = data[i];
+        }
+        return newData;
     }
 }

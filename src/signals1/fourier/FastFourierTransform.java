@@ -18,7 +18,8 @@ public class FastFourierTransform {
     public static Complex[] RecursiveFft(Complex[] data) throws NotPowerOfTwoException {
         int length = data.length;
         if ((length & (length - 1)) != 0) {
-            throw new NotPowerOfTwoException();
+            data = FillToPowerOfTwo(data);
+            length = data.length;
         }
 
         if (length == 1) {
@@ -47,7 +48,8 @@ public class FastFourierTransform {
     public static Complex[] RecursiveIfft(Complex[] data) throws NotPowerOfTwoException {
         int length = data.length;
         if ((length & (length - 1)) != 0) {
-            throw new NotPowerOfTwoException();
+            data = FillToPowerOfTwo(data);
+            length = data.length;
         }
         Complex[] tmp = ComplexConjugateWithDivision(data, 1);
 
