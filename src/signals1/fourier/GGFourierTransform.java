@@ -65,7 +65,6 @@ public class GGFourierTransform {
         odd = fft_recursive(odd);
         even = fft_recursive(even);
         
-        
         for (int m = 0; m < N/2; m++) {
             double angle = -2 * m * Math.PI / N;
             Complex w = new Complex(Math.cos(angle), Math.sin(angle));
