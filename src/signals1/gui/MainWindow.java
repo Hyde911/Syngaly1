@@ -8,10 +8,13 @@ package signals1.gui;
 import signals1.gui.radar.RadarWindow;
 import java.awt.BorderLayout;
 import java.awt.Dimension;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import javax.swing.DefaultComboBoxModel;
 import javax.swing.JOptionPane;
 import javax.swing.UIManager;
 import javax.swing.UnsupportedLookAndFeelException;
+import org.apache.commons.math3.complex.Complex;
 import signals1.gui.inputForms.SineInputPanel;
 import signals1.gui.inputForms.SquareInputPanel;
 import signals1.gui.tables.DiscreteSignalTableModel;
@@ -26,6 +29,7 @@ import signals1.discreteSignals.DerivedSignal;
 import signals1.discreteSignals.abstracts.DiscreteSignal;
 import signals1.discreteSignals.NonPeriodicDiscreteSignal;
 import signals1.discreteSignals.PeriodicDiscreteSignal;
+import signals1.fourier.GGFourierTransform;
 import signals1.gui.inputForms.InputPanel;
 import signals1.gui.inputForms.NoiseInputPanel;
 import signals1.gui.radar.RadarInputPanel;
@@ -41,6 +45,7 @@ import signals1.radar.RadarParameters;
 import signals1.tools.SignalContainer;
 import signals1.tools.constatns.Quantizers;
 import signals1.tools.exceptions.InputValidationException;
+import signals1.tools.exceptions.NotPowerOfTwoException;
 import signals1.tools.exceptions.NotSameSamplinRateExpcetion;
 
 /**
@@ -832,8 +837,13 @@ public class MainWindow extends javax.swing.JFrame {
             default:
                 filter = new BandPassFIRFilter(new Windows((Windows.Types) jComboWindow.getSelectedItem()).getWindows(), order, lowCutoffFreq, highCutoffReq, sampling);
         }
-
-        DerivedSignal signal = new DerivedSignal(filter.getFilter(), (int) sampling, 0, 1);
+        Complex[] values = null;
+        try {
+            values = GGFourierTransform.ifft_recursive(filter.getFilter());
+        } catch (NotPowerOfTwoException ex) {
+            Logger.getLogger(MainWindow.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        DerivedSignal signal = new DerivedSignal(values, (int) sampling, 0, 1);
         addDiscreteSignal(signal);
 
     }//GEN-LAST:event_jButtonConvolution1ActionPerformed

@@ -18,7 +18,7 @@ public class HighPassFIRFilter extends FIRFilter{
     public HighPassFIRFilter(final WindowFunction window, final int order, final double fc, final double fs){
         super(window, order, 0d, fc, fs);
         final double cutoff = highFrqCutoff / samplingRate;
-        filter = new Complex[order + 1];
+        filter = new Complex[order];
         final double factor = 2.0 * cutoff;
         final int half = order >> 1;
         for (int i = 0; i < filter.length; i++){

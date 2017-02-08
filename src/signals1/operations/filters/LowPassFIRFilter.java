@@ -18,7 +18,7 @@ public class LowPassFIRFilter extends FIRFilter{
     public LowPassFIRFilter(final WindowFunction window, final int order, final double fc, final double fs){
         super(window, order, fc, Double.POSITIVE_INFINITY, fs);
         final double cutoff = lowFrqCutoff / samplingRate;
-        filter = new Complex[order + 1];
+        filter = new Complex[order];
         final double factor = 2.0 * cutoff;
         final int half = order >> 1;
         for (int i = 0; i < filter.length; i++){
