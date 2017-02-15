@@ -401,7 +401,7 @@ public class MainWindow extends javax.swing.JFrame {
 
         jTextFilterOrder.setFont(new java.awt.Font("Tahoma", 1, 12)); // NOI18N
         jTextFilterOrder.setHorizontalAlignment(javax.swing.JTextField.CENTER);
-        jTextFilterOrder.setText("256");
+        jTextFilterOrder.setText("1024");
 
         jLabel12.setFont(new java.awt.Font("Verdana", 1, 12)); // NOI18N
         jLabel12.setText("Rząd Filtru [ilość próbek]");

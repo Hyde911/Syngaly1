@@ -60,7 +60,7 @@ public class FourierTransformLoadTests {
         start = System.nanoTime();
         for (int i = 0; i < iterations; i++) {
             try {
-                FastFourierTransform.RecursiveFft(data);
+                FastFourierTransform.recursiveFft(data);
             } catch (NotPowerOfTwoException ex) {
             }
         }
@@ -74,7 +74,7 @@ public class FourierTransformLoadTests {
         start = System.nanoTime();
         for (int i = 0; i < iterations; i++) {
             try {
-                FastFourierTransform.Fft(data);
+                FastFourierTransform.fft(data);
             } catch (NotPowerOfTwoException ex) {
             }
         }

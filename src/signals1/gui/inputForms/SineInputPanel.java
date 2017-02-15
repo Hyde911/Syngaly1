@@ -37,7 +37,7 @@ public class SineInputPanel extends javax.swing.JPanel implements InputPanel{
         double phaseShift = 0;
         try {
             amplitude = Double.parseDouble(jTextAmplitude.getText());
-            period = Double.parseDouble(jTextPeriod.getText());
+            period = 1.0 / Double.parseDouble(jTextPeriod.getText());
             duration = Double.parseDouble(jTextDuration.getText());
             startTime = Double.parseDouble(jTextStartTime.getText());
             phaseShift = Double.parseDouble(jTextPhaseShift.getText());
@@ -86,7 +86,7 @@ public class SineInputPanel extends javax.swing.JPanel implements InputPanel{
         jLabel1.setText("Amplituda");
 
         jLabel2.setFont(new java.awt.Font("Verdana", 1, 12)); // NOI18N
-        jLabel2.setText("Okres");
+        jLabel2.setText("Częstotliwość");
 
         jTextAmplitude.setFont(new java.awt.Font("Tahoma", 0, 12)); // NOI18N
         jTextAmplitude.setHorizontalAlignment(javax.swing.JTextField.CENTER);
@@ -99,7 +99,7 @@ public class SineInputPanel extends javax.swing.JPanel implements InputPanel{
 
         jTextPeriod.setFont(new java.awt.Font("Tahoma", 0, 12)); // NOI18N
         jTextPeriod.setHorizontalAlignment(javax.swing.JTextField.CENTER);
-        jTextPeriod.setText("0.5");
+        jTextPeriod.setText("10");
         jTextPeriod.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jTextPeriodActionPerformed(evt);
@@ -149,7 +149,7 @@ public class SineInputPanel extends javax.swing.JPanel implements InputPanel{
             .addGroup(layout.createSequentialGroup()
                 .addContainerGap()
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(jComboBox1, 0, 396, Short.MAX_VALUE)
+                    .addComponent(jComboBox1, 0, 399, Short.MAX_VALUE)
                     .addGroup(layout.createSequentialGroup()
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addGroup(layout.createSequentialGroup()

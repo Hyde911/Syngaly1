@@ -6,8 +6,6 @@
 package signals1.gui;
 
 import java.awt.BorderLayout;
-import java.util.logging.Level;
-import java.util.logging.Logger;
 import org.apache.commons.math3.complex.Complex;
 import org.jfree.chart.ChartPanel;
 import org.jfree.data.xy.XYSeries;
@@ -60,8 +58,7 @@ public class OutputPanelFrequency extends OutputPanel {
                 y = values[i].getImaginary();
             }
             x = i + (startTime * samplingRate);
-            series.add(x, y);
-            i++;            
+            series.add(x, y);            
         }
         return new XYSeriesCollection(series);
     }
