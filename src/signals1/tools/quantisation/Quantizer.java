@@ -5,6 +5,7 @@
  */
 package signals1.tools.quantisation;
 
+import java.io.Serializable;
 import org.apache.commons.math3.complex.Complex;
 import signals1.tools.constatns.QuantizationTables;
 
@@ -12,7 +13,7 @@ import signals1.tools.constatns.QuantizationTables;
  *
  * @author marr
  */
-public abstract class Quantizer {
+public abstract class Quantizer implements Serializable{
     protected int bitsNumber;
     protected double step;
     protected double[]stepsTable;

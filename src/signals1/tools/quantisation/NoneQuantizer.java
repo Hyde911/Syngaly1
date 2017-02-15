@@ -5,13 +5,14 @@
  */
 package signals1.tools.quantisation;
 
+import java.io.Serializable;
 import org.apache.commons.math3.complex.Complex;
 
 /**
  *
  * @author marr
  */
-public class NoneQuantizer extends Quantizer{
+public class NoneQuantizer extends Quantizer implements Serializable{
 
     public NoneQuantizer(){
         this(1);

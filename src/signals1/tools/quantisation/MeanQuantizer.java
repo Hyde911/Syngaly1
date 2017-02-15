@@ -5,13 +5,14 @@
  */
 package signals1.tools.quantisation;
 
+import java.io.Serializable;
 import org.apache.commons.math3.complex.Complex;
 
 /**
  *
  * @author marr
  */
-public class MeanQuantizer extends Quantizer{
+public class MeanQuantizer extends Quantizer implements Serializable{
 
     public MeanQuantizer(int bitsNumber) {
         super(bitsNumber);

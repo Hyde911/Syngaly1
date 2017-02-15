@@ -5,13 +5,14 @@
  */
 package signals1.tools.quantisation;
 
+import java.io.Serializable;
 import org.apache.commons.math3.complex.Complex;
 
 /**
  *
  * @author marr
  */
-public class RoundDownQuantizer extends Quantizer{
+public class RoundDownQuantizer extends Quantizer implements Serializable{
 
     public RoundDownQuantizer(int bitsNumber) {
         super(bitsNumber);
