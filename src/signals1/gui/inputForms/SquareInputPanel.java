@@ -174,7 +174,7 @@ public class SquareInputPanel extends javax.swing.JPanel implements InputPanel {
                                 .addComponent(jLabel5, javax.swing.GroupLayout.PREFERRED_SIZE, 178, javax.swing.GroupLayout.PREFERRED_SIZE)
                                 .addGap(18, 18, 18)
                                 .addComponent(jTextStartTime, javax.swing.GroupLayout.PREFERRED_SIZE, 56, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                        .addGap(0, 230, Short.MAX_VALUE)))
+                        .addGap(0, 290, Short.MAX_VALUE)))
                 .addContainerGap())
         );
         layout.setVerticalGroup(

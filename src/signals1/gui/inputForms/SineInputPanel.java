@@ -40,7 +40,7 @@ public class SineInputPanel extends javax.swing.JPanel implements InputPanel{
         double phaseShift = 0;
         try {
             amplitude = Double.parseDouble(jTextAmplitude.getText());
-            period = Double.parseDouble(jTextPeriod.getText());
+            period = 1.0 / Double.parseDouble(jTextPeriod.getText());
             duration = Double.parseDouble(jTextDuration.getText());
             startTime = Double.parseDouble(jTextStartTime.getText());
             phaseShift = Double.parseDouble(jTextPhaseShift.getText());
@@ -100,7 +100,7 @@ public class SineInputPanel extends javax.swing.JPanel implements InputPanel{
         jLabel1.setText("Amplituda");
 
         jLabel2.setFont(new java.awt.Font("Verdana", 1, 12)); // NOI18N
-        jLabel2.setText("Okres");
+        jLabel2.setText("Częstotliwość [Hz]");
 
         jTextAmplitude.setFont(new java.awt.Font("Tahoma", 0, 12)); // NOI18N
         jTextAmplitude.setHorizontalAlignment(javax.swing.JTextField.CENTER);
@@ -113,7 +113,7 @@ public class SineInputPanel extends javax.swing.JPanel implements InputPanel{
 
         jTextPeriod.setFont(new java.awt.Font("Tahoma", 0, 12)); // NOI18N
         jTextPeriod.setHorizontalAlignment(javax.swing.JTextField.CENTER);
-        jTextPeriod.setText("0.5");
+        jTextPeriod.setText("10");
         jTextPeriod.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jTextPeriodActionPerformed(evt);
@@ -163,14 +163,14 @@ public class SineInputPanel extends javax.swing.JPanel implements InputPanel{
             .addGroup(layout.createSequentialGroup()
                 .addContainerGap()
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(jComboBox1, 0, 412, Short.MAX_VALUE)
+                    .addComponent(jComboBox1, 0, 534, Short.MAX_VALUE)
                     .addGroup(layout.createSequentialGroup()
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addGroup(layout.createSequentialGroup()
                                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                    .addComponent(jLabel2, javax.swing.GroupLayout.PREFERRED_SIZE, 92, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                    .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 92, javax.swing.GroupLayout.PREFERRED_SIZE))
-                                .addGap(104, 104, 104)
+                                    .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 92, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                    .addComponent(jLabel2, javax.swing.GroupLayout.PREFERRED_SIZE, 134, javax.swing.GroupLayout.PREFERRED_SIZE))
+                                .addGap(62, 62, 62)
                                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                                     .addComponent(jTextPeriod, javax.swing.GroupLayout.PREFERRED_SIZE, 56, javax.swing.GroupLayout.PREFERRED_SIZE)
                                     .addComponent(jTextAmplitude, javax.swing.GroupLayout.PREFERRED_SIZE, 56, javax.swing.GroupLayout.PREFERRED_SIZE)))
