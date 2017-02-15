@@ -58,8 +58,7 @@ public class OutputPanelFrequency extends OutputPanel {
                 y = values[i].getImaginary();
             }
             x = i + (startTime * samplingRate);
-            series.add(x, y);
-            i++;            
+            series.add(x, y);            
         }
         return new XYSeriesCollection(series);
     }

@@ -37,7 +37,7 @@ public class SquareInputPanel extends javax.swing.JPanel implements InputPanel {
         int fillFactor = 0;
         try {
             amplitude = Double.parseDouble(jTextAmplitude.getText());
-            period = Double.parseDouble(jTextPeriod.getText());
+            period = 1.0 / Double.parseDouble(jTextPeriod.getText());
             duration = Double.parseDouble(jTextDuration.getText());
             startTime = Double.parseDouble(jTextStartTime.getText());
             fillFactor = Integer.parseInt(jTextFillFactor.getText());
@@ -88,7 +88,7 @@ public class SquareInputPanel extends javax.swing.JPanel implements InputPanel {
         jLabel1.setText("Amplituda");
 
         jLabel2.setFont(new java.awt.Font("Verdana", 1, 12)); // NOI18N
-        jLabel2.setText("Okres");
+        jLabel2.setText("Częstotliwość");
 
         jTextAmplitude.setFont(new java.awt.Font("Tahoma", 0, 12)); // NOI18N
         jTextAmplitude.setHorizontalAlignment(javax.swing.JTextField.CENTER);
@@ -101,7 +101,7 @@ public class SquareInputPanel extends javax.swing.JPanel implements InputPanel {
 
         jTextPeriod.setFont(new java.awt.Font("Tahoma", 0, 12)); // NOI18N
         jTextPeriod.setHorizontalAlignment(javax.swing.JTextField.CENTER);
-        jTextPeriod.setText("1");
+        jTextPeriod.setText("10");
         jTextPeriod.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jTextPeriodActionPerformed(evt);
@@ -174,7 +174,7 @@ public class SquareInputPanel extends javax.swing.JPanel implements InputPanel {
                                 .addComponent(jLabel5, javax.swing.GroupLayout.PREFERRED_SIZE, 178, javax.swing.GroupLayout.PREFERRED_SIZE)
                                 .addGap(18, 18, 18)
                                 .addComponent(jTextStartTime, javax.swing.GroupLayout.PREFERRED_SIZE, 56, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                        .addGap(0, 249, Short.MAX_VALUE)))
+                        .addGap(0, 230, Short.MAX_VALUE)))
                 .addContainerGap())
         );
         layout.setVerticalGroup(

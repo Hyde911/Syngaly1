@@ -6,9 +6,9 @@
 package signals1.discreteSignals.abstracts;
 
 import java.io.Serializable;
-import java.util.Arrays;
 import java.util.concurrent.atomic.AtomicInteger;
 import org.apache.commons.math3.complex.Complex;
+import signals1.fourier.FFT;
 import signals1.fourier.FastFourierTransform;
 import signals1.stats.Histogram;
 import signals1.stats.SignalStats;
@@ -76,7 +76,7 @@ public abstract class DiscreteSignal implements Serializable {
 
     public Complex[] getFourierTransformate() throws NotPowerOfTwoException{
         if (freqSpectrum == null){
-            freqSpectrum = FastFourierTransform.Fft(Arrays.copyOf(values, values.length));
+            freqSpectrum = FFT.fft(values);
         }
         return freqSpectrum;
     }
