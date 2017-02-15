@@ -24,7 +24,7 @@
           <Group type="102" attributes="0">
               <EmptySpace max="-2" attributes="0"/>
               <Group type="103" groupAlignment="0" attributes="0">
-                  <Component id="jComboBox1" pref="396" max="32767" attributes="0"/>
+                  <Component id="jComboBox1" pref="412" max="32767" attributes="0"/>
                   <Group type="102" attributes="0">
                       <Group type="103" groupAlignment="0" attributes="0">
                           <Group type="102" attributes="0">
@@ -91,7 +91,7 @@
                   <Component id="jLabel5" alignment="3" min="-2" pref="32" max="-2" attributes="0"/>
                   <Component id="jTextStartTime" alignment="3" pref="32" max="32767" attributes="0"/>
               </Group>
-              <EmptySpace min="-2" pref="90" max="-2" attributes="0"/>
+              <EmptySpace min="-2" pref="46" max="-2" attributes="0"/>
           </Group>
       </Group>
     </DimensionLayout>
@@ -103,13 +103,19 @@
           <Font name="Verdana" size="12" style="0"/>
         </Property>
         <Property name="model" type="javax.swing.ComboBoxModel" editor="org.netbeans.modules.form.editors2.ComboBoxModelEditor">
-          <StringArray count="3">
+          <StringArray count="6">
             <StringItem index="0" value="Sygna&#x142; sinusoidalny"/>
             <StringItem index="1" value="Sygna&#x142; sinusoidalny wyprostowany jednopo&#x142;&#xf3;wkowo"/>
             <StringItem index="2" value="Sygna&#x142; sinusoidalny wyprostowany dwupo&#x142;&#xf3;wkowo"/>
+            <StringItem index="3" value="S1"/>
+            <StringItem index="4" value="S2"/>
+            <StringItem index="5" value="S3"/>
           </StringArray>
         </Property>
       </Properties>
+      <Events>
+        <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="jComboBox1ActionPerformed"/>
+      </Events>
       <AuxValues>
         <AuxValue name="JavaCodeGenerator_TypeParameters" type="java.lang.String" value="&lt;String&gt;"/>
       </AuxValues>

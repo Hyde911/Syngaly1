@@ -11,6 +11,9 @@ import signals1.continuousSignals.SineModSingal;
 import signals1.continuousSignals.SineSignal;
 import signals1.continuousSignals.SinesHalfWafeSingal;
 import signals1.continuousSignals.abstracts.SineLikeSignals;
+import signals1.continuousSignals.zadanie4.S1;
+import signals1.continuousSignals.zadanie4.S2;
+import signals1.continuousSignals.zadanie4.S3;
 
 /**
  *
@@ -51,8 +54,14 @@ public class SineInputPanel extends javax.swing.JPanel implements InputPanel{
                 return new SineSignal(startTime, amplitude, duration, period, phaseShift);
             case 1:
                 return new SinesHalfWafeSingal(startTime, amplitude, duration, period, phaseShift);
-            default:
+            case 2:
                 return new SineModSingal(startTime, amplitude, duration, period, phaseShift);
+            case 3:
+                return new S1(startTime, amplitude, duration, period, phaseShift);
+            case 4:
+                return new S2(startTime, amplitude, duration, period, phaseShift);
+            default:
+                return new S3(startTime, amplitude, duration, period, phaseShift);
         }
     }
 
@@ -80,7 +89,12 @@ public class SineInputPanel extends javax.swing.JPanel implements InputPanel{
         setPreferredSize(dimension);
 
         jComboBox1.setFont(new java.awt.Font("Verdana", 0, 12)); // NOI18N
-        jComboBox1.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Sygnał sinusoidalny", "Sygnał sinusoidalny wyprostowany jednopołówkowo", "Sygnał sinusoidalny wyprostowany dwupołówkowo" }));
+        jComboBox1.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Sygnał sinusoidalny", "Sygnał sinusoidalny wyprostowany jednopołówkowo", "Sygnał sinusoidalny wyprostowany dwupołówkowo", "S1", "S2", "S3" }));
+        jComboBox1.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jComboBox1ActionPerformed(evt);
+            }
+        });
 
         jLabel1.setFont(new java.awt.Font("Verdana", 1, 12)); // NOI18N
         jLabel1.setText("Amplituda");
@@ -149,7 +163,7 @@ public class SineInputPanel extends javax.swing.JPanel implements InputPanel{
             .addGroup(layout.createSequentialGroup()
                 .addContainerGap()
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(jComboBox1, 0, 396, Short.MAX_VALUE)
+                    .addComponent(jComboBox1, 0, 412, Short.MAX_VALUE)
                     .addGroup(layout.createSequentialGroup()
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addGroup(layout.createSequentialGroup()
@@ -200,7 +214,7 @@ public class SineInputPanel extends javax.swing.JPanel implements InputPanel{
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel5, javax.swing.GroupLayout.PREFERRED_SIZE, 32, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(jTextStartTime, javax.swing.GroupLayout.DEFAULT_SIZE, 32, Short.MAX_VALUE))
-                .addGap(90, 90, 90))
+                .addGap(46, 46, 46))
         );
     }// </editor-fold>//GEN-END:initComponents
 
@@ -223,6 +237,10 @@ public class SineInputPanel extends javax.swing.JPanel implements InputPanel{
     private void jTextPhaseShiftActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jTextPhaseShiftActionPerformed
         // TODO add your handling code here:
     }//GEN-LAST:event_jTextPhaseShiftActionPerformed
+
+    private void jComboBox1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jComboBox1ActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_jComboBox1ActionPerformed
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JComboBox<String> jComboBox1;
