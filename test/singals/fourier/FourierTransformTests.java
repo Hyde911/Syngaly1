@@ -10,6 +10,7 @@ import java.util.Random;
 import org.apache.commons.math3.complex.Complex;
 import org.junit.Assert;
 import org.junit.Test;
+import signals1.fourier.Afft;
 import signals1.fourier.GGFourierTransform;
 import signals1.fourier.DefinitionFourierTransform;
 import signals1.fourier.FFT;
@@ -200,4 +201,7 @@ public class FourierTransformTests {
         }
         return result;
     }
+    
+    
+
 }

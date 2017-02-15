@@ -22,7 +22,7 @@ public class HighPassFIRFilter extends FIRFilter{
         final double factor = 2.0 * cutoff;
         final int half = order >> 1;
         for (int i = 0; i < filter.length; i++){
-            filter[i] = new Complex((i == half ? 1.0 : 0.0) - factor * MathFunctions.SINC(factor * (i - half)));
+            filter[i] = new Complex((i == half ? 1.0 : 0.0) - factor * MathFunctions.SINC(factor * (i - half))).multiply(order / 2);
         }
         filter = window.apply(filter);
     }

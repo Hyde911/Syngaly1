@@ -10,6 +10,7 @@ import java.util.logging.Logger;
 import org.apache.commons.math3.complex.Complex;
 import signals1.discreteSignals.DerivedSignal;
 import signals1.discreteSignals.abstracts.DiscreteSignal;
+import signals1.fourier.FastFourierTransform;
 import signals1.fourier.GGFourierTransform;
 import signals1.tools.exceptions.NotPowerOfTwoException;
 
@@ -65,11 +66,8 @@ public class Convolution {
         }
             
         DerivedSignal result = null;
-        try {
-            result = new DerivedSignal(GGFourierTransform.ifft_recursive(resValues), samplingRate, startTime, amplitude);
-        } catch (NotPowerOfTwoException ex) {
-            Logger.getLogger(Convolution.class.getName()).log(Level.SEVERE, null, ex);
-        }
+            result = new DerivedSignal(FastFourierTransform.iFft(resValues), samplingRate, startTime, amplitude);
+
         return result;
     }
     

@@ -8,6 +8,7 @@ package signals1.gui;
 import java.awt.BorderLayout;
 import org.apache.commons.math3.complex.Complex;
 import org.jfree.chart.ChartPanel;
+import org.jfree.data.Range;
 import org.jfree.data.xy.XYSeries;
 import org.jfree.data.xy.XYSeriesCollection;
 import signals1.discreteSignals.abstracts.DiscreteSignal;
@@ -33,7 +34,9 @@ public class OutputPanelFrequency extends OutputPanel {
         } catch (NotPowerOfTwoException ex) {
             return;
         }
-
+        Range range = realChart.getChart().getXYPlot().getRangeAxis().getRange();
+        double highBound = range.getUpperBound();
+        realChart.getChart().getXYPlot().getRangeAxis().setRange(-0.05 * highBound, highBound);
         jPanelReal.setLayout(new java.awt.BorderLayout());
         jPanelReal.add(realChart, BorderLayout.CENTER);
         jPanelReal.setVisible(true);
@@ -53,9 +56,9 @@ public class OutputPanelFrequency extends OutputPanel {
         int halfLength = values.length / 2;
         for (int i = 0; i < halfLength; i++){
             if (isReal) {
-                y = values[i].getReal();
+                y = Math.sqrt(values[i].getReal() * values[i].getReal() + values[i].getImaginary() * values[i].getImaginary()) / halfLength;
             } else {
-                y = values[i].getImaginary();
+                y =Math.atan(values[i].getImaginary());
             }
             x = i + (startTime * samplingRate);
             series.add(x, y);            

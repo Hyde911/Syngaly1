@@ -7,7 +7,6 @@ package signals1.fourier;
 
 import java.util.Arrays;
 import org.apache.commons.math3.complex.Complex;
-import signals1.tools.exceptions.NotPowerOfTwoException;
 
 /**
  *
@@ -15,7 +14,7 @@ import signals1.tools.exceptions.NotPowerOfTwoException;
  */
 public class FastFourierTransform {
 
-    public static Complex[] recursiveFft(Complex[] data) throws NotPowerOfTwoException {
+    public static Complex[] recursiveFft(Complex[] data)  {
         int length = data.length;
         if ((length & (length - 1)) != 0) {
             data = fillToPowerOfTwo(data);
@@ -45,7 +44,7 @@ public class FastFourierTransform {
         return result;
     }
 
-    public static Complex[] recursiveIfft(Complex[] data) throws NotPowerOfTwoException {
+    public static Complex[] recursiveIfft(Complex[] data) {
         int length = data.length;
         if ((length & (length - 1)) != 0) {
             data = fillToPowerOfTwo(data);
@@ -58,7 +57,7 @@ public class FastFourierTransform {
         return complexConjugateWithDivision(tmp, length);
     }
 
-    public static Complex[] fft(Complex[] data) throws NotPowerOfTwoException {
+    public static Complex[] fft(Complex[] data)  {
         int length = data.length;
         Complex[] res = Arrays.copyOf(data, length);
         if ((length & (length - 1)) != 0) {
@@ -102,7 +101,7 @@ public class FastFourierTransform {
         return res;
     }
 
-    public static Complex[] iFft(Complex[] data) throws NotPowerOfTwoException {
+    public static Complex[] iFft(Complex[] data)  {
         int length = data.length;
         if ((length & (length - 1)) != 0) {
             data = fillToPowerOfTwo(data);
@@ -120,16 +119,17 @@ public class FastFourierTransform {
     }
 
     private static Complex[] complexConjugateWithDivision(Complex[] data, int div) {
+        Complex[] result = Arrays.copyOf(data, data.length);
         if (div == 1) {
             for (int i = 0; i < data.length; i++) {
-                data[i] = data[i].conjugate();
+                result[i] = data[i].conjugate();
             }
         } else {
             for (int i = 0; i < data.length; i++) {
-                data[i] = data[i].conjugate().divide(div);
+                result[i] = data[i].conjugate().divide(div);
             }
         }
-        return data;
+        return result;
     }
 
     private static Complex[] fillToPowerOfTwo(Complex[] data){
