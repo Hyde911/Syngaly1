@@ -58,7 +58,7 @@ public class OutputPanelFrequency extends OutputPanel {
             if (isReal) {
                 y = Math.sqrt(values[i].getReal() * values[i].getReal() + values[i].getImaginary() * values[i].getImaginary()) / halfLength;
             } else {
-                y =Math.atan(values[i].getImaginary());
+                y = Math.abs(values[i].getReal()) < 0.1 ? 0 : Math.atan2(values[i].getImaginary(),values[i].getReal()) * 180 / Math.PI;
             }
             x = i + (startTime * samplingRate);
             series.add(x, y);            
