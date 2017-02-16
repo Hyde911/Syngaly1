@@ -54,13 +54,14 @@ public class OutputPanelFrequency extends OutputPanel {
         double x;
         double y;
         int halfLength = values.length / 2;
+        double lengthFactor = 1.0 * values.length / samplingRate;
         for (int i = 0; i < halfLength; i++){
             if (isReal) {
                 y = Math.sqrt(values[i].getReal() * values[i].getReal() + values[i].getImaginary() * values[i].getImaginary()) / halfLength;
             } else {
                 y = Math.abs(values[i].getReal()) < 0.1 ? 0 : Math.atan2(values[i].getImaginary(),values[i].getReal()) * 180 / Math.PI;
             }
-            x = i + (startTime * samplingRate);
+            x = i / lengthFactor + (startTime * samplingRate);
             series.add(x, y);            
         }
         return new XYSeriesCollection(series);
