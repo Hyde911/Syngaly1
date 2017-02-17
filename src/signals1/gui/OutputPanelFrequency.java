@@ -20,13 +20,16 @@ import signals1.tools.exceptions.NotPowerOfTwoException;
  */
 public class OutputPanelFrequency extends OutputPanel {
 
+    private Range originalRange;
+
+    public Range getOriginalRange() {
+        return originalRange;
+    }
+
     public OutputPanelFrequency(DiscreteSignal signal) {
         super(signal);
         realTitle = "wykres częstotliwości";
         imgTitle = "wykres przesunięć w fazie";
-
-        ChartPanel realChart;
-        ChartPanel imgChart;
 
         try {
             realChart = getScatterPlot(signal.getFourierTransformate(), true, 0, signal.getSamplingRate());
@@ -46,6 +49,16 @@ public class OutputPanelFrequency extends OutputPanel {
         jPanelImg.add(imgChart, BorderLayout.CENTER);
         jPanelImg.setVisible(true);
         jPanelImg.validate();
+        setOriginalRange();
+    }
+
+    public void setXScale(Range range) {
+        realChart.getChart().getXYPlot().getDomainAxis().setRange(range);
+        imgChart.getChart().getXYPlot().getDomainAxis().setRange(range);
+    }
+
+    protected final void setOriginalRange() {
+        this.originalRange = realChart.getChart().getXYPlot().getDomainAxis().getRange();
     }
 
     @Override
@@ -55,14 +68,14 @@ public class OutputPanelFrequency extends OutputPanel {
         double y;
         int halfLength = values.length / 2;
         double lengthFactor = 1.0 * values.length / samplingRate;
-        for (int i = 0; i < halfLength; i++){
+        for (int i = 0; i < halfLength; i++) {
             if (isReal) {
                 y = Math.sqrt(values[i].getReal() * values[i].getReal() + values[i].getImaginary() * values[i].getImaginary()) / halfLength;
             } else {
-                y = Math.abs(values[i].getReal()) < 0.1 ? 0 : Math.atan2(values[i].getImaginary(),values[i].getReal()) * 180 / Math.PI;
+                y = Math.abs(values[i].getReal()) < 0.1 ? 0 : Math.atan2(values[i].getImaginary(), values[i].getReal()) * 180 / Math.PI;
             }
             x = i / lengthFactor + (startTime * samplingRate);
-            series.add(x, y);            
+            series.add(x, y);
         }
         return new XYSeriesCollection(series);
     }

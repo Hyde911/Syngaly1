@@ -23,9 +23,6 @@ public class OutputPanelModAndPhase extends OutputPanel {
         realTitle = "moduł z liczby zespolonej";
         imgTitle = "faza liczby zespolonej";
 
-        ChartPanel realChart;
-        ChartPanel imgChart;
-
         realChart = getScatterPlot(signal.getValuesModAndShift(), true, signal.getStartTime(), signal.getSamplingRate());
         imgChart = getScatterPlot(signal.getValuesModAndShift(), false, signal.getStartTime(), signal.getSamplingRate());
         

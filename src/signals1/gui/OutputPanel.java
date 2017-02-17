@@ -18,6 +18,7 @@ import org.jfree.chart.axis.NumberAxis;
 import org.jfree.chart.axis.NumberTickUnit;
 import org.jfree.chart.plot.XYPlot;
 import org.jfree.chart.renderer.xy.XYItemRenderer;
+import org.jfree.data.Range;
 import org.jfree.data.xy.XYSeries;
 import org.jfree.data.xy.XYSeriesCollection;
 import signals1.discreteSignals.abstracts.DiscreteSignal;
@@ -28,8 +29,6 @@ import signals1.discreteSignals.abstracts.DiscreteSignal;
  */
 public abstract class OutputPanel extends javax.swing.JPanel {
 
-    private static final String MOD = "moduł z liczby zespolonej";
-    private static final String PHASE = "faza liczby zespolonej";
     private static final String AMPLITUDE = "amplituda";
     private static final String TIME = "czas";
     private static final Shape CIRCLESMALL = new Ellipse2D.Double(2, 2, 2, 2);
@@ -37,13 +36,16 @@ public abstract class OutputPanel extends javax.swing.JPanel {
     private final int chartDimensionY = 350;
     protected String realTitle = "składowa urojona";
     protected String imgTitle = "składowa rzeczywista";
+    
+    protected ChartPanel realChart;
+    protected ChartPanel imgChart;
 
     /**
      * Creates new form AmplitudePanel
      */
     public OutputPanel(DiscreteSignal signal) {
         initComponents();
-
+        
     }
 
     /**
@@ -108,6 +110,7 @@ public abstract class OutputPanel extends javax.swing.JPanel {
         );
     }// </editor-fold>//GEN-END:initComponents
 
+   
     protected ChartPanel getScatterPlot(Complex[] values, boolean isReal, double startTime, int samplingRate) {
         String title = realTitle;
         if (!isReal) {

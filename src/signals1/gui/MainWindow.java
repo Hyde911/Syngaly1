@@ -763,9 +763,9 @@ public class MainWindow extends javax.swing.JFrame {
         if (signal == null) {
             return;
         }
-        OutputPanel amPanel = new OutputPanelAmplitude(signal);
-        OutputPanel modAndShiftPanel = new OutputPanelModAndPhase(signal);
-        OutputPanel freqPanel = new OutputPanelFrequency(signal);
+        OutputPanelAmplitude amPanel = new OutputPanelAmplitude(signal);
+        OutputPanelModAndPhase modAndShiftPanel = new OutputPanelModAndPhase(signal);
+        OutputPanelFrequency freqPanel = new OutputPanelFrequency(signal);
         HistogramPanel hisPanel = new HistogramPanel(signal.getHistogram(jSliderHistNo.getValue()), jSliderHistNo.getValue());
         HistogramPanel hisModAndShiftPanel = new HistogramPanel(signal.getHistogramModAndShift(jSliderHistNo.getValue()), jSliderHistNo.getValue());
         OutputWindow outputWindow = new OutputWindow(signal, amPanel, hisPanel, modAndShiftPanel, hisModAndShiftPanel, freqPanel);

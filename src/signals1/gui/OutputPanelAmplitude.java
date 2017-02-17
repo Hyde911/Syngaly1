@@ -7,6 +7,7 @@ package signals1.gui;
 
 import java.awt.BorderLayout;
 import org.jfree.chart.ChartPanel;
+import org.jfree.data.Range;
 import signals1.discreteSignals.abstracts.DiscreteSignal;
 
 /**
@@ -19,9 +20,6 @@ public class OutputPanelAmplitude extends OutputPanel {
         super(signal);
         realTitle = "składowa urojona";
         imgTitle = "składowa rzeczywista";
-
-        ChartPanel realChart;
-        ChartPanel imgChart;
 
         realChart = getScatterPlot(signal.getValues(), true, signal.getStartTime(), signal.getSamplingRate());
         imgChart = getScatterPlot(signal.getValues(), false, signal.getStartTime(), signal.getSamplingRate());
