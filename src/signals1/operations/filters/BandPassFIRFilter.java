@@ -23,7 +23,7 @@ public class BandPassFIRFilter extends FIRFilter {
         }
     }
 
-    public Complex[] createBandstop() {
+    public final Complex[] createBandstop() {
         final Complex[] low = new LowPassFIRFilter(window, order, lowFrqCutoff, samplingRate).getFilter();
         final Complex[] high = new HighPassFIRFilter(window, order, highFrqCutoff, samplingRate).getFilter();
         for (int i = 0; i < low.length; i++) {

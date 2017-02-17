@@ -31,10 +31,11 @@ public class RadarChartsPanel extends javax.swing.JPanel {
     private final int chartDimensionY = 195;
 //    private DiscreteSignal signal1;
 //    private DiscreteSignal signal2;
+
     /**
      * Creates new form RadarChartsPanel
+     *
      * @param signalReponse
-     * @param analysis
      */
     public RadarChartsPanel(RadarResponse signalReponse) {
         initComponents();
@@ -53,7 +54,7 @@ public class RadarChartsPanel extends javax.swing.JPanel {
         jPanelCorrelation2.setLayout(new java.awt.BorderLayout());
         jPanelCorrelation2.add(getCorrelationChart(signalReponse.getCorrelation2().getValues(), "Korelacja drugiej odpowiedzi"), BorderLayout.CENTER);
         jPanelCorrelation2.setVisible(true);
-        jPanelCorrelation2.validate();        
+        jPanelCorrelation2.validate();
     }
 
     private ChartPanel getSignalCharts(Complex[] probingSignal, Complex[] responseSignal, String title) {
@@ -196,7 +197,6 @@ public class RadarChartsPanel extends javax.swing.JPanel {
                 .addComponent(jPanelCorrelation2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
         );
     }// </editor-fold>//GEN-END:initComponents
-
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JPanel jPanelCharts1;

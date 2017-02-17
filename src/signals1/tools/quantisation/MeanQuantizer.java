@@ -12,7 +12,7 @@ import org.apache.commons.math3.complex.Complex;
  *
  * @author marr
  */
-public class MeanQuantizer extends Quantizer implements Serializable{
+public class MeanQuantizer extends Quantizer implements Serializable {
 
     public MeanQuantizer(int bitsNumber) {
         super(bitsNumber);
@@ -20,15 +20,15 @@ public class MeanQuantizer extends Quantizer implements Serializable{
 
     @Override
     public Complex quantizeSample(Complex value, double amplitude) {
-        if (Math.abs(value.getReal()) == 1 || value.getReal() == 0){
+        if (Math.abs(value.getReal()) == 1 || value.getReal() == 0) {
             return value.multiply(amplitude);
         }
         int sign = 1;
-        if (value.getReal() < 0){
+        if (value.getReal() < 0) {
             sign = -1;
         }
         int interval = getInterval(value.getReal());
-        double newReal = (stepsTable[sign * interval] + stepsTable[(sign * interval) + 1])/2.0;
+        double newReal = (stepsTable[sign * interval] + stepsTable[(sign * interval) + 1]) / 2.0;
         return new Complex(newReal * amplitude * sign, value.getImaginary());
     }
 }

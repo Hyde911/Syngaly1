@@ -9,7 +9,6 @@ package signals1.tools.exceptions;
  *
  * @author marr
  */
-public class NotPowerOfTwoException extends Exception{
-    
-    
+public class NotPowerOfTwoException extends Exception {
+
 }

@@ -12,29 +12,29 @@ import signals1.discreteSignals.abstracts.DiscreteSignal;
  *
  * @author glabg
  */
-public class DiscretetSignalsContainer extends ArrayList<DiscreteSignal>{
-    
+public class DiscretetSignalsContainer extends ArrayList<DiscreteSignal> {
+
     private static DiscretetSignalsContainer INSTANCE;
 
-    private DiscretetSignalsContainer(){}
-    
+    private DiscretetSignalsContainer() {
+    }
+
     public static DiscretetSignalsContainer getInstance() {
-        if(INSTANCE == null){
+        if (INSTANCE == null) {
             INSTANCE = new DiscretetSignalsContainer();
         }
         return INSTANCE;
     }
-    
+
     public DiscreteSignal getById(int id) {
         if (id < 1) {
             return null;
         }
-        for (DiscreteSignal s : this){
-            if (s.getId() == id){
+        for (DiscreteSignal s : this) {
+            if (s.getId() == id) {
                 return s;
             }
         }
         return null;
     }
 }
-

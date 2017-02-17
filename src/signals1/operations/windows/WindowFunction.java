@@ -19,7 +19,6 @@ public abstract class WindowFunction {
     public WindowFunction() {
     }
 
-
     public Complex[] apply(Complex[] filter) {
         this.length = filter.length;
 
@@ -42,7 +41,6 @@ public abstract class WindowFunction {
         return filter;
     }
 
-
     public Complex[] generateCurve(int length) {
         Complex[] samples = new Complex[length];
         for (int n = 0; n < length; n++) {
@@ -52,6 +50,5 @@ public abstract class WindowFunction {
     }
 
     protected abstract double value(int length, int index);
-    
 
 }

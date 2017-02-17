@@ -43,8 +43,8 @@ public class Convolution {
         DerivedSignal result = new DerivedSignal(resValues, signal1.getSamplingRate(), signal1.getStartTime(), signal1.getAmplitude());
         return result;
     }
-    
-        public static DerivedSignal CalculateConvolutions(Complex[] signal1, Complex[] signal2, int samplingRate, double startTime, double amplitude) {
+
+    public static DerivedSignal CalculateConvolutions(Complex[] signal1, Complex[] signal2, int samplingRate, double startTime, double amplitude) {
         int numberOfSamples1 = signal1.length;
         int numberOfSamples2 = signal2.length;
         int newSize = numberOfSamples1 + numberOfSamples2 - 1;
@@ -64,12 +64,11 @@ public class Convolution {
                 resValues[i] = tmp;
             }
         }
-            
+
         DerivedSignal result = null;
-            result = new DerivedSignal(FastFourierTransform.iFft(resValues), samplingRate, startTime, amplitude);
+        result = new DerivedSignal(FastFourierTransform.iFft(resValues), samplingRate, startTime, amplitude);
 
         return result;
     }
-    
-    
+
 }

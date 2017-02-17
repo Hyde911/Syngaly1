@@ -18,7 +18,7 @@ import signals1.tools.DiscretetSignalsContainer;
  */
 public class DiscreteSignalTableModel extends DefaultTableModel {
 
-    private String[] columnsNames = {"id", "typ sygnału", "czas początkowy [s]", "czas trwania [s]", "amplituda", "okres [s]"};
+    private final String[] columnsNames = {"id", "typ sygnału", "czas początkowy [s]", "czas trwania [s]", "amplituda", "okres [s]"};
     private DiscretetSignalsContainer container = DiscretetSignalsContainer.getInstance();
     private int rowsNumber = 0;
 

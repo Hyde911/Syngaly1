@@ -13,15 +13,15 @@ import signals1.operations.windows.WindowFunction;
  *
  * @author glabg
  */
-public class HighPassFIRFilter extends FIRFilter{
-    
-    public HighPassFIRFilter(final WindowFunction window, final int order, final double fc, final double fs){
+public class HighPassFIRFilter extends FIRFilter {
+
+    public HighPassFIRFilter(final WindowFunction window, final int order, final double fc, final double fs) {
         super(window, order, 0d, fc, fs);
         final double cutoff = highFrqCutoff / samplingRate;
         filter = new Complex[order];
         final double factor = 2.0 * cutoff;
         final int half = order >> 1;
-        for (int i = 0; i < filter.length; i++){
+        for (int i = 0; i < filter.length; i++) {
             filter[i] = new Complex((i == half ? 1.0 : 0.0) - factor * MathFunctions.SINC(factor * (i - half))).multiply(order / 2);
         }
         filter = window.apply(filter);

@@ -24,7 +24,7 @@ public class CorrelationTest {
     private final Complex[] values1 = new Complex[]{new Complex(3.2), new Complex(1.5), new Complex(9.4), new Complex(4.3)};
     private final Complex[] values2 = new Complex[]{new Complex(0.9), new Complex(4.8), new Complex(7.1)};
     private final Complex[] valuesCorrelation = new Complex[]{new Complex(22.72), new Complex(26.01), new Complex(76.82), new Complex(77), new Complex(29.1), new Complex(3.87)};
- 
+
     public CorrelationTest() {
     }
 
@@ -52,10 +52,10 @@ public class CorrelationTest {
         DiscreteSignal signal1 = new DerivedSignal(this.values1, 100, 0, 1);
         DiscreteSignal signal2 = new DerivedSignal(this.values2, 100, 0, 1);
         DerivedSignal expResult = new DerivedSignal(this.valuesCorrelation, 100, 0, 1);;
-        
+
         DerivedSignal result = Correlation.CalculateCorrelation(signal1, signal2);
         assertEquals(expResult.getValues().length, result.getValues().length);
-        for (int i = 0; i < expResult.getValues().length; i++){
+        for (int i = 0; i < expResult.getValues().length; i++) {
             assertTrue(Complex.equals(expResult.getValues()[i], result.getValues()[i], 1E-10));
         }
     }

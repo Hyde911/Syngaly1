@@ -14,7 +14,7 @@ import signals1.tools.exceptions.NotPowerOfTwoException;
  * @author glabg
  *
  * m - output element
- * 
+ *
  */
 public class GGFourierTransform {
 

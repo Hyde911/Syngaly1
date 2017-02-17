@@ -41,7 +41,7 @@ public abstract class AbstractSignal {
     }
 
     public Complex[] getSignal() {
-        if (result == null){
+        if (result == null) {
             generateSignal();
         }
         return result;

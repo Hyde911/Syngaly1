@@ -12,25 +12,25 @@ import signals1.discreteSignals.abstracts.DiscreteSignal;
  * @author glabg
  */
 public class D2AConverterService {
-    
-    private D2AConverter service;
-    private DiscreteSignal input;
-    private DiscreteSignal output;
-    private int samplingRate;
-    
-    public D2AConverterService(D2AConverter service, DiscreteSignal input, int samplingRate){
+
+    private final D2AConverter service;
+    private final DiscreteSignal input;
+    private final DiscreteSignal output;
+    private final int samplingRate;
+
+    public D2AConverterService(D2AConverter service, DiscreteSignal input, int samplingRate) {
         this.service = service;
         this.input = input;
         this.samplingRate = samplingRate;
         this.output = convertD2A();
     }
-    
-    public DiscreteSignal getOutput(){
+
+    public DiscreteSignal getOutput() {
         return output;
     }
-    
-    private DiscreteSignal convertD2A(){
+
+    private DiscreteSignal convertD2A() {
         return service.convert(input, samplingRate);
     }
-    
+
 }

@@ -13,15 +13,15 @@ import signals1.operations.windows.WindowFunction;
  *
  * @author glabg
  */
-public class LowPassFIRFilter extends FIRFilter{
-    
-    public LowPassFIRFilter(final WindowFunction window, final int order, final double fc, final double fs){
+public class LowPassFIRFilter extends FIRFilter {
+
+    public LowPassFIRFilter(final WindowFunction window, final int order, final double fc, final double fs) {
         super(window, order, fc, Double.POSITIVE_INFINITY, fs);
         final double cutoff = lowFrqCutoff / samplingRate;
         filter = new Complex[order];
         final double factor = 2.0 * cutoff;
         final int half = order >> 1;
-        for (int i = 0; i < filter.length; i++){
+        for (int i = 0; i < filter.length; i++) {
             filter[i] = new Complex(factor * MathFunctions.SINC(factor * (i - half))).multiply(order / 2);
         }
         filter = window.apply(filter);
@@ -31,5 +31,5 @@ public class LowPassFIRFilter extends FIRFilter{
     public Complex[] getFilter() {
         return filter;
     }
-    
+
 }

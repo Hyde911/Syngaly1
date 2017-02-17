@@ -44,8 +44,8 @@ public class SignalComparer {
             return Double.NaN;
         }
         double result = 0;
-        for (int i = 0; i < signal1.getValues().length; i++) {
-            result += signal1.getValues()[i].getReal() * signal1.getValues()[i].getReal();
+        for (Complex value : signal1.getValues()) {
+            result += value.getReal() * value.getReal();
         }
         return 10 * Math.log10(result / CalculateMSE(signal1, signal2));
     }
@@ -61,9 +61,9 @@ public class SignalComparer {
             return Double.NaN;
         }
         double max = 0;
-        for (int i = 0; i < signal1.getValues().length; i++) {
-            if (signal1.getValues()[i].getReal() > max) {
-                max = signal1.getValues()[i].getReal();
+        for (Complex value : signal1.getValues()) {
+            if (value.getReal() > max) {
+                max = value.getReal();
             }
         }
         return 10 * Math.log10(max / CalculateMSE(signal1, signal2));

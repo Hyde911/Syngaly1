@@ -17,24 +17,24 @@ import org.junit.Test;
  * @author marr
  */
 public class MeanQuantizerTest {
-    
+
     private MeanQuantizer quan = new MeanQuantizer(12);
-    
+
     public MeanQuantizerTest() {
     }
-    
+
     @BeforeClass
     public static void setUpClass() {
     }
-    
+
     @AfterClass
     public static void tearDownClass() {
     }
-    
+
     @Before
     public void setUp() {
     }
-    
+
     @After
     public void tearDown() {
     }
@@ -47,5 +47,5 @@ public class MeanQuantizerTest {
         Complex val = new Complex(1, 0);
         System.out.println(quan.quantizeSample(val, 100));
     }
-    
+
 }

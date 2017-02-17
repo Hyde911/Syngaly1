@@ -12,12 +12,12 @@ import org.apache.commons.math3.complex.Complex;
  *
  * @author marr
  */
-public class NoneQuantizer extends Quantizer implements Serializable{
+public class NoneQuantizer extends Quantizer implements Serializable {
 
-    public NoneQuantizer(){
+    public NoneQuantizer() {
         this(1);
     }
-    
+
     public NoneQuantizer(int bitsNumber) {
         super(bitsNumber);
     }
@@ -26,5 +26,5 @@ public class NoneQuantizer extends Quantizer implements Serializable{
     public Complex quantizeSample(Complex value, double amplitude) {
         return value.multiply(amplitude);
     }
-    
+
 }

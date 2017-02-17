@@ -22,7 +22,7 @@ public class HistogramCalculator {
     private double minImg = 0;
     private double maxReal = 0;
     private double maxImg = 0;
-    private Complex[] values;
+    private final Complex[] values;
 
     public HistogramCalculator(Complex[] output) {
         values = output;

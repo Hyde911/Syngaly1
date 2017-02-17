@@ -14,7 +14,7 @@ import signals1.operations.arithmetic.ArithmeticOperator;
 import signals1.operations.arithmetic.Division;
 import signals1.operations.arithmetic.Multiplication;
 import signals1.operations.arithmetic.Subtraction;
-import signals1.tools.exceptions.DivideByZeroValueExcpetion;
+import signals1.tools.exceptions.DivideByZeroValueException;
 import signals1.tools.exceptions.NotSameSamplinRateExpcetion;
 
 /**
@@ -60,11 +60,11 @@ class AmplitudeOperations {
         return new DerivedSignal(values, samplingRate, startTime, amplitude);
     }
 
-    public DerivedSignal div() throws DivideByZeroValueExcpetion {
+    public DerivedSignal div() throws DivideByZeroValueException {
         doCalculation(new Division());
         for (Complex c : values) {
             if (Double.isNaN(c.getReal())) {
-                throw new DivideByZeroValueExcpetion();
+                throw new DivideByZeroValueException();
             }
         }
         return new DerivedSignal(values, samplingRate, startTime, amplitude);

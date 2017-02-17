@@ -53,5 +53,4 @@ public class SINCConverter implements D2AConverter {
         return ret.multiply((1.0 * originalSamplingRate / newSamplingRate));
     }
 
-
 }

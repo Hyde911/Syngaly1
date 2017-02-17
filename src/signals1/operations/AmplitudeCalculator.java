@@ -7,7 +7,7 @@ package signals1.operations;
 
 import signals1.discreteSignals.DerivedSignal;
 import signals1.discreteSignals.abstracts.DiscreteSignal;
-import signals1.tools.exceptions.DivideByZeroValueExcpetion;
+import signals1.tools.exceptions.DivideByZeroValueException;
 import signals1.tools.exceptions.NotSameSamplinRateExpcetion;
 
 /**
@@ -31,7 +31,7 @@ public class AmplitudeCalculator {
         return op.mul();
     }
 
-    public static DerivedSignal DivideSignals(DiscreteSignal s1, DiscreteSignal s2) throws NotSameSamplinRateExpcetion, DivideByZeroValueExcpetion {
+    public static DerivedSignal DivideSignals(DiscreteSignal s1, DiscreteSignal s2) throws NotSameSamplinRateExpcetion, DivideByZeroValueException {
         AmplitudeOperations op = new AmplitudeOperations(s1, s2);
         return op.div();
     }

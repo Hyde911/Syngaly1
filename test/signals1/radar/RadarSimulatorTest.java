@@ -25,13 +25,13 @@ public class RadarSimulatorTest {
     private final double finalDistance;
     private final RadarParameters params;
     private final RadarSimulator radar;
-    
+
     public RadarSimulatorTest() {
         params = new RadarParameters(firstCompomentPeriod, secondCompomentPeriod, samplingRate, buforLength, initialDistance, velocity, interval, waveSpeed);
         finalDistance = velocity * interval + initialDistance;
         radar = new RadarSimulator(params);
     }
-    
+
     /**
      * Test of generateResponse method, of class RadarSimulator.
      */
@@ -51,5 +51,5 @@ public class RadarSimulatorTest {
     public void testGenerateResponseFinalDistance() {
         RadarResponse result = radar.generateResponse();
         assertEquals(finalDistance, result.getCalculateFinalDistance(), initialDistance * 0.05);
-    }    
+    }
 }

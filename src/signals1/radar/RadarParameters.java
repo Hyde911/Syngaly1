@@ -10,6 +10,7 @@ package signals1.radar;
  * @author marr
  */
 public class RadarParameters {
+
     private final double firstCompomentPeriod;
     private final double secondCompomentPeriod;
     private final int samplingRate;
@@ -61,5 +62,5 @@ public class RadarParameters {
     public double getWaveSpeed() {
         return waveSpeed;
     }
-            
+
 }

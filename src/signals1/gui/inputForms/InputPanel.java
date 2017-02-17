@@ -12,6 +12,6 @@ import signals1.continuousSignals.abstracts.AbstractSignal;
  * @author marr
  */
 public interface InputPanel {
-    
+
     public AbstractSignal getSingal();
 }

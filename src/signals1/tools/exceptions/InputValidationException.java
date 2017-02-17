@@ -9,6 +9,6 @@ package signals1.tools.exceptions;
  *
  * @author marr
  */
-public class InputValidationException extends Exception{
-    
+public class InputValidationException extends Exception {
+
 }

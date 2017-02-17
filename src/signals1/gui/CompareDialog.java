@@ -15,11 +15,13 @@ import signals1.tools.DiscretetSignalsContainer;
  * @author marr
  */
 public class CompareDialog extends javax.swing.JFrame {
-    private DiscreteSignal signal1;
-    private DiscreteSignal signal2;
-    private int id1;
-    private int id2;
-    private DecimalFormat df = new DecimalFormat("0.####");
+
+    private final DiscreteSignal signal1;
+    private final DiscreteSignal signal2;
+    private final int id1;
+    private final int id2;
+    private final DecimalFormat df = new DecimalFormat("0.####");
+
     /**
      * Creates new form CompareDialog
      */
@@ -153,8 +155,8 @@ public class CompareDialog extends javax.swing.JFrame {
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
-    
-    private void showStats(){
+
+    private void showStats() {
         jTextS1.setText(String.valueOf(id1));
         jTextS2.setText(String.valueOf(id2));
         jTextMSE.setText(df.format(SignalComparer.CalculateMSE(signal1, signal2)));
@@ -162,7 +164,6 @@ public class CompareDialog extends javax.swing.JFrame {
         jTextSNR.setText(df.format(SignalComparer.CalculateSNR(signal1, signal2)));
         jTextMD.setText(df.format(SignalComparer.CalculateMD(signal1, signal2)));
     }
-
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JLabel jLabel1;

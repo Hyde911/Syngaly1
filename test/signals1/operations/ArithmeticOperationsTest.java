@@ -14,7 +14,7 @@ import org.junit.BeforeClass;
 import org.junit.Test;
 import static org.junit.Assert.*;
 import signals1.discreteSignals.DerivedSignal;
-import signals1.tools.exceptions.DivideByZeroValueExcpetion;
+import signals1.tools.exceptions.DivideByZeroValueException;
 import signals1.tools.exceptions.NotSameSamplinRateExpcetion;
 
 /**
@@ -23,7 +23,7 @@ import signals1.tools.exceptions.NotSameSamplinRateExpcetion;
  */
 public class ArithmeticOperationsTest {
 
-    private Complex[] values1 = {
+    private final Complex[] values1 = {
         new Complex(1.25, 1.02),
         new Complex(1.34, -2.7),
         new Complex(2.25, 2.13),
@@ -35,7 +35,7 @@ public class ArithmeticOperationsTest {
         new Complex(2.8, -1.81),
         new Complex(3.7, -0.88)
     };
-    private Complex[] values2 = {
+    private final Complex[] values2 = {
         new Complex(1.8, -2.2),
         new Complex(13, 9.13),
         new Complex(0.97, 1.22),
@@ -463,7 +463,7 @@ public class ArithmeticOperationsTest {
         DerivedSignal signal2 = new DerivedSignal(Arrays.copyOf(values2, 8), 1, 1, 0);
         DerivedSignal result = AmplitudeCalculator.MultiplySignals(signal1, signal2);
 
-        Complex[] expectedValues = Arrays.copyOf(values1, 10);;
+        Complex[] expectedValues = Arrays.copyOf(values1, 10);
         for (int i = 1; i < 11; i++) {
             try {
                 expectedValues[i] = signal1.getValues()[i].multiply(signal2.getValues()[i - 1]);
@@ -496,7 +496,7 @@ public class ArithmeticOperationsTest {
     }
 
     @Test
-    public void divTest_SecondShorter() throws NotSameSamplinRateExpcetion, DivideByZeroValueExcpetion {
+    public void divTest_SecondShorter() throws NotSameSamplinRateExpcetion, DivideByZeroValueException {
         DerivedSignal signal1 = new DerivedSignal(values1, 1, 0, 0);
         DerivedSignal signal2 = new DerivedSignal(Arrays.copyOf(values2, 8), 1, 0, 0);
         DerivedSignal result = AmplitudeCalculator.DivideSignals(signal1, signal2);
@@ -514,7 +514,7 @@ public class ArithmeticOperationsTest {
     }
 
     @Test
-    public void divTest_FirstShorter() throws NotSameSamplinRateExpcetion, DivideByZeroValueExcpetion {
+    public void divTest_FirstShorter() throws NotSameSamplinRateExpcetion, DivideByZeroValueException {
         DerivedSignal signal1 = new DerivedSignal(values1, 1, 0, 0);
         DerivedSignal signal2 = new DerivedSignal(Arrays.copyOf(values2, 8), 1, 0, 0);
         DerivedSignal result = AmplitudeCalculator.DivideSignals(signal2, signal1);
@@ -532,7 +532,7 @@ public class ArithmeticOperationsTest {
     }
 
     @Test
-    public void dviTest_SecondShifted() throws NotSameSamplinRateExpcetion, DivideByZeroValueExcpetion {
+    public void dviTest_SecondShifted() throws NotSameSamplinRateExpcetion, DivideByZeroValueException {
 
         DerivedSignal signal1 = new DerivedSignal(values1, 1, 0, 0);
         DerivedSignal signal2 = new DerivedSignal(values2, 1, 1, 0);
@@ -555,7 +555,7 @@ public class ArithmeticOperationsTest {
     }
 
     @Test
-    public void divTest_FirstShifted() throws NotSameSamplinRateExpcetion, DivideByZeroValueExcpetion {
+    public void divTest_FirstShifted() throws NotSameSamplinRateExpcetion, DivideByZeroValueException {
         DerivedSignal signal1 = new DerivedSignal(values1, 1, 0, 0);
         DerivedSignal signal2 = new DerivedSignal(values2, 1, 1, 0);
         DerivedSignal result = AmplitudeCalculator.DivideSignals(signal2, signal1);
@@ -576,7 +576,7 @@ public class ArithmeticOperationsTest {
     }
 
     @Test
-    public void divTest_FirstShiftedAndShorter() throws NotSameSamplinRateExpcetion, DivideByZeroValueExcpetion {
+    public void divTest_FirstShiftedAndShorter() throws NotSameSamplinRateExpcetion, DivideByZeroValueException {
         DerivedSignal signal1 = new DerivedSignal(values1, 1, 0, 0);
         DerivedSignal signal2 = new DerivedSignal(Arrays.copyOf(values2, 8), 1, 1, 0);
         DerivedSignal result = AmplitudeCalculator.DivideSignals(signal1, signal2);
@@ -594,7 +594,7 @@ public class ArithmeticOperationsTest {
     }
 
     @Test
-    public void divTest_SecondShiftedAndShorter() throws NotSameSamplinRateExpcetion, DivideByZeroValueExcpetion {
+    public void divTest_SecondShiftedAndShorter() throws NotSameSamplinRateExpcetion, DivideByZeroValueException {
         DerivedSignal signal1 = new DerivedSignal(values1, 1, 0, 0);
         DerivedSignal signal2 = new DerivedSignal(Arrays.copyOf(values2, 8), 1, 1, 0);
         DerivedSignal result = AmplitudeCalculator.DivideSignals(signal2, signal1);
@@ -613,8 +613,8 @@ public class ArithmeticOperationsTest {
         assertArrayEquals(expectedValues, result.getValues());
     }
 
-    @Test(expected = DivideByZeroValueExcpetion.class)
-    public void divTest_DivideByZero() throws NotSameSamplinRateExpcetion, DivideByZeroValueExcpetion {
+    @Test(expected = DivideByZeroValueException.class)
+    public void divTest_DivideByZero() throws NotSameSamplinRateExpcetion, DivideByZeroValueException {
         DerivedSignal signal1 = new DerivedSignal(values1, 1, 0, 0);
         Complex[] val = new Complex[10];
         Arrays.fill(val, Complex.ZERO);

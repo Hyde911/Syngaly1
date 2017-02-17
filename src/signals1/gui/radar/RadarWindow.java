@@ -17,10 +17,9 @@ import signals1.radar.RadarResponse;
  */
 public class RadarWindow extends javax.swing.JFrame {
 
-    private RadarSimulator radarSimulator;
-    private RadarResponse response;
-    private RadarParameters parameters;
-    private DecimalFormat df = new DecimalFormat("0.####");
+    private final RadarSimulator radarSimulator;
+    private final RadarResponse response;
+    private final DecimalFormat df = new DecimalFormat("0.####");
 
     /**
      * Creates new form RadarWindow
@@ -28,10 +27,8 @@ public class RadarWindow extends javax.swing.JFrame {
      * @param parameters
      */
     public RadarWindow(RadarParameters parameters) {
-        this.parameters = parameters;
         this.radarSimulator = new RadarSimulator(parameters);
         this.response = radarSimulator.generateResponse();
-//        System.out.println(response.getCalculatedInitialDistance());
         initComponents();
         addCharts();
         addResults();
@@ -44,11 +41,12 @@ public class RadarWindow extends javax.swing.JFrame {
         jPanelCharts.revalidate();
     }
 
-    private void addResults(){
+    private void addResults() {
         jTextFieldDistance1.setText(df.format(response.getCalculatedInitialDistance()));
         jTextFieldDistance2.setText(df.format(response.getCalculateFinalDistance()));
         jTextFieldVelocity.setText(df.format(response.getCalculatedVelocity()));
     }
+
     /**
      * This method is called from within the constructor to initialize the form.
      * WARNING: Do NOT modify this code. The content of this method is always
@@ -153,7 +151,6 @@ public class RadarWindow extends javax.swing.JFrame {
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
-
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JLabel jLabel3;

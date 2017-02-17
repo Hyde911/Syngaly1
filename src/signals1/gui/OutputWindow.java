@@ -17,8 +17,9 @@ import signals1.stats.SignalStats;
  */
 public class OutputWindow extends javax.swing.JFrame {
 
-    private DecimalFormat df = new DecimalFormat("0.####");
-    private OutputPanelFrequency freqChart;
+    private final DecimalFormat df = new DecimalFormat("0.####");
+    private final OutputPanelFrequency freqChart;
+
     /**
      * Creates new form OutputWindow
      */
@@ -26,9 +27,9 @@ public class OutputWindow extends javax.swing.JFrame {
         initComponents();
 
         this.freqChart = freqCharts;
-        
+
         showStats(signal.getStats());
-        
+
         jPanelAmp1.setLayout(new java.awt.BorderLayout());
         jPanelAmp1.add(aplitudeCharts, BorderLayout.CENTER);
         jPanelAmp1.revalidate();
@@ -42,12 +43,12 @@ public class OutputWindow extends javax.swing.JFrame {
         jPanelHist2.setLayout(new java.awt.BorderLayout());
         jPanelHist2.add(hisModAndPhase, BorderLayout.CENTER);
         jPanelHist2.revalidate();
-        
+
         jPanelFourier.setLayout(new java.awt.BorderLayout());
-        jPanelFourier.add(freqCharts, BorderLayout.CENTER);        
+        jPanelFourier.add(freqCharts, BorderLayout.CENTER);
         jPanelFourier.validate();
         jSliderScale.setEnabled(false);
-    }        
+    }
 
     /**
      * This method is called from within the constructor to initialize the form.
@@ -297,10 +298,9 @@ public class OutputWindow extends javax.swing.JFrame {
     }//GEN-LAST:event_jSliderScaleStateChanged
 
     private void jTabbedPaneStateChanged(javax.swing.event.ChangeEvent evt) {//GEN-FIRST:event_jTabbedPaneStateChanged
-        if (jTabbedPane.getSelectedIndex() == 4){
+        if (jTabbedPane.getSelectedIndex() == 4) {
             jSliderScale.setEnabled(true);
-        }
-        else{
+        } else {
             jSliderScale.setEnabled(false);
         }
     }//GEN-LAST:event_jTabbedPaneStateChanged
@@ -317,14 +317,14 @@ public class OutputWindow extends javax.swing.JFrame {
             jTextMeanPower.setText(df.format(stats.getAveragePower()));
         }
     }
-    
-    private Range calculateNewTransformateRange(int n){
+
+    private Range calculateNewTransformateRange(int n) {
         Range origRange = freqChart.getOriginalRange();
         double lowBound = origRange.getLowerBound();
         double uppBound = origRange.getUpperBound() / Math.pow(2, n);
         return new Range(lowBound, uppBound);
     }
-    
+
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;

@@ -22,7 +22,7 @@ public class FourierTransformLoadTests {
      */
     public static void main(String[] args) {
 
-        int n = 1048576;
+        int n = 2048;
         int iterations = 1;
         Complex[] data = new Complex[n];
         Random rand = new Random();
@@ -44,12 +44,12 @@ public class FourierTransformLoadTests {
         System.out.println("Definition transform");
 
         start = System.nanoTime();
-//        for (int i = 0; i < iterations; i++) {
-//            try {
-//                DefinitionFourierTransform.Transform(data);
-//            } catch (NotPowerOfTwoException ex) {
-//            }
-//        }
+        for (int i = 0; i < iterations; i++) {
+            try {
+                DefinitionFourierTransform.Transform(data);
+            } catch (NotPowerOfTwoException ex) {
+            }
+        }
         stop = System.nanoTime();
 
         System.out.println(((stop - start) / 1000000) + "[ms]");
@@ -59,10 +59,7 @@ public class FourierTransformLoadTests {
 
         start = System.nanoTime();
         for (int i = 0; i < iterations; i++) {
-            try {
-                FastFourierTransform.recursiveFft(data);
-            } catch (NotPowerOfTwoException ex) {
-            }
+            FastFourierTransform.recursiveFft(data);
         }
         stop = System.nanoTime();
 
@@ -73,17 +70,14 @@ public class FourierTransformLoadTests {
 
         start = System.nanoTime();
         for (int i = 0; i < iterations; i++) {
-            try {
-                FastFourierTransform.fft(data);
-            } catch (NotPowerOfTwoException ex) {
-            }
+            FastFourierTransform.fft(data);
         }
         stop = System.nanoTime();
 
         System.out.println(((stop - start) / 1000000) + "[ms]");
         System.out.println("--------------------");
 
-                System.out.println("GGRecursiveFFt");
+        System.out.println("GGRecursiveFFt");
 
         start = System.nanoTime();
         for (int i = 0; i < iterations; i++) {

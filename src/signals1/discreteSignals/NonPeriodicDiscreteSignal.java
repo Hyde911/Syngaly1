@@ -21,8 +21,9 @@ import signals1.tools.quantisation.Quantizer;
  * @author marr
  */
 public class NonPeriodicDiscreteSignal extends DiscreteSignal implements Serializable {
+
     private final Quantizer quantizer;
-    
+
     public NonPeriodicDiscreteSignal(NonPeriodicSignals noiseSignal, int samplingRate, Quantizer quantizer) {
         super();
         this.quantizer = quantizer;
@@ -68,7 +69,7 @@ public class NonPeriodicDiscreteSignal extends DiscreteSignal implements Seriali
     private void getSamples(AbstractSignal signal) {
         values = new Complex[(int) (samplingRate * signal.getDuration())];
         double factor = signal.getNumberOfSamples() / (1.0 * values.length);
-        Complex[]orValues =  signal.getSignal();
+        Complex[] orValues = signal.getSignal();
         for (int i = 0; i < values.length; i++) {
             values[i] = quantizer.quantizeSample(orValues[(int) (i * factor)], amplitude);
         }

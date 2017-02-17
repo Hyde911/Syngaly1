@@ -37,7 +37,7 @@ public class SignalSerializationHelper {
 
     public static DiscreteSignal loadSignal(File readFile) {
         DiscreteSignal result = null;
-        try (FileInputStream fis = new FileInputStream(readFile)){
+        try (FileInputStream fis = new FileInputStream(readFile)) {
             ObjectInputStream ois = new ObjectInputStream(fis);
             result = (DiscreteSignal) ois.readObject();
             ois.close();

@@ -13,7 +13,7 @@ import signals1.operations.windows.WindowFunction;
  * @author glabg
  */
 public abstract class FIRFilter {
-    
+
     protected WindowFunction window;
     protected Complex[] filter = null;
     protected int order;
@@ -28,7 +28,7 @@ public abstract class FIRFilter {
         this.highFrqCutoff = highFrqCutoff;
         this.samplingRate = samplingRate;
     }
-    
+
     public abstract Complex[] getFilter();
-    
+
 }

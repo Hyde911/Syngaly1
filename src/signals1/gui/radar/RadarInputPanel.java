@@ -25,7 +25,7 @@ public class RadarInputPanel extends javax.swing.JPanel {
         RadarParameters params;
         try {
             double firstCompomentPeriod = Double.parseDouble(jTextPeriod1.getText()) / 1000;
-            double secondCompomentPeriod = Double.parseDouble(jTextPeriod2.getText())/ 1000;
+            double secondCompomentPeriod = Double.parseDouble(jTextPeriod2.getText()) / 1000;
             int samplingRate = Integer.parseInt(jTextSamplingRate.getText());
             double buforLength = Double.parseDouble(jTextBuferSize.getText()) / 1000;
             double initialDistance = Double.parseDouble(jTextDistance.getText());
@@ -211,7 +211,6 @@ public class RadarInputPanel extends javax.swing.JPanel {
     private void jTextPeriod2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jTextPeriod2ActionPerformed
         // TODO add your handling code here:
     }//GEN-LAST:event_jTextPeriod2ActionPerformed
-
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JLabel jLabel10;

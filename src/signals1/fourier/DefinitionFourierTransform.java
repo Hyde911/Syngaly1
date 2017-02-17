@@ -20,9 +20,9 @@ public class DefinitionFourierTransform {
             throw new NotPowerOfTwoException();
         }
         Complex wFactor = CalculateWFactor(length);
-        
+
         Complex[] result = new Complex[length];
-        
+
         for (int i = 0; i < length; i++) {
             result[i] = Complex.ZERO;
             for (int j = 0; j < length; j++) {
@@ -39,7 +39,7 @@ public class DefinitionFourierTransform {
             throw new NotPowerOfTwoException();
         }
         Complex wFactor = CalculateWFactor(length);
-        
+
         Complex[] result = new Complex[length];
 
         for (int i = 0; i < length; i++) {
@@ -56,8 +56,8 @@ public class DefinitionFourierTransform {
     private static Complex CalculateImPower(double value) {
         return new Complex(Math.cos(value * Math.PI), Math.sin(value * Math.PI));
     }
-    
-    private static Complex  CalculateWFactor(int n ){
+
+    private static Complex CalculateWFactor(int n) {
         return new Complex(Math.cos(2.0 * Math.PI / n), Math.sin(2.0 * Math.PI / n));
     }
 }

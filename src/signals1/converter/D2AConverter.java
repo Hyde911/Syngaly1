@@ -14,5 +14,5 @@ import signals1.discreteSignals.abstracts.DiscreteSignal;
 public interface D2AConverter {
 
     public DiscreteSignal convert(DiscreteSignal input, int samplingRate);
-    
+
 }

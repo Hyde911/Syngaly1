@@ -9,11 +9,11 @@ package signals1.operations.windows;
  *
  * @author glabg
  */
-public class HanningWindow extends WindowFunction{
+public class HanningWindow extends WindowFunction {
 
     @Override
     protected double value(int length, int index) {
-         return 0.5f * (1d - (double) Math.cos(TWO_PI * index / (length - 1d)));
+        return 0.5f * (1d - (double) Math.cos(TWO_PI * index / (length - 1d)));
     }
-    
+
 }

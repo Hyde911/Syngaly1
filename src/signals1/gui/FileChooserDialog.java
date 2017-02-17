@@ -98,7 +98,6 @@ public class FileChooserDialog extends javax.swing.JDialog {
 //            java.util.logging.Logger.getLogger(FileChooserDialog.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
 //        }
 //        //</editor-fold>
-
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JFileChooser jFileChooser1;
     // End of variables declaration//GEN-END:variables

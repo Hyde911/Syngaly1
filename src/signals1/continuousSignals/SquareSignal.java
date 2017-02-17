@@ -12,7 +12,7 @@ import signals1.continuousSignals.abstracts.SquareSignals;
  *
  * @author marr
  */
-public class SquareSignal extends SquareSignals{
+public class SquareSignal extends SquareSignals {
 
     public SquareSignal(double startTime, double amplitude, double duration, double period, int fillFactor) {
         super(startTime, amplitude, duration, period, fillFactor);
@@ -24,15 +24,14 @@ public class SquareSignal extends SquareSignals{
         this.result = new Complex[numberOfSamples];
         int period = 0;
         int sampleOfPeriod = 0;
-        for (int i = 0; i< numberOfSamples; i++){
-            if (i % samplesPerPeriod == 0 && i != 0){
+        for (int i = 0; i < numberOfSamples; i++) {
+            if (i % samplesPerPeriod == 0 && i != 0) {
                 period++;
                 sampleOfPeriod = 0;
             }
-            if (sampleOfPeriod < samplesPerPeriod * fillFactor*0.01){
+            if (sampleOfPeriod < samplesPerPeriod * fillFactor * 0.01) {
                 this.result[i] = new Complex(1, 0);
-            }
-            else{
+            } else {
                 this.result[i] = new Complex(0, 0);
             }
             sampleOfPeriod++;

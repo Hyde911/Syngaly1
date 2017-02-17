@@ -82,12 +82,11 @@ public class PeriodicDiscreteSignal extends DiscreteSignal implements Serializab
     }
 
     private void calculateStats() {
-        if (numberOfWholePeriods > 0){
-        int wholePeriodSamples = samplesPerPeriod * numberOfWholePeriods;
-        Complex[] samplesForStats = Arrays.copyOf(values, wholePeriodSamples);
-        this.stats = StatsCalculator.getStats(samplesForStats);
-        }
-        else{
+        if (numberOfWholePeriods > 0) {
+            int wholePeriodSamples = samplesPerPeriod * numberOfWholePeriods;
+            Complex[] samplesForStats = Arrays.copyOf(values, wholePeriodSamples);
+            this.stats = StatsCalculator.getStats(samplesForStats);
+        } else {
             this.stats = new SignalStats(0, 0, 0, 0, 0);
         }
     }
@@ -95,7 +94,7 @@ public class PeriodicDiscreteSignal extends DiscreteSignal implements Serializab
     @Override
     public Histogram getHistogram(int numberOfIntervals) {
         int wholePeriodSamples = samplesPerPeriod * numberOfWholePeriods;
-        if (wholePeriodSamples < 1){
+        if (wholePeriodSamples < 1) {
             return Histogram.NULLHISTOGRAM;
         }
         Complex[] samplesForStats = Arrays.copyOf(values, wholePeriodSamples);
@@ -106,7 +105,7 @@ public class PeriodicDiscreteSignal extends DiscreteSignal implements Serializab
     private void getSamples(AbstractSignal signal) {
         values = new Complex[numberOfSamples];
         double factor = (1.0 * signal.getNumberOfSamples()) / (1.0 * values.length);
-        Complex[]orValues =  signal.getSignal();
+        Complex[] orValues = signal.getSignal();
         for (int i = 0; i < numberOfSamples; i++) {
             values[i] = quantizer.quantizeSample(orValues[(int) (i * factor)], amplitude);
         }

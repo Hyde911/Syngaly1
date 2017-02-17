@@ -6,10 +6,6 @@
 package signals1.gui;
 
 import java.awt.BorderLayout;
-import org.apache.commons.math3.complex.Complex;
-import org.jfree.chart.ChartPanel;
-import org.jfree.data.xy.XYSeries;
-import org.jfree.data.xy.XYSeriesCollection;
 import signals1.discreteSignals.abstracts.DiscreteSignal;
 
 /**
@@ -25,7 +21,7 @@ public class OutputPanelModAndPhase extends OutputPanel {
 
         realChart = getScatterPlot(signal.getValuesModAndShift(), true, signal.getStartTime(), signal.getSamplingRate());
         imgChart = getScatterPlot(signal.getValuesModAndShift(), false, signal.getStartTime(), signal.getSamplingRate());
-        
+
         jPanelReal.setLayout(new java.awt.BorderLayout());
         jPanelReal.add(realChart, BorderLayout.CENTER);
         jPanelReal.setVisible(true);
@@ -36,5 +32,5 @@ public class OutputPanelModAndPhase extends OutputPanel {
         jPanelImg.setVisible(true);
         jPanelImg.validate();
     }
-    
+
 }

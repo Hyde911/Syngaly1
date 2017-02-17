@@ -6,8 +6,6 @@
 package signals1.gui;
 
 import java.awt.BorderLayout;
-import org.jfree.chart.ChartPanel;
-import org.jfree.data.Range;
 import signals1.discreteSignals.abstracts.DiscreteSignal;
 
 /**

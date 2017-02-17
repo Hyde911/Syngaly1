@@ -17,7 +17,7 @@ import signals1.stats.StatsCalculator;
  * @author marr
  */
 public class DerivedSignal extends DiscreteSignal implements Serializable {
-    
+
     public DerivedSignal(Complex[] values, int samplingRate, double startTime, double amplitude) {
         super();
         this.fullName = "sygnał pochodny";

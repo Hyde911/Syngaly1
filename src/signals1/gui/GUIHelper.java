@@ -7,8 +7,6 @@ package signals1.gui;
 
 import java.io.File;
 import java.lang.reflect.Method;
-import java.util.logging.Level;
-import java.util.logging.Logger;
 import signals1.discreteSignals.abstracts.DiscreteSignal;
 import signals1.tools.SignalSerializationHelper;
 
@@ -25,7 +23,7 @@ public class GUIHelper {
             Method actionMethod = HELPERCLASS.getMethod(action, File.class, DiscreteSignal.class);
             actionMethod.invoke(null, file, signal);
         } catch (Exception ex) {
-            
+
             //DSAMainWindow.showError(ex, "Błąd Pliku", "Błąd Pliku");
         }
     }

@@ -25,24 +25,24 @@ public class StatsCalculator {
 
     public static double calcMeanValue(Complex[] input) {
         double mean = 0;
-        for (int i = 0; i < input.length; i++) {
-            mean += input[i].getReal();
+        for (Complex input1 : input) {
+            mean += input1.getReal();
         }
         return mean / (input.length + 1);
     }
 
     public static double calcAbsoluteMeanValue(Complex[] input) {
         double absMean = 0;
-        for (int i = 0; i < input.length; i++) {
-            absMean += Math.abs(input[i].getReal());
+        for (Complex input1 : input) {
+            absMean += Math.abs(input1.getReal());
         }
         return absMean / (input.length + 1);
     }
 
     public static double calcAveragePower(Complex[] input) {
         double power = 0;
-        for (int i = 0; i < input.length; i++) {
-            power += input[i].getReal() * input[i].getReal();
+        for (Complex input1 : input) {
+            power += input1.getReal() * input1.getReal();
         }
         return power / (input.length + 1);
     }
@@ -50,8 +50,8 @@ public class StatsCalculator {
     public static double caclVariance(Complex[] input) {
         double mean = calcMeanValue(input);
         double variance = 0;
-        for (int i = 0; i < input.length; i++) {
-            variance += (input[i].getReal() - mean) * (input[i].getReal() - mean);
+        for (Complex input1 : input) {
+            variance += (input1.getReal() - mean) * (input1.getReal() - mean);
         }
         mean = variance / (input.length + 1);
         return mean;

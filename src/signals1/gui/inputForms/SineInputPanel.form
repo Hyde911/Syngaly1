@@ -24,7 +24,7 @@
           <Group type="102" attributes="0">
               <EmptySpace max="-2" attributes="0"/>
               <Group type="103" groupAlignment="0" attributes="0">
-                  <Component id="jComboBox1" pref="534" max="32767" attributes="0"/>
+                  <Component id="jComboBox1" pref="458" max="32767" attributes="0"/>
                   <Group type="102" attributes="0">
                       <Group type="103" groupAlignment="0" attributes="0">
                           <Group type="102" attributes="0">
@@ -81,17 +81,17 @@
                   <Component id="jLabel6" alignment="3" min="-2" pref="32" max="-2" attributes="0"/>
                   <Component id="jTextPhaseShift" alignment="3" pref="32" max="32767" attributes="0"/>
               </Group>
-              <EmptySpace type="separate" max="-2" attributes="0"/>
-              <Group type="103" groupAlignment="3" attributes="0">
-                  <Component id="jLabel3" alignment="3" min="-2" pref="32" max="-2" attributes="0"/>
-                  <Component id="jTextDuration" alignment="3" pref="32" max="32767" attributes="0"/>
+              <EmptySpace type="unrelated" max="-2" attributes="0"/>
+              <Group type="103" groupAlignment="0" max="-2" attributes="0">
+                  <Component id="jLabel3" pref="32" max="32767" attributes="0"/>
+                  <Component id="jTextDuration" max="32767" attributes="0"/>
               </Group>
-              <EmptySpace type="separate" max="-2" attributes="0"/>
-              <Group type="103" groupAlignment="3" attributes="0">
-                  <Component id="jLabel5" alignment="3" min="-2" pref="32" max="-2" attributes="0"/>
-                  <Component id="jTextStartTime" alignment="3" pref="32" max="32767" attributes="0"/>
+              <EmptySpace pref="10" max="32767" attributes="0"/>
+              <Group type="103" groupAlignment="0" max="-2" attributes="0">
+                  <Component id="jLabel5" pref="32" max="32767" attributes="0"/>
+                  <Component id="jTextStartTime" max="32767" attributes="0"/>
               </Group>
-              <EmptySpace min="-2" pref="46" max="-2" attributes="0"/>
+              <EmptySpace pref="138" max="32767" attributes="0"/>
           </Group>
       </Group>
     </DimensionLayout>

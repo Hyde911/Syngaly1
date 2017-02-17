@@ -12,12 +12,12 @@ import signals1.discreteSignals.DerivedSignal;
  * @author marr
  */
 public class RadarResponse {
-    
+
     private final DerivedSignal probingSignal;
     private final DerivedSignal firstResponse;
     private final DerivedSignal secondRespone;
     private final DerivedSignal correlation1;
-    private final DerivedSignal correlation2;    
+    private final DerivedSignal correlation2;
     private final double calculatedVelocity;
     private final double calculatedInitialDistance;
     private final double calculateFinalDistance;
@@ -64,6 +64,5 @@ public class RadarResponse {
     public double getCalculateFinalDistance() {
         return calculateFinalDistance;
     }
-    
-    
+
 }

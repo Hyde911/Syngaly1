@@ -30,7 +30,7 @@ public abstract class DiscreteSignal implements Serializable {
     protected SignalStats stats;
     protected Complex[] values;
     protected Complex[] freqSpectrum;
-    
+
     protected DiscreteSignal() {
         id = nextId.incrementAndGet();
     }
@@ -74,13 +74,13 @@ public abstract class DiscreteSignal implements Serializable {
         return id;
     }
 
-    public Complex[] getFourierTransformate() throws NotPowerOfTwoException{
-        if (freqSpectrum == null){
+    public Complex[] getFourierTransformate() throws NotPowerOfTwoException {
+        if (freqSpectrum == null) {
             freqSpectrum = FastFourierTransform.fft(values);
         }
         return freqSpectrum;
     }
-    
+
     public double getStartTime() {
         return startTime;
     }

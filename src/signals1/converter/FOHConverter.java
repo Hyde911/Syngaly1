@@ -24,8 +24,8 @@ public class FOHConverter implements D2AConverter {
         int factor = aLength / dValues.length;
         Complex[] temp;
         for (int i = 0; i < dValues.length; i++) {
-            if(i+1<dValues.length){
-                temp = interpolate(dValues[i].getReal(), dValues[i+1].getReal(), factor);
+            if (i + 1 < dValues.length) {
+                temp = interpolate(dValues[i].getReal(), dValues[i + 1].getReal(), factor);
                 aValues = ArrayUtils.addAll(aValues, temp);
             }
         }

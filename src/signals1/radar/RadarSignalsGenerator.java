@@ -52,11 +52,11 @@ public class RadarSignalsGenerator {
     public DerivedSignal getSecondResponse() {
         return secondResponse;
     }
-    
+
     private DerivedSignal generateRadarSignal() {
         double duration = getDuration();
         SineSignal signal1 = new SineSignal(0, amplitude, duration, params.getFirstCompomentPeriod(), 1);
-        SineSignal signal2 = new SineSignal(0, amplitude, duration, params.getSecondCompomentPeriod(),1);
+        SineSignal signal2 = new SineSignal(0, amplitude, duration, params.getSecondCompomentPeriod(), 1);
         PeriodicDiscreteSignal disSignal1 = new PeriodicDiscreteSignal(signal1, params.getSamplingRate(), new NoneQuantizer());
         PeriodicDiscreteSignal disSignal2 = new PeriodicDiscreteSignal(signal2, params.getSamplingRate(), new NoneQuantizer());
         try {
@@ -65,7 +65,7 @@ public class RadarSignalsGenerator {
             return null;
         }
     }
-    
+
     private double getDuration() {
         int initialShift = getSamplesShiftFromDistance(params.getInitialDistance());
         int additionaShift = getSamplesShiftFromDistance(Math.abs(params.getVelocity()) * params.getInterval());

@@ -9,9 +9,9 @@ package signals1.tools.exceptions;
  *
  * @author marr
  */
-public class DivideByZeroValueExcpetion extends Exception {
+public class DivideByZeroValueException extends Exception {
 
-    public DivideByZeroValueExcpetion() {
+    public DivideByZeroValueException() {
 
         super("Divisor signal contains zero value");
     }

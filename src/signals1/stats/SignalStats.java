@@ -11,13 +11,13 @@ import java.io.Serializable;
  *
  * @author marr
  */
-public class SignalStats implements Serializable{
-    
-    private double meanValue;
-    private double absoluteMeanValue;
-    private double averagePower;
-    private double variance;
-    private double effectivePower;
+public class SignalStats implements Serializable {
+
+    private final double meanValue;
+    private final double absoluteMeanValue;
+    private final double averagePower;
+    private final double variance;
+    private final double effectivePower;
 
     public SignalStats(double meanValue, double absoluteMeanValue, double averagePower, double variance, double effectivePower) {
         this.meanValue = meanValue;

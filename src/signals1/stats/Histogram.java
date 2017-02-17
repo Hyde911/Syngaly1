@@ -10,9 +10,9 @@ package signals1.stats;
  * @author marr
  */
 public class Histogram {
-    
+
     public static Histogram NULLHISTOGRAM = new Histogram(new double[]{0}, new double[]{0});
-    
+
     protected double[] realHistogram;
     protected double[] imgHistogram;
 

@@ -14,8 +14,8 @@ import signals1.discreteSignals.abstracts.DiscreteSignal;
  * @author marr
  */
 public class Correlation {
-    
-        public static DerivedSignal CalculateCorrelation(DiscreteSignal signal1, DiscreteSignal signal2) {
+
+    public static DerivedSignal CalculateCorrelation(DiscreteSignal signal1, DiscreteSignal signal2) {
         int numberOfSamples1 = signal1.getValues().length;
         int numberOfSamples2 = signal2.getValues().length;
         int newSize = numberOfSamples1 + numberOfSamples2 - 1;

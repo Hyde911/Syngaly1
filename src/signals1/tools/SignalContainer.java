@@ -23,8 +23,8 @@ public class SignalContainer extends ArrayList<AbstractSignal> {
         if (id < 1) {
             return null;
         }
-        for (AbstractSignal s : this){
-            if (s.getId() == id){
+        for (AbstractSignal s : this) {
+            if (s.getId() == id) {
                 return s;
             }
         }

@@ -19,7 +19,7 @@ import signals1.tools.SignalContainer;
  */
 public class VirtualSignalsTableModel extends DefaultTableModel {
 
-    private String[] columnsNames = {"id", "typ sygnału", "czas początkowy [s]", "czas trwania [s]", "amplituda", "okres [s]", "wypełnienie [%]"};
+    private final String[] columnsNames = {"id", "typ sygnału", "czas początkowy [s]", "czas trwania [s]", "amplituda", "okres [s]", "wypełnienie [%]"};
     private SignalContainer container = SignalContainer.getInstance();
     private int rowsNumber = 0;
 

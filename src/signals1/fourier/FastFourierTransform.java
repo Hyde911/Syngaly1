@@ -14,7 +14,7 @@ import org.apache.commons.math3.complex.Complex;
  */
 public class FastFourierTransform {
 
-    public static Complex[] recursiveFft(Complex[] data)  {
+    public static Complex[] recursiveFft(Complex[] data) {
         int length = data.length;
         if ((length & (length - 1)) != 0) {
             data = fillToPowerOfTwo(data);
@@ -57,7 +57,7 @@ public class FastFourierTransform {
         return complexConjugateWithDivision(tmp, length);
     }
 
-    public static Complex[] fft(Complex[] data)  {
+    public static Complex[] fft(Complex[] data) {
         int length = data.length;
         Complex[] res = Arrays.copyOf(data, length);
         if ((length & (length - 1)) != 0) {
@@ -101,7 +101,7 @@ public class FastFourierTransform {
         return res;
     }
 
-    public static Complex[] iFft(Complex[] data)  {
+    public static Complex[] iFft(Complex[] data) {
         int length = data.length;
         if ((length & (length - 1)) != 0) {
             data = fillToPowerOfTwo(data);
@@ -115,7 +115,7 @@ public class FastFourierTransform {
     }
 
     private static Complex calculateWFactor(int k, int n) {
-        return new Complex(Math.cos(-2.0 * Math.PI  * k / n), Math.sin(-2.0 * Math.PI * k/ n));
+        return new Complex(Math.cos(-2.0 * Math.PI * k / n), Math.sin(-2.0 * Math.PI * k / n));
     }
 
     private static Complex[] complexConjugateWithDivision(Complex[] data, int div) {
@@ -132,12 +132,12 @@ public class FastFourierTransform {
         return result;
     }
 
-    private static Complex[] fillToPowerOfTwo(Complex[] data){
+    private static Complex[] fillToPowerOfTwo(Complex[] data) {
         int length = data.length;
-        int nextPowerOfTwo = (int)Math.ceil(((Math.log(length) / Math.log(2))));
-        Complex[] newData = new Complex[(int)Math.pow(2, nextPowerOfTwo)];
+        int nextPowerOfTwo = (int) Math.ceil(((Math.log(length) / Math.log(2))));
+        Complex[] newData = new Complex[(int) Math.pow(2, nextPowerOfTwo)];
         Arrays.fill(newData, Complex.ZERO);
-        for (int i = 0; i < length; i++){
+        for (int i = 0; i < length; i++) {
             newData[i] = data[i];
         }
         return newData;

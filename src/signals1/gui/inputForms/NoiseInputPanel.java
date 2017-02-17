@@ -8,16 +8,14 @@ package signals1.gui.inputForms;
 import java.awt.Dimension;
 import javax.swing.JOptionPane;
 import signals1.continuousSignals.GaussianNoise;
-import signals1.continuousSignals.StrokeSignal;
 import signals1.continuousSignals.UniformNoise;
 import signals1.continuousSignals.abstracts.NonPeriodicSignals;
-
 
 /**
  *
  * @author marr
  */
-public class NoiseInputPanel extends javax.swing.JPanel implements InputPanel{
+public class NoiseInputPanel extends javax.swing.JPanel implements InputPanel {
 
     private final Dimension dimension;
 
@@ -66,8 +64,6 @@ public class NoiseInputPanel extends javax.swing.JPanel implements InputPanel{
         jTextDuration = new javax.swing.JTextField();
         jLabel5 = new javax.swing.JLabel();
         jTextStartTime = new javax.swing.JTextField();
-        jLabel6 = new javax.swing.JLabel();
-        jTextStrokeTime = new javax.swing.JTextField();
 
         setPreferredSize(dimension);
 
@@ -95,13 +91,6 @@ public class NoiseInputPanel extends javax.swing.JPanel implements InputPanel{
         jTextStartTime.setHorizontalAlignment(javax.swing.JTextField.CENTER);
         jTextStartTime.setText("0");
 
-        jLabel6.setFont(new java.awt.Font("Verdana", 1, 12)); // NOI18N
-        jLabel6.setText("Czas skoku");
-
-        jTextStrokeTime.setFont(new java.awt.Font("Tahoma", 0, 12)); // NOI18N
-        jTextStrokeTime.setHorizontalAlignment(javax.swing.JTextField.CENTER);
-        jTextStrokeTime.setText("2");
-
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(this);
         this.setLayout(layout);
         layout.setHorizontalGroup(
@@ -123,12 +112,8 @@ public class NoiseInputPanel extends javax.swing.JPanel implements InputPanel{
                             .addGroup(layout.createSequentialGroup()
                                 .addComponent(jLabel5, javax.swing.GroupLayout.PREFERRED_SIZE, 178, javax.swing.GroupLayout.PREFERRED_SIZE)
                                 .addGap(18, 18, 18)
-                                .addComponent(jTextStartTime, javax.swing.GroupLayout.PREFERRED_SIZE, 56, javax.swing.GroupLayout.PREFERRED_SIZE))
-                            .addGroup(layout.createSequentialGroup()
-                                .addComponent(jLabel6, javax.swing.GroupLayout.PREFERRED_SIZE, 178, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addGap(18, 18, 18)
-                                .addComponent(jTextStrokeTime, javax.swing.GroupLayout.PREFERRED_SIZE, 56, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                        .addGap(0, 171, Short.MAX_VALUE)))
+                                .addComponent(jTextStartTime, javax.swing.GroupLayout.PREFERRED_SIZE, 56, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                        .addGap(0, 112, Short.MAX_VALUE)))
                 .addContainerGap())
         );
         layout.setVerticalGroup(
@@ -148,24 +133,17 @@ public class NoiseInputPanel extends javax.swing.JPanel implements InputPanel{
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                     .addComponent(jLabel5, javax.swing.GroupLayout.DEFAULT_SIZE, 32, Short.MAX_VALUE)
                     .addComponent(jTextStartTime))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jLabel6, javax.swing.GroupLayout.PREFERRED_SIZE, 32, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jTextStrokeTime, javax.swing.GroupLayout.PREFERRED_SIZE, 32, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addContainerGap(111, Short.MAX_VALUE))
+                .addContainerGap(257, Short.MAX_VALUE))
         );
     }// </editor-fold>//GEN-END:initComponents
-
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JComboBox<String> jComboBox1;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel3;
     private javax.swing.JLabel jLabel5;
-    private javax.swing.JLabel jLabel6;
     private javax.swing.JTextField jTextAmplitude;
     private javax.swing.JTextField jTextDuration;
     private javax.swing.JTextField jTextStartTime;
-    private javax.swing.JTextField jTextStrokeTime;
     // End of variables declaration//GEN-END:variables
 }
