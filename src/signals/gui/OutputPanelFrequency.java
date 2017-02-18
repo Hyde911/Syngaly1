@@ -31,12 +31,9 @@ public class OutputPanelFrequency extends OutputPanel {
         realTitle = "wykres częstotliwości";
         imgTitle = "wykres przesunięć w fazie";
 
-        try {
-            realChart = getScatterPlot(signal.getFourierTransformate(), true, 0, signal.getSamplingRate());
-            imgChart = getScatterPlot(signal.getFourierTransformate(), false, 0, signal.getSamplingRate());
-        } catch (NotPowerOfTwoException ex) {
-            return;
-        }
+        realChart = getScatterPlot(signal.getFourierTransformate(), true, 0, signal.getSamplingRate());
+        imgChart = getScatterPlot(signal.getFourierTransformate(), false, 0, signal.getSamplingRate());
+        
         Range range = realChart.getChart().getXYPlot().getRangeAxis().getRange();
         double highBound = range.getUpperBound();
         realChart.getChart().getXYPlot().getRangeAxis().setRange(-0.05 * highBound, highBound);

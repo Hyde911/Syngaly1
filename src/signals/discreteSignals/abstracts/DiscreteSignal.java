@@ -73,7 +73,7 @@ public abstract class DiscreteSignal implements Serializable {
         return id;
     }
 
-    public Complex[] getFourierTransformate() throws NotPowerOfTwoException {
+    public Complex[] getFourierTransformate(){
         if (freqSpectrum == null) {
             freqSpectrum = FastFourierTransform.fft(values);
         }
