@@ -22,8 +22,8 @@ import signals.tools.exceptions.NotPowerOfTwoException;
  */
 public class FourierTransformTests {
 
-    private Complex[] data;
-    private Complex[] transformData;
+    private final Complex[] data;
+    private final Complex[] transformData;
 
     public FourierTransformTests() throws Exception {
         data = generateData(128);

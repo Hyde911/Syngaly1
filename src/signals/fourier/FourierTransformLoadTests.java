@@ -6,8 +6,6 @@
 package signals.fourier;
 
 import java.util.Random;
-import java.util.logging.Level;
-import java.util.logging.Logger;
 import org.apache.commons.math3.complex.Complex;
 import signals.tools.exceptions.NotPowerOfTwoException;
 
