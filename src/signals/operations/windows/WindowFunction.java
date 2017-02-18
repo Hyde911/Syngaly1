@@ -3,7 +3,7 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package signals1.operations.windows;
+package signals.operations.windows;
 
 import org.apache.commons.math3.complex.Complex;
 

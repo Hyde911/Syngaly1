@@ -3,19 +3,19 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package signals1.operations;
+package signals.operations;
 
 import java.util.Arrays;
 import org.apache.commons.math3.complex.Complex;
-import signals1.operations.arithmetic.Addition;
-import signals1.discreteSignals.DerivedSignal;
-import signals1.discreteSignals.abstracts.DiscreteSignal;
-import signals1.operations.arithmetic.ArithmeticOperator;
-import signals1.operations.arithmetic.Division;
-import signals1.operations.arithmetic.Multiplication;
-import signals1.operations.arithmetic.Subtraction;
-import signals1.tools.exceptions.DivideByZeroValueException;
-import signals1.tools.exceptions.NotSameSamplinRateExpcetion;
+import signals.operations.arithmetic.Addition;
+import signals.discreteSignals.DerivedSignal;
+import signals.discreteSignals.abstracts.DiscreteSignal;
+import signals.operations.arithmetic.ArithmeticOperator;
+import signals.operations.arithmetic.Division;
+import signals.operations.arithmetic.Multiplication;
+import signals.operations.arithmetic.Subtraction;
+import signals.tools.exceptions.DivideByZeroValueException;
+import signals.tools.exceptions.NotSameSamplinRateExpcetion;
 
 /**
  *

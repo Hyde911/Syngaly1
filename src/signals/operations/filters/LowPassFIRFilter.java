@@ -3,11 +3,11 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package signals1.operations.filters;
+package signals.operations.filters;
 
 import org.apache.commons.math3.complex.Complex;
-import signals1.operations.MathFunctions;
-import signals1.operations.windows.WindowFunction;
+import signals.operations.MathFunctions;
+import signals.operations.windows.WindowFunction;
 
 /**
  *

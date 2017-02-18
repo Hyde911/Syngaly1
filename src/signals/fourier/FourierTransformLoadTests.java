@@ -3,13 +3,13 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package signals1.fourier;
+package signals.fourier;
 
 import java.util.Random;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import org.apache.commons.math3.complex.Complex;
-import signals1.tools.exceptions.NotPowerOfTwoException;
+import signals.tools.exceptions.NotPowerOfTwoException;
 
 /**
  *
@@ -46,7 +46,7 @@ public class FourierTransformLoadTests {
         start = System.nanoTime();
         for (int i = 0; i < iterations; i++) {
             try {
-                DefinitionFourierTransform.Transform(data);
+                DefinitionFourierTransform.transform(data);
             } catch (NotPowerOfTwoException ex) {
             }
         }

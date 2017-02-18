@@ -5,6 +5,7 @@
  */
 package signals1.operations;
 
+import signals.operations.AmplitudeCalculator;
 import java.util.Arrays;
 import org.apache.commons.math3.complex.Complex;
 import org.junit.After;
@@ -13,9 +14,9 @@ import org.junit.Before;
 import org.junit.BeforeClass;
 import org.junit.Test;
 import static org.junit.Assert.*;
-import signals1.discreteSignals.DerivedSignal;
-import signals1.tools.exceptions.DivideByZeroValueException;
-import signals1.tools.exceptions.NotSameSamplinRateExpcetion;
+import signals.discreteSignals.DerivedSignal;
+import signals.tools.exceptions.DivideByZeroValueException;
+import signals.tools.exceptions.NotSameSamplinRateExpcetion;
 
 /**
  *
@@ -71,7 +72,7 @@ public class ArithmeticOperationsTest {
     /**
      * Test of add method, of class AmplitudeOperations.
      *
-     * @throws signals1.tools.exceptions.NotSameSamplinRateExpcetion
+     * @throws signals.tools.exceptions.NotSameSamplinRateExpcetion
      */
     @Test(expected = NotSameSamplinRateExpcetion.class)
     public void testAdd_DifferentSamplingRates() throws NotSameSamplinRateExpcetion {

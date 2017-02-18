@@ -3,9 +3,9 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package signals1.app;
+package signals.app;
 
-import signals1.gui.MainWindow;
+import signals.gui.MainWindow;
 
 /**
  *

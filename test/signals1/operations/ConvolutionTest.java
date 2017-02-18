@@ -5,6 +5,7 @@
  */
 package signals1.operations;
 
+import signals.operations.Convolution;
 import org.apache.commons.math3.complex.Complex;
 import org.junit.After;
 import org.junit.AfterClass;
@@ -12,8 +13,8 @@ import org.junit.Before;
 import org.junit.BeforeClass;
 import org.junit.Test;
 import static org.junit.Assert.*;
-import signals1.discreteSignals.DerivedSignal;
-import signals1.discreteSignals.abstracts.DiscreteSignal;
+import signals.discreteSignals.DerivedSignal;
+import signals.discreteSignals.abstracts.DiscreteSignal;
 
 /**
  *

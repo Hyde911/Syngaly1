@@ -3,13 +3,13 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package signals1.gui.radar;
+package signals.gui.radar;
 
 import java.awt.BorderLayout;
 import java.text.DecimalFormat;
-import signals1.radar.RadarSimulator;
-import signals1.radar.RadarParameters;
-import signals1.radar.RadarResponse;
+import signals.radar.RadarSimulator;
+import signals.radar.RadarParameters;
+import signals.radar.RadarResponse;
 
 /**
  *

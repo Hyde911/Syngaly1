@@ -3,11 +3,11 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package signals1.radar;
+package signals.radar;
 
 import org.apache.commons.math3.complex.Complex;
-import signals1.discreteSignals.DerivedSignal;
-import signals1.operations.Correlation;
+import signals.discreteSignals.DerivedSignal;
+import signals.operations.Correlation;
 
 /**
  *

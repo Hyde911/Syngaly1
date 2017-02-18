@@ -5,6 +5,9 @@
  */
 package signals1.radar;
 
+import signals.radar.RadarResponse;
+import signals.radar.RadarParameters;
+import signals.radar.RadarSimulator;
 import org.junit.Test;
 import static org.junit.Assert.*;
 

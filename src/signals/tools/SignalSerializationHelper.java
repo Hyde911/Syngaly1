@@ -3,7 +3,7 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package signals1.tools;
+package signals.tools;
 
 import java.io.File;
 import java.io.FileInputStream;
@@ -14,7 +14,7 @@ import java.io.ObjectInputStream;
 import java.io.ObjectOutputStream;
 import java.util.logging.Level;
 import java.util.logging.Logger;
-import signals1.discreteSignals.abstracts.DiscreteSignal;
+import signals.discreteSignals.abstracts.DiscreteSignal;
 
 /**
  *

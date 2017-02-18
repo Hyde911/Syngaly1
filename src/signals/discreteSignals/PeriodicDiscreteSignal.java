@@ -3,20 +3,20 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package signals1.discreteSignals;
+package signals.discreteSignals;
 
-import signals1.discreteSignals.abstracts.DiscreteSignal;
+import signals.discreteSignals.abstracts.DiscreteSignal;
 import java.io.Serializable;
 import java.util.Arrays;
 import org.apache.commons.math3.complex.Complex;
-import signals1.continuousSignals.abstracts.PeriodicSignals;
-import signals1.continuousSignals.abstracts.AbstractSignal;
-import signals1.stats.Histogram;
-import signals1.stats.HistogramCalculator;
-import signals1.stats.SignalStats;
-import signals1.stats.StatsCalculator;
-import signals1.tools.quantisation.NoneQuantizer;
-import signals1.tools.quantisation.Quantizer;
+import signals.continuousSignals.abstracts.PeriodicSignals;
+import signals.continuousSignals.abstracts.AbstractSignal;
+import signals.stats.Histogram;
+import signals.stats.HistogramCalculator;
+import signals.stats.SignalStats;
+import signals.stats.StatsCalculator;
+import signals.tools.quantisation.NoneQuantizer;
+import signals.tools.quantisation.Quantizer;
 
 /**
  *

@@ -3,16 +3,16 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package signals1.radar;
+package signals.radar;
 
 import java.util.Arrays;
 import org.apache.commons.math3.complex.Complex;
-import signals1.continuousSignals.SineSignal;
-import signals1.discreteSignals.DerivedSignal;
-import signals1.discreteSignals.PeriodicDiscreteSignal;
-import signals1.operations.AmplitudeCalculator;
-import signals1.tools.exceptions.NotSameSamplinRateExpcetion;
-import signals1.tools.quantisation.NoneQuantizer;
+import signals.continuousSignals.SineSignal;
+import signals.discreteSignals.DerivedSignal;
+import signals.discreteSignals.PeriodicDiscreteSignal;
+import signals.operations.AmplitudeCalculator;
+import signals.tools.exceptions.NotSameSamplinRateExpcetion;
+import signals.tools.quantisation.NoneQuantizer;
 
 /**
  *

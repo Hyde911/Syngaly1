@@ -3,17 +3,17 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package signals1.gui.inputForms;
+package signals.gui.inputForms;
 
 import java.awt.Dimension;
 import javax.swing.JOptionPane;
-import signals1.continuousSignals.SineModSingal;
-import signals1.continuousSignals.SineSignal;
-import signals1.continuousSignals.SinesHalfWafeSingal;
-import signals1.continuousSignals.abstracts.SineLikeSignals;
-import signals1.continuousSignals.zadanie4.S1;
-import signals1.continuousSignals.zadanie4.S2;
-import signals1.continuousSignals.zadanie4.S3;
+import signals.continuousSignals.SineModSingal;
+import signals.continuousSignals.SineSignal;
+import signals.continuousSignals.SinesHalfWafeSingal;
+import signals.continuousSignals.abstracts.SineLikeSignals;
+import signals.continuousSignals.zadanie4.S1;
+import signals.continuousSignals.zadanie4.S2;
+import signals.continuousSignals.zadanie4.S3;
 
 /**
  *

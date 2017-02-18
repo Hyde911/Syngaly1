@@ -10,11 +10,11 @@ import java.util.Random;
 import org.apache.commons.math3.complex.Complex;
 import org.junit.Assert;
 import org.junit.Test;
-import signals1.fourier.GGFourierTransform;
-import signals1.fourier.DefinitionFourierTransform;
-import signals1.fourier.FFT;
-import signals1.fourier.FastFourierTransform;
-import signals1.tools.exceptions.NotPowerOfTwoException;
+import signals.fourier.GGFourierTransform;
+import signals.fourier.DefinitionFourierTransform;
+import signals.fourier.FFT;
+import signals.fourier.FastFourierTransform;
+import signals.tools.exceptions.NotPowerOfTwoException;
 
 /**
  *
@@ -41,7 +41,7 @@ public class FourierTransformTests {
     public void definitionTransformTest() {
         Complex[] transform;
         try {
-            transform = DefinitionFourierTransform.Transform(data);
+            transform = DefinitionFourierTransform.transform(data);
             compareComplexArrays(transformData, transform);
         } catch (NotPowerOfTwoException ex) {
             Assert.fail();
@@ -54,7 +54,7 @@ public class FourierTransformTests {
         Complex[] mgDFTData;
         try {
             transform = GGFourierTransform.dft(data, false);
-            mgDFTData = DefinitionFourierTransform.Transform(data);
+            mgDFTData = DefinitionFourierTransform.transform(data);
             compareComplexArrays(mgDFTData, transform);
         } catch (NotPowerOfTwoException ex) {
             Assert.fail();
@@ -98,7 +98,7 @@ public class FourierTransformTests {
     public void definitionInvTransormTest() {
         Complex[] reverse;
         try {
-            reverse = DefinitionFourierTransform.InvTransform(transformData);
+            reverse = DefinitionFourierTransform.invTransform(transformData);
             compareComplexArrays(data, reverse);
         } catch (NotPowerOfTwoException ex) {
             Assert.fail();
@@ -107,8 +107,8 @@ public class FourierTransformTests {
 
     @Test
     public void definitionTransformBothWaysTest() throws NotPowerOfTwoException {
-        Complex[] transform = DefinitionFourierTransform.Transform(data);
-        Complex[] reverse = DefinitionFourierTransform.InvTransform(transform);
+        Complex[] transform = DefinitionFourierTransform.transform(data);
+        Complex[] reverse = DefinitionFourierTransform.invTransform(transform);
         compareComplexArrays(data, reverse);
     }
 

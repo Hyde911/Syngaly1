@@ -3,12 +3,12 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package signals1.converter;
+package signals.converter;
 
 import org.apache.commons.math3.complex.Complex;
-import signals1.discreteSignals.DerivedSignal;
-import signals1.discreteSignals.abstracts.DiscreteSignal;
-import signals1.operations.MathFunctions;
+import signals.discreteSignals.DerivedSignal;
+import signals.discreteSignals.abstracts.DiscreteSignal;
+import signals.operations.MathFunctions;
 
 /**
  *

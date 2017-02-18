@@ -3,12 +3,12 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package signals1.tools.constatns;
+package signals.tools.constatns;
 
-import signals1.tools.quantisation.MeanQuantizer;
-import signals1.tools.quantisation.NoneQuantizer;
-import signals1.tools.quantisation.Quantizer;
-import signals1.tools.quantisation.RoundDownQuantizer;
+import signals.tools.quantisation.MeanQuantizer;
+import signals.tools.quantisation.NoneQuantizer;
+import signals.tools.quantisation.Quantizer;
+import signals.tools.quantisation.RoundDownQuantizer;
 
 /**
  *

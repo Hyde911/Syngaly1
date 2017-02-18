@@ -3,11 +3,11 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package signals1.fourier;
+package signals.fourier;
 
 import java.util.Arrays;
 import org.apache.commons.math3.complex.Complex;
-import signals1.tools.exceptions.NotPowerOfTwoException;
+import signals.tools.exceptions.NotPowerOfTwoException;
 
 /**
  *

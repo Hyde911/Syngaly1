@@ -3,10 +3,10 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package signals1.continuousSignals;
+package signals.continuousSignals;
 
 import org.apache.commons.math3.complex.Complex;
-import signals1.continuousSignals.abstracts.SquareSignals;
+import signals.continuousSignals.abstracts.SquareSignals;
 
 /**
  *

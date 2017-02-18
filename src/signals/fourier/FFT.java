@@ -19,7 +19,7 @@
  *
  *****************************************************************************
  */
-package signals1.fourier;
+package signals.fourier;
 
 import org.apache.commons.math3.complex.Complex;
 

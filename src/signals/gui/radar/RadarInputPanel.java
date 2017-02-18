@@ -3,10 +3,10 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package signals1.gui.radar;
+package signals.gui.radar;
 
-import signals1.radar.RadarParameters;
-import signals1.tools.exceptions.InputValidationException;
+import signals.radar.RadarParameters;
+import signals.tools.exceptions.InputValidationException;
 
 /**
  *

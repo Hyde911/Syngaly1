@@ -3,14 +3,14 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package signals1.gui.inputForms;
+package signals.gui.inputForms;
 
 import java.awt.Dimension;
 import javax.swing.JOptionPane;
-import signals1.continuousSignals.SquareSignal;
-import signals1.continuousSignals.SymetricSquareSignal;
-import signals1.continuousSignals.TriangleSignal;
-import signals1.continuousSignals.abstracts.SquareSignals;
+import signals.continuousSignals.SquareSignal;
+import signals.continuousSignals.SymetricSquareSignal;
+import signals.continuousSignals.TriangleSignal;
+import signals.continuousSignals.abstracts.SquareSignals;
 
 /**
  *

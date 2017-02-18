@@ -3,16 +3,15 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package signals1.discreteSignals.abstracts;
+package signals.discreteSignals.abstracts;
 
 import java.io.Serializable;
 import java.util.concurrent.atomic.AtomicInteger;
 import org.apache.commons.math3.complex.Complex;
-import signals1.fourier.FFT;
-import signals1.fourier.FastFourierTransform;
-import signals1.stats.Histogram;
-import signals1.stats.SignalStats;
-import signals1.tools.exceptions.NotPowerOfTwoException;
+import signals.fourier.FastFourierTransform;
+import signals.stats.Histogram;
+import signals.stats.SignalStats;
+import signals.tools.exceptions.NotPowerOfTwoException;
 
 /**
  *

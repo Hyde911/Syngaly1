@@ -3,10 +3,10 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package signals1.fourier;
+package signals.fourier;
 
 import org.apache.commons.math3.complex.Complex;
-import signals1.tools.exceptions.NotPowerOfTwoException;
+import signals.tools.exceptions.NotPowerOfTwoException;
 
 /**
  *
@@ -14,7 +14,7 @@ import signals1.tools.exceptions.NotPowerOfTwoException;
  */
 public class DefinitionFourierTransform {
 
-    public static Complex[] Transform(Complex[] data) throws NotPowerOfTwoException {
+    public static Complex[] transform(Complex[] data) throws NotPowerOfTwoException {
         int length = data.length;
         if ((length & (length - 1)) != 0) {
             throw new NotPowerOfTwoException();
@@ -33,7 +33,7 @@ public class DefinitionFourierTransform {
         return result;
     }
 
-    public static Complex[] InvTransform(Complex[] data) throws NotPowerOfTwoException {
+    public static Complex[] invTransform(Complex[] data) throws NotPowerOfTwoException {
         int length = data.length;
         if ((length & (length - 1)) != 0) {
             throw new NotPowerOfTwoException();
@@ -51,10 +51,6 @@ public class DefinitionFourierTransform {
         }
 
         return result;
-    }
-
-    private static Complex CalculateImPower(double value) {
-        return new Complex(Math.cos(value * Math.PI), Math.sin(value * Math.PI));
     }
 
     private static Complex CalculateWFactor(int n) {

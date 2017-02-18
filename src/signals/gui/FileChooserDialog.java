@@ -3,9 +3,9 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package signals1.gui;
+package signals.gui;
 
-import signals1.discreteSignals.abstracts.DiscreteSignal;
+import signals.discreteSignals.abstracts.DiscreteSignal;
 
 /**
  *

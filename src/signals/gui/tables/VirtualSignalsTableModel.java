@@ -3,15 +3,15 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package signals1.gui.tables;
+package signals.gui.tables;
 
 import javax.swing.event.TableModelEvent;
 import javax.swing.event.TableModelListener;
 import javax.swing.table.DefaultTableModel;
-import signals1.continuousSignals.abstracts.PeriodicSignals;
-import signals1.continuousSignals.abstracts.AbstractSignal;
-import signals1.continuousSignals.abstracts.SquareSignals;
-import signals1.tools.SignalContainer;
+import signals.continuousSignals.abstracts.PeriodicSignals;
+import signals.continuousSignals.abstracts.AbstractSignal;
+import signals.continuousSignals.abstracts.SquareSignals;
+import signals.tools.SignalContainer;
 
 /**
  *

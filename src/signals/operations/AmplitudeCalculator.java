@@ -3,12 +3,12 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package signals1.operations;
+package signals.operations;
 
-import signals1.discreteSignals.DerivedSignal;
-import signals1.discreteSignals.abstracts.DiscreteSignal;
-import signals1.tools.exceptions.DivideByZeroValueException;
-import signals1.tools.exceptions.NotSameSamplinRateExpcetion;
+import signals.discreteSignals.DerivedSignal;
+import signals.discreteSignals.abstracts.DiscreteSignal;
+import signals.tools.exceptions.DivideByZeroValueException;
+import signals.tools.exceptions.NotSameSamplinRateExpcetion;
 
 /**
  *

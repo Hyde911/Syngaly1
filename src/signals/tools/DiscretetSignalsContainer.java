@@ -3,10 +3,10 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package signals1.tools;
+package signals.tools;
 
 import java.util.ArrayList;
-import signals1.discreteSignals.abstracts.DiscreteSignal;
+import signals.discreteSignals.abstracts.DiscreteSignal;
 
 /**
  *

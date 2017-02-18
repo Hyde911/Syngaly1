@@ -3,7 +3,7 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package signals1.gui;
+package signals.gui;
 
 import java.awt.BorderLayout;
 import org.apache.commons.math3.complex.Complex;
@@ -11,8 +11,8 @@ import org.jfree.chart.ChartPanel;
 import org.jfree.data.Range;
 import org.jfree.data.xy.XYSeries;
 import org.jfree.data.xy.XYSeriesCollection;
-import signals1.discreteSignals.abstracts.DiscreteSignal;
-import signals1.tools.exceptions.NotPowerOfTwoException;
+import signals.discreteSignals.abstracts.DiscreteSignal;
+import signals.tools.exceptions.NotPowerOfTwoException;
 
 /**
  *

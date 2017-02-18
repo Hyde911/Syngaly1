@@ -3,13 +3,13 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package signals1.gui;
+package signals.gui;
 
 import java.awt.BorderLayout;
 import java.text.DecimalFormat;
 import org.jfree.data.Range;
-import signals1.discreteSignals.abstracts.DiscreteSignal;
-import signals1.stats.SignalStats;
+import signals.discreteSignals.abstracts.DiscreteSignal;
+import signals.stats.SignalStats;
 
 /**
  *

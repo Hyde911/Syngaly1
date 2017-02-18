@@ -3,9 +3,9 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package signals1.gui;
+package signals.gui;
 
-import signals1.gui.radar.RadarWindow;
+import signals.gui.radar.RadarWindow;
 import java.awt.BorderLayout;
 import java.awt.Dimension;
 import java.util.logging.Level;
@@ -16,37 +16,37 @@ import javax.swing.JOptionPane;
 import javax.swing.UIManager;
 import javax.swing.UnsupportedLookAndFeelException;
 import org.apache.commons.math3.complex.Complex;
-import signals1.gui.inputForms.SineInputPanel;
-import signals1.gui.inputForms.SquareInputPanel;
-import signals1.gui.tables.DiscreteSignalTableModel;
-import signals1.gui.tables.VirtualSignalsTableModel;
-import signals1.operations.AmplitudeCalculator;
-import signals1.continuousSignals.abstracts.NonPeriodicSignals;
-import signals1.continuousSignals.abstracts.PeriodicSignals;
-import signals1.continuousSignals.abstracts.AbstractSignal;
-import signals1.converter.Converters;
-import signals1.converter.D2AConverterService;
-import signals1.discreteSignals.DerivedSignal;
-import signals1.discreteSignals.abstracts.DiscreteSignal;
-import signals1.discreteSignals.NonPeriodicDiscreteSignal;
-import signals1.discreteSignals.PeriodicDiscreteSignal;
-import signals1.gui.inputForms.InputPanel;
-import signals1.gui.inputForms.NoiseInputPanel;
-import signals1.gui.radar.RadarInputPanel;
-import signals1.operations.Convolution;
-import signals1.operations.Correlation;
-import signals1.operations.filters.BandPassFIRFilter;
-import signals1.operations.filters.FIRFilter;
-import signals1.operations.filters.HighPassFIRFilter;
-import signals1.operations.filters.LowPassFIRFilter;
-import signals1.operations.windows.Windows;
-import signals1.tools.DiscretetSignalsContainer;
-import signals1.radar.RadarParameters;
-import signals1.tools.SignalContainer;
-import signals1.tools.constatns.Quantizers;
-import signals1.tools.exceptions.InputValidationException;
-import signals1.tools.exceptions.NotPowerOfTwoException;
-import signals1.tools.exceptions.NotSameSamplinRateExpcetion;
+import signals.gui.inputForms.SineInputPanel;
+import signals.gui.inputForms.SquareInputPanel;
+import signals.gui.tables.DiscreteSignalTableModel;
+import signals.gui.tables.VirtualSignalsTableModel;
+import signals.operations.AmplitudeCalculator;
+import signals.continuousSignals.abstracts.NonPeriodicSignals;
+import signals.continuousSignals.abstracts.PeriodicSignals;
+import signals.continuousSignals.abstracts.AbstractSignal;
+import signals.converter.Converters;
+import signals.converter.D2AConverterService;
+import signals.discreteSignals.DerivedSignal;
+import signals.discreteSignals.abstracts.DiscreteSignal;
+import signals.discreteSignals.NonPeriodicDiscreteSignal;
+import signals.discreteSignals.PeriodicDiscreteSignal;
+import signals.gui.inputForms.InputPanel;
+import signals.gui.inputForms.NoiseInputPanel;
+import signals.gui.radar.RadarInputPanel;
+import signals.operations.Convolution;
+import signals.operations.Correlation;
+import signals.operations.filters.BandPassFIRFilter;
+import signals.operations.filters.FIRFilter;
+import signals.operations.filters.HighPassFIRFilter;
+import signals.operations.filters.LowPassFIRFilter;
+import signals.operations.windows.Windows;
+import signals.tools.DiscretetSignalsContainer;
+import signals.radar.RadarParameters;
+import signals.tools.SignalContainer;
+import signals.tools.constatns.Quantizers;
+import signals.tools.exceptions.InputValidationException;
+import signals.tools.exceptions.NotPowerOfTwoException;
+import signals.tools.exceptions.NotSameSamplinRateExpcetion;
 
 /**
  *

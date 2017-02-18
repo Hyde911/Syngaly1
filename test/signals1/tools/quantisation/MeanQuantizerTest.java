@@ -5,6 +5,7 @@
  */
 package signals1.tools.quantisation;
 
+import signals.tools.quantisation.MeanQuantizer;
 import org.apache.commons.math3.complex.Complex;
 import org.junit.After;
 import org.junit.AfterClass;

@@ -3,12 +3,12 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package signals1.gui;
+package signals.gui;
 
 import java.text.DecimalFormat;
-import signals1.discreteSignals.abstracts.DiscreteSignal;
-import signals1.stats.SignalComparer;
-import signals1.tools.DiscretetSignalsContainer;
+import signals.discreteSignals.abstracts.DiscreteSignal;
+import signals.stats.SignalComparer;
+import signals.tools.DiscretetSignalsContainer;
 
 /**
  *

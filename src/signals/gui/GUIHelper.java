@@ -3,12 +3,12 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package signals1.gui;
+package signals.gui;
 
 import java.io.File;
 import java.lang.reflect.Method;
-import signals1.discreteSignals.abstracts.DiscreteSignal;
-import signals1.tools.SignalSerializationHelper;
+import signals.discreteSignals.abstracts.DiscreteSignal;
+import signals.tools.SignalSerializationHelper;
 
 /**
  *

@@ -3,9 +3,9 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package signals1.radar;
+package signals.radar;
 
-import signals1.discreteSignals.DerivedSignal;
+import signals.discreteSignals.DerivedSignal;
 
 /**
  *

@@ -3,10 +3,10 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package signals1.stats;
+package signals.stats;
 
 import org.apache.commons.math3.complex.Complex;
-import signals1.discreteSignals.abstracts.DiscreteSignal;
+import signals.discreteSignals.abstracts.DiscreteSignal;
 
 /**
  *

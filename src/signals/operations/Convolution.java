@@ -3,16 +3,16 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package signals1.operations;
+package signals.operations;
 
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import org.apache.commons.math3.complex.Complex;
-import signals1.discreteSignals.DerivedSignal;
-import signals1.discreteSignals.abstracts.DiscreteSignal;
-import signals1.fourier.FastFourierTransform;
-import signals1.fourier.GGFourierTransform;
-import signals1.tools.exceptions.NotPowerOfTwoException;
+import signals.discreteSignals.DerivedSignal;
+import signals.discreteSignals.abstracts.DiscreteSignal;
+import signals.fourier.FastFourierTransform;
+import signals.fourier.GGFourierTransform;
+import signals.tools.exceptions.NotPowerOfTwoException;
 
 /**
  *
